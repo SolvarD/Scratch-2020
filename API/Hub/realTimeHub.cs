@@ -13,15 +13,15 @@ namespace API.HubApi
         public const string NewMesageGroup = "NewMesageGroup";
     }
     public interface IRealTimeHub {
-        public Task SendMessageToAll(string user, string message);
+        public Task SendMessageToAll(string message);
         public Task SendMessageToCaller(string message);
         public Task SendMessageToGroup(string group, string message);
     }
     public class RealTimeHub: Hub<IRealTimeHub>
     {
-        public Task SendMessageToAll(string user, string message)
+        public Task SendMessageToAll(string message)
         {
-            return Clients.All.SendMessageToAll(user, message);
+            return Clients.All.SendMessageToAll(message);
         }
 
         public Task SendMessageToCaller(string message)
@@ -35,7 +35,7 @@ namespace API.HubApi
 
         public override async Task OnConnectedAsync()
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, "SignalR Users");
+            await Groups.AddToGroupAsync(Context.ConnectionId, "public");
             await base.OnConnectedAsync();
         }
         public override async Task OnDisconnectedAsync(Exception exception)

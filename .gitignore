@@ -2,3 +2,6 @@
 /API/bin
 /Web/ClientApp/node_modules
 /.vs/
+/API/obj/
+
+/.vs/

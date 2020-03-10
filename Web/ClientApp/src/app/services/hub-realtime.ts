@@ -1,11 +1,15 @@
 import { Injectable } from "@angular/core";
 import * as SignalR from "@aspnet/signalr";
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class HubRealtimeService {
+
   private hubConnection: SignalR.HubConnection;
+  private publicMessage = new Subject<string>();
+  public suscribePublicMessage = this.publicMessage.asObservable();
 
   constructor() { }
 
@@ -17,7 +21,9 @@ export class HubRealtimeService {
     this.connect();
 
 
-    this.hubConnection.on("public", (m) => console.log("message public", m))
+    this.hubConnection.on("SendMessageToAll", (m) => {
+      this.publicMessage.next(m);
+    });
 
     this.hubConnection.onclose(e => {
       if (e) this.connect();

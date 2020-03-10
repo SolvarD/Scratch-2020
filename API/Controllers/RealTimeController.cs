@@ -22,7 +22,7 @@ namespace API.Controllers
         [Route("SendAll")]
         public async Task<IActionResult> SendAll([FromQuery] string value)
         {
-            await _realTime.Clients.All.SendMessageToAll("public", value);
+            await _realTime.Clients.All.SendMessageToAll(value);
             return Ok();
         }
     }

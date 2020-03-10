@@ -28,17 +28,17 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("AllowAllOriginsPolicy", // I introduced a string constant just as a label "AllowAllOriginsPolicy"
-            //    builder =>
-            //    {
-            //        builder.AllowAnyOrigin();
-            //        builder.AllowAnyHeader();
-            //        builder.AllowAnyMethod();
-            //        //builder.AllowCredentials();
-            //    });
-            //});
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOriginsPolicy", // I introduced a string constant just as a label "AllowAllOriginsPolicy"
+                builder =>
+                {
+                    builder.WithOrigins("https://localhost:44359", "https://localhost:44303");
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                    builder.AllowCredentials();
+                });
+            });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -62,14 +62,11 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+
 
             app.UseHttpsRedirection();
             app.UseRouting();
-            //app.UseCors("AllowAllOriginsPolicy");
+            app.UseCors("AllowAllOriginsPolicy");
 
             app.UseAuthorization();
 

@@ -11,5 +11,7 @@ export class AppComponent {
   constructor(hub: HubRealtimeService, weatherforecast: weatherforecastService) {
     weatherforecast.init().then((res) => { console.log(res); });
     hub.Init();
+
+    hub.suscribePublicMessage.subscribe(m => alert(m))
   }
 }
