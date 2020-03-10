@@ -17,6 +17,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { TokenInterceptor } from './services/interceptor';
 import { weatherforecastService } from './services/weatherforecast.service';
 import { HubRealtimeService } from './services/hub-realtime';
+import { MessengerComponent } from './component/messenger/messenger.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HubRealtimeService } from './services/hub-realtime';
     FetchDataComponent,
     LoginComponent,
     UserComponent,
-    ErrorComponent
+    ErrorComponent,
+    MessengerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
