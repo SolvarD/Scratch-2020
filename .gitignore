@@ -5,3 +5,5 @@
 /API/obj/
 
 /.vs/
+/DataAccess/obj/
+/Database/bin/

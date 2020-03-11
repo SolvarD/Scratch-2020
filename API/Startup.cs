@@ -30,10 +30,10 @@ namespace API
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAllOriginsPolicy", // I introduced a string constant just as a label "AllowAllOriginsPolicy"
+                options.AddPolicy("AllowOriginsPolicy",
                 builder =>
                 {
-                    builder.WithOrigins("https://localhost:44359", "https://localhost:44303");
+                    builder.WithOrigins("https://localhost:44359","https://localhost:44303");
                     builder.AllowAnyHeader();
                     builder.AllowAnyMethod();
                     builder.AllowCredentials();
@@ -66,7 +66,7 @@ namespace API
 
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors("AllowAllOriginsPolicy");
+            app.UseCors("AllowOriginsPolicy");
 
             app.UseAuthorization();
 

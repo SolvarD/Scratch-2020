@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import * as SignalR from "@microsoft/signalr";
+import * as SignalR from "@aspnet/signalr";
 import { Subject } from "rxjs";
 
 @Injectable({

@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{8E0B8FEF-04CA-4101-B015-066929D623A9}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{2F64877C-30CF-479D-B1E2-7A3C429C4397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{FE431555-14B3-42E8-A99A-43F798B65A30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,16 @@ Global
 		{8E0B8FEF-04CA-4101-B015-066929D623A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E0B8FEF-04CA-4101-B015-066929D623A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E0B8FEF-04CA-4101-B015-066929D623A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F64877C-30CF-479D-B1E2-7A3C429C4397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F64877C-30CF-479D-B1E2-7A3C429C4397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F64877C-30CF-479D-B1E2-7A3C429C4397}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2F64877C-30CF-479D-B1E2-7A3C429C4397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F64877C-30CF-479D-B1E2-7A3C429C4397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F64877C-30CF-479D-B1E2-7A3C429C4397}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FE431555-14B3-42E8-A99A-43F798B65A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE431555-14B3-42E8-A99A-43F798B65A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE431555-14B3-42E8-A99A-43F798B65A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE431555-14B3-42E8-A99A-43F798B65A30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
