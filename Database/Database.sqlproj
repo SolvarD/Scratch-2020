@@ -58,11 +58,13 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Tables\REF" />
+    <Folder Include="StoredProcedure" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Users.sql" />
     <Build Include="Tables\REF\T_REF_Dictionnary.sql" />
     <Build Include="Tables\REF\T_REF_Languages.sql" />
     <Build Include="Tables\REF\T_REF_Roles.sql" />
+    <Build Include="StoredProcedure\GetAllUsers.sql" />
   </ItemGroup>
 </Project>

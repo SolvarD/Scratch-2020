@@ -2,13 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable()
-export class WeatherforecastService {
+export class UserService {
   constructor(private http: HttpClient) {
 
   }
 
-  init() {
-    return this.http.get("https://localhost:44359/weatherforecast").toPromise();
+  getAll() {
+    return this.http.get("https://localhost:44359/User/GetAll").toPromise();
   }
 }
 

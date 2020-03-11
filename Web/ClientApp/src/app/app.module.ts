@@ -13,10 +13,11 @@ import { UserComponent } from './views/users/user.component';
 import { ErrorComponent } from './views/error/error.component';
 import { AuthGuard } from './services/auth.guard';
 import { TokenInterceptor } from './services/interceptor';
-import { weatherforecastService } from './services/weatherforecast.service';
+import { WeatherforecastService } from './services/weatherforecast.service';
 import { HubRealtimeService } from './services/hub-realtime';
 import { MessengerComponent } from './component/messenger/messenger.component';
 import { SignalRCodeComponent } from './views/signalr-code/signalr-code.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,9 @@ import { SignalRCodeComponent } from './views/signalr-code/signalr-code.componen
     useClass: TokenInterceptor,
     multi: true
   },
-    weatherforecastService,
-    HubRealtimeService],
+    WeatherforecastService,
+    HubRealtimeService,
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

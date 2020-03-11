@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.HubApi;
-using API.Models;
+using API.Managers;
+using DataAccess.CRUD;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace API
 {
@@ -41,7 +35,8 @@ namespace API
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
+            services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<UserAccess>();
             //services.AddTransient<User>((f) => {
             //    var httpContextAccessor = f.GetService<IHttpContextAccessor>();
             //    return (httpContextAccessor.HttpContext != null)

@@ -1,18 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace API.Models
+namespace DataAccess.Models
 {
     public class User
     {
         private readonly ClaimsPrincipal _user;
-        public User(IHttpContextAccessor httpContextAccessor) {
+        //public User(IHttpContextAccessor httpContextAccessor) {
         
-        }
+        //}
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DataAccess
@@ -21,7 +21,7 @@ namespace DataAccess
 
         }
 
-        public Task<int> DeleteById(int id)
+        public async Task<int> DeleteById(int id)
         {
             throw new NotImplementedException();
         }
@@ -31,14 +31,18 @@ namespace DataAccess
             return requestor.Select<T>("");
         }
 
-        public Task<T> GetById<T>(int id)
+        public async Task<T> GetById<T>(int id)
+        {
+            return requestor.Select<T>("").First();
+        }
+
+        public async Task<int> Update<T>(T item)
         {
             throw new NotImplementedException();
         }
-
-        public Task<int> Update<T>(T item)
+        public async Task<List<T>> Execute<T>(string name, object param = null)
         {
-            throw new NotImplementedException();
+            return requestor.ExecuteStoredProcedure<T>(name, param);
         }
     }
 }

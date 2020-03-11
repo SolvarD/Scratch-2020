@@ -7,3 +7,5 @@
 /.vs/
 /DataAccess/obj/
 /Database/bin/
+/DataAccess/bin
+/Database/obj
