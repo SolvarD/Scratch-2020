@@ -109,3 +109,5 @@ F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Sy
 F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\DataAccess.dll
 F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\DataAccess.pdb
+F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll

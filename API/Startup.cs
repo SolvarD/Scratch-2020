@@ -37,6 +37,7 @@ namespace API
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<UserAccess>();
+            //services.AddSingleton<IConfiguration>(Configuration);
             //services.AddTransient<User>((f) => {
             //    var httpContextAccessor = f.GetService<IHttpContextAccessor>();
             //    return (httpContextAccessor.HttpContext != null)
@@ -57,12 +58,9 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
 
-
-
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("AllowOriginsPolicy");
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

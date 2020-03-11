@@ -18,6 +18,7 @@ import { HubRealtimeService } from './services/hub-realtime';
 import { MessengerComponent } from './component/messenger/messenger.component';
 import { SignalRCodeComponent } from './views/signalr-code/signalr-code.component';
 import { UserService } from './services/user.service';
+import { DataBaseComponent } from './views/database/database.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UserService } from './services/user.service';
     UserComponent,
     ErrorComponent,
     MessengerComponent,
-    SignalRCodeComponent
+    SignalRCodeComponent,
+    DataBaseComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace DataAccess
 
     public class DALCRUD : ICRUD
     {
-        public readonly Requestor requestor = new Requestor("PorteFolio");
+        public readonly Requestor requestor = new Requestor("PorteFolio", ConfigurationManager.ConnectionStrings["PorteFolio"].ConnectionString);
         public DALCRUD()
         {
 

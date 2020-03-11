@@ -5,8 +5,6 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -19,6 +17,15 @@ namespace DataAccess
         {
             _connexionName = databaseName;
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString))
+            {
+                List<string> prodAccount = new List<string> { };
+                checkProd = prodAccount.Any(g => connection.ConnectionString.Contains(g));
+            }
+        }
+        public Requestor(string connexionName, string connexionString)
+        {
+            _connexionName = connexionName;
+            using (var connection = new SqlConnection(connexionString))
             {
                 List<string> prodAccount = new List<string> { };
                 checkProd = prodAccount.Any(g => connection.ConnectionString.Contains(g));
