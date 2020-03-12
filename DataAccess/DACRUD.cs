@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace DataAccess
         public readonly Requestor requestor;
         public DALCRUD()
         {
-            requestor = new Requestor("PorteFolio");
+            requestor = new Requestor("PorteFolio", "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=PorteFolio.Database;");
         }
 
         public async Task<int> DeleteById(int id)

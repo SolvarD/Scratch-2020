@@ -14,11 +14,13 @@ namespace DataAccess
         public string connexionName = string.Empty;
         private bool checkProd = false;
         private readonly IConfiguration _configuration;
+        private readonly string _connectionString;
 
         public Requestor(string databaseName)
         {
             connexionName = databaseName;
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString))
+            _connectionString = ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString;
+            using (var connection = new SqlConnection(_connectionString))
             {
                 List<string> prodAccount = new List<string> { };
                 checkProd = prodAccount.Any(g => connection.ConnectionString.Contains(g));
@@ -27,7 +29,8 @@ namespace DataAccess
         public Requestor(string connexionName, string connexionString)
         {
             this.connexionName = connexionName;
-            using (var connection = new SqlConnection(connexionString))
+            _connectionString = connexionString;
+            using (var connection = new SqlConnection(_connectionString))
             {
                 List<string> prodAccount = new List<string> { };
                 checkProd = prodAccount.Any(g => connection.ConnectionString.Contains(g));
@@ -44,7 +47,8 @@ namespace DataAccess
             //    checkProd = prodAccount.Any(g => connection.ConnectionString.Contains(g));
             //}
         }
-        public void SetConnexionName(string connexionName) {
+        public void SetConnexionName(string connexionName)
+        {
             this.connexionName = connexionName;
             using (var connection = new SqlConnection(_configuration[$"ConnectionStrings:{connexionName}"]))
             {
@@ -95,7 +99,7 @@ namespace DataAccess
 
         private int ExecuteQuery(string request)
         {
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 return connection.Execute(request);
             }
@@ -103,7 +107,7 @@ namespace DataAccess
 
         public List<T> ExecuteStoredProcedure<T>(string name, object param = null)
         {
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 return connection.Query<T>(name, param, commandType: CommandType.StoredProcedure).ToList();
             }
@@ -111,7 +115,7 @@ namespace DataAccess
 
         public List<T> ExecuteStoredText<T>(string query)
         {
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 return connection.Query<T>(query, null, null, true, 6000, commandType: CommandType.Text).ToList();
             }
@@ -119,7 +123,7 @@ namespace DataAccess
 
         public void ExecuteStoredText(string query)
         {
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Query(query, null, null, true, 6000, commandType: CommandType.Text);
             }
@@ -137,7 +141,7 @@ namespace DataAccess
         {
             get
             {
-                using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString))
+                using (var connection = new SqlConnection(_connectionString))
                 {
                     try
                     {
