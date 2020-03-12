@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,10 +17,10 @@ namespace DataAccess
 
     public class DALCRUD : ICRUD
     {
-        public readonly Requestor requestor = new Requestor("PorteFolio", ConfigurationManager.ConnectionStrings["PorteFolio"].ConnectionString);
+        public readonly Requestor requestor;
         public DALCRUD()
         {
-
+            requestor = new Requestor("PorteFolio");
         }
 
         public async Task<int> DeleteById(int id)

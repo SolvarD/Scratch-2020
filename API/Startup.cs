@@ -1,5 +1,6 @@
 using API.HubApi;
 using API.Managers;
+using DataAccess;
 using DataAccess.CRUD;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +38,7 @@ namespace API
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<UserAccess>();
-            //services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton<IConfiguration>(Configuration);
             //services.AddTransient<User>((f) => {
             //    var httpContextAccessor = f.GetService<IHttpContextAccessor>();
             //    return (httpContextAccessor.HttpContext != null)

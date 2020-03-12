@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,12 +11,13 @@ namespace DataAccess
 {
     public class Requestor
     {
-        private string _connexionName = string.Empty;
+        public string connexionName = string.Empty;
         private bool checkProd = false;
+        private readonly IConfiguration _configuration;
 
         public Requestor(string databaseName)
         {
-            _connexionName = databaseName;
+            connexionName = databaseName;
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString))
             {
                 List<string> prodAccount = new List<string> { };
@@ -24,8 +26,27 @@ namespace DataAccess
         }
         public Requestor(string connexionName, string connexionString)
         {
-            _connexionName = connexionName;
+            this.connexionName = connexionName;
             using (var connection = new SqlConnection(connexionString))
+            {
+                List<string> prodAccount = new List<string> { };
+                checkProd = prodAccount.Any(g => connection.ConnectionString.Contains(g));
+            }
+        }
+
+        public Requestor(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            //_connexionName = connexionName;
+            //using (var connection = new SqlConnection(configuration[$"ConnectionStrings:{connexionName}"]))
+            //{
+            //    List<string> prodAccount = new List<string> { };
+            //    checkProd = prodAccount.Any(g => connection.ConnectionString.Contains(g));
+            //}
+        }
+        public void SetConnexionName(string connexionName) {
+            this.connexionName = connexionName;
+            using (var connection = new SqlConnection(_configuration[$"ConnectionStrings:{connexionName}"]))
             {
                 List<string> prodAccount = new List<string> { };
                 checkProd = prodAccount.Any(g => connection.ConnectionString.Contains(g));
@@ -135,7 +156,7 @@ namespace DataAccess
         {
             get
             {
-                return _connexionName;
+                return this.connexionName;
             }
         }
     }

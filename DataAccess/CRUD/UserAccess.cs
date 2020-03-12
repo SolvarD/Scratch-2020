@@ -8,6 +8,8 @@ namespace DataAccess.CRUD
 {
     public class UserAccess : DALCRUD
     {
+        public UserAccess()
+        { }
         public async Task<List<User>> GetAll()
         {
             return await this.Execute<User>("GetAllUsers");
