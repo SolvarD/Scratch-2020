@@ -21,18 +21,35 @@ export class MessengerComponent {
   formMessenger: FormGroup;
   message: Message = new Message();
   currentUserTag: string;
-
-  //@ViewChild('scrollMe') private myScrollContainer: ElementRef;
-
-
+  titleMessenger: string;
   constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder) {
 
     this.formMessenger = this._fb.group({
       messageToSend: ["", [Validators.required]]
     });
 
-    hub.suscribePublicMessage.subscribe((message) => {
-      console.log(message)
+    let curentdate = new Date();
+    let idUserAnonyme = `${curentdate.getHours()}${curentdate.getMinutes()}${curentdate.getSeconds()}${curentdate.getMilliseconds()}`;
+
+    this.currentUserTag = `anonyme${idUserAnonyme}`;
+    this.message.userName = `anonyme${idUserAnonyme}`;
+
+    this.titleMessenger = this.currentUserTag;
+
+    this.connectFlux();
+  }
+
+  sendMessagePublic() {
+    this.message.text = this.formMessenger.get('messageToSend').value;
+    this.message.time = new Date();
+
+    if (this.formMessenger.valid && this.message.text.trim()) {
+      this.hub.postMessage(this.message);
+      this.formMessenger.reset();
+    }
+  }
+  connectFlux() {
+    this.hub.suscribePublicMessage.subscribe((message) => {
       if (this.lastMessages.length < 10) {
         this.lastMessages.push(message);
         this.allMessages.push(message);
@@ -41,19 +58,8 @@ export class MessengerComponent {
         this.lastMessages.push(message);
         this.allMessages.push(message);
       }
+
       this.ref.detectChanges();
     });
-    let curentdate = new Date();
-    let idUserAnonyme = `${curentdate.getHours()}${curentdate.getMinutes()}${curentdate.getSeconds()}${curentdate.getMilliseconds()}`;
-
-    this.currentUserTag = `anonyme${idUserAnonyme}`;
-    this.message.userName = `anonyme${idUserAnonyme}`;
-  }
-
-  sendMessagePublic() {
-    this.message.text = this.formMessenger.get('messageToSend').value;
-    this.message.time = new Date();
-    this.hub.postMessage(this.message);
-    this.formMessenger.reset();
   }
 }

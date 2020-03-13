@@ -70,7 +70,7 @@ namespace DataAccess
             }
         }
 
-        public int Insert<T>(string request, List<T> items)
+        public int Insert<T>(string request, List<T> items = null)
         {
             if (string.IsNullOrEmpty(request))
             {

@@ -19,6 +19,7 @@ import { SignalRCodeComponent } from './views/signalr-code/signalr-code.componen
 import { UserService } from './services/user.service';
 import { DataBaseComponent } from './views/database/database.component';
 import { HostIISComponent } from './views/host-iis/host-iis.component';
+import { MultiLanguageComponent } from './component/multi-language/multi-language.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HostIISComponent } from './views/host-iis/host-iis.component';
     MessengerComponent,
     SignalRCodeComponent,
     DataBaseComponent,
-    HostIISComponent
+    HostIISComponent,
+    MultiLanguageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

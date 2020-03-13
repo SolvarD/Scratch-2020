@@ -50,7 +50,7 @@ namespace DataAccess
         }
         public async Task<int> Insert<T>(T item)
         {
-            throw new NotImplementedException();
+            return requestor.Insert<T>("", new List<T> { item });
         }
 
         public async Task<List<int>> InsertMany<T>(List<T> items, string table,List<string> columns)

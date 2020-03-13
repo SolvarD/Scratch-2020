@@ -21,4 +21,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="LanguageId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="cf4f8283-9248-4c66-a3c7-2145a27e4f70" ChangeDateTime="03/13/2020 19:22:57">
+    <Property Name="ElementName" Value="[dbo].[T_REF_MessageType].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[T_REF_MessageType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MessageTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e41c04f8-4d86-47ea-8ee4-809236a0af6b" ChangeDateTime="03/13/2020 19:24:32">
+    <Property Name="ElementName" Value="[dbo].[Messages].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Messages]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MessageId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="31545b10-bd2e-4364-b7d8-d5e3252096c9" ChangeDateTime="03/13/2020 19:26:15">
+    <Property Name="ElementName" Value="[dbo].[Messages].[time]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Messages]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Time" />
+  </Operation>
 </Operations>

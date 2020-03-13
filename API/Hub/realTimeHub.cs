@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Entities;
+using DataAccess.Models;
 using Microsoft.AspNetCore.SignalR;
 
 namespace API.HubApi
@@ -20,6 +21,7 @@ namespace API.HubApi
     }
     public class RealTimeHub: Hub<IRealTimeHub>
     {
+        private Dictionary<string, User> _usersChat = new Dictionary<string, User>();
         public Task SendMessageToAll(Message message)
         {
             return Clients.All.SendMessageToAll(message);
@@ -41,7 +43,7 @@ namespace API.HubApi
         }
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, "SignalR Users");
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, "public");
             await base.OnDisconnectedAsync(exception);
         }
     }
