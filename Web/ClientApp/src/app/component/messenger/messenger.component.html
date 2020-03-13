@@ -3,15 +3,15 @@
      [style.width.px]="width"
      >
 
-  <div>
+  <div class="container-message-display">
     <ul class="message-display">
       <li *ngFor="let msg of lastMessages">
         {{msg}}
       </li>
     </ul>
   </div>
-  <div [formGroup]="formMessenger">
-    <input type="text" formControlName="messageToSend"/>
+  <div [formGroup]="formMessenger" class="bloc-send-text">
+    <input type="text"  [style.width.px]="width - 50" formControlName="messageToSend"/>
     <input type="button" (click)="sendMessagePublic()" value="send" />
   </div>
  

@@ -81,6 +81,23 @@ export class SignalRCodeComponent {
     public postMessage(message: string) {
         this.hubConnection.send("SendMessageToAll", message);
     }
+
+
+  app.module
+
+  FormsModule,
+  ReactiveFormsModule,
+
+  messenger.component
+
+  constructor(private ref: ChangeDetectorRef)
+  this.ref.detectChanges();
+
+
+  formMessenger: FormGroup;
+  this.formMessenger = this._fb.group({
+  messageToSend: ["", [Validators.required]]
+  });
     `;
 
   constructor() {
