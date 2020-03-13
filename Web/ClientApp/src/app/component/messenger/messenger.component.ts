@@ -1,6 +1,7 @@
-import { Component, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { HubRealtimeService } from '../../services/hub-realtime';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Message } from '../../../models/message';
 
 @Component({
   selector: 'app-messenger',
@@ -8,16 +9,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./messenger.component.less']
 })
 export class MessengerComponent {
-  public lastMessages: Array<string> = [];
-  public allMessages: Array<string> = [];
+  public lastMessages: Array<Message> = [];
+  public allMessages: Array<Message> = [];
 
 
   @Input()
   height: number = 400;
   @Input()
-  width: number = 200;
+  width: number = 320;
 
   formMessenger: FormGroup;
+  message: Message = new Message();
+  currentUserTag: string;
+
+  //@ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
 
   constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder) {
 
@@ -36,11 +42,18 @@ export class MessengerComponent {
         this.allMessages.push(message);
       }
       this.ref.detectChanges();
-    })
+    });
+    let curentdate = new Date();
+    let idUserAnonyme = `${curentdate.getHours()}${curentdate.getMinutes()}${curentdate.getSeconds()}${curentdate.getMilliseconds()}`;
+
+    this.currentUserTag = `anonyme${idUserAnonyme}`;
+    this.message.userName = `anonyme${idUserAnonyme}`;
   }
 
   sendMessagePublic() {
-    this.hub.postMessage(this.formMessenger.get('messageToSend').value);
+    this.message.text = this.formMessenger.get('messageToSend').value;
+    this.message.time = new Date();
+    this.hub.postMessage(this.message);
     this.formMessenger.reset();
   }
 }

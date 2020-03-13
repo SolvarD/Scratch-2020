@@ -1,5 +1,4 @@
 .container-messenger {
-  background-color: gray;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -9,8 +8,12 @@
 
 .message-display {
   bottom: 0;
+  padding: 5px;
+  list-style: none;
   position: absolute;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  max-height: 370px;
+  overflow-y: auto;
 }
 
 .bloc-send-text {
@@ -18,5 +21,21 @@
 }
 
 .container-message-display {
+  overflow-y: auto;
   flex: 1;
+}
+.text-container {
+  width: 85%;
+  background-color: #f1f0f0;
+  margin: 2.5px;
+  padding: 5px;
+  border-radius: 10px;
+  float:left;
+}
+.text-right {
+  float: right;
+  background-color: #6998f0;
+}
+.label-messenger {
+  float: left;
 }

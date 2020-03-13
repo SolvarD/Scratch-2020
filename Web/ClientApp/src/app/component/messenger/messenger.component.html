@@ -1,19 +1,28 @@
 <div class="container-messenger"
      [style.height.px]="height"
-     [style.width.px]="width"
-     >
+     [style.width.px]="width">
 
   <div class="container-message-display">
-    <ul class="message-display">
+    <ul class="message-display" [style.width.px]="width" #scrollMe [scrollTop]="scrollMe.scrollHeight">
       <li *ngFor="let msg of lastMessages">
-        {{msg}}
+        <div class="text-container" [ngClass]="{'text-right': msg.userName == currentUserTag}">
+          <label class="label-messenger" *ngIf="msg.userName != currentUserTag">{{msg.userName}}</label> 
+          <label class="label-messenger" *ngIf="msg.userName == currentUserTag">Me </label> 
+          <label class="label-messenger">{{msg.time | date: "dd/MM/yyyy HH:MM:ss" }}: </label>
+          <label class="label-messenger">{{msg.text}}</label>
+        </div>
       </li>
     </ul>
   </div>
-  <div [formGroup]="formMessenger" class="bloc-send-text">
-    <input type="text"  [style.width.px]="width - 50" formControlName="messageToSend"/>
-    <input type="button" (click)="sendMessagePublic()" value="send" />
-  </div>
- 
+  <form [formGroup]="formMessenger">
+    <div class="bloc-send-text">
+      <div>
+        <input type="text" [style.width.px]="width - 50" formControlName="messageToSend" />
+      </div>
+      <div>
+        <input type="submit" (click)="sendMessagePublic()" value="send" />
+      </div>
+    </div>
+  </form>
 </div>
 

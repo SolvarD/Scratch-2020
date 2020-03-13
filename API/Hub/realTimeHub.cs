@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Entities;
 using Microsoft.AspNetCore.SignalR;
 
 namespace API.HubApi
@@ -13,22 +14,22 @@ namespace API.HubApi
         public const string NewMesageGroup = "NewMesageGroup";
     }
     public interface IRealTimeHub {
-        public Task SendMessageToAll(string message);
-        public Task SendMessageToCaller(string message);
-        public Task SendMessageToGroup(string group, string message);
+        public Task SendMessageToAll(Message message);
+        public Task SendMessageToCaller(Message message);
+        public Task SendMessageToGroup(string group, Message message);
     }
     public class RealTimeHub: Hub<IRealTimeHub>
     {
-        public Task SendMessageToAll(string message)
+        public Task SendMessageToAll(Message message)
         {
             return Clients.All.SendMessageToAll(message);
         }
 
-        public Task SendMessageToCaller(string message)
+        public Task SendMessageToCaller(Message message)
         {
             return Clients.Caller.SendMessageToCaller(message);
         }
-        public Task SendMessageToGroup(string group, string message)
+        public Task SendMessageToGroup(string group, Message message)
         {
             return Clients.Groups(group).SendMessageToGroup(TypeMessage.NewMesageGroup, message);
         }

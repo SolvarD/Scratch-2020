@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import * as SignalR from "@aspnet/signalr";
 import { Subject } from "rxjs";
 import { environment } from "../../environments/environment";
+import { Message } from "../../models/message";
 
 @Injectable({
   providedIn: "root"
@@ -9,7 +10,7 @@ import { environment } from "../../environments/environment";
 export class HubRealtimeService {
 
   private hubConnection: SignalR.HubConnection;
-  private publicMessage = new Subject<string>();
+  private publicMessage = new Subject<Message>();
   public suscribePublicMessage = this.publicMessage.asObservable();
 
   constructor() { }
@@ -22,7 +23,7 @@ export class HubRealtimeService {
     this.connect();
 
 
-    this.hubConnection.on("SendMessageToAll", (m) => {
+    this.hubConnection.on("SendMessageToAll", (m: Message) => {
       this.publicMessage.next(m);
     });
 
@@ -44,7 +45,7 @@ export class HubRealtimeService {
     }
   }
 
-  public postMessage(message: string) {
+  public postMessage(message: Message) {
     this.hubConnection.send("SendMessageToAll", message);
   }
 }

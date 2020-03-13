@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.HubApi;
+using DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -20,7 +21,7 @@ namespace API.Controllers
         }
         [HttpGet]
         [Route("SendAll")]
-        public async Task<IActionResult> SendAll([FromQuery] string value)
+        public async Task<IActionResult> SendAll([FromQuery] Message value)
         {
             await _realTime.Clients.All.SendMessageToAll(value);
             return Ok();
