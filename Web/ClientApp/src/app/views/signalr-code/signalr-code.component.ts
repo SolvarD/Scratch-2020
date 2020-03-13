@@ -76,7 +76,12 @@ export class SignalRCodeComponent {
             }, 1000);
         }
       }
-    }`;
+    }
+
+    public postMessage(message: string) {
+        this.hubConnection.send("SendMessageToAll", message);
+    }
+    `;
 
   constructor() {
  

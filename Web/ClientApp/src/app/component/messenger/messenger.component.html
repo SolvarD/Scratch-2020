@@ -1,5 +1,19 @@
-<ul>
-  <li *ngFor="let msg of lastMessages">
-    {{msg}}
-  </li>
-</ul>
+<div class="container-messenger"
+     [style.height.px]="height"
+     [style.width.px]="width"
+     >
+
+  <div>
+    <ul class="message-display">
+      <li *ngFor="let msg of lastMessages">
+        {{msg}}
+      </li>
+    </ul>
+  </div>
+  <div [formGroup]="formMessenger">
+    <input type="text" formControlName="messageToSend"/>
+    <input type="button" (click)="sendMessagePublic()" value="send" />
+  </div>
+ 
+</div>
+

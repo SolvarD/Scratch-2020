@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import * as SignalR from "@aspnet/signalr";
 import { Subject } from "rxjs";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: "root"
@@ -15,7 +16,7 @@ export class HubRealtimeService {
 
   public Init() {
     this.hubConnection = new SignalR.HubConnectionBuilder()
-      .withUrl(`https://localhost:44359/msgs`)
+      .withUrl(`${environment.API}/msgs`)
       .build();
 
     this.connect();
@@ -41,5 +42,9 @@ export class HubRealtimeService {
         this.connect();
       }, 1000);
     }
+  }
+
+  public postMessage(message: string) {
+    this.hubConnection.send("SendMessageToAll", message);
   }
 }

@@ -6,6 +6,11 @@
 
 <div>
   (FE -> npm @aspnet/signalr)
+
+  constructor(private ref: ChangeDetectorRef)
+  this.ref.detectChanges();
+
+
   <code [innerHTML]="JS"></code>
 </div>
 

@@ -28,7 +28,9 @@ namespace API
                 options.AddPolicy("AllowOriginsPolicy",
                 builder =>
                 {
-                    builder.WithOrigins("https://localhost:44359","https://localhost:44303");
+                    builder.WithOrigins("https://localhost:44359","https://localhost:44303", 
+                        "https://localhost:45666", "https://localhost:443",
+                        "http://solvard.ddns.net", "https://solvard.ddns.net", "https://solvard.ddns.net:45666");
                     builder.AllowAnyHeader();
                     builder.AllowAnyMethod();
                     builder.AllowCredentials();
@@ -39,6 +41,12 @@ namespace API
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<UserAccess>();
             services.AddSingleton<IConfiguration>(Configuration);
+
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AutomaticAuthentication = false;
+            });
+
             //services.AddTransient<User>((f) => {
             //    var httpContextAccessor = f.GetService<IHttpContextAccessor>();
             //    return (httpContextAccessor.HttpContext != null)

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class WeatherforecastService {
@@ -8,7 +9,7 @@ export class WeatherforecastService {
   }
 
   init() {
-    return this.http.get("https://localhost:44359/weatherforecast").toPromise();
+    return this.http.get(`${environment.API}/weatherforecast`).toPromise();
   }
 }
 
