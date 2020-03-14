@@ -8,7 +8,7 @@ namespace DataAccess.CRUD
 {
     public class UserAccess : DALCRUD
     {
-        public UserAccess()
+        public UserAccess(Requestor requestor) : base(requestor)
         { }
         public async Task<List<User>> GetAll()
         {

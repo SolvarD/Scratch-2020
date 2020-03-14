@@ -37,15 +37,16 @@ namespace DataAccess
             }
         }
 
-        public Requestor(IConfiguration configuration)
+        public Requestor(IConfiguration configuration, string connexionName)
         {
             _configuration = configuration;
-            //_connexionName = connexionName;
-            //using (var connection = new SqlConnection(configuration[$"ConnectionStrings:{connexionName}"]))
-            //{
-            //    List<string> prodAccount = new List<string> { };
-            //    checkProd = prodAccount.Any(g => connection.ConnectionString.Contains(g));
-            //}
+            this.connexionName = connexionName;
+            _connectionString = configuration[$"ConnectionStrings:{connexionName}"];
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                List<string> prodAccount = new List<string> { };
+                checkProd = prodAccount.Any(g => connection.ConnectionString.Contains(g));
+            }
         }
         public void SetConnexionName(string connexionName)
         {

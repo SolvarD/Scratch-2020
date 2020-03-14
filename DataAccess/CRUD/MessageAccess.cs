@@ -10,7 +10,7 @@ namespace DataAccess.CRUD
     public class MessageAccess : DALCRUD
     {
         private readonly string _table = "Messages";
-        public MessageAccess()
+        public MessageAccess(Requestor requestor) : base(requestor)
         { }
         public async Task<List<Message>> GetAll()
         {

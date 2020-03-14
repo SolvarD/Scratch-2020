@@ -10,7 +10,7 @@ namespace DataAccess.CRUD
     public class LanguageAccess : DALCRUD
     {
         private readonly string _table = "T_REF_Languages";
-        public LanguageAccess()
+        public LanguageAccess(Requestor requestor) : base(requestor) 
         { }
         public async Task<List<Language>> GetAll()
         {

@@ -44,6 +44,9 @@ namespace API
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<IMessageManager, MessageManager>();
 
+            services.AddSingleton<Requestor>(new Requestor(Configuration, "PorteFolio"));
+            services.AddTransient<ICRUD, DALCRUD>();
+
 
 
             services.AddSingleton<IConfiguration>(Configuration);

@@ -25,14 +25,13 @@ namespace DataAccess
     {
         public enum enumAction
         {
-            INSERT = 1, UPDATE,SELECT, DELETE
+            INSERT = 1, UPDATE, SELECT, DELETE
         }
 
         public readonly Requestor requestor;
-        public DALCRUD()
+        public DALCRUD(Requestor _requestor)
         {
-            requestor = new Requestor("PorteFolio", @"Data Source=192.168.0.11;Initial Catalog=PorteFolio.Database;Integrated Security=True;User Id=ULTIMATE-OMEGA\omega;Password=linkofgwada");
-            //requestor = new Requestor("PorteFolio", @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PorteFolio.Database;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            requestor = _requestor;
         }
 
         public async Task<int> DeleteById(int id)
@@ -56,16 +55,19 @@ namespace DataAccess
         }
         public async Task<int> Insert<T>(T item, string table, List<string> columns)
         {
-            try {
-            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, new List<T> { item }, table, columns));
-            } catch(Exception e){
+            try
+            {
+                return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, new List<T> { item }, table, columns));
+            }
+            catch (Exception e)
+            {
                 throw e;
-            }            
+            }
         }
 
-        public async Task<List<int>> InsertMany<T>(List<T> items, string table,List<string> columns)
+        public async Task<List<int>> InsertMany<T>(List<T> items, string table, List<string> columns)
         {
-            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT,items,table,columns));
+            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, items, table, columns));
         }
 
         public async Task<List<T>> Execute<T>(string name, object param = null)
@@ -73,7 +75,7 @@ namespace DataAccess
             return requestor.ExecuteStoredProcedure<T>(name, param);
         }
 
-        private static string RequestSimple<T>(enumAction action,List<T> items, string table, List<string> tableColumns, List<string> classAttribut = null)
+        private static string RequestSimple<T>(enumAction action, List<T> items, string table, List<string> tableColumns, List<string> classAttribut = null)
         {
             if (!items.Any())
             {
@@ -92,11 +94,11 @@ namespace DataAccess
                 case enumAction.INSERT:
                     requestLine = $"INSERT INTO {table} ({string.Join(",", tableColumns.ToArray())}) OUTPUT INSERTED.* VALUES ";
                     break;
-                //case enumAction.SELECT:
-                //    requestLine = $"SELECT {string.Join(",", tableColumns.ToArray())} FROM {table}";
-                //    break;
+                    //case enumAction.SELECT:
+                    //    requestLine = $"SELECT {string.Join(",", tableColumns.ToArray())} FROM {table}";
+                    //    break;
             }
-                
+
 
             request.AppendLine(requestLine);
 
@@ -121,7 +123,7 @@ namespace DataAccess
                 }
                 else
                 {
-                    request.AppendLine(strLine + ";");                   
+                    request.AppendLine(strLine + ";");
                     request.AppendLine(requestLine);
                     countRow = 0;
                 }
