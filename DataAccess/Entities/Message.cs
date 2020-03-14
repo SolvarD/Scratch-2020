@@ -4,6 +4,10 @@ using System.Text;
 
 namespace DataAccess.Entities
 {
+    public enum enumMessageType
+    {
+        PUBLIC = 1, PRIVATE
+    }
     public class Message
     {
         public int MessageId { get; set; }

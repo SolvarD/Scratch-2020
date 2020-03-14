@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Managers;
 using DataAccess.Entities;
 using DataAccess.Models;
 using Microsoft.AspNetCore.SignalR;
@@ -21,9 +22,18 @@ namespace API.HubApi
     }
     public class RealTimeHub: Hub<IRealTimeHub>
     {
+        private readonly IMessageManager _messageManager;
+
+        public RealTimeHub(IMessageManager messageManager)
+        {
+            _messageManager = messageManager;
+        }
         private Dictionary<string, User> _usersChat = new Dictionary<string, User>();
         public Task SendMessageToAll(Message message)
         {
+            message.MessageTypeId = (int)enumMessageType.PUBLIC;
+
+            _messageManager.InsertMessage(message);
             return Clients.All.SendMessageToAll(message);
         }
 

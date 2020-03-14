@@ -16,13 +16,18 @@ namespace DataAccess
         public Task<T> GetById<T>(int id);
         public Task<int> DeleteById(int id);
         public Task<int> Update<T>(T item);
-        public Task<int> Insert<T>(T item);
+        Task<int> Insert<T>(T item, string table, List<string> columns);
         public Task<List<int>> InsertMany<T>(List<T> items, string table, List<string> columns);
         public Task<List<T>> GetAll<T>();
     }
 
     public class DALCRUD : ICRUD
     {
+        public enum enumAction
+        {
+            INSERT = 1, UPDATE,SELECT, DELETE
+        }
+
         public readonly Requestor requestor;
         public DALCRUD()
         {
@@ -48,14 +53,14 @@ namespace DataAccess
         {
             throw new NotImplementedException();
         }
-        public async Task<int> Insert<T>(T item)
+        public async Task<int> Insert<T>(T item, string table, List<string> columns)
         {
-            return requestor.Insert<T>("", new List<T> { item });
+            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, new List<T> { item }, table, columns));
         }
 
         public async Task<List<int>> InsertMany<T>(List<T> items, string table,List<string> columns)
         {
-            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(items,table,columns));
+            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT,items,table,columns));
         }
 
         public async Task<List<T>> Execute<T>(string name, object param = null)
@@ -63,7 +68,7 @@ namespace DataAccess
             return requestor.ExecuteStoredProcedure<T>(name, param);
         }
 
-        private static string RequestSimple<T>(List<T> items, string table, List<string> columns, List<string> values = null)
+        private static string RequestSimple<T>(enumAction action,List<T> items, string table, List<string> tableColumns, List<string> classAttribut = null)
         {
             if (!items.Any())
             {
@@ -75,14 +80,22 @@ namespace DataAccess
             int countRow = 0;
             StringBuilder request = new StringBuilder();
 
-            string insertLine = $"INSERT INTO {table} ({string.Join(",", columns.ToArray())}) VALUES ";
+            string insertLine = string.Empty;
+
+            switch (action)
+            {
+                case enumAction.INSERT:
+                    insertLine = $"INSERT INTO {table} ({string.Join(",", tableColumns.ToArray())}) OUTPUT INSERTED.* VALUES ";
+                    break;
+            }
+                
 
             request.AppendLine(insertLine);
 
             foreach (T item in items)
             {
 
-                List<string> columnsValues = values != null ? values : columns;
+                List<string> columnsValues = classAttribut != null ? classAttribut : tableColumns;
 
                 var strLine = $"(" +
                         string.Join(", ", columnsValues.Select(g =>

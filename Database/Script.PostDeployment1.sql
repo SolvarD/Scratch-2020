@@ -10,8 +10,8 @@ Modèle de script de post-déploiement
 --------------------------------------------------------------------------------------
 */
 Insert into T_REF_languages ([LanguageId], [Label], [Code]) values 
-(1, 'FRENCH', 'fr-FR'),
-(2, 'ENGLISH', 'en-US')
+(1, 'Français', 'fr-FR'),
+(2, 'English', 'en-US')
 
 Insert into T_REF_MessageTypes ([MessageTypeId],[Label]) values
 (1, 'PUBLIC'),

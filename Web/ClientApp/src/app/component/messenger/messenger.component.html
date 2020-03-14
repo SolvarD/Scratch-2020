@@ -18,11 +18,11 @@
   </div>
   <form [formGroup]="formMessenger">
     <div class="bloc-send-text">
-      <div>
-        <input type="text" [style.width.px]="width - 50" formControlName="messageToSend" />
+      <div class="text-box">
+        <input type="text" class="form-control" formControlName="messageToSend" />
       </div>
       <div>
-        <input type="submit" (click)="sendMessagePublic()" value="send" />
+        <input type="submit" class="btn btn-primary" (click)="sendMessagePublic()" value="send" />
       </div>
     </div>
   </form>

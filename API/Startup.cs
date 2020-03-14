@@ -36,10 +36,16 @@ namespace API
                     builder.AllowCredentials();
                 });
             });
-
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<IUserManager, UserManager>();
+
             services.AddTransient<UserAccess>();
+            services.AddTransient<MessageAccess>();
+
+            services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<IMessageManager, MessageManager>();
+
+
+
             services.AddSingleton<IConfiguration>(Configuration);
 
             services.Configure<IISServerOptions>(options =>
