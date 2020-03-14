@@ -30,7 +30,7 @@ namespace API
                 {
                     builder.WithOrigins("https://localhost:44359","https://localhost:44303", 
                         "https://localhost:45666", "https://localhost:443",
-                        "http://solvard.ddns.net", "https://solvard.ddns.net", "https://solvard.ddns.net:45666");
+                        "https://solvard.ddns.net", "https://solvard.ddns.net:45666");
                     builder.AllowAnyHeader();
                     builder.AllowAnyMethod();
                     builder.AllowCredentials();

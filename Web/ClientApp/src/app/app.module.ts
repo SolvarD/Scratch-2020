@@ -20,6 +20,7 @@ import { UserService } from './services/user.service';
 import { DataBaseComponent } from './views/database/database.component';
 import { HostIISComponent } from './views/host-iis/host-iis.component';
 import { MultiLanguageComponent } from './component/multi-language/multi-language.component';
+import { MessageService } from './services/message.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { MultiLanguageComponent } from './component/multi-language/multi-languag
   },
     WeatherforecastService,
     HubRealtimeService,
-    UserService],
+    UserService,
+    MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

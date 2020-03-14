@@ -64,7 +64,7 @@ namespace DataAccess
                 throw new Exception("Request Empty");
             }
 
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 return connection.Query<T>(request).ToList();
             }
@@ -91,7 +91,7 @@ namespace DataAccess
 
         private int Execute<T>(string request, List<T> items = null)
         {
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[ConnexionName].ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 return connection.Execute(request, items);
             }

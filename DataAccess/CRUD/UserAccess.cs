@@ -12,7 +12,7 @@ namespace DataAccess.CRUD
         { }
         public async Task<List<User>> GetAll()
         {
-            return await this.Execute<User>("GetAllUsers");
+            return await base.Execute<User>("GetAllUsers");
         }
     }
 }

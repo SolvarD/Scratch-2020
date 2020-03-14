@@ -18,7 +18,7 @@ namespace DataAccess
         public Task<int> Update<T>(T item);
         Task<int> Insert<T>(T item, string table, List<string> columns);
         public Task<List<int>> InsertMany<T>(List<T> items, string table, List<string> columns);
-        public Task<List<T>> GetAll<T>();
+        public Task<List<T>> GetAll<T>(string table, List<string> tableColumns);
     }
 
     public class DALCRUD : ICRUD
@@ -31,7 +31,8 @@ namespace DataAccess
         public readonly Requestor requestor;
         public DALCRUD()
         {
-            requestor = new Requestor("PorteFolio", "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=PorteFolio.Database;");
+            requestor = new Requestor("PorteFolio", @"Data Source=192.168.0.11;Initial Catalog=PorteFolio.Database;Integrated Security=True;User Id=ULTIMATE-OMEGA\omega;Password=linkofgwada");
+            //requestor = new Requestor("PorteFolio", @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PorteFolio.Database;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         public async Task<int> DeleteById(int id)
@@ -39,9 +40,9 @@ namespace DataAccess
             throw new NotImplementedException();
         }
 
-        public async Task<List<T>> GetAll<T>()
+        public async Task<List<T>> GetAll<T>(string table, List<string> tableColumns)
         {
-            return requestor.Select<T>("");
+            return requestor.Select<T>($"SELECT {string.Join(",", tableColumns.ToArray())} FROM {table}");
         }
 
         public async Task<T> GetById<T>(int id)
@@ -55,7 +56,11 @@ namespace DataAccess
         }
         public async Task<int> Insert<T>(T item, string table, List<string> columns)
         {
+            try {
             return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, new List<T> { item }, table, columns));
+            } catch(Exception e){
+                throw e;
+            }            
         }
 
         public async Task<List<int>> InsertMany<T>(List<T> items, string table,List<string> columns)
@@ -80,17 +85,20 @@ namespace DataAccess
             int countRow = 0;
             StringBuilder request = new StringBuilder();
 
-            string insertLine = string.Empty;
+            string requestLine = string.Empty;
 
             switch (action)
             {
                 case enumAction.INSERT:
-                    insertLine = $"INSERT INTO {table} ({string.Join(",", tableColumns.ToArray())}) OUTPUT INSERTED.* VALUES ";
+                    requestLine = $"INSERT INTO {table} ({string.Join(",", tableColumns.ToArray())}) OUTPUT INSERTED.* VALUES ";
                     break;
+                //case enumAction.SELECT:
+                //    requestLine = $"SELECT {string.Join(",", tableColumns.ToArray())} FROM {table}";
+                //    break;
             }
                 
 
-            request.AppendLine(insertLine);
+            request.AppendLine(requestLine);
 
             foreach (T item in items)
             {
@@ -114,7 +122,7 @@ namespace DataAccess
                 else
                 {
                     request.AppendLine(strLine + ";");                   
-                    request.AppendLine(insertLine);
+                    request.AppendLine(requestLine);
                     countRow = 0;
                 }
             }

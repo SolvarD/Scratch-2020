@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace API.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class RealTimeController : ControllerBase
     {
         private readonly IHubContext<RealTimeHub, IRealTimeHub> _realTime;

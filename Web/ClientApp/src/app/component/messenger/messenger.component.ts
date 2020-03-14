@@ -2,6 +2,7 @@ import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@ang
 import { HubRealtimeService } from '../../services/hub-realtime';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-messenger',
@@ -22,7 +23,7 @@ export class MessengerComponent {
   message: Message = new Message();
   currentUserTag: string;
   titleMessenger: string;
-  constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder) {
+  constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder, private messageService: MessageService) {
 
     this.formMessenger = this._fb.group({
       messageToSend: ["", [Validators.required]]
@@ -35,8 +36,12 @@ export class MessengerComponent {
     this.message.userName = `anonyme${idUserAnonyme}`;
 
     this.titleMessenger = this.currentUserTag;
-
+    this.GetAllMessages();
     this.connectFlux();
+  }
+
+  async GetAllMessages() {
+    this.lastMessages = await this.messageService.getAll();
   }
 
   sendMessagePublic() {
@@ -50,14 +55,13 @@ export class MessengerComponent {
   }
   connectFlux() {
     this.hub.suscribePublicMessage.subscribe((message) => {
-      if (this.lastMessages.length < 10) {
+      //if (this.lastMessages.length < 10) {
         this.lastMessages.push(message);
-        this.allMessages.push(message);
-      } else {
-        this.lastMessages.shift();
-        this.lastMessages.push(message);
-        this.allMessages.push(message);
-      }
+      //} else {
+      //  this.lastMessages.shift();
+      //  this.lastMessages.push(message);
+      //  this.allMessages.push(message);
+      //}
 
       this.ref.detectChanges();
     });

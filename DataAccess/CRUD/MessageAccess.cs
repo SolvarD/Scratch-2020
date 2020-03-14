@@ -14,7 +14,7 @@ namespace DataAccess.CRUD
         { }
         public async Task<List<Message>> GetAll()
         {
-            return await this.GetAll<Message>();
+            return await this.GetAll<Message>(_table, new List<string> { "*" });
         }
 
         public async Task<int> Insert(Message item)
