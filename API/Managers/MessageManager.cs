@@ -1,6 +1,7 @@
 ﻿using DataAccess.CRUD;
 using DataAccess.Entities;
 using DataAccess.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,32 @@ namespace API.Managers
     public interface IMessageManager
     {
         Task<List<Message>> GetAllMessages();
-        Task<int> InsertMessage(Message message);
+        Task<int> Insert(Message message);
     }
     public class MessageManager : IMessageManager
     {
         private readonly MessageAccess _messageAccess;
+        private readonly ILogger<MessageManager> _logger;
+        private readonly EmailManager _email;
 
-        public MessageManager(MessageAccess messageAccess) {
+        public MessageManager(MessageAccess messageAccess, ILogger<MessageManager> logger, EmailManager emailManager) {
             _messageAccess = messageAccess;
+            _email = emailManager;
         }
 
         public Task<List<Message>> GetAllMessages()
         {
-            return _messageAccess.GetAll();
+            try
+            {
+                return _messageAccess.GetAll();
+            }
+            catch (Exception e) {
+                _email.SendEmail(e.Message + e.StackTrace);
+                return null;
+            }            
         }
 
-        public Task<int> InsertMessage(Message message)
+        public Task<int> Insert(Message message)
         {
             return _messageAccess.Insert(message);
         }

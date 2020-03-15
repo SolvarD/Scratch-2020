@@ -40,12 +40,18 @@ namespace API
 
             services.AddTransient<UserAccess>();
             services.AddTransient<MessageAccess>();
+            services.AddTransient<LanguageAccess>();
+            services.AddTransient<DictionnaryAccess>();
 
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<IMessageManager, MessageManager>();
+            services.AddTransient<ILanguageManager, LanguageManager>();
+            services.AddTransient<IDictionaryManager, DictionnaryManager>();
+
+            services.AddTransient<EmailManager>();
 
             services.AddSingleton<Requestor>(new Requestor(Configuration, "PorteFolio"));
-            services.AddTransient<ICRUD, DALCRUD>();
+            //services.AddTransient<ICRUD, DALCRUD>();
 
 
 

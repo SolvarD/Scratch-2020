@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[T_REF_Dictionnary]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[DictionnaryId] INT NOT NULL PRIMARY KEY IDENTITY, 
     [LanguageId] INT NOT NULL, 
     [Key] VARCHAR(50) NOT NULL, 
     [Label] VARCHAR(MAX) NOT NULL, 

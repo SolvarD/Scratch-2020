@@ -5,7 +5,7 @@
     <label>{{titleMessenger}}</label> <i class="fas fa-bath"></i>
   </div>
   <div class="container-message-display">
-    <ul class="message-display" [style.width.px]="width" [style.max.height.px]="(height - 70)" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+    <ul class="message-display" [style.width.px]="width" #scrollMe [scrollTop]="scrollMe.scrollHeight">
       <li *ngFor="let msg of lastMessages">
         <div class="text-container" [ngClass]="{'text-right': msg.userName == currentUserTag}">
           <label class="label-messenger" *ngIf="msg.userName != currentUserTag">{{msg.userName}}</label> 

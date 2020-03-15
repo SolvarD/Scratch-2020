@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './component/nav-menu/nav-menu.component';
 import { HomeComponent } from './views/home/home.component';
@@ -21,6 +21,13 @@ import { DataBaseComponent } from './views/database/database.component';
 import { HostIISComponent } from './views/host-iis/host-iis.component';
 import { MultiLanguageComponent } from './component/multi-language/multi-language.component';
 import { MessageService } from './services/message.service';
+import { LanguageService } from './services/language.service';
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { environment } from '../environments/environment';
+import { TranslationService } from './services/translation.service';
+import { MultiLanguageViewComponent } from './views/multi-language/multi-language-view.component';
 
 @NgModule({
   declarations: [
@@ -35,14 +42,22 @@ import { MessageService } from './services/message.service';
     SignalRCodeComponent,
     DataBaseComponent,
     HostIISComponent,
-    MultiLanguageComponent
+    MultiLanguageComponent,
+    MultiLanguageViewComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useClass: TranslationService,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [AuthGuard, {
     provide: HTTP_INTERCEPTORS,
@@ -52,7 +67,12 @@ import { MessageService } from './services/message.service';
     WeatherforecastService,
     HubRealtimeService,
     UserService,
-    MessageService],
+    MessageService,
+    LanguageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, `${environment.API}/Dictionnary`, "");
+}

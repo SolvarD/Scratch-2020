@@ -42,4 +42,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Time" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="50b84d5a-d195-4ebc-b0c7-0e7cb0f01f15" ChangeDateTime="03/15/2020 13:38:28">
+    <Property Name="ElementName" Value="[dbo].[T_REF_Dictionnary].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[T_REF_Dictionnary]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DictionnaryId" />
+  </Operation>
 </Operations>

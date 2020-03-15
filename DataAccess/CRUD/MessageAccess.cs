@@ -9,18 +9,17 @@ namespace DataAccess.CRUD
 {
     public class MessageAccess : DALCRUD
     {
-        private readonly string _table = "Messages";
-        public MessageAccess(Requestor requestor) : base(requestor)
+        public MessageAccess(Requestor requestor) : base(requestor, "Messages")
         { }
         public async Task<List<Message>> GetAll()
         {
-            return await this.GetAll<Message>(_table, new List<string> { "*" });
+            return await base.GetAll<Message>(new List<string> { "*" });
         }
 
         public async Task<int> Insert(Message item)
         {
             List<string> columns = new List<string> { "MessageTypeId", "UserName", "Text", "Time", "UserId", "ReceiverId"};
-            return await base.Insert<Message>(item, _table, columns);
+            return await base.Insert<Message>(item, columns);
         }
     }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HubRealtimeService } from './services/hub-realtime';
 import { WeatherforecastService } from './services/weatherforecast.service';
 import { UserService } from './services/user.service';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,10 +10,8 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
   title = 'app';
-  constructor(hub: HubRealtimeService, weatherforecast: WeatherforecastService, userService: UserService) {    
+  constructor(hub: HubRealtimeService, private _translateService: TranslateService) {
+    this._translateService.use("1");
     hub.Init();
-
-    weatherforecast.init().then((res) => { console.log(res); });
-    userService.getAll().then((res) => { console.log('USERS', res); });
   }
 }

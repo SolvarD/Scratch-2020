@@ -33,7 +33,7 @@ namespace API.HubApi
         {
             message.MessageTypeId = (int)enumMessageType.PUBLIC;
 
-            _messageManager.InsertMessage(message);
+            _messageManager.Insert(message);
             return Clients.All.SendMessageToAll(message);
         }
 

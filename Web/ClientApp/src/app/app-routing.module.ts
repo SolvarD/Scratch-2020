@@ -9,6 +9,7 @@ import { ErrorComponent } from "./views/error/error.component";
 import { SignalRCodeComponent } from "./views/signalr-code/signalr-code.component";
 import { DataBaseComponent } from "./views/database/database.component";
 import { HostIISComponent } from "./views/host-iis/host-iis.component";
+import { MultiLanguageViewComponent } from "./views/multi-language/multi-language-view.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'signalr', component: SignalRCodeComponent },
   { path: 'database', component: DataBaseComponent },
   { path: 'host-iis', component: HostIISComponent },
+  { path: 'multi-language', component: MultiLanguageViewComponent },
   {
     path: 'admin',
     component: LoginComponent,

@@ -11,24 +11,30 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class MessageController : Controller
+    public class LanguageController : Controller
     {
-        private readonly IMessageManager _messageManager;
+        private readonly ILanguageManager _languageManager;
         private readonly EmailManager _email;
-        public MessageController(IMessageManager messageManager, EmailManager email) {
-            _messageManager = messageManager;
+        public LanguageController(ILanguageManager languageManager, EmailManager email)
+        {
+            _languageManager = languageManager;
             _email = email;
         }
         [HttpGet]
         [Route("GetAll")]
-        public async Task<List<Message>> GetAll(){
+        public async Task<List<Language>> GetAll()
+        {
             //return new List<Message> { new Message {MessageTypeId = 1,Text= "hardcoded", Time = DateTime.Now,UserName= "BE"} };
-            try { return await _messageManager.GetAllMessages(); } catch (Exception e)
+            try
+            {
+                return await _languageManager.GetAllLanguages();
+            }
+            catch (Exception e)
             {
                 _email.SendEmail(e.StackTrace);
                 return null;
             }
-            
+
         }
     }
 }

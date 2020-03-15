@@ -8,17 +8,19 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace DataAccess
 {
     public interface ICRUD
     {
-        public Task<T> GetById<T>(int id);
+        public Task<T> GetOneById<T>(int id);
+        public Task<List<T>> GetManyById<T>(int id, string column, List<string> tableColumns);
         public Task<int> DeleteById(int id);
         public Task<int> Update<T>(T item);
-        Task<int> Insert<T>(T item, string table, List<string> columns);
-        public Task<List<int>> InsertMany<T>(List<T> items, string table, List<string> columns);
-        public Task<List<T>> GetAll<T>(string table, List<string> tableColumns);
+        Task<int> Insert<T>(T item,List<string> columns);
+        public Task<List<int>> InsertMany<T>(List<T> items, List<string> columns);
+        public Task<List<T>> GetAll<T>(List<string> tableColumns);
     }
 
     public class DALCRUD : ICRUD
@@ -27,11 +29,12 @@ namespace DataAccess
         {
             INSERT = 1, UPDATE, SELECT, DELETE
         }
-
+        public string _table = string.Empty;
         public readonly Requestor requestor;
-        public DALCRUD(Requestor _requestor)
+        public DALCRUD(Requestor _requestor, string table)
         {
             requestor = _requestor;
+            _table = table;
         }
 
         public async Task<int> DeleteById(int id)
@@ -39,25 +42,28 @@ namespace DataAccess
             throw new NotImplementedException();
         }
 
-        public async Task<List<T>> GetAll<T>(string table, List<string> tableColumns)
+        public async Task<List<T>> GetAll<T>(List<string> tableColumns)
         {
-            return requestor.Select<T>($"SELECT {string.Join(",", tableColumns.ToArray())} FROM {table}");
+            return requestor.Select<T>($"SELECT {string.Join(",", tableColumns.ToArray())} FROM {_table}");
         }
 
-        public async Task<T> GetById<T>(int id)
+        public async Task<T> GetOneById<T>(int id)
         {
             return requestor.Select<T>("").First();
         }
-
+        public async Task<List<T>> GetManyById<T>(int id, string column,List<string> tableColumns)
+        {
+            return requestor.Select<T>($"SELECT {string.Join(",", tableColumns.ToArray())} FROM {_table} Where {column}={id}");
+        }
         public async Task<int> Update<T>(T item)
         {
             throw new NotImplementedException();
         }
-        public async Task<int> Insert<T>(T item, string table, List<string> columns)
+        public async Task<int> Insert<T>(T item, List<string> columns)
         {
             try
             {
-                return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, new List<T> { item }, table, columns));
+                return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, new List<T> { item }, _table, columns));
             }
             catch (Exception e)
             {
@@ -65,9 +71,9 @@ namespace DataAccess
             }
         }
 
-        public async Task<List<int>> InsertMany<T>(List<T> items, string table, List<string> columns)
+        public async Task<List<int>> InsertMany<T>(List<T> items, List<string> columns)
         {
-            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, items, table, columns));
+            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, items, _table, columns));
         }
 
         public async Task<List<T>> Execute<T>(string name, object param = null)

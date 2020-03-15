@@ -16,3 +16,9 @@ Insert into T_REF_languages ([LanguageId], [Label], [Code]) values
 Insert into T_REF_MessageTypes ([MessageTypeId],[Label]) values
 (1, 'PUBLIC'),
 (2, 'PRIVATE')
+
+Insert into T_REF_Dictionnary ([LanguageId],[Key],[Label]) values 
+(1,'DATABASE','Base de donnée'),
+(2,'DATABASE','Database'),
+(1,'HOME', 'Accueil'),
+(2,'HOME', 'Home')

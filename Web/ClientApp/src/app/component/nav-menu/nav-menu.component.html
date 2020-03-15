@@ -11,24 +11,30 @@
               (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse menu"
            [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
           <li class="nav-item"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-dark" [routerLink]="['/']">Accueil</a>
+            <a class="nav-link text-dark" [routerLink]="['/']" translate>HOME</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/signalr']">signalR</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/database']">Database</a>
+            <a class="nav-link text-dark" [routerLink]="['/database']" translate>DATABASE</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/host-iis']">IIS</a>
           </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/multi-language']">Multi Language</a>
+          </li>
         </ul>
+      </div>
+      <div class="language">
+        <app-multi-language></app-multi-language>
       </div>
     </div>
   </nav>

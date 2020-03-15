@@ -9,12 +9,11 @@ namespace DataAccess.CRUD
 {
     public class LanguageAccess : DALCRUD
     {
-        private readonly string _table = "T_REF_Languages";
-        public LanguageAccess(Requestor requestor) : base(requestor) 
+        public LanguageAccess(Requestor requestor) : base(requestor, "T_REF_Languages") 
         { }
         public async Task<List<Language>> GetAll()
         {
-            return await base.GetAll<Language>(_table, new List<string> { "*" });
+            return await base.GetAll<Language>(new List<string> { "*" });
         }
     }
 }

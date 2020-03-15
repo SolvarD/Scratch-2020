@@ -108,3 +108,4 @@ F:\Scratch\Scratch\API\obj\Debug\netcoreapp3.1\staticwebassets\API.StaticWebAsse
 F:\Scratch\Scratch\API\obj\Debug\netcoreapp3.1\staticwebassets\API.StaticWebAssets.xml
 F:\Scratch\Scratch\API\obj\Debug\netcoreapp3.1\API.dll
 F:\Scratch\Scratch\API\obj\Debug\netcoreapp3.1\API.pdb
+F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
