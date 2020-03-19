@@ -32,7 +32,7 @@ namespace API.HubApi
         public Task SendMessageToAll(Message message)
         {
             message.MessageTypeId = (int)enumMessageType.PUBLIC;
-
+            message.Group = "Public";
             _messageManager.Insert(message);
             return Clients.All.SendMessageToAll(message);
         }
@@ -43,17 +43,19 @@ namespace API.HubApi
         }
         public Task SendMessageToGroup(string group, Message message)
         {
+            message.MessageTypeId = (int)enumMessageType.PUBLIC;
+            message.Group = group;
             return Clients.Groups(group).SendMessageToGroup(TypeMessage.NewMesageGroup, message);
         }
 
         public override async Task OnConnectedAsync()
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, "public");
+            await Groups.AddToGroupAsync(Context.ConnectionId, "Public");
             await base.OnConnectedAsync();
         }
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, "public");
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, "Public");
             await base.OnDisconnectedAsync(exception);
         }
     }

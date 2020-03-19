@@ -3,11 +3,35 @@ import { HubRealtimeService } from '../../services/hub-realtime';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
 import { MessageService } from '../../services/message.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-messenger',
   templateUrl: './messenger.component.html',
-  styleUrls: ['./messenger.component.less']
+  styleUrls: ['./messenger.component.less'],
+  animations: [trigger('sizeChat', [
+    state('open', style({
+      flex: '1'
+    })),
+    state('closed', style({      
+      display: 'none'
+    })),
+    state('justHeader', style({
+      height: '50px'
+    })),
+    state('hideMessage', style({
+      height:'0px'
+    })),
+    state('hideInput', style({
+      display:'none'
+    })),
+    transition('open <=> *', [
+      animate('0s')
+    ]),
+    transition('open <=> hideInput', [
+      animate('0s')
+    ])
+  ])]
 })
 export class MessengerComponent {
   public lastMessages: Array<Message> = [];
@@ -19,10 +43,13 @@ export class MessengerComponent {
   @Input()
   width: number = 320;
 
+  private origineSize = this.height;
   formMessenger: FormGroup;
   message: Message = new Message();
   currentUserTag: string;
   titleMessenger: string;
+  isOpen: boolean = false;
+
   constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder, private messageService: MessageService) {
 
     this.formMessenger = this._fb.group({
@@ -55,15 +82,15 @@ export class MessengerComponent {
   }
   connectFlux() {
     this.hub.suscribePublicMessage.subscribe((message) => {
-      //if (this.lastMessages.length < 10) {
-        this.lastMessages.push(message);
-      //} else {
-      //  this.lastMessages.shift();
-      //  this.lastMessages.push(message);
-      //  this.allMessages.push(message);
-      //}
-
+      this.lastMessages.push(message);
       this.ref.detectChanges();
     });
+  }
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+  }
+  getClassIco() {
+    return this.isOpen ? 'fas fa-angle-down' : 'fas fa-angle-up';
   }
 }

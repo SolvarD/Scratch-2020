@@ -17,6 +17,6 @@ namespace DataAccess.Entities
         public DateTime Time { get; set; }
         public int UserId { get; set; }
         public int ReceiverId { get; set; }
-
+        public string Group { get; set; }
     }
 }

@@ -7,11 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MultiLanguageViewComponent {
 
-  public CSHARP: string = `  services.Configure<IISServerOptions>
-    (options =>
-    {
-    options.AutomaticAuthentication = false;
-    });`;
+  public CSHARP: string = ``;
   public WEBCONFIG: string = `
 
 with ngx-translate

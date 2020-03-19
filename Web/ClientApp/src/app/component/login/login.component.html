@@ -1,0 +1,42 @@
+<div >
+  <button type="button" [style.height.px]="height" class="btn btn-light" (click)="toggle()">
+    <i class='fas fa-portrait' style='font-size:24px'></i>
+  </button>
+  <label class="lastname">{{user.lastName}}</label>
+</div>
+
+<div div class="modal" [style.display]="(displayModal? 'block': 'none')" id="myModal" style="background-color:rgba(128, 128, 128, 0.5);">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title" translate>LOGIN</h4>
+        <button type="button" class="close" data-dismiss="modal" (click)="toggle()">&times;</button>
+      </div>
+      <form [formGroup]="formLogin">
+        <div class="modal-body">
+
+          <div>
+            <div class="form-group">
+              <label for="mail" translate>EMAIL</label>
+              <input type="text" id="mail" class="form-control" formControlName="email" />
+            </div>
+            <div class="form-group">
+              <label for="mdp" translate>PASSWORD</label>
+              <input type="password" id="mdp" class="form-control" formControlName="password" />
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer" *ngIf="!user.userId">
+          <button type="button" class="btn btn-dark" (click)="toggle()" translate>CANCEL</button>
+          <button type="button" (click)="onSubmit()" class="btn btn-success" data-dismiss="modal">Ok</button>
+        </div>
+        <div class="modal-footer" *ngIf="user.userId">
+          <button type="button" class="btn btn-danger" (click)="onDisconnect()" translate>DECONNEXION</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

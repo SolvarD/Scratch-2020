@@ -10,5 +10,6 @@ namespace DataAccess.Entities
         public int LanguageId { get; set; }
         public string Key { get; set; }
         public string Label { get; set; }
+        public DateTime Created { get; set; }
     }
 }

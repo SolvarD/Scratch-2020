@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -7,7 +7,6 @@ import { NavMenuComponent } from './component/nav-menu/nav-menu.component';
 import { HomeComponent } from './views/home/home.component';
 import { CounterComponent } from './views/counter/counter.component';
 import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './views/login/login.component';
 import { UserComponent } from './views/users/user.component';
 import { ErrorComponent } from './views/error/error.component';
 import { AuthGuard } from './services/auth.guard';
@@ -28,6 +27,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
 import { TranslationService } from './services/translation.service';
 import { MultiLanguageViewComponent } from './views/multi-language/multi-language-view.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './component/login/login.component';
+import { AuthenticationComponent } from './views/authentification/authentication.component';
+import { AppInitService } from './services/AppInit.service';
 
 @NgModule({
   declarations: [
@@ -43,10 +46,12 @@ import { MultiLanguageViewComponent } from './views/multi-language/multi-languag
     DataBaseComponent,
     HostIISComponent,
     MultiLanguageComponent,
-    MultiLanguageViewComponent
+    MultiLanguageViewComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -60,15 +65,20 @@ import { MultiLanguageViewComponent } from './views/multi-language/multi-languag
     })
   ],
   providers: [AuthGuard, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
+    provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
   },
+    AppInitService,
+    {
+      provide: APP_INITIALIZER, useFactory: (appInitService: AppInitService) => {
+        return () => appInitService.initializeApp();
+      }, deps: [AppInitService], multi: true
+    },
     WeatherforecastService,
     HubRealtimeService,
     UserService,
     MessageService,
-    LanguageService],
+    LanguageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

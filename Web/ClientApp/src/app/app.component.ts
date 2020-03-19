@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   title = 'app';
   constructor(hub: HubRealtimeService, private _translateService: TranslateService) {
-    this._translateService.use("1");
+    this._translateService.use(UserService.currentUser.languageId.toString());
     hub.Init();
   }
 }

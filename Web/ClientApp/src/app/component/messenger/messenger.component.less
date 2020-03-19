@@ -10,10 +10,13 @@
   bottom: 0;
   padding: 5px;
   list-style: none;
-  position: absolute;
-  margin-bottom: 39px;
+ /*position: absolute;*/
+   /*margin-bottom: 39px;*/
   max-height: 308px;
   overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 1px;
+  margin-top: 1px;
 }
 
 .bloc-send-text {
@@ -21,11 +24,13 @@
 }
 
 .container-message-display {
-  overflow-y: auto;
+  overflow-y: hidden;
+  overflow-x: hidden;
   flex: 1;
   border-width: 0.1px;
   border-style: solid;
   background-color: white;
+  /*position:relative;*/
 }
 .text-container {
   width: 85%;
@@ -56,4 +61,8 @@
 }
 .text-box{
     flex:1;
+}
+.control-size{
+    background: none;
+    border: none;
 }

@@ -10,7 +10,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, visitez https:
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="PorteFolio">
-      <Value>Data Source=%28localdb%29\mssqllocaldb%3bInitial Catalog=PorteFolio.Database%3b</Value>
+      <Value>Data Source=solvar.database.windows.net%3bInitial Catalog=PorteFolio.Database%3bPersist Security Info=True%3bUser ID=omega%3bPassword=Insta2012</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
 </Project>

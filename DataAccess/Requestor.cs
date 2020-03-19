@@ -149,7 +149,7 @@ namespace DataAccess
                         connection.Open();
                         return true;
                     }
-                    catch (SqlException e)
+                    catch
                     {
                         return false;
                     }

@@ -7,5 +7,6 @@
     [Time] DATETIME NOT NULL, 
     [UserId] INT NULL, 
     [ReceiverId] INT NULL, 
+    [Group] VARCHAR(50) NULL, 
     CONSTRAINT [FK_Messages_MessageTypes] FOREIGN KEY ([MessageTypeId]) REFERENCES [T_REF_MessageTypes]([MessageTypeId])
 )

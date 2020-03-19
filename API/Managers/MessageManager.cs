@@ -17,10 +17,9 @@ namespace API.Managers
     public class MessageManager : IMessageManager
     {
         private readonly MessageAccess _messageAccess;
-        private readonly ILogger<MessageManager> _logger;
         private readonly EmailManager _email;
 
-        public MessageManager(MessageAccess messageAccess, ILogger<MessageManager> logger, EmailManager emailManager) {
+        public MessageManager(MessageAccess messageAccess, EmailManager emailManager) {
             _messageAccess = messageAccess;
             _email = emailManager;
         }

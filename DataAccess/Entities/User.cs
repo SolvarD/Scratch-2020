@@ -1,21 +1,51 @@
-﻿using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DataAccess.Models
 {
-    public class User
+    public enum enumRole
     {
-        private readonly ClaimsPrincipal _user;
-        //public User(IHttpContextAccessor httpContextAccessor) {
-        
-        //}
-        public int Id { get; set; }
+        ADMIN = 1,
+        WEBMASTER,
+        USER,
+        VISITOR,
+        ANONYME
+    }
+    public class User
+    {        
+        public User()
+        {
+
+        }
+        public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Token { get; set; }
         public string Email { get; set; }
-        public int Role { get; set; }
+        public int RoleId { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Updated { get; set; }
+        public bool isActive { get; set; }
+        public int LanguageId { get; set; } = 1;
+
+        public List<Claim> getClaims()
+        {
+            return new List<Claim>{
+                    new Claim("UserId", UserId.ToString()),
+                    new Claim("Name", Username ?? ($"{FirstName} {LastName}")),
+                    new Claim("Email", Email),
+                    new Claim("FullName", string.Format("{0} {1}", FirstName, LastName)),
+                    new Claim("Role", ((enumRole)RoleId).ToString("g")),
+                    new Claim("LanguageId", LanguageId.ToString()),
+                    new Claim("Password", Password.ToString()?? string.Empty),
+                    new Claim("Token", Token?? string.Empty)
+            };
+        }
+
     }
 }

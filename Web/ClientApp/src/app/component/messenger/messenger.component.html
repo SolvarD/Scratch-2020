@@ -1,30 +1,39 @@
 <div class="container-messenger"
      [style.height.px]="height"
-     [style.width.px]="width">
+     [style.width.px]="width"
+     [@sizeChat]="isOpen ? 'open' : 'justHeader'"
+     >
   <div class="header-messenger">
-    <label>{{titleMessenger}}</label> <i class="fas fa-bath"></i>
+    <div style="flex:9"><label>{{titleMessenger}}</label></div>
+    <div style="flex:1"><button (click)="toggle()" class="control-size" type="button"><i [ngClass]="getClassIco()"></i></button> </div>    
   </div>
-  <div class="container-message-display">
-    <ul class="message-display" [style.width.px]="width" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-      <li *ngFor="let msg of lastMessages">
-        <div class="text-container" [ngClass]="{'text-right': msg.userName == currentUserTag}">
-          <label class="label-messenger" *ngIf="msg.userName != currentUserTag">{{msg.userName}}</label> 
-          <label class="label-messenger" *ngIf="msg.userName == currentUserTag">Me </label> 
-          <label class="label-messenger">{{msg.time | date: "dd/MM/yyyy HH:MM:ss" }}: </label>
-          <label class="label-messenger">{{msg.text}}</label>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <form [formGroup]="formMessenger">
-    <div class="bloc-send-text">
-      <div class="text-box">
-        <input type="text" class="form-control" formControlName="messageToSend" />
-      </div>
-      <div>
-        <input type="submit" class="btn btn-primary" (click)="sendMessagePublic()" value="send" />
-      </div>
+
+  <div style="display:flex;flex-direction: column;">
+    <div class="container-message-display" [@sizeChat]="isOpen ? 'open' : 'closed'">
+      <ul class="message-display" [@sizeChat]="isOpen ? 'open' : 'hideMessage'" [style.width.px]="width" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+        <li *ngFor="let msg of lastMessages">
+          <div class="text-container" [ngClass]="{'text-right': msg.userName == currentUserTag}">
+            <label class="label-messenger" *ngIf="msg.userName != currentUserTag">{{msg.userName}}</label>
+            <label class="label-messenger" *ngIf="msg.userName == currentUserTag">Me </label>
+            <label class="label-messenger">{{msg.time | date: "dd/MM/yyyy HH:MM:ss" }}: </label>
+            <label class="label-messenger">{{msg.text}}</label>
+          </div>
+        </li>
+      </ul>
     </div>
-  </form>
+    <form [formGroup]="formMessenger">
+      <div [@sizeChat]="isOpen ? 'open' : 'hideInput'" class="bloc-send-text">
+        <div class="text-box">
+          <input type="text" class="form-control" formControlName="messageToSend" />
+        </div>
+        <div>
+          <input type="submit" class="btn btn-primary" (click)="sendMessagePublic()" value="send" />
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+
 </div>
 

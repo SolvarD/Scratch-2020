@@ -1,7 +1,7 @@
 ﻿using DataAccess.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DataAccess.CRUD
@@ -13,6 +13,11 @@ namespace DataAccess.CRUD
         public async Task<List<User>> GetAll()
         {
             return await base.Execute<User>("GetAllUsers");
+        }
+        public async Task<User> GetByEmailPassword(string email, string password)
+        {
+            var users = await base.Execute<User>("GetByEmailPassword", new { @email = email, @password = password });
+            return users.FirstOrDefault();
         }
     }
 }

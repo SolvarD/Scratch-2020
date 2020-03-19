@@ -8,7 +8,7 @@
               data-target=".navbar-collapse"
               aria-label="Toggle navigation"
               [attr.aria-expanded]="isExpanded"
-              (click)="toggle()">
+              (click)="toggleMenu()">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse menu"
@@ -19,22 +19,28 @@
               [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark" [routerLink]="['/']" translate>HOME</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/signalr']">signalR</a>
+
+
+          <li class="nav-item dropdown" id="sub-menu-stack">
+            <a class="nav-link text-dark dropdown-toggle" (click)="toggleStack()" translate>STACK</a>
+            <div class="dropdown-menu" [style.display]="(isExpandedStack? 'block': 'none')">
+              <a class="dropdown-item" [routerLinkActive]="['link-active']" [routerLink]="['/database']" translate>DATABASE</a>
+              <a class="dropdown-item" [routerLinkActive]="['link-active']" [routerLink]="['/host-iis']">IIS</a>
+              <a class="dropdown-item" [routerLinkActive]="['link-active']" [routerLink]="['/signalr']" >SignalR</a>
+              <a class="dropdown-item" [routerLinkActive]="['link-active']" [routerLink]="['/authentication']" translate>AUTHENTICATION</a>
+            </div>
           </li>
+          
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/database']" translate>DATABASE</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/host-iis']">IIS</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/multi-language']">Multi Language</a>
+            <a class="nav-link text-dark" [routerLink]="['/multi-language']" translate>MULTI_LANGUAGE</a>
           </li>
         </ul>
       </div>
       <div class="language">
         <app-multi-language></app-multi-language>
+      </div>
+      <div class="login">
+        <app-login></app-login>
       </div>
     </div>
   </nav>

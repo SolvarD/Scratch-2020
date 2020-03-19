@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,12 +7,17 @@ import { Component } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  isExpandedStack = false;
 
   collapse() {
     this.isExpanded = false;
   }
 
-  toggle() {
+  toggleMenu() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  toggleStack() {
+    this.isExpandedStack = !this.isExpandedStack;
   }
 }
