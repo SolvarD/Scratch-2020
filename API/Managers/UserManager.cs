@@ -25,13 +25,13 @@ namespace API.Managers
         private readonly UserAccess _userAccess;
         private readonly IEncryptManager _encryptManager;
         private readonly IConfiguration _config;
-        private readonly IHttpContextAccessor _httpContext;
-        public UserManager(UserAccess userAccess, IEncryptManager encryptManager, IConfiguration config, IHttpContextAccessor httpContext)
+        //private readonly IHttpContextAccessor _httpContext;
+        public UserManager(UserAccess userAccess, IEncryptManager encryptManager, IConfiguration config/*, IHttpContextAccessor httpContext*/)
         {
             _userAccess = userAccess;
             _encryptManager = encryptManager;
             _config = config;
-            _httpContext = httpContext;
+            //_httpContext = httpContext;
         }
 
         public Task<List<User>> GetAllUsers()
@@ -41,17 +41,11 @@ namespace API.Managers
         public async Task<User> Login(string login, string password)
         {
             var user = await _userAccess.GetByEmailPassword(login, _encryptManager.GetMd5Hash(password));
-            return user;
+            return declareUser(user);
         }
         public async Task<User> Login()
         {
-            User user;
-            //if (_httpContext.HttpContext.User.Claims != null && _httpContext.HttpContext.User.Claims.Any()) {
-            //    user = await _userAccess.GetByEmailPassword(_httpContext.HttpContext.User.FindFirst("Email").Value , _httpContext.HttpContext.User.FindFirst("Password").Value);
-            //    return user;
-            //}
-
-            user = new User
+            User user = new User
             {
                 LanguageId = 1,
                 RoleId = (int)enumRole.ANONYME,
@@ -69,22 +63,10 @@ namespace API.Managers
         private User declareUser(User user)
         {
             if (user == null) { return null; }
-            var userClaims = user.getClaims();
+            var userClaims = user.GetClaims();
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_config["Authentication:SecretKey"]);
-
-            //var tokenDescriptor = new SecurityTokenDescriptor
-            //{
-            //    Subject = new ClaimsIdentity(userClaims),
-            //    Expires = DateTime.UtcNow.AddDays(7),
-            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            //};
-
-            //var token = tokenHandler.CreateToken(tokenDescriptor);
-            //var tokenString = tokenHandler.WriteToken(token);
-
-            //user.Token = tokenString;
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

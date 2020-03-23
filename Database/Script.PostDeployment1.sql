@@ -44,4 +44,8 @@ Insert into T_REF_Dictionnary ([LanguageId],[Key],[Label] ,[Created]) values
 (1,'EMAIL', 'Adresse mail', @now),
 (2,'EMAIL', 'E-mail', @now),
 (1,'PASSWORD', 'Mot de passe', @now),
-(2,'PASSWORD', 'Password', @now)
+(2,'PASSWORD', 'Password', @now),
+(1,'STACK', 'Architecture', @now),
+(2,'STACK', 'Stack', @now),
+(1,'AUTHENTICATION', 'Identhification', @now),
+(2,'AUTHENTICATION', 'Authentication', @now)

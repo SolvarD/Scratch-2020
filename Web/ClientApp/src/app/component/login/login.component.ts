@@ -43,15 +43,14 @@ export class LoginComponent {
 
     if (this.formLogin.valid) {
       this.user = await this.userService.getByEmailPassword(email, password);
-      if (this.user.userId) {
-        UserService.currentUser = this.user;
+      if (this.user.userId) {        
         this.toggle();
       }
     }
   }
 
-  onDisconnect() {    
-    UserService.currentUser = null;
+  async onDisconnect() {
+    await this.userService.logout();
     this.reseet();
   }
 

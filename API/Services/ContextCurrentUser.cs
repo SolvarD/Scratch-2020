@@ -29,19 +29,19 @@ namespace API.Services
             this.UserId = user.UserId;
         }
 
-        public ContextCurrentUser(IHttpContextAccessor httpContextAccessor)
-        {
-            _user = httpContextAccessor.HttpContext.User;
-            //this.Email = user.Email;
-            //this.FirstName = user.FirstName;
-            //this.isActive = user.isActive;
-            //this.LastName = user.LastName;
-            //this.Password = user.Password;
-            //this.RoleId = user.RoleId;
-            //this.Created = user.Created;
-            //this.LanguageId = user.LanguageId;
-            //this.Token = user.Token;
-        }
+        //public ContextCurrentUser(IHttpContextAccessor httpContextAccessor)
+        //{
+        //    _user = httpContextAccessor.HttpContext.User;
+        //    //this.Email = user.Email;
+        //    //this.FirstName = user.FirstName;
+        //    //this.isActive = user.isActive;
+        //    //this.LastName = user.LastName;
+        //    //this.Password = user.Password;
+        //    //this.RoleId = user.RoleId;
+        //    //this.Created = user.Created;
+        //    //this.LanguageId = user.LanguageId;
+        //    //this.Token = user.Token;
+        //}
 
         public void UpdateCurrentUser(User user) {
             this.Email = user.Email;

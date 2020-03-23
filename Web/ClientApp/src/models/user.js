@@ -3,6 +3,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var User = /** @class */ (function () {
     function User() {
     }
+    Object.defineProperty(User.prototype, "token", {
+        get: function () {
+            return localStorage.getItem('Token');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    User.prototype.set = function (value) {
+        localStorage.setItem('Token', value);
+    };
     return User;
 }());
 exports.User = User;

@@ -7,9 +7,11 @@ export class AppInitService {
   constructor(private userService: UserService) { }
 
   initializeApp() {
-    return this.userService.getAnonymousLogin().then((user) => {
-      UserService.currentUser = user;
-      return user;
-    })
+    if (!UserService.currentUser || !UserService.currentUser.token) {
+      return this.userService.getAnonymousLogin().then((user) => {
+        UserService.currentUser = user;
+        return user;
+      })
+    }
   }
 }

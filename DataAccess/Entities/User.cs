@@ -33,7 +33,7 @@ namespace DataAccess.Models
         public bool isActive { get; set; }
         public int LanguageId { get; set; } = 1;
 
-        public List<Claim> getClaims()
+        public List<Claim> GetClaims()
         {
             return new List<Claim>{
                     new Claim("UserId", UserId.ToString()),
