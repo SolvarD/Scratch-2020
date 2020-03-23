@@ -31,7 +31,7 @@ export class UserService {
   }
 
   logout() {
-    return this.http.get<User>(`${environment.API}/User/Logout`).toPromise().then((data) => {
+    return this.http.post<User>(`${environment.API}/User/Logout`).toPromise().then((data) => {
       localStorage.clear();
       UserService.currentUser = null;
       return data;
