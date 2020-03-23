@@ -8,7 +8,7 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  public static currentUser: User;
+  public static currentUser: User = JSON.parse(localStorage.getItem('currentUser'));
 
   getAll() {
     return this.http.get<User[]>(`${environment.API}/User/GetAll`).toPromise();

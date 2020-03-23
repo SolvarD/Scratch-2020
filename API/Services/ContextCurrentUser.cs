@@ -36,7 +36,7 @@ namespace API.Services
             string roleName = user.FindFirst("Role").Value;
             RoleId = (int)Enum.Parse(typeof(enumRole), roleName);
             LanguageId = int.Parse(user.FindFirst("LanguageId").Value);
-            Username = user.FindFirst("Username").Value;
+            UserName = user.FindFirst("UserName").Value;
             Email = user.FindFirst("Email").Value;
             Password = user.FindFirst("Password").Value;
             Token = user.FindFirst("Token").Value;

@@ -9,12 +9,7 @@ export class User {
   public password: string;
   public created: Date;
   public updated: Date;
-  public get token() {
-    return localStorage.getItem('Token');
-  }
-  set(value) {
-    localStorage.setItem('Token', value);
-  }
+  public token: string;
   public isActive: boolean;
 }
 

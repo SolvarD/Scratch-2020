@@ -24,7 +24,6 @@ namespace API.Controllers
         [Route("GetAll")]
         public async Task<List<Language>> GetAll()
         {
-            //return new List<Message> { new Message {MessageTypeId = 1,Text= "hardcoded", Time = DateTime.Now,UserName= "BE"} };
             try
             {
                 return await _languageManager.GetAllLanguages();

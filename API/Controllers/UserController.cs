@@ -54,10 +54,6 @@ namespace API.Controllers
         public async Task<IActionResult> Login(string returnUrl)
         {
             var user = await _userManager.Login();
-            //var claims = user.GetClaims();
-            //_httpContext.HttpContext.Session.SetString("TEST", "OWARIDA !!");
-            //var claimsIdentity = new ClaimsIdentity(claims, "GlobalDevApp");
-            //await HttpContext.SignInAsync("GlobalDevApp", new ClaimsPrincipal(claimsIdentity), new AuthenticationProperties { IsPersistent = true});
             return Ok(user);
         }
 

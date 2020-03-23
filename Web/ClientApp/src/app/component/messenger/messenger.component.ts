@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
 import { MessageService } from '../../services/message.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-messenger',
@@ -55,14 +56,10 @@ export class MessengerComponent {
     this.formMessenger = this._fb.group({
       messageToSend: ["", [Validators.required]]
     });
-
-    let curentdate = new Date();
-    let idUserAnonyme = `${curentdate.getHours()}${curentdate.getMinutes()}${curentdate.getSeconds()}${curentdate.getMilliseconds()}`;
-
-    this.currentUserTag = `anonyme${idUserAnonyme}`;
-    this.message.userName = `anonyme${idUserAnonyme}`;
-
-    this.titleMessenger = this.currentUserTag;
+    
+    this.currentUserTag = UserService.currentUser.userName;
+    this.message.userName = UserService.currentUser.userName;
+    this.titleMessenger = UserService.currentUser.userName;
     this.GetAllMessages();
     this.connectFlux();
   }

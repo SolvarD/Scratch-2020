@@ -23,7 +23,7 @@ namespace DataAccess.Models
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Username { get; set; }
+        public string UserName { get; set; }
         public string Password { get; set; }
         public string Token { get; set; }
         public string Email { get; set; }
@@ -37,7 +37,7 @@ namespace DataAccess.Models
         {
             return new List<Claim>{
                     new Claim("UserId", UserId.ToString()),
-                    new Claim("Username", Username ?? ($"{FirstName} {LastName}")),
+                    new Claim("UserName", UserName ?? ($"{FirstName} {LastName}")),
                     new Claim("Email", Email),
                     new Claim("FullName", string.Format("{0} {1}", FirstName, LastName)),
                     new Claim("Role", ((enumRole)RoleId).ToString("g")),

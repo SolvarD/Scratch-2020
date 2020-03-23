@@ -3,7 +3,7 @@
 	[UserId] INT NOT NULL PRIMARY KEY IDENTITY, 
     [FirstName] VARCHAR(50) NOT NULL, 
     [LastName] VARCHAR(50) NOT NULL, 
-    [Username] VARCHAR(50) NOT NULL, 
+    [UserName] VARCHAR(50) NOT NULL, 
     [Password] VARCHAR(MAX) NOT NULL, 
     [Token] VARCHAR(MAX) NULL, 
     [Email] VARCHAR(50) NOT NULL, 

@@ -50,12 +50,16 @@ namespace API.Managers
         }
         public async Task<User> Login()
         {
+            DateTime curentdate = DateTime.Now;
+            string idUserAnonyme = $"{ curentdate.Hour}{ curentdate.Minute}{ curentdate.Second}{ curentdate.Millisecond}";
+
             User user = new User
             {
                 LanguageId = 1,
                 RoleId = (int)enumRole.ANONYME,
                 LastName = "Doe",
                 FirstName = "John",
+                UserName = "anonyme" + idUserAnonyme,
                 Email = "j.doe@GlobalDevApp.com",
                 Created = DateTime.Now,
                 Token = string.Empty,

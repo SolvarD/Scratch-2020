@@ -24,7 +24,7 @@ Insert Into T_REF_Roles ([RoleId],[Label]) values
 (4, 'VISITOR'),
 (5, 'ANONYME')
 declare @now datetime = GETDATE();
-Insert Into Users ([RoleId],[FirstName],[LastName],[Email],[Username],[Password],[Created],[isActive],[LanguageId]) values
+Insert Into Users ([RoleId],[FirstName],[LastName],[Email],[UserName],[Password],[Created],[isActive],[LanguageId]) values
 --totototo
 (1, 'Solvar', 'Dimitri', 'solvar@msn.com', 'Belphegore', 'c33ca5e7eae116138d1d1b61158d58f9', @now, 1, 1),
 --Visitor2020
