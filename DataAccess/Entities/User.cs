@@ -37,7 +37,7 @@ namespace DataAccess.Models
         {
             return new List<Claim>{
                     new Claim("UserId", UserId.ToString()),
-                    new Claim("Name", Username ?? ($"{FirstName} {LastName}")),
+                    new Claim("Username", Username ?? ($"{FirstName} {LastName}")),
                     new Claim("Email", Email),
                     new Claim("FullName", string.Format("{0} {1}", FirstName, LastName)),
                     new Claim("Role", ((enumRole)RoleId).ToString("g")),

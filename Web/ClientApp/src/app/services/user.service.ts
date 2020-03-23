@@ -31,11 +31,24 @@ export class UserService {
   }
 
   logout() {
-    return this.http.post<User>(`${environment.API}/User/Logout`).toPromise().then((data) => {
+    return this.http.get<User>(`${environment.API}/User/Logout`).toPromise().then((data) => {
       localStorage.clear();
       UserService.currentUser = null;
+      this.interceptUser(data);
       return data;
     }); 
+  }
+
+  UpdateLanguage(id: number) {
+    return this.http.put(`${environment.API}/User/Update/Language`, { languageId: id }).toPromise().then((user) => {
+      UserService.currentUser.languageId = id;
+      this.interceptUser(UserService.currentUser);
+      return UserService.currentUser;
+    });
+  }
+
+  Update(user: User) {
+    return this.http.put(`${environment.API}/User/Update`, user).toPromise();
   }
 
   private interceptUser(user: User): User {

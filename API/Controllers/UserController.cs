@@ -21,13 +21,13 @@ namespace API.Controllers
     public class UserController : Controller
     {
         private readonly IUserManager _userManager;
-        private readonly ContextCurrentUser _currentUser;
-        //private readonly IHttpContextAccessor _httpContext;
-        public UserController(IUserManager userManager, ContextCurrentUser currentUser /*,IHttpContextAccessor httpContext*/)
+        private ContextCurrentUser _currentUser;
+        private readonly IHttpContextAccessor _httpContext;
+        public UserController(IUserManager userManager, ContextCurrentUser currentUser ,IHttpContextAccessor httpContext)
         {
             _userManager = userManager;
             _currentUser = currentUser;
-            //_httpContext = httpContext;
+            _httpContext = httpContext;
         }
 
         [HttpGet]
@@ -61,11 +61,32 @@ namespace API.Controllers
             return Ok(user);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("Logout")]
-        public async void Logout()
+        public async Task<IActionResult> Logout()
         {
-           // await HttpContext.SignOutAsync("GlobalDevApp");
+            var user = await _userManager.Login();
+            return Ok(user);
+        }
+
+        [HttpPut]
+        [Authorize("UpdateUser")]
+        [Route("Update")]
+        public async Task<User> Update(User user)
+        {
+            await _userManager.Update(user);
+            _currentUser.UpdateCurrentUser(user);
+            return user;
+        }
+
+        [HttpPut]
+        [Route("Update/Language")]
+        public async Task<User> UpdateLanguage(User user)
+        {
+            var current = _httpContext.HttpContext.User.Claims;
+            _currentUser.LanguageId = user.LanguageId;
+            await _userManager.UpdateLanguage(_currentUser);
+            return _currentUser;
         }
     }
 }

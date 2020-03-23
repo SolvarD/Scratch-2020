@@ -5,6 +5,7 @@ import { Message } from '../../../models/message';
 import { LanguageService } from '../../services/language.service';
 import { Language } from '../../../models/language';
 import { TranslateService } from '@ngx-translate/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-multi-language',
@@ -15,7 +16,7 @@ export class MultiLanguageComponent implements OnInit {
   formLanguage: FormGroup;
   languages: Language[] = [];
 
-  constructor(private _fb: FormBuilder, private _languageService: LanguageService, private _translateService: TranslateService) {
+  constructor(private _fb: FormBuilder, private _languageService: LanguageService, private _translateService: TranslateService, private _userService: UserService) {
    
   }
 
@@ -27,7 +28,9 @@ export class MultiLanguageComponent implements OnInit {
     });
 
     this.formLanguage.valueChanges.subscribe((val) => {
-      this._translateService.use(val.languageId);
+      let languageId = val.languageId;
+      this._userService.UpdateLanguage(parseInt(languageId));
+      this._translateService.use(languageId);
     });
   }
 }

@@ -7,6 +7,7 @@ namespace API.enums
 {
     public enum enumPolicyAuthorization
     {
-        ConsultUsers = 1
+        UpdateUser = 1,
+        ConsultUsers
     }
 }

@@ -76,9 +76,10 @@ namespace API
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(enumPolicyAuthorization.ConsultUsers.ToString("g"), policy => policy.RequireRole(enumRole.ADMIN.ToString("g"), enumRole.VISITOR.ToString("g")));
+                options.AddPolicy(enumPolicyAuthorization.UpdateUser.ToString("g"), policy => policy.RequireRole(enumRole.ADMIN.ToString("g")));
             });
 
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddTransient<UserAccess>();
             services.AddTransient<MessageAccess>();
@@ -104,24 +105,22 @@ namespace API
                 options.AutomaticAuthentication = false;
             });
             services.AddHttpClient();
-            services.AddTransient<ContextCurrentUser>();
-            //(f) =>
-            //{
-            //var currentContext = f.GetService<IHttpContextAccessor>();
-
-
-            //var JWToken = currentContext.HttpContext.Session.GetString("JWToken");
-            //if (currentContext != null && currentContext.HttpContext.GetTokenAsync("GlobalDevApp").Result != null) {
-            //   return new ContextCurrentUser(currentContext);
-            //}
-            //else {
-            //    var user = new ContextCurrentUser(f.GetService<IUserManager>().Login().Result);
-            //currentContext.HttpContext.User.AddIdentity(new ClaimsIdentity(user.getClaims()));
-            //currentContext.HttpContext.Session.SetString("JWToken", user.Token);
-            // return user;
-            //}                
-            //}
-            // );
+            services.AddTransient<ContextCurrentUser>(
+            (f) =>
+            {
+                var currentContext = f.GetService<IHttpContextAccessor>();
+                var userClaims = currentContext.HttpContext.User;
+                if (Convert.ToInt32(userClaims.FindFirst("UserId")?.Value) > 0)
+                {
+                    return new ContextCurrentUser(userClaims);
+                }
+                else
+                {
+                    var user = new ContextCurrentUser(f.GetService<IUserManager>().Login().Result);
+                    return user;
+                }
+            }
+             );
             services.AddDistributedSqlServerCache((opt) =>
             {
                 opt.ConnectionString = Configuration["connectionStrings:PorteFolio"];

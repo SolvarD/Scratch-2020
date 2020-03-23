@@ -17,7 +17,7 @@ namespace DataAccess
         public Task<T> GetOneById<T>(int id);
         public Task<List<T>> GetManyById<T>(int id, string column, List<string> tableColumns);
         public Task<int> DeleteById(int id);
-        public Task<int> Update<T>(T item);
+        public Task<List<T>> Update<T>(int id, string column, T item, List<string> tableColumns);
         Task<int> Insert<T>(T item,List<string> columns);
         public Task<List<int>> InsertMany<T>(List<T> items, List<string> columns);
         public Task<List<T>> GetAll<T>(List<string> tableColumns);
@@ -55,15 +55,26 @@ namespace DataAccess
         {
             return requestor.Select<T>($"SELECT {string.Join(",", tableColumns.ToArray())} FROM {_table} Where {column}={id}");
         }
-        public async Task<int> Update<T>(T item)
+        public async Task<List<T>> Update<T>(int id, string column, T item, List<string> tableColumns)
         {
-            throw new NotImplementedException();
+            StringBuilder request = new StringBuilder();
+            request.Append($"Update {_table} set ");
+            foreach (string tableColumn in tableColumns)
+            {
+                PropertyInfo propertyInfo = item.GetType().GetProperty(Regex.Replace(tableColumn, @"[\[,\]]", string.Empty));
+                var value = GetValueProperty(propertyInfo, propertyInfo.GetValue(item, null));
+                request.Append($"{tableColumn}={ value }, ");
+            }
+            request.Remove(request.Length - 2,2);
+            request.Append($" OUTPUT inserted.* Where {column}={id} ");
+
+            return requestor.Select<T>(request.ToString());
         }
         public async Task<int> Insert<T>(T item, List<string> columns)
         {
             try
             {
-                return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, new List<T> { item }, _table, columns));
+                return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, new List<T> { item }, columns));
             }
             catch (Exception e)
             {
@@ -73,7 +84,7 @@ namespace DataAccess
 
         public async Task<List<int>> InsertMany<T>(List<T> items, List<string> columns)
         {
-            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, items, _table, columns));
+            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, items, columns));
         }
 
         public async Task<List<T>> Execute<T>(string name, object param = null)
@@ -81,7 +92,7 @@ namespace DataAccess
             return requestor.ExecuteStoredProcedure<T>(name, param);
         }
 
-        private static string RequestSimple<T>(enumAction action, List<T> items, string table, List<string> tableColumns, List<string> classAttribut = null)
+        private string RequestSimple<T>(enumAction action, List<T> items, List<string> tableColumns, List<string> classAttribut = null)
         {
             if (!items.Any())
             {
@@ -98,7 +109,7 @@ namespace DataAccess
             switch (action)
             {
                 case enumAction.INSERT:
-                    requestLine = $"INSERT INTO {table} ({string.Join(",", tableColumns.ToArray())}) OUTPUT INSERTED.* VALUES ";
+                    requestLine = $"INSERT INTO {_table} ({string.Join(",", tableColumns.ToArray())}) OUTPUT INSERTED.* VALUES ";
                     break;
                     //case enumAction.SELECT:
                     //    requestLine = $"SELECT {string.Join(",", tableColumns.ToArray())} FROM {table}";
@@ -117,7 +128,7 @@ namespace DataAccess
                         string.Join(", ", columnsValues.Select(g =>
                         {
                             PropertyInfo propertyInfo = item.GetType().GetProperty(Regex.Replace(g, @"[\[,\]]", string.Empty));
-                            return GetValueProperty(propertyInfo, propertyInfo.GetValue(item, null), item);
+                            return GetValueProperty(propertyInfo, propertyInfo.GetValue(item, null));
                         }).ToArray())
                     + ")";
 
@@ -141,7 +152,7 @@ namespace DataAccess
             return request.ToString();
         }
 
-        private static dynamic GetValueProperty(PropertyInfo property, object val, dynamic item)
+        private static dynamic GetValueProperty(PropertyInfo property, object val)
         {
 
             if (val == null || val.ToString() == string.Empty) { return "NULL"; }

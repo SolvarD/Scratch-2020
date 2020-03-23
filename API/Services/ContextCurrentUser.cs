@@ -27,23 +27,22 @@ namespace API.Services
             this.LanguageId = user.LanguageId;
             this.Token = user.Token;
             this.UserId = user.UserId;
+            this.Updated = user.Updated;
         }
+        public ContextCurrentUser(ClaimsPrincipal user)
+        {
+            UserId = int.Parse(user.FindFirst("UserId").Value);
 
-        //public ContextCurrentUser(IHttpContextAccessor httpContextAccessor)
-        //{
-        //    _user = httpContextAccessor.HttpContext.User;
-        //    //this.Email = user.Email;
-        //    //this.FirstName = user.FirstName;
-        //    //this.isActive = user.isActive;
-        //    //this.LastName = user.LastName;
-        //    //this.Password = user.Password;
-        //    //this.RoleId = user.RoleId;
-        //    //this.Created = user.Created;
-        //    //this.LanguageId = user.LanguageId;
-        //    //this.Token = user.Token;
-        //}
-
-        public void UpdateCurrentUser(User user) {
+            string roleName = user.FindFirst("Role").Value;
+            RoleId = (int)Enum.Parse(typeof(enumRole), roleName);
+            LanguageId = int.Parse(user.FindFirst("LanguageId").Value);
+            Username = user.FindFirst("Username").Value;
+            Email = user.FindFirst("Email").Value;
+            Password = user.FindFirst("Password").Value;
+            Token = user.FindFirst("Token").Value;
+        }
+        public void UpdateCurrentUser(User user)
+        {
             this.Email = user.Email;
             this.FirstName = user.FirstName;
             this.isActive = user.isActive;
@@ -54,6 +53,7 @@ namespace API.Services
             this.LanguageId = user.LanguageId;
             this.Token = user.Token;
             this.UserId = user.UserId;
+            this.Updated = user.Updated;
         }
     }
 }

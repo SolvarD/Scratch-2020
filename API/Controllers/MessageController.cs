@@ -37,7 +37,6 @@ namespace API.Controllers
                 _email.SendEmail(e.StackTrace);
                 return null;
             }
-
         }
     }
 }

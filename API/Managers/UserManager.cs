@@ -19,6 +19,9 @@ namespace API.Managers
         Task<List<User>> GetAllUsers();
         Task<User> Login(string login, string password);
         Task<User> Login();
+        Task<User> Update(User user);
+        Task<User> UpdateToken(User user);
+        Task<User> UpdateLanguage(User user);
     }
     public class UserManager : IUserManager
     {
@@ -26,12 +29,11 @@ namespace API.Managers
         private readonly IEncryptManager _encryptManager;
         private readonly IConfiguration _config;
         //private readonly IHttpContextAccessor _httpContext;
-        public UserManager(UserAccess userAccess, IEncryptManager encryptManager, IConfiguration config/*, IHttpContextAccessor httpContext*/)
+        public UserManager(UserAccess userAccess, IEncryptManager encryptManager, IConfiguration config)
         {
             _userAccess = userAccess;
             _encryptManager = encryptManager;
             _config = config;
-            //_httpContext = httpContext;
         }
 
         public Task<List<User>> GetAllUsers()
@@ -41,7 +43,10 @@ namespace API.Managers
         public async Task<User> Login(string login, string password)
         {
             var user = await _userAccess.GetByEmailPassword(login, _encryptManager.GetMd5Hash(password));
-            return declareUser(user);
+            var userLogged = declareUser(user);
+
+            await UpdateToken(user);
+            return userLogged;
         }
         public async Task<User> Login()
         {
@@ -58,6 +63,23 @@ namespace API.Managers
             };
 
             return declareUser(user);
+        }
+
+        public async Task<User> UpdateToken(User user)
+        {
+            var users = await _userAccess.Update(user, new List<string> { "Token" });
+            return users.First(); ;
+        }
+
+        public async Task<User> Update(User user)
+        {
+            var users = await _userAccess.Update(user, new List<string> { "Token", "Email", "Token", "RoleId", "isActive", "LanguageId" });
+            return users.First(); ;
+        }
+        public async Task<User> UpdateLanguage(User user)
+        {
+            var users = await _userAccess.Update(user, new List<string> { "LanguageId" });
+            return users.First(); ;
         }
 
         private User declareUser(User user)
