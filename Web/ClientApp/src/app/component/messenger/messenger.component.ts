@@ -14,17 +14,17 @@ import { UserService } from '../../services/user.service';
     state('open', style({
       flex: '1'
     })),
-    state('closed', style({      
+    state('closed', style({
       display: 'none'
     })),
     state('justHeader', style({
       height: '50px'
     })),
     state('hideMessage', style({
-      height:'0px'
+      height: '0px'
     })),
     state('hideInput', style({
-      display:'none'
+      display: 'none'
     })),
     transition('open <=> *', [
       animate('0s')
@@ -47,8 +47,8 @@ export class MessengerComponent {
   private origineSize = this.height;
   formMessenger: FormGroup;
   message: Message = new Message();
-  currentUserTag: string;
-  titleMessenger: string;
+  currentUserTag: string = UserService.currentUser.userName;
+  titleMessenger: string = UserService.currentUser.userName;
   isOpen: boolean = false;
 
   constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder, private messageService: MessageService) {
@@ -56,10 +56,15 @@ export class MessengerComponent {
     this.formMessenger = this._fb.group({
       messageToSend: ["", [Validators.required]]
     });
-    
-    this.currentUserTag = UserService.currentUser.userName;
+
     this.message.userName = UserService.currentUser.userName;
-    this.titleMessenger = UserService.currentUser.userName;
+
+    UserService.subCurrentUser.subscribe((user) => {
+      this.currentUserTag = user.userName;
+      this.message.userName = user.userName;
+      this.titleMessenger = user.userName;
+    });
+
     this.GetAllMessages();
     this.connectFlux();
   }

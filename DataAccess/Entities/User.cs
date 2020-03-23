@@ -41,6 +41,7 @@ namespace DataAccess.Models
                     new Claim("Email", Email),
                     new Claim("FullName", string.Format("{0} {1}", FirstName, LastName)),
                     new Claim("Role", ((enumRole)RoleId).ToString("g")),
+                    new Claim(ClaimTypes.Role, ((enumRole)RoleId).ToString("g")),
                     new Claim("LanguageId", LanguageId.ToString()),
                     new Claim("Password", Password.ToString()?? string.Empty),
                     new Claim("Token", Token?? string.Empty)

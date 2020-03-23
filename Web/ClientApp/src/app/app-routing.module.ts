@@ -10,6 +10,7 @@ import { DataBaseComponent } from "./views/database/database.component";
 import { HostIISComponent } from "./views/host-iis/host-iis.component";
 import { MultiLanguageViewComponent } from "./views/multi-language/multi-language-view.component";
 import { AuthenticationComponent } from "./views/authentification/authentication.component";
+import { DictionaryComponent } from "./views/dictionary/dictionary.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -21,6 +22,9 @@ const routes: Routes = [
   { path: 'authentication', component: AuthenticationComponent },
   {
     path: 'users', component: UserComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'dictionary', component: DictionaryComponent, canActivate: [AuthGuard]
   },
   {
     path: 'error/:id',

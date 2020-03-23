@@ -25,3 +25,12 @@ html {
 a{
     cursor:pointer;
 }
+#sub-menu-stack:hover #menu-stack {
+  display: block;
+}
+#sub-menu-admin:hover #menu-admin {
+  display: block;
+}
+.nega-margin {
+  margin-top: -5px;
+}

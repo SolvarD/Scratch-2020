@@ -30,7 +30,7 @@ Insert Into Users ([RoleId],[FirstName],[LastName],[Email],[UserName],[Password]
 --Visitor2020
 (4, 'Fourth', 'Type', 'solvar@msn.com', 'Visitor', 'a44846113b882c1f57cd03b696c40e76', @now, 1, 1)
 
-Insert into T_REF_Dictionnary ([LanguageId],[Key],[Label] ,[Created]) values 
+Insert into T_REF_Dictionary ([LanguageId],[Key],[Label] ,[Created]) values 
 (1,'DATABASE','Base de donnée', @now),
 (2,'DATABASE','Database', @now),
 (1,'HOME', 'Accueil', @now),

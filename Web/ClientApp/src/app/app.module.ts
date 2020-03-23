@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './component/login/login.component';
 import { AuthenticationComponent } from './views/authentification/authentication.component';
 import { AppInitService } from './services/AppInit.service';
+import { DictionaryComponent } from './views/dictionary/dictionary.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AppInitService } from './services/AppInit.service';
     HostIISComponent,
     MultiLanguageComponent,
     MultiLanguageViewComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    DictionaryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -77,12 +79,13 @@ import { AppInitService } from './services/AppInit.service';
     HubRealtimeService,
     UserService,
     MessageService,
-    LanguageService
+    LanguageService,
+    TranslationService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, `${environment.API}/Dictionnary`, "");
+  return new TranslateHttpLoader(http, `${environment.API}/Dictionary`, "");
 }

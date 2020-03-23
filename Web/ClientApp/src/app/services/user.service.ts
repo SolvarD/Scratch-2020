@@ -2,13 +2,19 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { User } from "../../models/user";
+import { Subject } from "rxjs";
 
 @Injectable()
 export class UserService {
+
+  public static emitCurrentUser = new Subject<User>();
+  public static subCurrentUser = UserService.emitCurrentUser.asObservable();
   constructor(private http: HttpClient) {
   }
 
   public static currentUser: User = JSON.parse(localStorage.getItem('currentUser'));
+  
+
 
   getAll() {
     return this.http.get<User[]>(`${environment.API}/User/GetAll`).toPromise();
@@ -54,6 +60,7 @@ export class UserService {
   private interceptUser(user: User): User {
     localStorage.setItem('currentUser', JSON.stringify(user));
     UserService.currentUser = user;
+    UserService.emitCurrentUser.next(user);
     return user;
   }
 }

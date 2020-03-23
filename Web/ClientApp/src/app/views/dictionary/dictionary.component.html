@@ -1,0 +1,20 @@
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th *ngFor="let language of languages">{{language.label}}</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let dictionary of displayLanguage | keyvalue">
+        <td>{{dictionary.key}}</td>
+        <td *ngFor="let item of dictionary.value"> {{item.label}}</td>
+        <td></td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>

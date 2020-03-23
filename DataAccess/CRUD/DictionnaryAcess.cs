@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace DataAccess.CRUD
 {
-    public interface IDictionnaryAccess
+    public interface IDictionaryAccess
     {
         Task<List<DictionaryLanguage>> GetById(int id);
     }
-    public class DictionnaryAccess : DALCRUD
+    public class DictionaryAccess : DALCRUD
     {
         
-        public DictionnaryAccess(Requestor requestor) : base(requestor, "T_REF_Dictionnary") 
+        public DictionaryAccess(Requestor requestor) : base(requestor, "T_REF_Dictionary") 
         {
         }
         public async Task<List<DictionaryLanguage>> GetManyById(int id)

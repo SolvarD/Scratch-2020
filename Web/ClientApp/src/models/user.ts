@@ -13,7 +13,7 @@ export class User {
   public isActive: boolean;
 }
 
-export enum Role {
+export enum enumRole {
   ADMIN = 1,
   WEBMASTER,
   USER,

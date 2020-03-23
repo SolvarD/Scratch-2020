@@ -84,12 +84,12 @@ namespace API
             services.AddTransient<UserAccess>();
             services.AddTransient<MessageAccess>();
             services.AddTransient<LanguageAccess>();
-            services.AddTransient<DictionnaryAccess>();
+            services.AddTransient<DictionaryAccess>();
 
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<IMessageManager, MessageManager>();
             services.AddTransient<ILanguageManager, LanguageManager>();
-            services.AddTransient<IDictionaryManager, DictionnaryManager>();
+            services.AddTransient<IDictionaryManager, DictionaryManager>();
 
             services.AddTransient<EmailManager>();
 
