@@ -41,11 +41,16 @@ namespace API.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("Login")]
-        public async Task<User> Login(User user)
+        public async Task<IActionResult> Login(User user)
         {
             User loggedUser = await _userManager.Login(user.Email, user.Password);
+
+            if (loggedUser == null) {
+                return Unauthorized();
+            }
+
             _currentUser.UpdateCurrentUser(loggedUser);          
-            return loggedUser;
+            return Ok(loggedUser);
         }
 
         [HttpGet]

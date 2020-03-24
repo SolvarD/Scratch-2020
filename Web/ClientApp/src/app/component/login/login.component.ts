@@ -21,12 +21,12 @@ export class LoginComponent {
 
   displayModal: boolean = false;
   user: User = new User();
-
+  display401: boolean = false;
 
   constructor(private hub: HubRealtimeService, private userService: UserService, private _fb: FormBuilder) {
     if (UserService.currentUser.userId) {
       this.user = UserService.currentUser;
-    }    
+    }
     this.formLogin = this._fb.group({
       email: [this.user.email, [Validators.required]],
       password: [this.user.password, [Validators.required]]
@@ -38,14 +38,17 @@ export class LoginComponent {
   }
 
   async onSubmit() {
+    this.display401 = false;
     let email = this.formLogin.get('email').value;
     let password = this.formLogin.get('password').value;
 
     if (this.formLogin.valid) {
-      this.user = await this.userService.getByEmailPassword(email, password);
-      if (this.user.userId) {        
+      await this.userService.getByEmailPassword(email, password).then((user) => {
+        this.user = user;
         this.toggle();
-      }
+      }).catch((err) => {
+        this.display401 = err.status == 401;
+      });
     }
   }
 

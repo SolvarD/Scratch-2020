@@ -35,6 +35,10 @@
             <a class="nav-link text-dark" [routerLink]="['/multi-language']" translate>MULTI_LANGUAGE</a>
           </li>
 
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/cv']">C.V</a>
+          </li>
+
           <li class="nav-item dropdown" id="sub-menu-admin" *ngIf="canDisplay">
             <a class="nav-link text-dark dropdown-toggle" translate>ADMINISTRATION</a>
             <div class="dropdown-menu nega-margin" id="menu-admin">
@@ -42,6 +46,7 @@
               <a class="dropdown-item" [routerLinkActive]="['link-active']" [routerLink]="['/dictionary']">DICTIONARY</a>
             </div>
           </li>
+
         </ul>
       </div>
       <div class="language">

@@ -80,6 +80,7 @@ namespace API
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<UserChatService>();
 
             services.AddTransient<UserAccess>();
             services.AddTransient<MessageAccess>();

@@ -6,7 +6,7 @@ namespace DataAccess.Entities
 {
     public enum enumMessageType
     {
-        PUBLIC = 1, PRIVATE
+        Public = 1, Private
     }
     public class Message
     {

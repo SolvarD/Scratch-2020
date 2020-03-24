@@ -4,7 +4,10 @@
      [@sizeChat]="isOpen ? 'open' : 'justHeader'"
      >
   <div class="header-messenger">
-    <div style="flex:9"><label>{{titleMessenger}}</label></div>
+    <div style="flex:9">
+      <label>{{titleMessenger}}</label>
+      <label class="label-user-connected"> connected({{countUsers}})</label>
+    </div>
     <div style="flex:1"><button (click)="toggle()" class="control-size" type="button"><i [ngClass]="getClassIco()"></i></button> </div>    
   </div>
 

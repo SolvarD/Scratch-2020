@@ -26,6 +26,9 @@
               <input type="password" id="mdp" class="form-control" formControlName="password" />
             </div>
           </div>
+          <div *ngIf="display401">
+            <span class="text-danger" translate>ERROR_LOGIN</span>
+          </div>
 
         </div>
 

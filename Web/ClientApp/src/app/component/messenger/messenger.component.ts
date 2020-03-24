@@ -50,7 +50,7 @@ export class MessengerComponent {
   currentUserTag: string = UserService.currentUser.userName;
   titleMessenger: string = UserService.currentUser.userName;
   isOpen: boolean = false;
-
+  countUsers = 0;
   constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder, private messageService: MessageService) {
 
     this.formMessenger = this._fb.group({
@@ -85,6 +85,11 @@ export class MessengerComponent {
   connectFlux() {
     this.hub.suscribePublicMessage.subscribe((message) => {
       this.lastMessages.push(message);
+      this.ref.detectChanges();
+    });
+
+    this.hub.suscribeCountUser.subscribe((total) => {
+      this.countUsers = total;
       this.ref.detectChanges();
     });
   }

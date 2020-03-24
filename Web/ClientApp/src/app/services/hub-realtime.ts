@@ -10,8 +10,12 @@ import { Message } from "../../models/message";
 export class HubRealtimeService {
 
   private hubConnection: SignalR.HubConnection;
+
   private publicMessage = new Subject<Message>();
   public suscribePublicMessage = this.publicMessage.asObservable();
+
+  private countUser = new Subject<number>();
+  public suscribeCountUser = this.countUser.asObservable();
 
   constructor() { }
 
@@ -25,6 +29,10 @@ export class HubRealtimeService {
 
     this.hubConnection.on("SendMessageToAll", (m: Message) => {
       this.publicMessage.next(m);
+    });
+
+    this.hubConnection.on("SendNumberUser", (m: number) => {
+      this.countUser.next(m);
     });
 
     this.hubConnection.onclose(e => {

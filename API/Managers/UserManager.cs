@@ -43,10 +43,12 @@ namespace API.Managers
         public async Task<User> Login(string login, string password)
         {
             var user = await _userAccess.GetByEmailPassword(login, _encryptManager.GetMd5Hash(password));
-            var userLogged = declareUser(user);
-
-            await UpdateToken(user);
-            return userLogged;
+            if (user != null) {
+                var userLogged = declareUser(user);
+                await UpdateToken(user);
+                return userLogged;
+            }
+            return user;
         }
         public async Task<User> Login()
         {
