@@ -3,7 +3,7 @@
      [style.width.px]="width"
      [@sizeChat]="isOpen ? 'open' : 'justHeader'"
      >
-  <div class="header-messenger">
+  <div class="header-messenger" [ngClass]="{'color-blink': newMessage}">
     <div style="flex:9">
       <label>{{titleMessenger}}</label>
       <label class="label-user-connected"> connected({{countUsers}})</label>
@@ -11,7 +11,7 @@
     <div style="flex:1"><button (click)="toggle()" class="control-size" type="button"><i [ngClass]="getClassIco()"></i></button> </div>    
   </div>
 
-  <div style="display:flex;flex-direction: column;">
+  <div style="display:flex;flex-direction: column;" (click)="newMessage = false;">
     <div class="container-message-display" [@sizeChat]="isOpen ? 'open' : 'closed'">
       <ul class="message-display" [@sizeChat]="isOpen ? 'open' : 'hideMessage'" [style.width.px]="width" #scrollMe [scrollTop]="scrollMe.scrollHeight">
         <li *ngFor="let msg of lastMessages">

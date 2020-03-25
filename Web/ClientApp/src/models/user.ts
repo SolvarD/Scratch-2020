@@ -11,6 +11,7 @@ export class User {
   public updated: Date;
   public token: string;
   public isActive: boolean;
+  public roleName: string;
 }
 
 export enum enumRole {

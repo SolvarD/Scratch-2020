@@ -51,6 +51,8 @@ export class MessengerComponent {
   titleMessenger: string = UserService.currentUser.userName;
   isOpen: boolean = false;
   countUsers = 0;
+  newMessage: boolean = false;
+
   constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder, private messageService: MessageService) {
 
     this.formMessenger = this._fb.group({
@@ -84,6 +86,9 @@ export class MessengerComponent {
   }
   connectFlux() {
     this.hub.suscribePublicMessage.subscribe((message) => {
+      if (message.userName != this.currentUserTag) {
+        this.newMessage = true;
+      }
       this.lastMessages.push(message);
       this.ref.detectChanges();
     });
@@ -95,6 +100,7 @@ export class MessengerComponent {
   }
 
   toggle() {
+    this.newMessage = false;
     this.isOpen = !this.isOpen;
   }
   getClassIco() {

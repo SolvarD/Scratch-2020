@@ -15,7 +15,7 @@ namespace DataAccess.Models
         ANONYME
     }
     public class User
-    {        
+    {
         public User()
         {
 
@@ -28,6 +28,13 @@ namespace DataAccess.Models
         public string Token { get; set; }
         public string Email { get; set; }
         public int RoleId { get; set; }
+        public string RoleName
+        {
+            get
+            {
+                return ((enumRole)RoleId).ToString("g");
+            }
+        }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
         public bool isActive { get; set; }
@@ -40,7 +47,7 @@ namespace DataAccess.Models
                     new Claim("UserName", UserName ?? ($"{FirstName} {LastName}")),
                     new Claim("Email", Email),
                     new Claim("FullName", string.Format("{0} {1}", FirstName, LastName)),
-                    new Claim("Role", ((enumRole)RoleId).ToString("g")),
+                    new Claim("Role", RoleName),
                     new Claim(ClaimTypes.Role, ((enumRole)RoleId).ToString("g")),
                     new Claim("LanguageId", LanguageId.ToString()),
                     new Claim("Password", Password.ToString()?? string.Empty),

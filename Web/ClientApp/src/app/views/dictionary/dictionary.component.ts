@@ -20,8 +20,6 @@ export class DictionaryComponent implements OnInit {
   async ngOnInit() {
     this.dictionaryLanguage = await this._translationService.getAll();
     this.displayLanguage = Array.prototype['groupBy'](this.dictionaryLanguage, g => g.key);
-    console.log(Array.prototype['groupBy'](this.dictionaryLanguage, g => g.key))
-
     this.languages = await this._languageService.getAll();
   }
 }

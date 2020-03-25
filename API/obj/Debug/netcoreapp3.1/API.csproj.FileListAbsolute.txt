@@ -124,4 +124,10 @@ F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\M
 F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
 F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\Carbon.Data.Protection.dll
+F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\Carbon.Packaging.dll
+F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\Carbon.Storage.dll
+F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\Carbon.VersionControl.dll
+F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\Carbon.Versioning.dll
+F:\Scratch\Scratch\API\bin\Debug\netcoreapp3.1\GitHub.dll
 F:\Scratch\Scratch\API\obj\Debug\netcoreapp3.1\API.MvcApplicationPartsAssemblyInfo.cache

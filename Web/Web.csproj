@@ -18,8 +18,12 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\dist\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\dist\**" />
+    <EmbeddedResource Remove="ClientApp\dist\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\dist\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -28,6 +32,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\dist\3rdpartylicenses.txt" />
+    <None Remove="ClientApp\dist\index.html" />
+    <None Remove="ClientApp\dist\main-es2015.fa2f0dadcde877fc3306.js" />
+    <None Remove="ClientApp\dist\main-es5.fa2f0dadcde877fc3306.js" />
+    <None Remove="ClientApp\dist\polyfills-es2015.0ef207fb7b4761464817.js" />
+    <None Remove="ClientApp\dist\polyfills-es5.f8e56c44acec13826399.js" />
+    <None Remove="ClientApp\dist\runtime-es2015.e8a2810b3b08d6a1b6aa.js" />
+    <None Remove="ClientApp\dist\runtime-es5.e8a2810b3b08d6a1b6aa.js" />
+    <None Remove="ClientApp\dist\styles.5c27b2226787533af791.css" />
     <None Remove="ClientApp\src\app\guard\auth.guard.ts" />
     <None Remove="ClientApp\src\app\app-routing.module.ts" />
   </ItemGroup>
