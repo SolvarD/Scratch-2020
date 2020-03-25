@@ -93,7 +93,12 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (1,'STACK', 'Architecture', @now),
 (2,'STACK', 'Stack', @now),
 (1,'AUTHENTICATION', 'Identhification', @now),
-(2,'AUTHENTICATION', 'Authentication', @now)
+(2,'AUTHENTICATION', 'Authentication', @now),
+(1,'ADMIN', 'Administrateur', @now),
+(2,'ADMIN', 'Administrator', @now),
+(1,'VISITOR', 'Visiteur', @now),
+(2,'VISITOR', 'Visitor', @now)
+
 
 Merge into T_REF_Dictionary trd using @tmpDictionary tmpD
 on trd.[LanguageId] = tmpD.[LanguageId] and trd.[Key] = tmpD.[Key]

@@ -1,0 +1,42 @@
+<form [formGroup]="formUser">
+  <div class="form-group">
+    <label for="mail" translate>EMAIL</label>
+    <input type="email" id="mail" class="form-control" formControlName="email" />
+  </div>
+  <div class="form-group">
+    <label for="firstName" translate>FIRSTNAME</label>
+    <input type="text" id="firstName" class="form-control" formControlName="firstName" />
+  </div>
+  <div class="form-group">
+    <label for="lastName" translate>LASTNAME</label>
+    <input type="text" id="lastName" class="form-control" formControlName="lastName" />
+  </div>
+  <div class="form-group">
+    <label for="userName" translate>USERNAME</label>
+    <input type="text" id="userName" class="form-control" formControlName="userName" />
+  </div>
+
+  <div class="form-group">
+    <label for="mail" translate>ROLE</label>
+    <select class="form-control" formControlName="roleId">
+      <option *ngFor="let role of roles" [value]="role.roleId" translate>{{role.label}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="isActive" translate>ACTIF</label>
+    <input type="checkbox" id="isActive" class="form-control" formControlName="isActive" />
+  </div>
+
+  <div class="form-group">
+    <label for="mail" translate>LANGUAGE</label>
+    <select class="form-control" formControlName="languageId">
+      <option *ngFor="let language of languages" [value]="language.languageId">{{language.label}}</option>
+    </select>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-dark" translate>CANCEL</button>
+    <button type="submit" (click)="onSubmit()" class="btn btn-success" data-dismiss="modal">SAVE</button>
+  </div>
+</form>

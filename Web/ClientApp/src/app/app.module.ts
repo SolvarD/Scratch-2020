@@ -4,20 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './component/nav-menu/nav-menu.component';
-import { HomeComponent } from './views/home/home.component';
-import { CounterComponent } from './views/counter/counter.component';
 import { AppRoutingModule } from './app-routing.module';
-import { UserComponent } from './views/users/user.component';
-import { ErrorComponent } from './views/error/error.component';
 import { AuthGuard } from './services/auth.guard';
 import { TokenInterceptor } from './services/interceptor';
 import { WeatherforecastService } from './services/weatherforecast.service';
 import { HubRealtimeService } from './services/hub-realtime';
 import { MessengerComponent } from './component/messenger/messenger.component';
-import { SignalRCodeComponent } from './views/signalr-code/signalr-code.component';
 import { UserService } from './services/user.service';
-import { DataBaseComponent } from './views/database/database.component';
-import { HostIISComponent } from './views/host-iis/host-iis.component';
 import { MultiLanguageComponent } from './component/multi-language/multi-language.component';
 import { MessageService } from './services/message.service';
 import { LanguageService } from './services/language.service';
@@ -26,12 +19,21 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
 import { TranslationService } from './services/translation.service';
-import { MultiLanguageViewComponent } from './views/multi-language/multi-language-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './component/login/login.component';
-import { AuthenticationComponent } from './views/authentification/authentication.component';
 import { AppInitService } from './services/AppInit.service';
-import { DictionaryComponent } from './views/dictionary/dictionary.component';
+import { HomeComponent } from "./views/public/home/home.component";
+import { ErrorComponent } from "./views/public/error/error.component";
+import { DictionaryComponent } from "./views/Admin/dictionary/dictionary.component";
+import { AuthenticationComponent } from "./views/public/authentification/authentication.component";
+import { MultiLanguageViewComponent } from "./views/public/multi-language/multi-language-view.component";
+import { HostIISComponent } from "./views/public/host-iis/host-iis.component";
+import { SignalRCodeComponent } from "./views/public/signalr-code/signalr-code.component";
+import { CounterComponent } from "./views/public/counter/counter.component";
+import { DataBaseComponent } from "./views/public/database/database.component";
+import { UserComponent } from "./views/Admin/users/user.component";
+import { DisplayUserComponent } from './component/display-user/display-user.component';
+import { RoleService } from './services/role.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { DictionaryComponent } from './views/dictionary/dictionary.component';
     MultiLanguageComponent,
     MultiLanguageViewComponent,
     AuthenticationComponent,
-    DictionaryComponent
+    DictionaryComponent,
+    DisplayUserComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -80,7 +83,8 @@ import { DictionaryComponent } from './views/dictionary/dictionary.component';
     UserService,
     MessageService,
     LanguageService,
-    TranslationService
+    TranslationService,
+    RoleService
   ],
   bootstrap: [AppComponent]
 })

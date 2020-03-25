@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { HomeComponent } from "./views/home/home.component";
-import { CounterComponent } from "./views/counter/counter.component";
 import { AuthGuard } from "./services/auth.guard";
-import { UserComponent } from "./views/users/user.component";
-import { ErrorComponent } from "./views/error/error.component";
-import { SignalRCodeComponent } from "./views/signalr-code/signalr-code.component";
-import { DataBaseComponent } from "./views/database/database.component";
-import { HostIISComponent } from "./views/host-iis/host-iis.component";
-import { MultiLanguageViewComponent } from "./views/multi-language/multi-language-view.component";
-import { AuthenticationComponent } from "./views/authentification/authentication.component";
-import { DictionaryComponent } from "./views/dictionary/dictionary.component";
+import { HomeComponent } from "./views/public/home/home.component";
+import { ErrorComponent } from "./views/public/error/error.component";
+import { DictionaryComponent } from "./views/Admin/dictionary/dictionary.component";
+import { AuthenticationComponent } from "./views/public/authentification/authentication.component";
+import { MultiLanguageViewComponent } from "./views/public/multi-language/multi-language-view.component";
+import { HostIISComponent } from "./views/public/host-iis/host-iis.component";
+import { SignalRCodeComponent } from "./views/public/signalr-code/signalr-code.component";
+import { CounterComponent } from "./views/public/counter/counter.component";
+import { DataBaseComponent } from "./views/public/database/database.component";
+import { UserComponent } from "./views/Admin/users/user.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },

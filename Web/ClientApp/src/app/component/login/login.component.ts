@@ -54,10 +54,10 @@ export class LoginComponent {
 
   async onDisconnect() {
     await this.userService.logout();
-    this.reseet();
+    this.reset();
   }
 
-  reseet() {
+  reset() {
     this.formLogin.reset();
     this.user = new User();
     this.toggle();

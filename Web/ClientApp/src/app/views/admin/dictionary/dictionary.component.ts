@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TranslationService } from '../../services/translation.service';
-import { DictionaryLanguage } from '../../../models/dictionary-language';
-import { Language } from '../../../models/language';
-import { LanguageService } from '../../services/language.service';
+import { DictionaryLanguage } from '../../../../models/dictionary-language';
+import { Language } from '../../../../models/language';
+import { TranslationService } from '../../../services/translation.service';
+import { LanguageService } from '../../../services/language.service';
 
 @Component({
   selector: 'app-dictionary',
