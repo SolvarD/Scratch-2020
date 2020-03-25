@@ -5,6 +5,7 @@ import { Message } from '../../../models/message';
 import { MessageService } from '../../services/message.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { UserService } from '../../services/user.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-messenger',
@@ -53,7 +54,7 @@ export class MessengerComponent {
   countUsers = 0;
   newMessage: boolean = false;
 
-  constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder, private messageService: MessageService) {
+  constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder, private messageService: MessageService, private titleService: Title) {
 
     this.formMessenger = this._fb.group({
       messageToSend: ["", [Validators.required]]
@@ -88,6 +89,7 @@ export class MessengerComponent {
     this.hub.suscribePublicMessage.subscribe((message) => {
       if (message.userName != this.currentUserTag) {
         this.newMessage = true;
+        this.titleService.setTitle('New Message');
       }
       this.lastMessages.push(message);
       this.ref.detectChanges();
@@ -105,5 +107,10 @@ export class MessengerComponent {
   }
   getClassIco() {
     return this.isOpen ? 'fas fa-angle-down' : 'fas fa-angle-up';
+  }
+
+  disableBlink() {
+    this.newMessage = false;
+    this.titleService.setTitle('GlobalDevApp');
   }
 }
