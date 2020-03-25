@@ -53,6 +53,7 @@ export class MessengerComponent {
   isOpen: boolean = false;
   countUsers = 0;
   newMessage: boolean = false;
+  stopBlink: NodeJS.Timeout;
 
   constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder, private messageService: MessageService, private titleService: Title) {
 
@@ -87,9 +88,8 @@ export class MessengerComponent {
   }
   connectFlux() {
     this.hub.suscribePublicMessage.subscribe((message) => {
-      if (message.userName != this.currentUserTag) {
-        this.newMessage = true;
-        this.titleService.setTitle('New Message');
+      if (message.userName != this.currentUserTag) {        
+        this.triggerNewMessage();   
       }
       this.lastMessages.push(message);
       this.ref.detectChanges();
@@ -101,16 +101,29 @@ export class MessengerComponent {
     });
   }
 
+  triggerNewMessage() {
+    this.newMessage = true;
+    this.stopBlink = setInterval(() => {
+      if (this.titleService.getTitle() == 'GlobalDevApp') {
+        this.titleService.setTitle('New Message');
+      } else {
+        this.titleService.setTitle('GlobalDevApp');
+      }
+    }, 1000);     
+  }
+
   toggle() {
     this.newMessage = false;
     this.isOpen = !this.isOpen;
   }
+
   getClassIco() {
     return this.isOpen ? 'fas fa-angle-down' : 'fas fa-angle-up';
   }
 
   disableBlink() {
     this.newMessage = false;
+    clearInterval(this.stopBlink);
     this.titleService.setTitle('GlobalDevApp');
   }
 }
