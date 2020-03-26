@@ -10,7 +10,7 @@ import { HostIISComponent } from "./views/public/host-iis/host-iis.component";
 import { SignalRCodeComponent } from "./views/public/signalr-code/signalr-code.component";
 import { CounterComponent } from "./views/public/counter/counter.component";
 import { DataBaseComponent } from "./views/public/database/database.component";
-import { UserComponent } from "./views/Admin/users/user.component";
+import { UserComponent } from "./views/admin/users/user.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
