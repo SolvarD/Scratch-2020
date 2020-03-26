@@ -24,7 +24,7 @@ import { LoginComponent } from './component/login/login.component';
 import { AppInitService } from './services/AppInit.service';
 import { HomeComponent } from "./views/public/home/home.component";
 import { ErrorComponent } from "./views/public/error/error.component";
-import { DictionaryComponent } from "./views/Admin/dictionary/dictionary.component";
+import { DictionaryComponent } from "./views/admin/dictionary/dictionary.component";
 import { AuthenticationComponent } from "./views/public/authentification/authentication.component";
 import { MultiLanguageViewComponent } from "./views/public/multi-language/multi-language-view.component";
 import { HostIISComponent } from "./views/public/host-iis/host-iis.component";
