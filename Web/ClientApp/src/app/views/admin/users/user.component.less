@@ -1,4 +1,30 @@
-.container-user-display
-{
-    display: flex;
+.container-user-display {
+  display: flex;
 }
+
+.container-user-left {
+  flex: 1;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+@media all and (min-width:1200px) {
+  .container-user-right {
+    flex: 1;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .modal, modal-dialog, modal-lg, modal-content {
+    all: initial !important;
+  }
+  .modal-header{
+      display: none;
+  }
+}
+
+@media all and (max-width:1200px) {
+  .display-small-screen {
+    display: block;
+  }
+}
+

@@ -6,6 +6,7 @@ import { MessageService } from '../../services/message.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { User } from '../../../models/user';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent {
   user: User = new User();
   display401: boolean = false;
 
-  constructor(private hub: HubRealtimeService, private userService: UserService, private _fb: FormBuilder) {
+  constructor(private hub: HubRealtimeService, private userService: UserService, private _fb: FormBuilder, public router: Router) {
     if (UserService.currentUser.userId) {
       this.user = UserService.currentUser;
     }
@@ -54,7 +55,7 @@ export class LoginComponent {
 
   async onDisconnect() {
     await this.userService.logout();
-    this.reset();
+    this.reset();    
   }
 
   reset() {

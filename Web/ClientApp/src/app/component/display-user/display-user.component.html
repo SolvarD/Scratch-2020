@@ -1,42 +1,42 @@
-<form [formGroup]="formUser">
+<form [formGroup]="formUser" *ngIf="this.formUser">
   <div class="form-group">
     <label for="mail" translate>EMAIL</label>
-    <input type="email" id="mail" class="form-control" formControlName="email" />
+    <input type="email" id="mail" class="form-control" [disabled]="!canEdit" formControlName="email" />
   </div>
   <div class="form-group">
     <label for="firstName" translate>FIRSTNAME</label>
-    <input type="text" id="firstName" class="form-control" formControlName="firstName" />
+    <input type="text" id="firstName" class="form-control" [disabled]="!canEdit" formControlName="firstName" />
   </div>
   <div class="form-group">
     <label for="lastName" translate>LASTNAME</label>
-    <input type="text" id="lastName" class="form-control" formControlName="lastName" />
+    <input type="text" id="lastName" class="form-control" [disabled]="!canEdit" formControlName="lastName" />
   </div>
   <div class="form-group">
     <label for="userName" translate>USERNAME</label>
-    <input type="text" id="userName" class="form-control" formControlName="userName" />
+    <input type="text" id="userName" class="form-control" [disabled]="!canEdit" formControlName="userName" />
   </div>
 
   <div class="form-group">
     <label for="mail" translate>ROLE</label>
-    <select class="form-control" formControlName="roleId">
+    <select class="form-control" formControlName="roleId" [disabled]="!canEdit">
       <option *ngFor="let role of roles" [value]="role.roleId" translate>{{role.label}}</option>
     </select>
   </div>
 
   <div class="form-group">
     <label for="isActive" translate>ACTIF</label>
-    <input type="checkbox" id="isActive" class="form-control" formControlName="isActive" />
+    <input type="checkbox" id="isActive" class="form-control" [disabled]="!canEdit" formControlName="isActive" />
   </div>
 
   <div class="form-group">
     <label for="mail" translate>LANGUAGE</label>
-    <select class="form-control" formControlName="languageId">
+    <select class="form-control" formControlName="languageId" [disabled]="!canEdit">
       <option *ngFor="let language of languages" [value]="language.languageId">{{language.label}}</option>
     </select>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-dark" translate>CANCEL</button>
-    <button type="submit" (click)="onSubmit()" class="btn btn-success" data-dismiss="modal">SAVE</button>
+    <button type="button" class="btn btn-dark" [disabled]="!canEdit" translate>CANCEL</button>
+    <button type="submit" (click)="onSubmit()" [disabled]="!canEdit" class="btn btn-success" data-dismiss="modal" translate>SAVE</button>
   </div>
 </form>

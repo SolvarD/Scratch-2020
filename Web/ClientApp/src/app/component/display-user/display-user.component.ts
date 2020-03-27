@@ -11,13 +11,14 @@ import { Language } from '../../../models/language';
 import { LanguageService } from '../../services/language.service';
 import { Role } from '../../../models/role';
 import { RoleService } from '../../services/role.service';
+import { BaseComponent } from '../../../models/base-component';
 
 @Component({
   selector: 'app-display-user',
   templateUrl: './display-user.component.html',
   styleUrls: ['./display-user.component.less']
 })
-export class DisplayUserComponent implements OnInit {
+export class DisplayUserComponent extends BaseComponent implements OnInit {
 
   formUser: FormGroup;
   private _user: User = new User();
@@ -35,15 +36,7 @@ export class DisplayUserComponent implements OnInit {
     private _fb: FormBuilder, private _roleService: RoleService) {
     //this.user = new User();
 
-    this.formUser = this._fb.group({
-      email: [this.user.email, [Validators.required]],
-      firstName: [this.user.firstName, [Validators.required]],
-      lastName: [this.user.lastName, [Validators.required]],
-      userName: [this.user.userName],
-      roleId: [this.user.roleId, [Validators.required]],
-      isActive: [this.user.isActive, [Validators.required]],
-      languageId: [this.user.languageId, [Validators.required]]
-    });
+    super();
 
   }
 
@@ -59,6 +52,28 @@ export class DisplayUserComponent implements OnInit {
   async ngOnInit() {
     this.languages = await this._languageService.getAll();
     this.roles = await this._roleService.getAll();
+
+    this.formUser = this._fb.group({
+      email: [this.user.email, [Validators.required]],
+      firstName: [this.user.firstName, [Validators.required]],
+      lastName: [this.user.lastName, [Validators.required]],
+      userName: [this.user.userName],
+      roleId: [this.user.roleId, [Validators.required]],
+      isActive: [this.user.isActive, [Validators.required]],
+      languageId: [this.user.languageId, [Validators.required]]
+    });
+
+
+
+    //this.formUser = this._fb.group({
+    //  email: [{ value: this.user.email, disabled: !this.canEdit }, [Validators.required]],
+    //  firstName: [{ value: this.user.firstName, disabled: !this.canEdit }, [Validators.required]],
+    //  lastName: [{ value: this.user.lastName, disabled: !this.canEdit }, [Validators.required]],
+    //  userName: [{ value: this.user.userName, disabled: !this.canEdit }],
+    //  roleId: [{ value: this.user.roleId, disabled: !this.canEdit }, [Validators.required]],
+    //  isActive: [{ value: this.user.isActive, disabled: !this.canEdit }, [Validators.required]],
+    //  languageId: [{ value: this.user.languageId, disabled: !this.canEdit }, [Validators.required]]
+    //});
   }
 
 }
