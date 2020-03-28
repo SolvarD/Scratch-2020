@@ -13,10 +13,10 @@
 
       <tbody>
         <tr *ngFor="let user of users">
-          <td>{{user.firstName}}</td>
-          <td>{{user.lastName}}</td>
-          <td>{{user.email}}</td>
-          <td translate>{{user.roleName}}</td>
+          <td (click)="selectUser(user.userId)">{{user.firstName}}</td>
+          <td (click)="selectUser(user.userId)">{{user.lastName}}</td>
+          <td (click)="selectUser(user.userId)">{{user.email}}</td>
+          <td (click)="selectUser(user.userId)" translate>{{user.roleName}}</td>
           <td></td>
         </tr>
       </tbody>
@@ -26,7 +26,7 @@
   <div class="container-user-right ">
 
     <div class="modal display-small-screen">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-sm">
         <div class="modal-content">
 
           <div class="modal-header">

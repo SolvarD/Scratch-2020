@@ -79,7 +79,7 @@ namespace API.Managers
 
         public async Task<User> Update(User user)
         {
-            var users = await _userAccess.Update(user, new List<string> { "Token", "Email", "Token", "RoleId", "isActive", "LanguageId" });
+            var users = await _userAccess.Update(user, new List<string> { "Token", "Email", "FirstName", "LastName", "RoleId", "isActive", "LanguageId" });
             return users.First(); ;
         }
         public async Task<User> UpdateLanguage(User user)

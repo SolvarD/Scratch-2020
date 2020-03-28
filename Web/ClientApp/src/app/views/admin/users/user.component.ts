@@ -19,4 +19,9 @@ export class UserComponent implements OnInit {
     this.users = await this._users.getAll();
     this.selectedUSer = this.users[0];
   }
+
+  selectUser(userId: number) {
+    this.selectedUSer = this.users.find((user) => { return user.userId == userId });
+    console.log(this.selectedUSer);
+  }
 }

@@ -31,49 +31,55 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
   }
   set user(val) {
     this._user = val
+    this.buildForm(val);
   }
   constructor(private _languageService: LanguageService, private userService: UserService,
     private _fb: FormBuilder, private _roleService: RoleService) {
-    //this.user = new User();
-
     super();
-
   }
 
   async onSubmit() {
     if (this.formUser.valid) {
-      console.log('formUser', this.formUser.value);
-      //await this.userService.Update(this.formUser.value as User).then((user) => {
+      await this.userService.Update(this.formUser.value as User).then((user) => {
 
-      //});
+      });
     }
   }
 
   async ngOnInit() {
     this.languages = await this._languageService.getAll();
     this.roles = await this._roleService.getAll();
-
-    this.formUser = this._fb.group({
-      email: [this.user.email, [Validators.required]],
-      firstName: [this.user.firstName, [Validators.required]],
-      lastName: [this.user.lastName, [Validators.required]],
-      userName: [this.user.userName],
-      roleId: [this.user.roleId, [Validators.required]],
-      isActive: [this.user.isActive, [Validators.required]],
-      languageId: [this.user.languageId, [Validators.required]]
+    UserService.subCurrentUser.subscribe(() => {
+      for (var key in this.formUser.controls) {
+        if (this.canEdit) {
+          this.formUser.controls[key].enable();
+        } else {
+          this.formUser.controls[key].disable();
+        }
+      }
     });
-
-
-
-    //this.formUser = this._fb.group({
-    //  email: [{ value: this.user.email, disabled: !this.canEdit }, [Validators.required]],
-    //  firstName: [{ value: this.user.firstName, disabled: !this.canEdit }, [Validators.required]],
-    //  lastName: [{ value: this.user.lastName, disabled: !this.canEdit }, [Validators.required]],
-    //  userName: [{ value: this.user.userName, disabled: !this.canEdit }],
-    //  roleId: [{ value: this.user.roleId, disabled: !this.canEdit }, [Validators.required]],
-    //  isActive: [{ value: this.user.isActive, disabled: !this.canEdit }, [Validators.required]],
-    //  languageId: [{ value: this.user.languageId, disabled: !this.canEdit }, [Validators.required]]
-    //});
   }
 
+  buildForm(user: User) {
+    this.formUser = this._fb.group({
+      email: [{ value: user.email, disabled: !this.canEdit }, [Validators.required]],
+      firstName: [{ value: user.firstName, disabled: !this.canEdit }, [Validators.required]],
+      lastName: [{ value: user.lastName, disabled: !this.canEdit }, [Validators.required]],
+      userName: [{ value: user.userName, disabled: !this.canEdit }],
+      roleId: [{ value: user.roleId, disabled: !this.canEdit }, [Validators.required]],
+      isActive: [{ value: user.isActive, disabled: !this.canEdit }, [Validators.required]],
+      languageId: [{ value: user.languageId, disabled: !this.canEdit }, [Validators.required]],
+      userId: [user.userId, [Validators.required]]
+    });
+
+    //this.formUser = this._fb.group({
+    //  email: [user.email, [Validators.required]],
+    //  firstName: [user.firstName, [Validators.required]],
+    //  lastName: [user.lastName, [Validators.required]],
+    //  userName: [user.userName],
+    //  roleId: [user.roleId, [Validators.required]],
+    //  isActive: [user.isActive, [Validators.required]],
+    //  languageId: [user.languageId, [Validators.required]]
+    //});
+  }
 }

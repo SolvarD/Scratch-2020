@@ -124,12 +124,12 @@ namespace API
                 }
             }
              );
-            services.AddDistributedSqlServerCache((opt) =>
-            {
-                opt.ConnectionString = Configuration["connectionStrings:PorteFolio"];
-                opt.SchemaName = "dbo";
-                opt.TableName = "T_CACHE_DistributedCache";
-            });
+            //services.AddDistributedSqlServerCache((opt) =>
+            //{
+            //    opt.ConnectionString = Configuration["connectionStrings:PorteFolio"];
+            //    opt.SchemaName = "dbo";
+            //    opt.TableName = "T_CACHE_DistributedCache";
+            //});
             services.AddDistributedMemoryCache();
             services.AddSession(
                 options =>
