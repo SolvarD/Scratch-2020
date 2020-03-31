@@ -97,8 +97,26 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (1,'ADMIN', 'Administrateur', @now),
 (2,'ADMIN', 'Administrator', @now),
 (1,'VISITOR', 'Visiteur', @now),
-(2,'VISITOR', 'Visitor', @now)
+(2,'VISITOR', 'Visitor', @now),
 
+(1,'MANAGE_USER', 'Gestion utilisateurs', @now),
+(2,'MANAGE_USER', 'Manage users', @now),
+(1,'ADD_USER', 'Visiteur', @now),
+(2,'ADD_USER', 'Visitor', @now),
+(1,'ANONYME', 'Anonyme', @now),
+(2,'ANONYME', 'Anonymous', @now),
+(1,'WEBMASTER', 'Webmaster', @now),
+(2,'WEBMASTER', 'Webmaster', @now),
+(1,'ADMINISTRATION', 'Administration', @now),
+(2,'ADMINISTRATION', 'Administration', @now),
+(1,'USERS', 'Utilisateurs', @now),
+(2,'USERS', 'Users', @now),
+(1,'DICTIONARY', 'Dictionnaire', @now),
+(2,'DICTIONARY', 'Dictionary', @now),
+(1,'USER', 'Utilisateur', @now),
+(2,'USER', 'User', @now),
+(1,'DELETE_TEXT', 'Voulez-vous vraiment supprimé', @now),
+(2,'DELETE_TEXT', 'Do you really want delete', @now)
 
 Merge into T_REF_Dictionary trd using @tmpDictionary tmpD
 on trd.[LanguageId] = tmpD.[LanguageId] and trd.[Key] = tmpD.[Key]

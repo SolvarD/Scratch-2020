@@ -19,3 +19,7 @@ label {
   margin-bottom: 1px;
   margin-right: 5px;
 }
+.page-title {
+  justify-content: center;
+  display: flex;
+}

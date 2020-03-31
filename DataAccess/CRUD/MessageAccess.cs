@@ -16,10 +16,10 @@ namespace DataAccess.CRUD
             return await base.GetAll<Message>(new List<string> { "*" });
         }
 
-        public async Task<int> Insert(Message item)
+        public async Task<Message> Insert(Message item)
         {
             List<string> columns = new List<string> { "MessageTypeId", "UserName", "Text", "Time", "UserId", "ReceiverId"};
-            return await base.Insert<Message>(item, columns);
+            return  base.Insert<Message>(item, columns);
         }
     }
 }

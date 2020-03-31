@@ -1,47 +1,64 @@
 <div class="container-user-display">
-  <div class="container-user-left">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td (click)="selectUser(user.userId)">{{user.firstName}}</td>
-          <td (click)="selectUser(user.userId)">{{user.lastName}}</td>
-          <td (click)="selectUser(user.userId)">{{user.email}}</td>
-          <td (click)="selectUser(user.userId)" translate>{{user.roleName}}</td>
-          <td></td>
-        </tr>
-      </tbody>
-
-    </table>
+  <div class="page-title">
+    <h3 translate>MANAGE_USER</h3>
   </div>
-  <div class="container-user-right ">
+  <div class="add-user-container">
+    <button type="button" (click)="addUser()" [disabled]="!canEdit" class="btn btn-primary" translate>ADD_USER</button>
+  </div>
+  <div style="display:flex">
+    <div class="container-user-left">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+          </tr>
+        </thead>
 
-    <div class="modal display-small-screen">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td (click)="selectUser(user.userId)">{{user.firstName}}</td>
+            <td (click)="selectUser(user.userId)">{{user.lastName}}</td>
+            <td (click)="selectUser(user.userId)">{{user.email}}</td>
+            <td (click)="selectUser(user.userId)" translate>{{user.roleName}}</td>
+            <td>
+              <div class="contain-action">
+                <div class="hide-big-screen" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && toggleUser(user.userId)">
+                  <i class="fas fa-user-edit"></i>
+                </div>
+                <div  [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && displayModal(user)">
+                  <i class="fas fa-trash"></i>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
 
-          <div class="modal-header">
-            <h4 class="modal-title">User</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <app-display-user [(user)]="selectedUSer"></app-display-user>
+      </table>
+    </div>
+    <div class="container-user-right">
+
+      <div class="modal display-small-screen" [ngClass]="{'show-modal': displayUser}">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">User</h4>
+              <button type="button" class="close" (click)="toggleUser()" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <app-display-user [(user)]="selectedUSer"></app-display-user>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
-
-
-
-    
   </div>
+
 </div>
+
+<app-modal-confirm [(displayModalConfirm)]="showDeleteUser" [onValidate]="validateDelete" [valueToDelete]="textDelete"></app-modal-confirm>

@@ -12,6 +12,7 @@ import { LanguageService } from '../../services/language.service';
 import { Role } from '../../../models/role';
 import { RoleService } from '../../services/role.service';
 import { BaseComponent } from '../../../models/base-component';
+import { parse } from 'querystring';
 
 @Component({
   selector: 'app-display-user',
@@ -24,6 +25,8 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
   private _user: User = new User();
   languages: Language[] = [];
   roles: Role[] = [];
+  originalUser: User = new User();
+  hasChange: boolean = false;
 
   @Input()
   get user() {
@@ -31,6 +34,7 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
   }
   set user(val) {
     this._user = val
+    this.originalUser = Object.assign({}, val);
     this.buildForm(val);
   }
   constructor(private _languageService: LanguageService, private userService: UserService,
@@ -39,10 +43,21 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
   }
 
   async onSubmit() {
-    if (this.formUser.valid) {
-      await this.userService.Update(this.formUser.value as User).then((user) => {
+    console.log(this.formUser);
+    if (this.formUser.valid && this.hasChange) {
+      let saveUser = this.formUser.value as User;
+      saveUser.roleId = parseInt(this.formUser.value.roleId);
+      saveUser.languageId = parseInt(this.formUser.value.languageId);
 
-      });
+      if (this.user.userId) {
+        await this.userService.update(saveUser).then((user) => {
+
+        });
+      } else {
+        await this.userService.create(saveUser).then((user) => {
+
+        });
+      }
     }
   }
 
@@ -60,6 +75,10 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
     });
   }
 
+  reset() {
+    this.user = Object.assign({}, this.originalUser);
+  }
+
   buildForm(user: User) {
     this.formUser = this._fb.group({
       email: [{ value: user.email, disabled: !this.canEdit }, [Validators.required]],
@@ -69,17 +88,16 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
       roleId: [{ value: user.roleId, disabled: !this.canEdit }, [Validators.required]],
       isActive: [{ value: user.isActive, disabled: !this.canEdit }, [Validators.required]],
       languageId: [{ value: user.languageId, disabled: !this.canEdit }, [Validators.required]],
-      userId: [user.userId, [Validators.required]]
+      userId: [user.userId],
+      password: [user.userId ? user.password: '']
     });
 
-    //this.formUser = this._fb.group({
-    //  email: [user.email, [Validators.required]],
-    //  firstName: [user.firstName, [Validators.required]],
-    //  lastName: [user.lastName, [Validators.required]],
-    //  userName: [user.userName],
-    //  roleId: [user.roleId, [Validators.required]],
-    //  isActive: [user.isActive, [Validators.required]],
-    //  languageId: [user.languageId, [Validators.required]]
-    //});
+    this.formUser.valueChanges.subscribe(() => {
+      this.hasChange = true;
+    })
+  }
+
+  async deleteUser(userId) {
+    await this.userService.delete(userId);
   }
 }

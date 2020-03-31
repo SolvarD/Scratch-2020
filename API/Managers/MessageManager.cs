@@ -12,7 +12,7 @@ namespace API.Managers
     public interface IMessageManager
     {
         Task<List<Message>> GetAllMessages();
-        Task<int> Insert(Message message);
+        Task<Message> Insert(Message message);
     }
     public class MessageManager : IMessageManager
     {
@@ -36,7 +36,7 @@ namespace API.Managers
             }            
         }
 
-        public Task<int> Insert(Message message)
+        public Task<Message> Insert(Message message)
         {
             return _messageAccess.Insert(message);
         }

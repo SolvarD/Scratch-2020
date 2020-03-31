@@ -45,7 +45,7 @@ export class UserService {
     }); 
   }
 
-  UpdateLanguage(id: number) {
+  updateLanguage(id: number) {
     return this.http.put(`${environment.API}/User/Update/Language`, { languageId: id }).toPromise().then((user) => {
       UserService.currentUser.languageId = id;
       this.interceptUser(UserService.currentUser);
@@ -53,8 +53,16 @@ export class UserService {
     });
   }
 
-  Update(user: User) {
+  update(user: User) {
     return this.http.put(`${environment.API}/User/Update`, user).toPromise();
+  }
+
+  delete(userId: number) {
+    return this.http.delete(`${environment.API}/User/Delete/${userId}`).toPromise();
+  }
+
+  create(user: User) {
+    return this.http.post(`${environment.API}/User/Create`, user).toPromise();
   }
 
   private interceptUser(user: User): User {

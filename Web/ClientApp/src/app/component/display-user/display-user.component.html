@@ -11,21 +11,28 @@
     <label for="lastName" translate>LASTNAME</label>
     <input type="text" id="lastName" class="form-control" formControlName="lastName" />
   </div>
+
   <div class="form-group">
     <label for="userName" translate>USERNAME</label>
     <input type="text" id="userName" class="form-control" formControlName="userName" />
   </div>
 
+  <div class="form-group" *ngIf="!user.userId">
+    <label for="user-password" translate>PASSWORD</label>
+    <input type="text" id="user-password" class="form-control" formControlName="password" />
+  </div>
+
   <div class="form-group">
     <label for="mail" translate>ROLE</label>
-    <select class="form-control" formControlName="roleId" >
+    <select class="form-control" formControlName="roleId">
       <option *ngFor="let role of roles" [value]="role.roleId" translate>{{role.label}}</option>
     </select>
   </div>
 
   <div class="form-group">
-    <label for="isActive" translate>ACTIF</label>
-    <input type="checkbox" id="isActive" class="form-control" formControlName="isActive" />
+    <label for="isActive" class="form-check-label" translate>
+    <input type="checkbox" id="isActive" class="" formControlName="isActive" />ACTIF</label>
+    
   </div>
 
   <div class="form-group">
@@ -36,7 +43,7 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-dark" [disabled]="!canEdit" translate>CANCEL</button>
+    <button type="button" (click)="reset()" class="btn btn-dark" [disabled]="!canEdit" translate>CANCEL</button>
     <button type="submit" (click)="onSubmit()" [disabled]="!canEdit" class="btn btn-success" data-dismiss="modal" translate>SAVE</button>
   </div>
 </form>

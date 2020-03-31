@@ -1,5 +1,6 @@
 .container-user-display {
   display: flex;
+  flex-direction: column;
 }
 
 .container-user-left {
@@ -8,24 +9,57 @@
   padding-right: 5px;
 }
 
-@media all and (min-width:1200px) {
+.contain-action {
+  display: flex;
+  justify-content: space-between;
+  width: 50px;
+  cursor: pointer;
+}
+
+@media all and (min-width:800px) {
+  tr {
+    cursor: pointer;
+  }
+
   .container-user-right {
     flex: 1;
     padding-left: 5px;
     padding-right: 5px;
   }
+
   .modal, modal-dialog, modal-sm, modal-content {
     all: initial !important;
+    margin:0px!important;
   }
-  .modal-header{
+
+  .modal-header {
+    display: none;
+  }
+  .hide-big-screen{
       display: none;
   }
 }
 
-@media all and (max-width:1200px) {
+@media all and (max-width:800px) {
+  tr {
+    cursor: default;
+  }
   .display-small-screen {
     background-color: rgba(128, 128, 128, 0.5);
+    display: none;
+  }
+
+  .show-modal {
     display: block;
   }
+}
+
+.add-user-container{
+    margin-bottom:10px;
+    margin-top: 10px;
+}
+
+.forbidden {
+  cursor: not-allowed;
 }
 

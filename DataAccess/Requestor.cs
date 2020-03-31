@@ -114,7 +114,7 @@ namespace DataAccess
             }
         }
 
-        public dynamic ExecuteStoredText<T>(string query)
+        public List<T> ExecuteStoredText<T>(string query)
         {
             using (var connection = new SqlConnection(_connectionString))
             {

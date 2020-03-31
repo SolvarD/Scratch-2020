@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace DataAccess
 {
@@ -16,10 +17,10 @@ namespace DataAccess
     {
         public Task<T> GetOneById<T>(int id);
         public Task<List<T>> GetManyById<T>(int id, string column, List<string> tableColumns);
-        public Task<int> DeleteById(int id);
+        public Task<int> DeleteById(int id, string column);
         public Task<List<T>> Update<T>(int id, string column, T item, List<string> tableColumns);
-        Task<int> Insert<T>(T item,List<string> columns);
-        public Task<List<int>> InsertMany<T>(List<T> items, List<string> columns);
+        public T Insert<T>(T item,List<string> columns);
+        public List<T> InsertMany<T>(List<T> items, List<string> columns);
         public Task<List<T>> GetAll<T>(List<string> tableColumns);
     }
 
@@ -37,9 +38,9 @@ namespace DataAccess
             _table = table;
         }
 
-        public async Task<int> DeleteById(int id)
+        public async Task<int> DeleteById(int id, string column)
         {
-            throw new NotImplementedException();
+            return requestor.Delete($"Delete from {_table} OUTPUT DELETED.* where {column}={id}");
         }
 
         public async Task<List<T>> GetAll<T>(List<string> tableColumns)
@@ -70,11 +71,11 @@ namespace DataAccess
 
             return requestor.Select<T>(request.ToString());
         }
-        public async Task<int> Insert<T>(T item, List<string> columns)
+        public T Insert<T>(T item, List<string> columns)
         {
             try
             {
-                return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, new List<T> { item }, columns));
+                return requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, new List<T> { item }, columns)).First();
             }
             catch (Exception e)
             {
@@ -82,9 +83,9 @@ namespace DataAccess
             }
         }
 
-        public async Task<List<int>> InsertMany<T>(List<T> items, List<string> columns)
+        public List<T> InsertMany<T>(List<T> items, List<string> columns)
         {
-            return await requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, items, columns));
+            return requestor.ExecuteStoredText<T>(RequestSimple<T>(enumAction.INSERT, items, columns));
         }
 
         public async Task<List<T>> Execute<T>(string name, object param = null)

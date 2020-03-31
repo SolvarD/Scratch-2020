@@ -34,6 +34,7 @@ import { DataBaseComponent } from "./views/public/database/database.component";
 import { UserComponent } from "./views/admin/users/user.component";
 import { DisplayUserComponent } from './component/display-user/display-user.component';
 import { RoleService } from './services/role.service';
+import { ModalConfirmComponent } from './component/modal-confirm/modal-confirm.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { RoleService } from './services/role.service';
     MultiLanguageViewComponent,
     AuthenticationComponent,
     DictionaryComponent,
-    DisplayUserComponent
+    DisplayUserComponent,
+    ModalConfirmComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

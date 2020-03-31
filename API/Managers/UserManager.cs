@@ -20,6 +20,8 @@ namespace API.Managers
         Task<User> Login(string login, string password);
         Task<User> Login();
         Task<User> Update(User user);
+        User Create(User user);
+        Task<bool> Delete(int userId);
         Task<User> UpdateToken(User user);
         Task<User> UpdateLanguage(User user);
     }
@@ -86,6 +88,16 @@ namespace API.Managers
         {
             var users = await _userAccess.Update(user, new List<string> { "LanguageId" });
             return users.First(); ;
+        }
+
+        public async Task<bool> Delete(int userId) {
+            var hasDelete = await _userAccess.DeleteById(userId, "UserId") > 0;
+            return hasDelete;
+        }
+
+        public User Create(User user) {
+            user.Created = DateTime.Now;
+            return _userAccess.Insert(user, new List<string> { "Email", "FirstName", "LastName", "RoleId", "isActive", "LanguageId", "Password", "Created", "UserName" });
         }
 
         private User declareUser(User user)

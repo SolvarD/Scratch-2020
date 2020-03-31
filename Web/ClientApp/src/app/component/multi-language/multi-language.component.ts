@@ -29,7 +29,7 @@ export class MultiLanguageComponent implements OnInit {
 
     this.formLanguage.valueChanges.subscribe((val) => {
       let languageId = val.languageId;
-      this._userService.UpdateLanguage(parseInt(languageId));
+      this._userService.updateLanguage(parseInt(languageId));
       this._translateService.use(languageId);
     });
   }

@@ -23,7 +23,7 @@ namespace API.Controllers
         private readonly IUserManager _userManager;
         private ContextCurrentUser _currentUser;
         private readonly IHttpContextAccessor _httpContext;
-        public UserController(IUserManager userManager, ContextCurrentUser currentUser ,IHttpContextAccessor httpContext)
+        public UserController(IUserManager userManager, ContextCurrentUser currentUser, IHttpContextAccessor httpContext)
         {
             _userManager = userManager;
             _currentUser = currentUser;
@@ -45,11 +45,12 @@ namespace API.Controllers
         {
             User loggedUser = await _userManager.Login(user.Email, user.Password);
 
-            if (loggedUser == null) {
+            if (loggedUser == null)
+            {
                 return Unauthorized();
             }
 
-            _currentUser.UpdateCurrentUser(loggedUser);          
+            _currentUser.UpdateCurrentUser(loggedUser);
             return Ok(loggedUser);
         }
 
@@ -88,6 +89,22 @@ namespace API.Controllers
             _currentUser.LanguageId = user.LanguageId;
             await _userManager.UpdateLanguage(_currentUser);
             return _currentUser;
+        }
+
+        [HttpDelete]
+        [Route("Delete/{userId}")]
+        public async Task<IActionResult> Delete(int userId)
+        {
+            await _userManager.Delete(userId);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public async Task<IActionResult> Create(User user)
+        {
+            _userManager.Create(user);
+            return Ok();
         }
     }
 }
