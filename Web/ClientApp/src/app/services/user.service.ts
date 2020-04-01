@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { User } from "../../models/user";
 import { Subject } from "rxjs";
+import { Tuple } from "../../models/tuple";
 
 @Injectable()
 export class UserService {
@@ -19,6 +20,11 @@ export class UserService {
   getAll() {
     return this.http.get<User[]>(`${environment.API}/User/GetAll`).toPromise();
   }
+
+  public GetFilteredAndPagined(take = 10, skip = 0, filter = ''): Promise<Tuple<User>> {
+    return this.http.get<Tuple<User>>(`${environment.API}/User/GetFilteredAndPagined?take=${take}&skip=${skip}&filter=${filter}`).toPromise();
+  }
+
   getByEmailPassword(email: string, password: string) {
     return this.http.post<User>(`${environment.API}/User/Login`, { email: email, password: password }).toPromise().then(this.interceptUser);
   }

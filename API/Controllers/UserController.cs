@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using API.Services;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using DataAccess.Entities;
 
 namespace API.Controllers
 {
@@ -36,6 +37,14 @@ namespace API.Controllers
         public async Task<List<User>> GetAll()
         {
             return await _userManager.GetAllUsers();
+        }
+
+        [HttpGet]
+        [Authorize("ConsultUsers")]
+        [Route("GetFilteredAndPagined")]
+        public async Task<Tuple<List<User>, InfoPagination>> GetFilteredAndPagined(int take, int skip, string filter = "")
+        {
+            return await _userManager.GetFilteredAndPagined(take, skip, filter);
         }
 
         [HttpPost]

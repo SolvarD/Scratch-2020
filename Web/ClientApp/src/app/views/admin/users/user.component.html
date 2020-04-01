@@ -2,11 +2,16 @@
   <div class="page-title">
     <h3 translate>MANAGE_USER</h3>
   </div>
+
+  <div id="input-search">
+    <input type="text" class="form-control" id="search" placeholder="{{ 'SEARCH_KEY' | translate}}" (keyup)="search.next($event)">
+  </div>
+
   <div class="add-user-container">
     <button type="button" (click)="addUser()" [disabled]="!canEdit" class="btn btn-primary" translate>ADD_USER</button>
   </div>
   <div style="display:flex">
-    <div class="container-user-left">
+    <div class="container-user-left table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -29,7 +34,7 @@
                 <div class="hide-big-screen" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && toggleUser(user.userId)">
                   <i class="fas fa-user-edit"></i>
                 </div>
-                <div  [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && displayModal(user)">
+                <div [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && displayModal(user)">
                   <i class="fas fa-trash"></i>
                 </div>
               </div>
@@ -38,6 +43,12 @@
         </tbody>
 
       </table>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" (click)="previewPage()">Previous</a></li>
+        <li *ngFor="let page of pages" [ngClass]="{'active':isPageActive(page)}" class="page-item"><a (click)="gotToPage(page)" class="page-link">{{page}}</a></li>
+
+        <li class="page-item"><a class="page-link" (click)="nextPage()">Next</a></li>
+      </ul>
     </div>
     <div class="container-user-right">
 

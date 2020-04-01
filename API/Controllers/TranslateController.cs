@@ -51,5 +51,20 @@ namespace API.Controllers
                 return null;
             }
         }
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetFilteredAndPagined")]
+        public async Task<Tuple<List<DictionaryLanguage>, InfoPagination>> GetFilteredAndPagined(int take, int skip, string filter = "")
+        {
+            try
+            {
+                return await _dictionaryManager.GetFilteredAndPagined(take,skip,filter);
+            }
+            catch (Exception e)
+            {
+                _email.SendEmail(e.StackTrace);
+                return null;
+            }
+        }
     }
 }

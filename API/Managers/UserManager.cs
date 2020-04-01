@@ -1,5 +1,6 @@
 ﻿using API.Services;
 using DataAccess.CRUD;
+using DataAccess.Entities;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,7 @@ namespace API.Managers
         Task<bool> Delete(int userId);
         Task<User> UpdateToken(User user);
         Task<User> UpdateLanguage(User user);
+        Task<Tuple<List<User>, InfoPagination>> GetFilteredAndPagined(int take, int skip, string filter);
     }
     public class UserManager : IUserManager
     {
@@ -45,7 +47,8 @@ namespace API.Managers
         public async Task<User> Login(string login, string password)
         {
             var user = await _userAccess.GetByEmailPassword(login, _encryptManager.GetMd5Hash(password));
-            if (user != null) {
+            if (user != null)
+            {
                 var userLogged = declareUser(user);
                 await UpdateToken(user);
                 return userLogged;
@@ -90,16 +93,53 @@ namespace API.Managers
             return users.First(); ;
         }
 
-        public async Task<bool> Delete(int userId) {
+        public async Task<bool> Delete(int userId)
+        {
             var hasDelete = await _userAccess.DeleteById(userId, "UserId") > 0;
             return hasDelete;
         }
 
-        public User Create(User user) {
+        public User Create(User user)
+        {
             user.Created = DateTime.Now;
             return _userAccess.Insert(user, new List<string> { "Email", "FirstName", "LastName", "RoleId", "isActive", "LanguageId", "Password", "Created", "UserName" });
         }
+        public async Task<Tuple<List<User>, InfoPagination>> GetFilteredAndPagined(int take, int skip, string filter)
+        {
+            if (filter == null)
+            {
+                filter = string.Empty;
+            }
 
+            var users = await _userAccess.Execute<UserFiltered>("GetUserPaginedAndFiltered", new { @take = take, @skip = skip, @filter = filter });
+            Tuple<List<User>, InfoPagination> pagination;
+
+            if (users.Any())
+            {
+                pagination =
+                new Tuple<List<User>, InfoPagination>(users.Select(g => new User
+                {
+                    Email = g.Email,
+                    FirstName = g.FirstName,
+                    LastName = g.LastName,
+                    isActive = g.isActive,
+                    RoleId = g.RoleId,
+                    Updated= g.Updated,
+                    UserId = g.UserId,
+                    UserName = g.UserName,
+                    Token = g.Token,
+                    LanguageId = g.LanguageId,
+                    Created = g.Created
+                }).ToList(), new InfoPagination { Take = users.First().Take, Skip = users.First().Skip, Filter = users.First().Filter, Total = users.First().Total });
+            }
+            else
+            {
+                pagination =
+                    new Tuple<List<User>, InfoPagination>(new List<User> { new User() }, new InfoPagination { Take = 0, Skip = 0, Filter = "", Total = 0 });
+            }
+
+            return pagination;
+        }
         private User declareUser(User user)
         {
             if (user == null) { return null; }

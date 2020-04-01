@@ -101,8 +101,8 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 
 (1,'MANAGE_USER', 'Gestion utilisateurs', @now),
 (2,'MANAGE_USER', 'Manage users', @now),
-(1,'ADD_USER', 'Visiteur', @now),
-(2,'ADD_USER', 'Visitor', @now),
+(1,'ADD_USER', 'Ajouter utilisateur', @now),
+(2,'ADD_USER', 'Add user', @now),
 (1,'ANONYME', 'Anonyme', @now),
 (2,'ANONYME', 'Anonymous', @now),
 (1,'WEBMASTER', 'Webmaster', @now),

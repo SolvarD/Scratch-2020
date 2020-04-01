@@ -1,20 +1,32 @@
 <div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Key</th>
-        <th *ngFor="let language of languages">{{language.label}}</th>
-        <th>Action</th>
-      </tr>
-    </thead>
+  <div class="form-group" id="input-search">
+    <input type="text" class="form-control" id="search" placeholder="{{ 'SEARCH_KEY' | translate}}" (keyup)="search.next($event)">
+  </div>
 
-    <tbody>
-      <tr *ngFor="let dictionary of displayLanguage | keyvalue">
-        <td>{{dictionary.key}}</td>
-        <td *ngFor="let item of dictionary.value"> {{item.label}}</td>
-        <td></td>
-      </tr>
-    </tbody>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th *ngFor="let language of languages">{{language.label}}</th>
+          <th>Action</th>
+        </tr>
+      </thead>
 
-  </table>
+      <tbody>
+        <tr *ngFor="let dictionary of displayLanguage | keyvalue">
+          <td>{{dictionary.key}}</td>
+          <td *ngFor="let item of dictionary.value"> {{item.label}}</td>
+          <td></td>
+        </tr>
+      </tbody>
+
+    </table>
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" (click)="previewPage()">Previous</a></li>
+      <li *ngFor="let page of pages" [ngClass]="{'active':isPageActive(page)}" class="page-item"><a (click)="gotToPage(page)" class="page-link">{{page}}</a></li>
+
+      <li class="page-item"><a class="page-link" (click)="nextPage()">Next</a></li>
+    </ul>
+  </div>
 </div>
