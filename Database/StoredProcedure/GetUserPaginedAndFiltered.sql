@@ -4,7 +4,7 @@
 	@filter varchar(MAX) = ''
 AS
 
-declare @rows int = (select count(*) from Users);
+declare @rows int = (select count(*) from Users WHERE FirstName like '%'+@filter+'%' or LastName like '%'+@filter+'%' or Email like '%'+@filter+'%');
 
 	SELECT *, @rows as total, @skip as skip, @take as take, @filter as filter
  FROM Users

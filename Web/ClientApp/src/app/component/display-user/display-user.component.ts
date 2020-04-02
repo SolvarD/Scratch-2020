@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef, OnInit, Output } from '@angular/core';
 import { HubRealtimeService } from '../../services/hub-realtime';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
@@ -37,6 +37,10 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
     this.originalUser = Object.assign({}, val);
     this.buildForm(val);
   }
+
+  @Output()
+  close: Subject<boolean> = new Subject<boolean>();
+
   constructor(private _languageService: LanguageService, private userService: UserService,
     private _fb: FormBuilder, private _roleService: RoleService) {
     super();
@@ -89,7 +93,7 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
       isActive: [{ value: user.isActive, disabled: !this.canEdit }, [Validators.required]],
       languageId: [{ value: user.languageId, disabled: !this.canEdit }, [Validators.required]],
       userId: [user.userId],
-      password: [user.userId ? user.password: '']
+      password: [user.userId ? user.password : '']
     });
 
     this.formUser.valueChanges.subscribe(() => {
@@ -99,5 +103,9 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
 
   async deleteUser(userId) {
     await this.userService.delete(userId);
+  }
+
+  onClose() {
+    this.close.next(true);
   }
 }

@@ -8,7 +8,7 @@ declare @askSkip int = @skip;
 
 set @take =(select count(*) from T_REF_Languages) * @askTake;
 set @skip =(select count(*) from T_REF_Languages) * @askSkip;
-declare @rows int = (select count(*) from T_REF_Dictionary) / (select count(*) from T_REF_Languages);
+declare @rows int = (select count(*) from T_REF_Dictionary WHERE [Key] like '%'+@filter+'%') / (select count(*) from T_REF_Languages);
 
 	SELECT *, @rows as total, @askSkip as skip, @askTake as take, @filter as filter
  FROM T_REF_Dictionary

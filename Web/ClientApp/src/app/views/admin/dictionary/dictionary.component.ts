@@ -35,6 +35,7 @@ export class DictionaryComponent implements OnInit {
       this.filter = event.target.value;
 
       if (event.target.value.length >= 2 || !event.target.value) {
+        this.skip = 0;
         this.populate();
       }
     });

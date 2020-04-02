@@ -22,7 +22,7 @@
       </tbody>
 
     </table>
-    <ul class="pagination">
+    <ul class="pagination" *ngIf="pages.length">
       <li class="page-item"><a class="page-link" (click)="previewPage()">Previous</a></li>
       <li *ngFor="let page of pages" [ngClass]="{'active':isPageActive(page)}" class="page-item"><a (click)="gotToPage(page)" class="page-link">{{page}}</a></li>
 

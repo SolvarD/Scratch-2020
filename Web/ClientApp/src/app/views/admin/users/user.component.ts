@@ -38,6 +38,7 @@ export class UserComponent extends BaseComponent implements OnInit {
       this.filter = event.target.value;
 
       if (event.target.value.length >= 2 || !event.target.value) {
+        this.skip = 0;
         this.populate();
       }
     });
@@ -94,7 +95,7 @@ export class UserComponent extends BaseComponent implements OnInit {
   }
 
   async nextPage() {
-    if ((this.skip + this.take) == this.infoPagination.total) {
+    if ((this.skip + this.take) > this.infoPagination.total) {
       return;
     }
     this.skip += this.take;
