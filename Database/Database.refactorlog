@@ -56,4 +56,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DocumentId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="8c8f46f7-7e9d-45a1-a9af-5e27a6e30e54" ChangeDateTime="04/14/2020 10:18:46">
+    <Property Name="ElementName" Value="[dbo].[Trace].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Trace]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TraceId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e0f1092f-f651-4728-8535-2a7a730770d3" ChangeDateTime="04/14/2020 10:22:01">
+    <Property Name="ElementName" Value="[dbo].[ContactMessage].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ContactMessage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContactMessageId" />
+  </Operation>
 </Operations>

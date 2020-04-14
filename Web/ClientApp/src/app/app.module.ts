@@ -35,6 +35,9 @@ import { UserComponent } from "./views/admin/users/user.component";
 import { DisplayUserComponent } from './component/display-user/display-user.component';
 import { RoleService } from './services/role.service';
 import { ModalConfirmComponent } from './component/modal-confirm/modal-confirm.component';
+import { SpinnerService } from './services/spinner.service';
+import { ContactComponent } from './views/public/contact/contact.component';
+import { ContactService } from './services/contact.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { ModalConfirmComponent } from './component/modal-confirm/modal-confirm.c
     AuthenticationComponent,
     DictionaryComponent,
     DisplayUserComponent,
-    ModalConfirmComponent
+    ModalConfirmComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -86,7 +90,9 @@ import { ModalConfirmComponent } from './component/modal-confirm/modal-confirm.c
     MessageService,
     LanguageService,
     TranslationService,
-    RoleService
+    RoleService,
+    SpinnerService,
+    ContactService
   ],
   bootstrap: [AppComponent]
 })

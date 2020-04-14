@@ -17,9 +17,9 @@ namespace API.Managers
     public class MessageManager : IMessageManager
     {
         private readonly MessageAccess _messageAccess;
-        private readonly EmailManager _email;
+        private readonly IEmailManager _email;
 
-        public MessageManager(MessageAccess messageAccess, EmailManager emailManager) {
+        public MessageManager(MessageAccess messageAccess, IEmailManager emailManager) {
             _messageAccess = messageAccess;
             _email = emailManager;
         }
@@ -31,7 +31,7 @@ namespace API.Managers
                 return _messageAccess.GetAll();
             }
             catch (Exception e) {
-                _email.SendEmail(e.Message + e.StackTrace);
+                _email.SendTrace(e.Message + e.StackTrace);
                 return null;
             }            
         }

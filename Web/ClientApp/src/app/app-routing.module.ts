@@ -11,6 +11,7 @@ import { SignalRCodeComponent } from "./views/public/signalr-code/signalr-code.c
 import { CounterComponent } from "./views/public/counter/counter.component";
 import { DataBaseComponent } from "./views/public/database/database.component";
 import { UserComponent } from "./views/admin/users/user.component";
+import { ContactComponent } from "./views/public/contact/contact.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -20,6 +21,8 @@ const routes: Routes = [
   { path: 'host-iis', component: HostIISComponent },
   { path: 'multi-language', component: MultiLanguageViewComponent },
   { path: 'authentication', component: AuthenticationComponent },
+  { path: 'contact', component: ContactComponent },
+
   {
     path: 'users', component: UserComponent, canActivate: [AuthGuard]
   },

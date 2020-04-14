@@ -25,7 +25,7 @@ export class UserComponent extends BaseComponent implements OnInit {
   search: Subject<string> = new Subject<string>();
   infoPagination: InfoPagination;
   pages: number[] = [];
-
+  currentPage: number = 0;
   constructor(private userService: UserService) {
     super();
   }
@@ -63,7 +63,7 @@ export class UserComponent extends BaseComponent implements OnInit {
     this.displayUser = !this.displayUser;
   }
 
-  addUser() {    
+  addUser() {
     this.selectedUSer = new User();
     this.displayUser = true;
   }
@@ -110,13 +110,14 @@ export class UserComponent extends BaseComponent implements OnInit {
   }
 
   async gotToPage(page: number) {
-    this.skip = (this.take * page) - this.take;
-    await this.populate();
+    if (page != this.currentPage) {
+      this.currentPage = page;
+      this.skip = (this.take * page) - this.take;
+      await this.populate();
+    }
   }
 
   isPageActive(page: number) {
     return page == (this.skip + this.take) / this.take;
   }
-
-
 }

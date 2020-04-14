@@ -13,8 +13,8 @@ namespace API.Controllers
     public class RoleController : Controller
     {
         private readonly IRoleManager _roleManager;
-        private readonly EmailManager _email;
-        public RoleController(IRoleManager roleManager, EmailManager email)
+        private readonly IEmailManager _email;
+        public RoleController(IRoleManager roleManager, IEmailManager email)
         {
             _roleManager = roleManager;
             _email = email;
@@ -30,7 +30,7 @@ namespace API.Controllers
             }
             catch (Exception e)
             {
-                _email.SendEmail(e.StackTrace);
+                _email.SendTrace(e.StackTrace);
                 return null;
             }
 

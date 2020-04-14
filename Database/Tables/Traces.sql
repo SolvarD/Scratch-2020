@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Traces]
+(
+	[TraceId] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Created] DATETIME NOT NULL, 
+    [Message] VARCHAR(MAX) NOT NULL
+)

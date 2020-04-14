@@ -21,6 +21,7 @@ export class DictionaryComponent implements OnInit {
   take: number = 10;
   filter: string = '';
   pages: number[] = [];
+  currentPage: number = 1;
   search: Subject<string> = new Subject<string>();
 
   constructor(private _translationService: TranslationService, private _languageService: LanguageService) {
@@ -65,8 +66,11 @@ export class DictionaryComponent implements OnInit {
   }
 
   async gotToPage(page: number) {
-    this.skip = (this.take * page) - this.take;
-    await this.populate();
+    if (page != this.currentPage) {
+      this.currentPage = page;
+      this.skip = (this.take * page) - this.take;
+      await this.populate();
+    }
   }
 
   isPageActive(page: number) {

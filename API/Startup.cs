@@ -43,7 +43,13 @@ namespace API
                 {
                     builder.WithOrigins("https://localhost:44359", "https://localhost:44303",
                         "https://localhost:45666", "https://localhost:443",
-                        "https://solvard.ddns.net", "https://solvard.ddns.net:45666", "https://192.168.0.11");
+                        "https://solvard.ddns.net", 
+                        "https://solvard.ddns.net:45666", 
+                        "https://globaldevapp.com:45666", 
+                        "https://192.168.0.11", 
+                        "https://dsolvar.globaldevapp.com", 
+                        "https://www.globaldevapp.com",
+                        "https://globaldevapp.com");
                     builder.AllowAnyHeader();
                     builder.AllowAnyMethod();
                     builder.AllowCredentials();
@@ -86,6 +92,8 @@ namespace API
             services.AddTransient<MessageAccess>();
             services.AddTransient<LanguageAccess>();
             services.AddTransient<DictionaryAccess>();
+            services.AddTransient<TraceAccess>();
+            services.AddTransient<ContactMessageAccess>();
             services.AddTransient<RoleAccess>();
 
             services.AddTransient<IUserManager, UserManager>();
@@ -94,7 +102,7 @@ namespace API
             services.AddTransient<IDictionaryManager, DictionaryManager>();
             services.AddTransient<IRoleManager, RoleManager>();
 
-            services.AddTransient<EmailManager>();
+            services.AddTransient<IEmailManager,EmailManager>();
 
             services.AddSingleton<Requestor>(new Requestor(Configuration, "PorteFolio"));
             services.AddTransient<IEncryptManager, EncryptManager>();

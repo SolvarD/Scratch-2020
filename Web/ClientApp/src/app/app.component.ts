@@ -3,6 +3,7 @@ import { HubRealtimeService } from './services/hub-realtime';
 import { WeatherforecastService } from './services/weatherforecast.service';
 import { UserService } from './services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SpinnerService } from './services/spinner.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'app';
-  constructor(hub: HubRealtimeService, private _translateService: TranslateService) {
+  constructor(hub: HubRealtimeService, private _translateService: TranslateService, public spinner: SpinnerService) {
     this._translateService.use(UserService.currentUser.languageId.toString());
     hub.Init();
 

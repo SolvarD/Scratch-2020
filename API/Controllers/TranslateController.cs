@@ -15,8 +15,8 @@ namespace API.Controllers
     public class TranslateController : Controller
     {
         private readonly IDictionaryManager _dictionaryManager;
-        private readonly EmailManager _email;
-        public TranslateController(IDictionaryManager dictionaryManager, EmailManager email)
+        private readonly IEmailManager _email;
+        public TranslateController(IDictionaryManager dictionaryManager, IEmailManager email)
         {
             _dictionaryManager = dictionaryManager;
             _email = email;
@@ -32,7 +32,7 @@ namespace API.Controllers
             }
             catch (Exception e)
             {
-                _email.SendEmail(e.StackTrace);
+                _email.SendTrace(e.StackTrace);
                 return null;
             }
         }
@@ -47,7 +47,7 @@ namespace API.Controllers
             }
             catch (Exception e)
             {
-                _email.SendEmail(e.StackTrace);
+                _email.SendTrace(e.StackTrace);
                 return null;
             }
         }
@@ -62,7 +62,7 @@ namespace API.Controllers
             }
             catch (Exception e)
             {
-                _email.SendEmail(e.StackTrace);
+                _email.SendTrace(e.StackTrace);
                 return null;
             }
         }

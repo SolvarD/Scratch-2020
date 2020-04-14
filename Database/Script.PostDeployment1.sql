@@ -92,7 +92,7 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (2,'PASSWORD', 'Password', @now),
 (1,'STACK', 'Architecture', @now),
 (2,'STACK', 'Stack', @now),
-(1,'AUTHENTICATION', 'Identhification', @now),
+(1,'AUTHENTICATION', 'Identification', @now),
 (2,'AUTHENTICATION', 'Authentication', @now),
 (1,'ADMIN', 'Administrateur', @now),
 (2,'ADMIN', 'Administrator', @now),

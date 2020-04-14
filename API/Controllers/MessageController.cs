@@ -18,8 +18,8 @@ namespace API.Controllers
     public class MessageController : Controller
     {
         private readonly IMessageManager _messageManager;
-        private readonly EmailManager _email;
-        public MessageController(IMessageManager messageManager, EmailManager email)
+        private readonly IEmailManager _email;
+        public MessageController(IMessageManager messageManager, IEmailManager email)
         {
             _messageManager = messageManager;
             _email = email;
@@ -34,7 +34,7 @@ namespace API.Controllers
             }
             catch (Exception e)
             {
-                _email.SendEmail(e.StackTrace);
+                _email.SendTrace(e.StackTrace);
                 return null;
             }
         }

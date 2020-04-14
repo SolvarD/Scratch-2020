@@ -14,8 +14,8 @@ namespace API.Controllers
     public class LanguageController : Controller
     {
         private readonly ILanguageManager _languageManager;
-        private readonly EmailManager _email;
-        public LanguageController(ILanguageManager languageManager, EmailManager email)
+        private readonly IEmailManager _email;
+        public LanguageController(ILanguageManager languageManager, IEmailManager email)
         {
             _languageManager = languageManager;
             _email = email;
@@ -30,7 +30,7 @@ namespace API.Controllers
             }
             catch (Exception e)
             {
-                _email.SendEmail(e.StackTrace);
+                _email.SendTrace(e.StackTrace);
                 return null;
             }
 
