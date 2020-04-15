@@ -12,6 +12,7 @@ import { CounterComponent } from "./views/public/counter/counter.component";
 import { DataBaseComponent } from "./views/public/database/database.component";
 import { UserComponent } from "./views/admin/users/user.component";
 import { ContactComponent } from "./views/public/contact/contact.component";
+import { PorteFolioComponent } from "./views/public/porte-folio/porte-folio.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'multi-language', component: MultiLanguageViewComponent },
   { path: 'authentication', component: AuthenticationComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'porte-folio', component: PorteFolioComponent },
 
   {
     path: 'users', component: UserComponent, canActivate: [AuthGuard]

@@ -38,6 +38,7 @@ import { ModalConfirmComponent } from './component/modal-confirm/modal-confirm.c
 import { SpinnerService } from './services/spinner.service';
 import { ContactComponent } from './views/public/contact/contact.component';
 import { ContactService } from './services/contact.service';
+import { PorteFolioComponent } from './views/public/porte-folio/porte-folio.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ContactService } from './services/contact.service';
     DictionaryComponent,
     DisplayUserComponent,
     ModalConfirmComponent,
-    ContactComponent
+    ContactComponent,
+    PorteFolioComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
