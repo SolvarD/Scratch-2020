@@ -39,6 +39,9 @@ import { SpinnerService } from './services/spinner.service';
 import { ContactComponent } from './views/public/contact/contact.component';
 import { ContactService } from './services/contact.service';
 import { PorteFolioComponent } from './views/public/porte-folio/porte-folio.component';
+import { ProfilComponent } from './views/public/profil/profil.component';
+import { SkillsComponent } from './views/public/skills/skills.component';
+import { PricesComponent } from './views/public/prices/prices.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { PorteFolioComponent } from './views/public/porte-folio/porte-folio.comp
     DisplayUserComponent,
     ModalConfirmComponent,
     ContactComponent,
-    PorteFolioComponent
+    PorteFolioComponent,
+    ProfilComponent,
+    SkillsComponent,
+    PricesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

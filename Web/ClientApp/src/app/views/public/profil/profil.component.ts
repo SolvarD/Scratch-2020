@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-porte-folio',
-  templateUrl: './porte-folio.component.html',
-  styleUrls: ['./porte-folio.component.less']
+  selector: 'app-profil',
+  templateUrl: './profil.component.html',
+  styleUrls: ['./profil.component.less']
 })
-export class PorteFolioComponent implements OnInit {
+export class ProfilComponent implements OnInit {
 
 
   currentSlide: number = 0;

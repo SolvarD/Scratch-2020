@@ -64,7 +64,9 @@ namespace API.Managers
             string from = "contact@globaldevapp.com";
             MailMessage message = new MailMessage(from, to);
             message.Subject = "New contact";
-            message.Body = contact.Message;
+            message.Body = $@"{contact.FirstName} {contact.LastName} <br/>
+                            {contact.Email} <br/>
+                            {contact.Message}";
 
             SmtpClient client = new SmtpClient();
             client.Port = 25;

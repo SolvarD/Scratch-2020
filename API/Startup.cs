@@ -43,13 +43,15 @@ namespace API
                 {
                     builder.WithOrigins("https://localhost:44359", "https://localhost:44303",
                         "https://localhost:45666", "https://localhost:443",
-                        "https://solvard.ddns.net", 
-                        "https://solvard.ddns.net:45666", 
-                        "https://globaldevapp.com:45666", 
-                        "https://192.168.0.11", 
-                        "https://dsolvar.globaldevapp.com", 
+                        "https://solvard.ddns.net",
+                        "https://solvard.ddns.net:45666",
+                        "https://globaldevapp.com:45666",
+                        "https://192.168.0.11",
+                        "https://dsolvar.globaldevapp.com",
+                        "https://www.globaldevapp.com:45666",
                         "https://www.globaldevapp.com",
                         "https://globaldevapp.com");
+                    //builder.AllowAnyOrigin();
                     builder.AllowAnyHeader();
                     builder.AllowAnyMethod();
                     builder.AllowCredentials();

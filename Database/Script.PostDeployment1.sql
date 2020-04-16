@@ -80,7 +80,7 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (2,'DATABASE','Database', @now),
 (1,'HOME', 'Accueil', @now),
 (2,'HOME', 'Home', @now),
-(1,'MULTI_LANGUAGE', 'Interniationalisation', @now),
+(1,'MULTI_LANGUAGE', 'internationalisation', @now),
 (2,'MULTI_LANGUAGE', 'Multi language', @now),
 (1,'CANCEL', 'Annuler', @now),
 (2,'CANCEL', 'Cancel', @now),
@@ -116,7 +116,22 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (1,'USER', 'Utilisateur', @now),
 (2,'USER', 'User', @now),
 (1,'DELETE_TEXT', 'Voulez-vous vraiment supprimé', @now),
-(2,'DELETE_TEXT', 'Do you really want delete', @now)
+(2,'DELETE_TEXT', 'Do you really want delete', @now),
+
+(1,'CONTEXT', 'Contexte', @now),
+(2,'CONTEXT', 'Context', @now),
+(1,'TO', 'à', @now),
+(2,'TO', 'to', @now),
+(1,'PROFIL', 'Profile', @now),
+(2,'PROFIL', 'Profil', @now),
+(1,'SKILLS', 'Compétences', @now),
+(2,'SKILLS', 'Skills', @now),
+(1,'PORTE_FOLIO', 'Porte-Folio', @now),
+(2,'PORTE_FOLIO', 'Wallet', @now),
+(1,'PRICES', 'Tarifs', @now),
+(2,'PRICES', 'Prices', @now),
+(1,'CONTACT_US', 'Contactez-nous', @now),
+(2,'CONTACT_US', 'Contact us', @now)
 
 Merge into T_REF_Dictionary trd using @tmpDictionary tmpD
 on trd.[LanguageId] = tmpD.[LanguageId] and trd.[Key] = tmpD.[Key]

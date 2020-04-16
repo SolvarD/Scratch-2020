@@ -13,6 +13,9 @@ import { DataBaseComponent } from "./views/public/database/database.component";
 import { UserComponent } from "./views/admin/users/user.component";
 import { ContactComponent } from "./views/public/contact/contact.component";
 import { PorteFolioComponent } from "./views/public/porte-folio/porte-folio.component";
+import { ProfilComponent } from "./views/public/profil/profil.component";
+import { SkillsComponent } from "./views/public/skills/skills.component";
+import { PricesComponent } from "./views/public/prices/prices.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -24,6 +27,9 @@ const routes: Routes = [
   { path: 'authentication', component: AuthenticationComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'porte-folio', component: PorteFolioComponent },
+  { path: 'profil', component: ProfilComponent },
+  { path: 'skills', component: SkillsComponent },
+  { path: 'prices', component: PricesComponent },
 
   {
     path: 'users', component: UserComponent, canActivate: [AuthGuard]

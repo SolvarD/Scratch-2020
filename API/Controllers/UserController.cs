@@ -24,12 +24,11 @@ namespace API.Controllers
         private readonly IUserManager _userManager;
         private ContextCurrentUser _currentUser;
         private readonly IHttpContextAccessor _httpContext;
-        public UserController(IUserManager userManager, ContextCurrentUser currentUser, IHttpContextAccessor httpContext, EmailManager email)
+        public UserController(IUserManager userManager, ContextCurrentUser currentUser, IHttpContextAccessor httpContext)
         {
             _userManager = userManager;
             _currentUser = currentUser;
             _httpContext = httpContext;
-            _email = email;
         }
 
         [HttpGet]
@@ -63,7 +62,7 @@ namespace API.Controllers
             _currentUser.UpdateCurrentUser(loggedUser);
             return Ok(loggedUser);
         }
-        private readonly EmailManager _email;
+        
         [HttpGet]
         [AllowAnonymous]
         [Route("Login")]
