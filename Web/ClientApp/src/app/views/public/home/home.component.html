@@ -17,35 +17,16 @@
     solvar@msn.com //
     Visitor2020
   </b>
-
 </div>
 
 <div class="thumbnail-container">
-  <div title="{{'PROFIL' | translate}}" class="thumbnail" [routerLink]="['/profil']">
-    <i class="fas fa-id-card fa-9x full-size">
-      <label class="text-thumbnail">{{'PROFIL' | translate}}</label>
-    </i>
+  <div *ngFor="let element of elements" title="{{element.title | translate}}" class="thumbnail" [routerLink]="[element.route]">
+    <div>
+      <i [ngClass]="element.class">
+      </i>
+    </div>
+    <div class="content-title">
+      <label class="text-thumbnail">{{element.title | translate}}</label>
+    </div>
   </div>
-  <div title="{{'SKILLS' | translate}}" class="thumbnail" [routerLink]="['/skills']">
-    <i class="fas fa-suitcase fa-9x full-size">
-      <label class="text-thumbnail">{{'SKILLS' | translate}}</label>
-    </i>
-  </div>
-  <div title="{{'PORTE_FOLIO' | translate}}" class="thumbnail" [routerLink]="['/porte-folio']">
-    <i class="fas fa-building fa-9x full-size">
-      <label class="text-thumbnail">{{'PORTE_FOLIO' | translate}}</label>
-    </i>
-  </div>
-  <div title="{{'PRICES' | translate}}" class="thumbnail" [routerLink]="['/prices']">
-    <i class="fas fa-money-check-alt fa-9x full-size">
-      <label class="text-thumbnail">{{'PRICES' | translate}}</label>
-    </i>
-  </div>
-
-  <div title="{{'CONTACT_US' | translate}}" class="thumbnail" [routerLink]="['/contact']">
-    <i class="fas fa-envelope fa-9x full-size">
-      <label class="text-thumbnail">{{'CONTACT_US' | translate}}</label>
-    </i>
-  </div>
-
 </div>

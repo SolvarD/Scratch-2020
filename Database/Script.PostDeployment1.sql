@@ -134,7 +134,7 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (2,'CONTACT_US', 'Contact us', @now),
 
 (1,'LANGUAGE', 'Langages', @now),
-(2,'LANGUAGE', 'Languages us', @now),
+(2,'LANGUAGE', 'Languages', @now),
 (1,'ORM', 'Object-Relational Mapping', @now),
 (2,'ORM', 'mapping objet-relationnel', @now),
 (1,'UNIT_TEST', 'Test unitaire', @now),
