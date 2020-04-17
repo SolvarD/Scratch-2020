@@ -1,4 +1,4 @@
-<div>
+<div class="page-title">
   <h2 translate>PORTE_FOLIO</h2>
 </div>
 <div id="demo" class="carousel slide slide-container">
@@ -8,8 +8,8 @@
     <li *ngFor="let slide of slides;index as i" [ngClass]="{'active': currentSlide == i}" (click)="goTo(i)"></li>
   </ul>-->
   <!-- The slideshow -->
-  <div class="carousel-inner">
-    <div *ngFor="let slide of slides;index as i" class="carousel-item" [ngClass]="{'active': currentSlide == i}">
+  <div class="carousel-inner border-carrousel">
+    <div *ngFor="let slide of slides;index as i" class="carousel-item " [ngClass]="{'active bloc': currentSlide == i}">
       <div class="text-container" *ngIf="currentSlide == i">
         <div class="slide-header">
           <div class="slide-title"><label>{{slide.title}}</label></div>
@@ -36,10 +36,10 @@
   </div>
 
   <!-- Left and right controls -->
-  <div class="carousel-control-prev pointer" (click)="previewSlide()">
+  <div class="carousel-control-prev pointer border-carrousel" (click)="previewSlide()">
     <span class="carousel-control-prev-icon"></span>
   </div>
-  <div class="carousel-control-next pointer" (click)="nextSlide()">
+  <div class="carousel-control-next pointer border-carrousel" (click)="nextSlide()">
     <span class="carousel-control-next-icon"></span>
   </div>
 

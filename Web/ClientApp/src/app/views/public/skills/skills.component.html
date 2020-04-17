@@ -1,8 +1,8 @@
-<div>
+<div class="page-title">
   <h2 translate>SKILLS</h2>
 </div>
 <div class="skills-container">
-  <div class="skill" *ngFor="let category of objectKeys(skills)">
+  <div class="skill bloc" *ngFor="let category of objectKeys(skills)">
     <h4 translate>{{category}}</h4>
     <ul>
       <li *ngFor="let name of skills[category]">{{name}}</li>

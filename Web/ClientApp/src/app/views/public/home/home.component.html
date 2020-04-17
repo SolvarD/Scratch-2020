@@ -8,7 +8,7 @@
   bootstrap 4
   Font awesome 5
 </div>-->
-<div>
+<div class="page-title">
   <h2 translate>HOME</h2>
 </div>
 <div>
@@ -20,7 +20,7 @@
 </div>
 
 <div class="thumbnail-container">
-  <div *ngFor="let element of elements" title="{{element.title | translate}}" class="thumbnail" [routerLink]="[element.route]">
+  <div *ngFor="let element of elements" title="{{element.title | translate}}" class="thumbnail bloc" [routerLink]="[element.route]">
     <div>
       <i [ngClass]="element.class">
       </i>
