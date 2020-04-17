@@ -1,46 +1,11 @@
 <div>
-  <h2 translate>PORTE_FOLIO</h2>
+  <h2 translate>SKILLS</h2>
 </div>
-<div id="demo" class="carousel slide slide-container">
-
-  <!-- Indicators -->
-  <!--<ul style="background-color:antiquewhite;" class="carousel-indicators">
-    <li *ngFor="let slide of slides;index as i" [ngClass]="{'active': currentSlide == i}" (click)="goTo(i)"></li>
-  </ul>-->
-  <!-- The slideshow -->
-  <div class="carousel-inner">
-    <div *ngFor="let slide of slides;index as i" class="carousel-item" [ngClass]="{'active': currentSlide == i}">
-      <div class="text-container" *ngIf="currentSlide == i">
-        <div class="slide-header">
-          <div class="slide-title"><label>{{slide.title}}</label></div>
-          <div class="slide-date"><label>{{slide.from}} {{'TO'| translate}} {{slide.to}} </label></div>
-        </div>
-        <div>
-          <fieldset>
-            <legend>{{'CONTEXT'| translate}}</legend>
-            <div [innerHTML]="slide.context"></div>
-          </fieldset>
-        </div>
-        <div>
-          <fieldset>
-            <legend>{{'STACK'| translate}}</legend>
-            <div>
-              <ul>
-                <li *ngFor="let techno of slide.stack">{{techno}}</li>
-              </ul>
-            </div>
-          </fieldset>
-        </div>
-      </div>
-    </div>
+<div class="skills-container">
+  <div class="skill" *ngFor="let category of objectKeys(skills)">
+    <h4 translate>{{category}}</h4>
+    <ul>
+      <li *ngFor="let name of skills[category]">{{name}}</li>
+    </ul>   
   </div>
-
-  <!-- Left and right controls -->
-  <div class="carousel-control-prev pointer" (click)="previewSlide()">
-    <span class="carousel-control-prev-icon"></span>
-  </div>
-  <div class="carousel-control-next pointer" (click)="nextSlide()">
-    <span class="carousel-control-next-icon"></span>
-  </div>
-
 </div>

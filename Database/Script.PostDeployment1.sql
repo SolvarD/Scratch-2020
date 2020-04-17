@@ -131,7 +131,18 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (1,'PRICES', 'Tarifs', @now),
 (2,'PRICES', 'Prices', @now),
 (1,'CONTACT_US', 'Contactez-nous', @now),
-(2,'CONTACT_US', 'Contact us', @now)
+(2,'CONTACT_US', 'Contact us', @now),
+
+(1,'LANGUAGE', 'Langages', @now),
+(2,'LANGUAGE', 'Languages us', @now),
+(1,'ORM', 'Object-Relational Mapping', @now),
+(2,'ORM', 'mapping objet-relationnel', @now),
+(1,'UNIT_TEST', 'Test unitaire', @now),
+(2,'UNIT_TEST', 'Unit test', @now),
+(1,'TOOLS', 'Outils', @now),
+(2,'TOOLS', 'Tools', @now),
+(1,'REPOSITORY', 'Dépôt code source', @now),
+(2,'REPOSITORY', 'Repository source code', @now)
 
 Merge into T_REF_Dictionary trd using @tmpDictionary tmpD
 on trd.[LanguageId] = tmpD.[LanguageId] and trd.[Key] = tmpD.[Key]
