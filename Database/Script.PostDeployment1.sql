@@ -98,7 +98,6 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (2,'ADMIN', 'Administrator', @now),
 (1,'VISITOR', 'Visiteur', @now),
 (2,'VISITOR', 'Visitor', @now),
-
 (1,'MANAGE_USER', 'Gestion utilisateurs', @now),
 (2,'MANAGE_USER', 'Manage users', @now),
 (1,'ADD_USER', 'Ajouter utilisateur', @now),
@@ -117,7 +116,6 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (2,'USER', 'User', @now),
 (1,'DELETE_TEXT', 'Voulez-vous vraiment supprimé', @now),
 (2,'DELETE_TEXT', 'Do you really want delete', @now),
-
 (1,'CONTEXT', 'Contexte', @now),
 (2,'CONTEXT', 'Context', @now),
 (1,'TO', 'à', @now),
@@ -132,7 +130,6 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (2,'PRICES', 'Prices', @now),
 (1,'CONTACT_US', 'Contactez-nous', @now),
 (2,'CONTACT_US', 'Contact us', @now),
-
 (1,'LANGUAGE', 'Langages', @now),
 (2,'LANGUAGE', 'Languages', @now),
 (1,'ORM', 'Object-Relational Mapping', @now),
@@ -142,7 +139,17 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (1,'TOOLS', 'Outils', @now),
 (2,'TOOLS', 'Tools', @now),
 (1,'REPOSITORY', 'Dépôt code source', @now),
-(2,'REPOSITORY', 'Repository source code', @now)
+(2,'REPOSITORY', 'Repository source code', @now),
+
+(1,'FIRSTNAME', 'Prénom', @now),
+(2,'FIRSTNAME', 'Firstname source code', @now),
+(1,'LASTNAME', 'Nom code source', @now),
+(2,'LASTNAME', 'Lastname source code', @now),
+(1,'MESSAGE', 'Message', @now),
+(2,'MESSAGE', 'Message', @now),
+(1,'SEND', 'Envoyer', @now),
+(2,'SEND', 'Send', @now)
+
 
 Merge into T_REF_Dictionary trd using @tmpDictionary tmpD
 on trd.[LanguageId] = tmpD.[LanguageId] and trd.[Key] = tmpD.[Key]

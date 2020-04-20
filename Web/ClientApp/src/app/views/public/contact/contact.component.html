@@ -2,28 +2,41 @@
   <h2 translate>CONTACT_US</h2>
 </div>
 <div>
-  <form [formGroup]="formContact" *ngIf="formContact">
-    <div class="form-group">
-      <label for="mail" translate>EMAIL</label>
-      <input type="email" id="mail-user" class="form-control" formControlName="email" />
-    </div>
-    <div class="form-group">
-      <label for="firstName" translate>FIRSTNAME</label>
-      <input type="text" id="firstName" class="form-control" formControlName="firstName" />
-    </div>
-    <div class="form-group">
-      <label for="lastName" translate>LASTNAME</label>
-      <input type="text" id="lastName" class="form-control" formControlName="lastName" />
-    </div>
-    <div class="form-group">
-      <label for="message" translate>MESSAGE</label>
-      <textarea id="message" rows="5" class="form-control" formControlName="message"></textarea>
-    </div>
-    <div>
-      <button type="submit" (click)="onSubmit()" [disabled]="messageSending" class="btn btn-success" data-dismiss="modal" translate>SEND</button>
-      <div [ngStyle]="{'display': messageSend?'block':'none'}" class="valid-feedback"><span translate>MESSAGE_SEND</span></div>
-      <div [ngStyle]="{'display': messageError?'block':'none'}" class="invalid-feedback"><span translate>ERROR</span></div>
-    </div>
 
-  </form>
+  <div class="modal" style="display:block">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+
+       
+        <div class="modal-body">
+          <form [formGroup]="formContact" *ngIf="formContact">
+            <div class="form-group">
+              <label for="mail" translate>EMAIL</label>
+              <input type="email" id="mail-user" class="form-control" formControlName="email" />
+            </div>
+            <div class="form-group">
+              <label for="firstName" translate>FIRSTNAME</label>
+              <input type="text" id="firstName" class="form-control" formControlName="firstName" />
+            </div>
+            <div class="form-group">
+              <label for="lastName" translate>LASTNAME</label>
+              <input type="text" id="lastName" class="form-control" formControlName="lastName" />
+            </div>
+            <div class="form-group">
+              <label for="message" translate>MESSAGE</label>
+              <textarea id="message" rows="5" class="form-control" formControlName="message"></textarea>
+            </div>
+            <div>
+              <button type="submit" (click)="onSubmit()" [disabled]="messageSending" class="btn btn-success" data-dismiss="modal" translate>SEND</button>
+              <div [ngStyle]="{'display': messageSend?'block':'none'}" class="valid-feedback"><span translate>MESSAGE_SEND</span></div>
+              <div [ngStyle]="{'display': messageError?'block':'none'}" class="invalid-feedback"><span translate>ERROR</span></div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
 </div>

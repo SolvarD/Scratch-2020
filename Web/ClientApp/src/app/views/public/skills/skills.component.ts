@@ -13,7 +13,7 @@ export class SkillsComponent implements OnInit {
 
   ngOnInit(): void {
     this.skills = {
-      'LANGUAGE': ['Angular 6~8', 'c# 4.5', 'ASP MVC5 // SignalR', '.NET core 2.1 ~ 3', 'HTML5', 'AngularJs', 'ASP WEBFORM, ASP MVC3', 'JQuery'],
+      'LANGUAGE': ['Angular 8', 'c# 4.5', 'ASP MVC5 // SignalR', '.NET core 2.1 ~ 3', 'HTML5', 'AngularJs', 'JQuery'],
       'DATABASE': ['SQL2016', 'SQL2012', 'SQL2008'],
       'ORM': ['Dapper', 'EntityFramework', 'nHibernate'],
       'UNIT_TEST': ['nUnit', 'MSTest', 'Karma/Jasmine', 'Selenium'],

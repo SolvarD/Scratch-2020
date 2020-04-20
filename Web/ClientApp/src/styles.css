@@ -51,8 +51,8 @@ html {
   /*align-items: center;*/
   border-radius: 15px;
   /*background-color: antiquewhite;*/
-  background-image: radial-gradient(black, #191970);
-  color:white;
+  background-image: radial-gradient(#4169E1, #191970);
+  color: #f3f6e6;
 }
 table{
     background-color:white;
