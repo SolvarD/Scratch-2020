@@ -24,6 +24,21 @@
   text-align: center;
 }
 
+.contact-container {
+  text-align: center;
+}
+
+.contact-button {
+  font-size: 18px;
+  background-color: #f1b221;
+  height: 63px;
+  width: 283px;
+  border: none;
+  margin: 30px;
+  font-family: Poppins-Medium;
+  border-radius: 2px;
+}
+
 @media all and (max-width:800px) {
   .thumbnail {
     flex: 1 1 380px;
@@ -33,6 +48,12 @@
     height: 200px;
     padding: 15px;
     cursor: pointer;
+    color: white;
+    display: flex;
+  }
+
+  .contact-title {
+display:none;
   }
 }
 
@@ -63,6 +84,9 @@
     height: 300px;
     padding: 15px;
     cursor: pointer;
+    color: white;
+    display: flex;
+    flex-direction:column;
   }
 
   .content-logo {
@@ -71,22 +95,10 @@
   .thumbnail-container-right {
     padding-top: 100px;
   }
-  .contact-container{
-      text-align:center;
-  }
   .contact-title {
     font-family: Poppins-Bold;
     font-size: 44px;
-    color:white;
-  }
-  .contact-button {
-    font-size: 18px;
-    background-color: #f1b221;
-    height: 63px;
-    width: 283px;
-    border: none;
-    margin: 30px;
-    font-family: Poppins-Medium;
-    border-radius: 2px;
+    color: white;
+    display: block;
   }
 }

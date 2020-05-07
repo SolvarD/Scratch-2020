@@ -77,9 +77,10 @@ app-root {
   margin: 5px;
   display: flex;
   /*align-items: center;*/
-  border-radius: 15px;
+  /*border-radius: 15px;*/
   /*background-color: antiquewhite;*/
-  background-image: radial-gradient(#4169E1, #191970);
+  /*background-image: radial-gradient(#4169E1, #191970);*/
+  background-color: #4cb1f7;
   color: #f3f6e6;
 }
 table{
