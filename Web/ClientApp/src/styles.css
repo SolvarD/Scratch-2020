@@ -26,18 +26,46 @@ label {
   background-color: #6495ED;
   margin-bottom:10px;
 }
+
+@font-face {
+  font-family: Poppins;
+  src: url(./assets/font/Poppins-Regular.ttf);
+}
+@font-face {
+  font-family: Poppins-Bold;
+  src: url(./assets/font/Poppins-Bold.ttf);
+  /*font-weight: bold;*/
+}
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url(./assets/font/Poppins-SemiBold.ttf);
+  /*font-weight: 600;*/
+}
+@font-face {
+  font-family: Poppins-Medium;
+  src: url(./assets/font/Poppins-Medium.ttf);
+  /*font-weight: 500;*/
+}
 body {
   display: flex;
   flex-direction: column;
   flex: 1 1;
-  height:100%;
-  background-color: #B0E0E6;
+  height: auto;
+  min-height: 100%;
+  background: linear-gradient(180deg, #fff 30%, #020842 30%);
+  background-repeat: no-repeat;
+  font-family: Poppins;
 }
 html {
   display: flex;
   flex: 1 1;
-  background-color: #B0E0E6;
-  /*height:100%;*/
+  /*background-color: #B0E0E6;*/
+  height: auto;
+  min-height: 100%;
+}
+app-root {
+  height: auto;
+  min-height: 100%;
 }
 .pointer{
     cursor:pointer;
@@ -56,4 +84,7 @@ html {
 }
 table{
     background-color:white;
+}
+a{
+    text-decoration:none;
 }

@@ -34,3 +34,7 @@ a{
 .nega-margin {
   margin-top: -5px;
 }
+.nav-link-font {
+  font-family: Poppins-SemiBold;
+  color: #1a237e !important;
+}

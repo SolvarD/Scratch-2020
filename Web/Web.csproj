@@ -65,7 +65,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ClientApp\src\assets\DSC_0073_REDIM.jpg">
+    <None Update="ClientApp\src\assets\images\DSC_0073_REDIM.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

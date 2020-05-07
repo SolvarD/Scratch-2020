@@ -42,6 +42,7 @@ import { PorteFolioComponent } from './views/public/porte-folio/porte-folio.comp
 import { ProfilComponent } from './views/public/profil/profil.component';
 import { SkillsComponent } from './views/public/skills/skills.component';
 import { PricesComponent } from './views/public/prices/prices.component';
+import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { PricesComponent } from './views/public/prices/prices.component';
     PorteFolioComponent,
     ProfilComponent,
     SkillsComponent,
-    PricesComponent
+    PricesComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

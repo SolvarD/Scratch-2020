@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataAccess.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -54,6 +55,6 @@ namespace DataAccess.Models
                     new Claim("Token", Token?? string.Empty)
             };
         }
-
+        public List<Software> Softwares { get; set; }
     }
 }

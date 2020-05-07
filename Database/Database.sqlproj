@@ -75,6 +75,8 @@
     <Build Include="StoredProcedure\GetDictionaryPaginedAndFiltered.sql" />
     <Build Include="Tables\Traces.sql" />
     <Build Include="Tables\ContactMessages.sql" />
+    <Build Include="Tables\Softwares.sql" />
+    <Build Include="Tables\Users_Softwares.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Database.refactorlog" />

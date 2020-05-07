@@ -130,6 +130,8 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (2,'PRICES', 'Prices', @now),
 (1,'CONTACT_US', 'Contactez-nous', @now),
 (2,'CONTACT_US', 'Contact us', @now),
+(1,'CONTACT_ME', 'Contactez-moi', @now),
+(2,'CONTACT_ME', 'Contact me', @now),
 (1,'LANGUAGE', 'Langages', @now),
 (2,'LANGUAGE', 'Languages', @now),
 (1,'ORM', 'Object-Relational Mapping', @now),
@@ -148,7 +150,14 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (1,'MESSAGE', 'Message', @now),
 (2,'MESSAGE', 'Message', @now),
 (1,'SEND', 'Envoyer', @now),
-(2,'SEND', 'Send', @now)
+(2,'SEND', 'Send', @now),
+
+(1,'HELLO', 'Bonjour je suis Dimitri. Developper Fullstack français basé en région parisienne', @now),
+(2,'HELLO', 'I’m Dimitri. French fullstack developer based in Paris', @now),
+(1,'GOT_A_PROJECT', 'Vous avez un projet', @now),
+(2,'GOT_A_PROJECT', 'You got a project', @now),
+(1,'A_QUESTION', 'Une question', @now),
+(2,'A_QUESTION', 'A question', @now)
 
 
 Merge into T_REF_Dictionary trd using @tmpDictionary tmpD

@@ -8,9 +8,9 @@
   bootstrap 4
   Font awesome 5
 </div>-->
-<div class="page-title">
+<!--<div class="page-title">
   <h2 translate>HOME</h2>
-</div>
+</div>-->
 <div>
   <b>
     Compte Visiteur:
@@ -18,9 +18,36 @@
     Visitor2020
   </b>
 </div>
-
+<div class="hello-container">
+  <label class="hello" translate>HELLO</label>
+</div>
 <div class="thumbnail-container">
-  <div *ngFor="let element of elements" title="{{element.title | translate}}" class="thumbnail bloc" [routerLink]="[element.route]">
+
+  <div class="thumbnail-container-left">
+    <div *ngFor="let element of elements | filter: getModulo0" title="{{element.title | translate}}" class="thumbnail" [routerLink]="[element.route]">
+      <div class="content-logo">
+        <i [ngClass]="element.class">
+        </i>
+      </div>
+      <div class="content-title">
+        <label class="text-thumbnail">{{element.title | translate}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="thumbnail-container-right">
+    <div *ngFor="let element of elements | filter: getModulo1" title="{{element.title | translate}}" class="thumbnail" [routerLink]="[element.route]">
+      <div class="content-logo">
+        <i [ngClass]="element.class">
+        </i>
+      </div>
+      <div class="content-title">
+        <label class="text-thumbnail">{{element.title | translate}}</label>
+      </div>
+    </div>
+  </div>
+
+
+  <!--<div *ngFor="let element of elements | filter: getByModulo ; index as i" title="{{element.title | translate}}" class="thumbnail" [routerLink]="[element.route]">
     <div>
       <i [ngClass]="element.class">
       </i>
@@ -28,5 +55,11 @@
     <div class="content-title">
       <label class="text-thumbnail">{{element.title | translate}}</label>
     </div>
+  </div>-->
+</div>
+<div class="contact-container">
+  <div class="contact-title"><label translate>GOT_A_PROJECT</label> ? <label translate>A_QUESTION</label> ?</div>
+  <div class="">
+  <button class="contact-button" translate [routerLink]="['/contact']">CONTACT_ME</button>
   </div>
 </div>
