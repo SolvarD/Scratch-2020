@@ -105,7 +105,28 @@ namespace DataAccess
                 return connection.Execute(request);
             }
         }
+        public List<T> ExecuteMultiQuery<T,U>(string foreignKey)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
 
+                var sql = @$"select * from {typeof(T)}
+                       select * from {typeof(U)} ";
+
+                using (var multi = connection.QueryMultiple(sql))
+                {
+                    //var skillCategories = multi.Read<T>().ToDictionary(g => g., g=>g);
+
+
+                    //skillCategories.ForEach((item) => {
+                    //    item[""] = multi.Read<U>().Where(i => i.).ToList();
+
+                    //});
+                }
+
+                return new List<T>();
+            }
+        }
         public List<T> ExecuteStoredProcedure<T>(string name, object param = null)
         {
             using (var connection = new SqlConnection(_connectionString))

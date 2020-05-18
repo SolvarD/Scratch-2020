@@ -167,3 +167,67 @@ insert ([LanguageId],[Key],[Label] ,[Created]) values
 (tmpD.[LanguageId],tmpD.[Key],tmpD.[Label] ,tmpD.[Created]);
 
 ------------------------------------------------------------------------
+
+declare @tmpSkillCategories table([Order] int, [Label] varchar(MAX))
+insert INTO @tmpSkillCategories values 
+(1, 'LANGUAGE'),
+(2, 'DATABASE'),
+(3, 'ORM'),
+(4, 'UNIT_TEST'),
+(5, 'TOOLS'),
+(6, 'REPOSITORY')
+
+Merge into SkillCategories sc using @tmpSkillCategories tmpSc
+on sc.[Label] = tmpSc.[Label]
+when not matched then
+insert ([Order],[Label]) values
+(tmpSc.[Order],tmpSc.[Label]);
+
+-------------------------------------------------------------------------
+
+declare @tmpSkillCategoryDetails table([SkillCategoryId] int, [Label] varchar(MAX));
+
+declare @Language int = (select top 1 SkillCategoryId from SkillCategories where Label = 'LANGUAGE');
+declare @Database int = (select top 1 SkillCategoryId from SkillCategories where Label = 'DATABASE');
+declare @Orm int = (select top 1 SkillCategoryId from SkillCategories where Label = 'ORM');
+declare @UnitTest int = (select top 1 SkillCategoryId from SkillCategories where Label = 'UNIT_TEST');
+declare @Tools int = (select top 1 SkillCategoryId from SkillCategories where Label = 'TOOLS');
+declare @Repository int = (select top 1 SkillCategoryId from SkillCategories where Label = 'REPOSITORY');
+
+insert INTO @tmpSkillCategoryDetails ([SkillCategoryId], [Label]) values 
+(@Language, 'Angular 8'),
+(@Language, 'c# 4.5'),
+(@Language, 'ASP MVC5 // SignalR'),
+(@Language, '.NET core 2.1 ~ 3'),
+(@Language, 'HTML5'),
+(@Language, 'AngularJs'),
+(@Language, 'JQuery'),
+
+(@Database, 'SQL2016'),
+(@Database, 'SQL2012'),
+(@Database, 'SQL2008'),
+
+(@Orm, 'Dapper'),
+(@Orm, 'EntityFramework'),
+(@Orm, 'nHibernate'),
+
+(@UnitTest, 'nUnit'),
+(@UnitTest, 'MSTest'),
+(@UnitTest, 'Karma/Jasmine'),
+(@UnitTest, 'Selenium'),
+
+(@Tools, 'Visual Studio 2019'),
+(@Tools, 'Visual Studio Code'),
+(@Tools, 'SQL Server Mnagement Studio'),
+(@Tools, 'Balsamiq'),
+(@Tools, 'Jira'),
+
+(@Repository, 'Azure DevOps'),
+(@Repository, 'Github'),
+(@Repository, 'TFS')
+
+Merge into SkillCategoryDetails scd using @tmpSkillCategoryDetails tmpScd
+on scd.[Label] = tmpScd.[Label]
+when not matched then
+insert (SkillCategoryId,[Label]) values
+(tmpScd.SkillCategoryId,tmpScd.[Label]);

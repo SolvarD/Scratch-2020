@@ -43,6 +43,7 @@ import { ProfilComponent } from './views/public/profil/profil.component';
 import { SkillsComponent } from './views/public/skills/skills.component';
 import { PricesComponent } from './views/public/prices/prices.component';
 import { FilterPipe } from './pipe/filter.pipe';
+import { SkillService } from './services/skill.service';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { FilterPipe } from './pipe/filter.pipe';
     TranslationService,
     RoleService,
     SpinnerService,
-    ContactService
+    ContactService,
+    SkillService
   ],
   bootstrap: [AppComponent]
 })

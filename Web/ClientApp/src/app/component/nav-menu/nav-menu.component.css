@@ -7,34 +7,54 @@ a.navbar-brand {
 html {
   font-size: 14px;
 }
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+@media (max-width: 768px) {
+  .logo {
+    margin-left: 10px;
+    height: 15px;
+  }
 }
-.menu{
-    margin-right: 10px;
-}
+
 .login {
   margin-left: 10px;
 }
-a{
-    cursor:pointer;
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+.menu {
+  margin-right: 10px;
+}
+
+a {
+  cursor: pointer;
+}
+
 #sub-menu-stack:hover #menu-stack {
   display: block;
 }
+
 #sub-menu-admin:hover #menu-admin {
   display: block;
 }
+
 .nega-margin {
   margin-top: -5px;
 }
+
 .nav-link-font {
   font-family: Poppins-SemiBold;
   color: #1a237e !important;
+}
+.separator {
+  border-right: #4cb1f7;
+  border-right-width: 3px;
+  border-right-style: solid;
 }

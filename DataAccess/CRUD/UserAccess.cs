@@ -26,7 +26,7 @@ namespace DataAccess.CRUD
                 columns.Add("Updated");
                 user.Updated = DateTime.Now;
             }
-            return await base.Update<User>(user.UserId, "UserId", user, columns);
+            return await base.Update<User>("UserId",user.UserId,  user, columns);
         }
     }
 }

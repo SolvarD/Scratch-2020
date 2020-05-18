@@ -98,13 +98,17 @@ namespace API
             services.AddTransient<ContactMessageAccess>();
             services.AddTransient<RoleAccess>();
 
+            services.AddTransient<SkillCategoryAccess>();
+            services.AddTransient<SkillCategoryDetailAccess>();
+
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<IMessageManager, MessageManager>();
             services.AddTransient<ILanguageManager, LanguageManager>();
             services.AddTransient<IDictionaryManager, DictionaryManager>();
             services.AddTransient<IRoleManager, RoleManager>();
 
-            services.AddTransient<IEmailManager,EmailManager>();
+            services.AddTransient<IEmailManager, EmailManager>();
+            services.AddTransient<ISkillManager, SkillManager>();
 
             services.AddSingleton<Requestor>(new Requestor(Configuration, "PorteFolio"));
             services.AddTransient<IEncryptManager, EncryptManager>();

@@ -2,10 +2,10 @@
   <h2 translate>SKILLS</h2>
 </div>
 <div class="skills-container">
-  <div class="skill bloc" *ngFor="let category of objectKeys(skills)">
-    <h4 translate>{{category}}</h4>
+  <div class="skill bloc" *ngFor="let category of skillsCategory">
+    <h4 translate>{{category.label}}</h4>
     <ul>
-      <li *ngFor="let name of skills[category]">{{name}}</li>
+      <li *ngFor="let detail of category.skillCategoryDetails">{{detail.label}}</li>
     </ul>   
   </div>
 </div>
