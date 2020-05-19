@@ -8,5 +8,6 @@ export class SkillCategory {
 export class SkillCategoryDetail {
   public skillCategoryDetailId: number;
   public skillCategoryId: number;
+  public experienceId: number;
   public Label: string;
 }

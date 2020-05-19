@@ -12,13 +12,13 @@
     <div *ngFor="let slide of slides;index as i" class="carousel-item " [ngClass]="{'active bloc': currentSlide == i}">
       <div class="text-container" *ngIf="currentSlide == i">
         <div class="slide-header">
-          <div class="slide-title"><label>{{slide.title}}</label></div>
-          <div class="slide-date"><label>{{slide.from}} {{'TO'| translate}} {{slide.to}} </label></div>
+          <div class="slide-title"><label>{{slide.name}}</label></div>
+          <div class="slide-date"><label>{{slide.start}} {{'TO'| translate}} {{slide.end}} </label></div>
         </div>
         <div>
           <fieldset>
             <legend>{{'CONTEXT'| translate}}</legend>
-            <div [innerHTML]="slide.context"></div>
+            <div [innerHTML]="slide.description"></div>
           </fieldset>
         </div>
         <div>
@@ -26,7 +26,7 @@
             <legend>{{'STACK'| translate}}</legend>
             <div>
               <ul>
-                <li *ngFor="let techno of slide.stack">{{techno}}</li>
+                <li *ngFor="let techno of slide.skillCategoryDetails">{{techno.label}}</li>
               </ul>
             </div>
           </fieldset>

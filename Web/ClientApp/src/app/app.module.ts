@@ -44,6 +44,7 @@ import { SkillsComponent } from './views/public/skills/skills.component';
 import { PricesComponent } from './views/public/prices/prices.component';
 import { FilterPipe } from './pipe/filter.pipe';
 import { SkillService } from './services/skill.service';
+import { ExperienceService } from './services/experience.service';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { SkillService } from './services/skill.service';
     RoleService,
     SpinnerService,
     ContactService,
-    SkillService
+    SkillService,
+    ExperienceService
   ],
   bootstrap: [AppComponent]
 })

@@ -79,6 +79,9 @@
     <Build Include="Tables\Users_Softwares.sql" />
     <Build Include="Tables\SkillCategories.sql" />
     <Build Include="Tables\SkillCategoryDetails.sql" />
+    <Build Include="Tables\Experiences.sql" />
+    <Build Include="Tables\Experiences_SkillCategoryDetails.sql" />
+    <Build Include="StoredProcedure\GetSkillCategoryDetailsWithExperiences.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Database.refactorlog" />

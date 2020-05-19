@@ -7,6 +7,7 @@ namespace DataAccess.Entities
     public class SkillCategoryDetail
     {
         public int SkillCategoryDetailId { get; set; }
+        public int? ExperienceId { get; set; }
         public int SkillCategoryId { get; set; }
         public string Label { get; set; }
     }
