@@ -36,15 +36,15 @@
           </div>
           <div class="skill-side">
             <fieldset>
-              <legend>{{'STACK'| translate}}</legend>
+              <legend>{{'SKILLS'| translate}}</legend>
               <div>
                 <ul>
                   <li *ngFor="let techno of slide.skillCategoryDetails">
                     <div class="flex">
-                      <div>
+                      <div class="flex-1">
                         {{techno.label}}
                       </div>
-                      <div [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && displayModal(techno)">
+                      <div class="pointer" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && displayModal(techno)">
                         <i class="fas fa-trash"></i>
                       </div>
                     </div>
