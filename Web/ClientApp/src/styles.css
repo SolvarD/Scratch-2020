@@ -14,38 +14,44 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
 label {
   display: inline-block;
   margin-bottom: 1px;
   margin-right: 5px;
 }
+
 .page-title {
   justify-content: center;
   display: flex;
   border-radius: 15px;
   background-color: #6495ED;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 @font-face {
   font-family: Poppins;
   src: url(./assets/font/Poppins-Regular.ttf);
 }
+
 @font-face {
   font-family: Poppins-Bold;
   src: url(./assets/font/Poppins-Bold.ttf);
   /*font-weight: bold;*/
 }
+
 @font-face {
   font-family: Poppins-SemiBold;
   src: url(./assets/font/Poppins-SemiBold.ttf);
   /*font-weight: 600;*/
 }
+
 @font-face {
   font-family: Poppins-Medium;
   src: url(./assets/font/Poppins-Medium.ttf);
   /*font-weight: 500;*/
 }
+
 body {
   display: flex;
   flex-direction: column;
@@ -56,6 +62,7 @@ body {
   background-repeat: no-repeat;
   font-family: Poppins;
 }
+
 html {
   display: flex;
   flex: 1 1;
@@ -63,12 +70,14 @@ html {
   height: auto;
   min-height: 100%;
 }
+
 app-root {
   height: auto;
   min-height: 100%;
 }
-.pointer{
-    cursor:pointer;
+
+.pointer {
+  cursor: pointer;
 }
 
 .bloc {
@@ -83,9 +92,19 @@ app-root {
   background-color: #4cb1f7;
   color: #f3f6e6;
 }
-table{
-    background-color:white;
+
+table {
+  background-color: white;
 }
-a{
-    text-decoration:none;
+
+a {
+  text-decoration: none;
+}
+
+.forbidden {
+  cursor: not-allowed;
+}
+
+.flex {
+  display: flex;
 }

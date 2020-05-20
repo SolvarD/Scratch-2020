@@ -45,6 +45,9 @@ import { PricesComponent } from './views/public/prices/prices.component';
 import { FilterPipe } from './pipe/filter.pipe';
 import { SkillService } from './services/skill.service';
 import { ExperienceService } from './services/experience.service';
+import { AdminSkillsComponent } from './views/admin/skills/admin-skills.component';
+import { AdminPorteFolioComponent } from './views/admin/porte-folio/admin-porte-folio.component';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,9 @@ import { ExperienceService } from './services/experience.service';
     ProfilComponent,
     SkillsComponent,
     PricesComponent,
-    FilterPipe
+    FilterPipe,
+    AdminPorteFolioComponent,
+    AdminSkillsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -85,7 +90,8 @@ import { ExperienceService } from './services/experience.service';
         useClass: TranslationService,
         deps: [HttpClient]
       }
-    })
+    }),
+    CKEditorModule
   ],
   providers: [AuthGuard, {
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true

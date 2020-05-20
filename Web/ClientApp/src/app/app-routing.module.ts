@@ -16,6 +16,8 @@ import { PorteFolioComponent } from "./views/public/porte-folio/porte-folio.comp
 import { ProfilComponent } from "./views/public/profil/profil.component";
 import { SkillsComponent } from "./views/public/skills/skills.component";
 import { PricesComponent } from "./views/public/prices/prices.component";
+import { AdminSkillsComponent } from "./views/admin/skills/admin-skills.component";
+import { AdminPorteFolioComponent } from "./views/admin/porte-folio/admin-porte-folio.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -30,12 +32,21 @@ const routes: Routes = [
   { path: 'profil', component: ProfilComponent },
   { path: 'skills', component: SkillsComponent },
   { path: 'prices', component: PricesComponent },
-
   {
-    path: 'users', component: UserComponent, canActivate: [AuthGuard]
-  },
-  {
-    path: 'dictionary', component: DictionaryComponent, canActivate: [AuthGuard]
+    path: 'admin', children: [
+      {
+        path: 'users', component: UserComponent, canActivate: [AuthGuard]
+      },
+      {
+        path: 'dictionary', component: DictionaryComponent, canActivate: [AuthGuard]
+      },
+      {
+        path: 'skills', component: AdminSkillsComponent, canActivate: [AuthGuard]
+      },
+      {
+        path: 'porte-folio', component: AdminPorteFolioComponent, canActivate: [AuthGuard]
+      }
+    ]
   },
   {
     path: 'error/:id',
