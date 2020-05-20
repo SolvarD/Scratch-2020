@@ -3,59 +3,64 @@
 </div>
 <div id="demo" class="carousel slide slide-container">
 
-  <!-- Indicators -->
-  <!--<ul style="background-color:antiquewhite;" class="carousel-indicators">
-    <li *ngFor="let slide of slides;index as i" [ngClass]="{'active': currentSlide == i}" (click)="goTo(i)"></li>
-  </ul>-->
-  <!-- The slideshow -->
   <div class="">
     <div *ngFor="let slide of slides;index as i" class="active ">
-      <div class="text-container flex">
+      <form [formGroup]="formsExperiences[i]" *ngIf="formsExperiences[i]">
+        <div class="text-container flex">
 
-        <div class="slide-header bloc">
-          <div class="slide-title"><label>{{slide.name}}</label></div>
+          <div class="slide-header bloc">
+            <div class="slide-title"><label>{{slide.name}}</label></div>
 
-          <div class="pointer" (click)="!displayBloc[i] ? display(i) : hide(i)">
-            <span class="carousel-control-next-icon" [ngClass]="{'rotate': displayBloc[i]}"></span>
+            <div class="pointer" (click)="!displayBloc[i] ? display(i) : hide(i)">
+              <i class="carousel-control-next-icon" [ngClass]="{'rotate': displayBloc[i]}"></i>
+            </div>
           </div>
-        </div>
 
-        <div class="bloc" [ngClass]="{'displayBloc': displayBloc[i] == true, 'hideBloc': !displayBloc[i]}">
-          <div class="context-side">
-            <fieldset>
-              <legend>{{'CONTEXT'| translate}}</legend>
-              <div class="slide-date">
+          <div class="bloc" [ngClass]="{'displayBloc': displayBloc[i] == true, 'hideBloc': !displayBloc[i]}">
+            <div class="context-side">
+              <fieldset>
+                <legend>{{'CONTEXT'| translate}}</legend>
+                <div class="slide-date">
 
-                <input type="text" [ngModel]="slide.start" />  <label>{{'TO'| translate}}</label>  <input type="text" [ngModel]="slide.end" />
+                  <div class="form-group">
+                    <label for="start" translate>START</label>
+                    <input type="text" id="start" class="form-control" formControlName="start" />
+                  </div>
+                  <div class="form-group">
+                    <label for="end" translate>END</label>
+                    <input type="text" id="end" class="form-control" formControlName="end" />
+                  </div>
 
-              </div>
+                </div>
+                <label translate>DESCRIPTION</label>
+                <ckeditor formControlName="description" ></ckeditor>
 
-              <ckeditor [(ngModel)]="slide.description"></ckeditor>
-
-            </fieldset>
-          </div>
-          <div class="skill-side">
-            <fieldset>
-              <legend>{{'SKILLS'| translate}}</legend>
-              <div>
-                <ul>
-                  <li *ngFor="let techno of slide.skillCategoryDetails">
-                    <div class="flex">
-                      <div class="flex-1">
-                        {{techno.label}}
+              </fieldset>
+            </div>
+            <div class="skill-side">
+              <fieldset>
+                <legend>{{'SKILLS'| translate}}<i class="fas fa-plus-circle add-skill-experience pointer"></i></legend>
+                <div>
+                  <ul>
+                    <li *ngFor="let techno of slide.skillCategoryDetails">
+                      <div class="flex">
+                        <div class="flex-1">
+                          {{techno.label}}
+                        </div>
+                        <div class="pointer" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && displayModal(techno)">
+                          <i class="fas fa-trash space-trash"></i>
+                        </div>
                       </div>
-                      <div class="pointer" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && displayModal(techno)">
-                        <i class="fas fa-trash"></i>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </fieldset>
+                    </li>
+                  </ul>
+                </div>
+              </fieldset>
+            </div>
           </div>
-        </div>
 
-      </div>
+        </div>
+      </form>
+     
     </div>
   </div>
 
