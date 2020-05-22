@@ -47,7 +47,6 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.formUser);
     if (this.formUser.valid && this.hasChange) {
       let saveUser = this.formUser.value as User;
       saveUser.roleId = parseInt(this.formUser.value.roleId);

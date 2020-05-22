@@ -18,7 +18,7 @@ namespace DataAccess
         public Task<T> GetOneById<T>(int id);
         public Task<List<T>> GetManyById<T>(int id, string column, List<string> tableColumns);
         public Task<int> DeleteById(int id, string column);
-        public Task<List<T>> Update<T>(string column, int id, T item, List<string> tableColumns);
+        public T Update<T>(string column, int id, T item, List<string> tableColumns);
         public T Insert<T>(T item,List<string> columns);
         public List<T> InsertMany<T>(List<T> items, List<string> columns);
         public Task<List<T>> GetAll<T>(List<string> tableColumns);
@@ -56,7 +56,7 @@ namespace DataAccess
         {
             return requestor.Select<T>($"SELECT {string.Join(",", tableColumns.ToArray())} FROM {_table} Where {column}={id}");
         }
-        public async Task<List<T>> Update<T>(string column, int id, T item, List<string> tableColumns)
+        public T Update<T>(string column, int id, T item, List<string> tableColumns)
         {
             StringBuilder request = new StringBuilder();
             request.Append($"Update {_table} set ");
@@ -69,7 +69,7 @@ namespace DataAccess
             request.Remove(request.Length - 2,2);
             request.Append($" OUTPUT inserted.* Where {column}={id} ");
 
-            return requestor.Select<T>(request.ToString());
+            return requestor.Select<T>(request.ToString()).First();
         }
         public T Insert<T>(T item, List<string> columns)
         {

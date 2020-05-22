@@ -79,18 +79,18 @@ namespace API.Managers
         public async Task<User> UpdateToken(User user)
         {
             var users = await _userAccess.Update(user, new List<string> { "Token" });
-            return users.First(); ;
+            return users; ;
         }
 
         public async Task<User> Update(User user)
         {
             var users = await _userAccess.Update(user, new List<string> { "Token", "Email", "FirstName", "LastName", "RoleId", "isActive", "LanguageId" });
-            return users.First(); ;
+            return users;
         }
         public async Task<User> UpdateLanguage(User user)
         {
             var users = await _userAccess.Update(user, new List<string> { "LanguageId" });
-            return users.First(); ;
+            return users;
         }
 
         public async Task<bool> Delete(int userId)

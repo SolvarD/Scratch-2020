@@ -20,13 +20,13 @@ namespace DataAccess.CRUD
             return users.FirstOrDefault();
         }
 
-        public async Task<List<User>> Update(User user, List<string> columns)
+        public async Task<User> Update(User user, List<string> columns)
         {
             if (!columns.Any(g => g == "Updated")) {
                 columns.Add("Updated");
                 user.Updated = DateTime.Now;
             }
-            return await base.Update<User>("UserId",user.UserId,  user, columns);
+            return base.Update<User>("UserId",user.UserId,  user, columns);
         }
     }
 }

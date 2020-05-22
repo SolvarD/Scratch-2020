@@ -9,8 +9,11 @@ export class SkillService {
 
   }
 
-  getAll(){
-    return this.http.get<SkillCategory[]>(`${environment.API}/skill/GetAll`).toPromise();
+  getAll() {
+    return this.http.get<SkillCategory[]>(`${environment.API}/Skill/GetAll`).toPromise();
   }
+  getAllSkillDetail() {
+    return this.http.get<SkillCategory[]>(`${environment.API}/Skill/Detail/GetAll`).toPromise();
+  } 
 }
 

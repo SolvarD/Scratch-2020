@@ -16,9 +16,14 @@ namespace DataAccess.CRUD
         {
             return await base.GetAll<SkillCategoryDetail>(new List<string> { "*" });
         }
-         public async Task<List<SkillCategoryDetail>> GetSkillCategoryDetailsWithExperiences()
+        public async Task<List<SkillCategoryDetail>> GetSkillCategoryDetailsWithExperiences()
         {
             return await base.Execute<SkillCategoryDetail>("GetSkillCategoryDetailsWithExperiences");
+        }
+
+        public async Task<List<SkillCategoryDetail>> GetSkillCategoryDetailsWithExperiencesByExperienceId(int experienceId)
+        {
+            return await base.Execute<SkillCategoryDetail>("GetSkillCategoryDetailsWithExperiencesByExperienceId", new { @ExperienceId = experienceId });
         }
 
         public async Task<SkillCategoryDetail> Insert(SkillCategoryDetail item)

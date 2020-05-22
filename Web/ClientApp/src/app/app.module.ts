@@ -48,7 +48,9 @@ import { ExperienceService } from './services/experience.service';
 import { AdminSkillsComponent } from './views/admin/skills/admin-skills.component';
 import { AdminPorteFolioComponent } from './views/admin/porte-folio/admin-porte-folio.component';
 import { CKEditorModule } from 'ckeditor4-angular';
-
+import { DatePipe, registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr, 'fr-FR');
 @NgModule({
   declarations: [
     AppComponent,
@@ -112,7 +114,8 @@ import { CKEditorModule } from 'ckeditor4-angular';
     SpinnerService,
     ContactService,
     SkillService,
-    ExperienceService
+    ExperienceService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

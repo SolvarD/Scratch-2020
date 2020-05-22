@@ -18,7 +18,8 @@ namespace API.Controllers
         private readonly IEmailManager _email;
         private readonly IExperienceManager _experienceManager;
 
-        public ExperienceController(IEmailManager emailManager,IExperienceManager experienceManager) {
+        public ExperienceController(IEmailManager emailManager, IExperienceManager experienceManager)
+        {
             _email = emailManager;
             _experienceManager = experienceManager;
         }
@@ -31,6 +32,50 @@ namespace API.Controllers
             try
             {
                 return await _experienceManager.GetAllExperiences();
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.StackTrace);
+                return null;
+            }
+        }
+        [HttpDelete]
+        [Route("Skill/Delete/{ExperienceId}/{SkillId}")]
+        public async Task<List<SkillCategoryDetail>> DeleteSkill(int ExperienceId, int SkillId)
+        {
+            try
+            {
+                return await _experienceManager.DeleteSkillExperiences(ExperienceId, SkillId);
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.StackTrace);
+                return null;
+            }
+        }
+
+        [HttpDelete]
+        [Route("Delete/{ExperienceId}")]
+        public async Task<bool> Delete(int ExperienceId)
+        {
+            try
+            {
+                return await _experienceManager.DeleteExperience(ExperienceId);
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.StackTrace);
+                return false;
+            }
+        }
+
+        [HttpPost]
+        [Route("Save")]
+        public async Task<Experience> Save(Experience experience)
+        {
+            try
+            {
+                return await _experienceManager.SaveOrUpadateExperience(experience);
             }
             catch (Exception e)
             {

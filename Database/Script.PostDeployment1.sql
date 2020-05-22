@@ -144,9 +144,9 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (2,'REPOSITORY', 'Repository source code', @now),
 
 (1,'FIRSTNAME', 'Prénom', @now),
-(2,'FIRSTNAME', 'Firstname source code', @now),
-(1,'LASTNAME', 'Nom code source', @now),
-(2,'LASTNAME', 'Lastname source code', @now),
+(2,'FIRSTNAME', 'Firstname', @now),
+(1,'LASTNAME', 'Nom', @now),
+(2,'LASTNAME', 'Lastname', @now),
 (1,'MESSAGE', 'Message', @now),
 (2,'MESSAGE', 'Message', @now),
 (1,'SEND', 'Envoyer', @now),

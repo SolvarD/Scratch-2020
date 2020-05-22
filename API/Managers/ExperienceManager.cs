@@ -12,6 +12,10 @@ namespace API.Managers
     public interface IExperienceManager
     {
         Task<List<Experience>> GetAllExperiences();
+        Task<List<SkillCategoryDetail>> DeleteSkillExperiences(int experienceIdint, int SkillId);
+        Task<Experience> SaveOrUpadateExperience(Experience experience);
+        Task<bool> DeleteExperience(int experienceId);
+
     }
     public class ExperienceManager : IExperienceManager
     {
@@ -36,7 +40,8 @@ namespace API.Managers
                 List<Experience> experiences = await _experienceAccess.GetAll();
                 List<SkillCategoryDetail> skillsDetails = await _skillCategoryDetailAccess.GetSkillCategoryDetailsWithExperiences();
 
-                experiences.ForEach((item) => {
+                experiences.ForEach((item) =>
+                {
                     item.SkillCategoryDetails = skillsDetails.Where(g => g.ExperienceId == item.ExperienceId).ToList();
                 });
 
@@ -47,6 +52,42 @@ namespace API.Managers
                 _email.SendTrace(e.Message + e.StackTrace);
                 return null;
             }
+        }
+
+        public async Task<List<SkillCategoryDetail>> DeleteSkillExperiences(int experienceId, int skillId)
+        {
+            try
+            {
+                await _experienceAccess.DeleteExperienceSkillDetail(experienceId, skillId);
+                return await _skillCategoryDetailAccess.GetSkillCategoryDetailsWithExperiencesByExperienceId(experienceId);
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.Message + e.StackTrace);
+                return null;
+            }
+        }
+        public async Task<Experience> SaveOrUpadateExperience(Experience experience)
+        {
+            if (experience.ExperienceId > 0)
+            {
+                return _experienceAccess.Update<Experience>("ExperienceId", experience.ExperienceId, experience, new List<string> {
+                "[Name]",
+                "[Description]",
+                "[Start]",
+                "[End]" });
+            }
+
+            return _experienceAccess.Insert<Experience>(experience, new List<string> {
+                "[Name]",
+                "[Description]",
+                "[Start]",
+                "[End]" });
+        }
+        public async Task<bool> DeleteExperience(int experienceId)
+        {
+            await _experienceAccess.DeleteAllExperienceSkillDetailByIdExperience(experienceId);
+            return await _experienceAccess.DeleteById(experienceId, "ExperienceId") > 0;
         }
     }
 }

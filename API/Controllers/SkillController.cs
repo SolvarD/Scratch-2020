@@ -38,5 +38,21 @@ namespace API.Controllers
                 return null;
             }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Detail/GetAll")]
+        public async Task<List<SkillCategoryDetail>> GetAllDetail()
+        {
+            try
+            {
+                return await _skillManager.GetAllSkillsDetails();
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.StackTrace);
+                return null;
+            }
+        }
     }
 }

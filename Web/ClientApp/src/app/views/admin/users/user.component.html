@@ -8,7 +8,7 @@
       <input type="text" class="form-control" id="search" style="width: 200px;" placeholder="{{ 'SEARCH_NAME_EMAIL' | translate}}" (keyup)="search.next($event)">
     </div>
 
-    <div style="flex:1">
+    <div class="flex-1">
       <button type="button" (click)="addUser()" [disabled]="!canEdit" class="btn btn-primary" translate>ADD_USER</button>
     </div>
   </div>

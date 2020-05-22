@@ -13,7 +13,7 @@
       <div class="text-container" *ngIf="currentSlide == i">
         <div class="slide-header">
           <div class="slide-title"><label>{{slide.name}}</label></div>
-          <div class="slide-date"><label>{{slide.start | date}} {{'TO'| translate}} {{ (slide.end | date ) || 'In Progress'}} </label></div>
+          <div class="slide-date"><label>{{slide.start | date: 'shortDate': '+0000' : 'fr-FR'}} {{'TO'| translate}} {{ (slide.end |  date: 'shortDate': '+0000' : 'fr-FR' ) || 'In Progress'}} </label></div>
         </div>
         <div>
           <fieldset>
