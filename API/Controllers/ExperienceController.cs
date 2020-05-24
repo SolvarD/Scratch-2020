@@ -17,11 +17,13 @@ namespace API.Controllers
     {
         private readonly IEmailManager _email;
         private readonly IExperienceManager _experienceManager;
+        private readonly ISkillManager _skillManager;
 
-        public ExperienceController(IEmailManager emailManager, IExperienceManager experienceManager)
+        public ExperienceController(IEmailManager emailManager, IExperienceManager experienceManager, ISkillManager skillManager)
         {
             _email = emailManager;
             _experienceManager = experienceManager;
+            _skillManager = skillManager;
         }
 
         [HttpGet]
@@ -75,7 +77,9 @@ namespace API.Controllers
         {
             try
             {
-                return await _experienceManager.SaveOrUpadateExperience(experience);
+                var savedExperience = await _experienceManager.SaveOrUpadateExperience(experience);
+                savedExperience.SkillCategoryDetails = await _skillManager.AddSkillsToExperience(experience.SkillCategoryDetails);
+                return savedExperience;
             }
             catch (Exception e)
             {

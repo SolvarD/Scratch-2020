@@ -1,0 +1,11 @@
+<div>
+  <div class="form-group" id="input-search">
+    <input type="text" class="form-control" id="search" placeholder="{{ 'SEARCH_KEY' | translate}}" (keyup)="search.next($event)">
+  </div>
+
+  <div class="propose">
+    <div *ngFor="let item of rows | filter : {label : filter}" (click)="selectRow(item)">
+      {{item.label}}
+    </div>
+  </div>
+</div>

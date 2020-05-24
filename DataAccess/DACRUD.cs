@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Data;
 
 namespace DataAccess
 {
@@ -19,7 +20,7 @@ namespace DataAccess
         public Task<List<T>> GetManyById<T>(int id, string column, List<string> tableColumns);
         public Task<int> DeleteById(int id, string column);
         public T Update<T>(string column, int id, T item, List<string> tableColumns);
-        public T Insert<T>(T item,List<string> columns);
+        public T Insert<T>(T item, List<string> columns);
         public List<T> InsertMany<T>(List<T> items, List<string> columns);
         public Task<List<T>> GetAll<T>(List<string> tableColumns);
     }
@@ -52,7 +53,7 @@ namespace DataAccess
         {
             return requestor.Select<T>("").First();
         }
-        public async Task<List<T>> GetManyById<T>(int id, string column,List<string> tableColumns)
+        public async Task<List<T>> GetManyById<T>(int id, string column, List<string> tableColumns)
         {
             return requestor.Select<T>($"SELECT {string.Join(",", tableColumns.ToArray())} FROM {_table} Where {column}={id}");
         }
@@ -66,7 +67,7 @@ namespace DataAccess
                 var value = GetValueProperty(propertyInfo, propertyInfo.GetValue(item, null));
                 request.Append($"{tableColumn}={ value }, ");
             }
-            request.Remove(request.Length - 2,2);
+            request.Remove(request.Length - 2, 2);
             request.Append($" OUTPUT inserted.* Where {column}={id} ");
 
             return requestor.Select<T>(request.ToString()).First();
@@ -190,6 +191,34 @@ namespace DataAccess
                 return nullableType;
             else
                 return possiblyNullableType;
+        }
+
+        public static DataTable ToDataTable<T>(List<T> iList)
+        {
+            DataTable dataTable = new DataTable();
+            var propertyDescriptorCollection =
+                typeof(T).GetProperties();
+            for (int i = 0; i < propertyDescriptorCollection.Length; i++)
+            {
+                var propertyDescriptor = propertyDescriptorCollection[i];
+                Type type = propertyDescriptor.PropertyType;
+
+                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    type = Nullable.GetUnderlyingType(type);
+
+
+                dataTable.Columns.Add(propertyDescriptor.Name, type);
+            }
+            object[] values = new object[propertyDescriptorCollection.Length];
+            foreach (T iListItem in iList)
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    values[i] = propertyDescriptorCollection[i].GetValue(iListItem);
+                }
+                dataTable.Rows.Add(values);
+            }
+            return dataTable;
         }
     }
 }

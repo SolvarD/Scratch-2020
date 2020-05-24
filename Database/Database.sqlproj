@@ -59,6 +59,7 @@
     <Folder Include="Tables" />
     <Folder Include="Tables\REF" />
     <Folder Include="StoredProcedure" />
+    <Folder Include="Type" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Users.sql" />
@@ -85,6 +86,7 @@
     <Build Include="StoredProcedure\GetSkillCategoryDetailsWithExperiencesByExperienceId.sql" />
     <Build Include="StoredProcedure\DeleteExperienceSkillDetail.sql" />
     <Build Include="StoredProcedure\DeleteAllExperienceSkillDetailByIdExperience.sql" />
+    <Build Include="StoredProcedure\AddSkillToExperience.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Database.refactorlog" />
@@ -94,5 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Database.publish.xml" />
+    <Build Include="Type\Type_Experiences_SkillCategoryDetails.sql" />
   </ItemGroup>
 </Project>

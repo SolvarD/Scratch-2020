@@ -50,6 +50,7 @@ import { AdminPorteFolioComponent } from './views/admin/porte-folio/admin-porte-
 import { CKEditorModule } from 'ckeditor4-angular';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { DDLComponent } from './component/ddl-filter/ddl-filter.component';
 registerLocaleData(localeFr, 'fr-FR');
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ registerLocaleData(localeFr, 'fr-FR');
     PricesComponent,
     FilterPipe,
     AdminPorteFolioComponent,
-    AdminSkillsComponent
+    AdminSkillsComponent,
+    DDLComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

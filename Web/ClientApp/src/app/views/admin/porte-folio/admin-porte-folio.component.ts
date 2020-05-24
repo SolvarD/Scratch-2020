@@ -4,8 +4,9 @@ import { Experience } from '../../../../models/experience';
 import { BaseComponent } from '../../../../models/base-component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
-import { SkillCategoryDetail } from '../../../../models/skill';
+import { SkillCategoryDetail, SkillCategory } from '../../../../models/skill';
 import { DatePipe } from '@angular/common';
+import { SkillService } from '../../../services/skill.service';
 
 @Component({
   selector: 'app-admin-porte-folio',
@@ -15,14 +16,14 @@ import { DatePipe } from '@angular/common';
 export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 
   currentSlide: number = 0;
-  slides: Array<Experience> = [];
+  experiences: Array<Experience> = [];
   displayBloc: boolean[] = [];
   formsExperiences: FormGroup[] = [];
   showDeleteExperience: boolean = false;
   textDelete: string;
   expoerienceToDelete: Experience;
-
-  constructor(private experienceService: ExperienceService, private _fb: FormBuilder, private pipeDate: DatePipe) {
+  skillsCategory: SkillCategory[] = [];
+  constructor(private experienceService: ExperienceService, private _fb: FormBuilder, private skillService: SkillService, private pipeDate: DatePipe) {
     super();
   }
 
@@ -37,8 +38,10 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
         this.formsExperiences.push(form);
       });
 
-      this.slides = res;
+      this.experiences = res;
     });
+
+    this.skillService.getAllSkillDetail().then((res) => { this.skillsCategory = res; });
 
     UserService.subCurrentUser.subscribe(() => {
       this.formsExperiences.forEach((form) => {
@@ -71,20 +74,16 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
     this.displayBloc[bloc] = false;
   }
 
-  async deleteSkill(experienceSkill: SkillCategoryDetail) {
-    await this.experienceService.deleteSkill(experienceSkill.experienceId, experienceSkill.skillCategoryDetailId).then((res) => {
-      if (res) {
-
-      }
-    });
-  }
-
-  onSubmit(form: FormGroup) {
+  onSubmit(form: FormGroup, skills: SkillCategoryDetail[]) {
+   
     if (form.valid) {
       let item = form.value as Experience;
-     
+
+      item.SkillCategoryDetails = skills;
+
       item.end = item.end ? new Date(this.pipeDate.transform(item.end + ' 12:00:00', null, '+0000', 'fr-FR')) : null;
       item.start = new Date(Date.parse(item.start + ' 12:00:00'));
+
       this.experienceService.save(item);
     }
 
@@ -98,18 +97,45 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
   }
 
   addExperience() {
-    this.slides.unshift(new Experience());
+    this.experiences.unshift(new Experience());
     this.formsExperiences.unshift(this.buildForm(new Experience()));
   }
 
-  deleteExperience(experience: Experience) {
-    this.expoerienceToDelete = experience;
-    this.textDelete = experience.name;
-    this.showDeleteExperience = true;
+  deleteExperience(experience: Experience, index: number) {
+    if (experience.experienceId) {
+      this.expoerienceToDelete = experience;
+      this.textDelete = experience.name;
+      this.showDeleteExperience = true;
+    } else {
+      this.experiences.splice(index, 1);
+      this.formsExperiences.splice(index, 1);
+    }
+  }
+
+  addSkillExperience(skillCategoryDetails: SkillCategoryDetail[]) {
+    skillCategoryDetails.unshift(new SkillCategoryDetail());
+  }
+
+  async deleteSkill(experienceSkills: SkillCategoryDetail[], index: number) {
+    if (experienceSkills[index].experienceId && experienceSkills[index].skillCategoryDetailId) {
+      await this.experienceService.deleteSkill(experienceSkills[index].experienceId, experienceSkills[index].skillCategoryDetailId).then((res) => {
+        if (res) {
+          experienceSkills.splice(index, 1);
+        }
+      });
+    } else {
+      experienceSkills.splice(index, 1);
+    }
   }
 
   validateDelete = async () => {
     await this.experienceService.deleteExperience(this.expoerienceToDelete.experienceId).then(() => {
-    });   
+    });
+  }
+
+  skillChosen(skillCategoryDetails: SkillCategoryDetail[], item: SkillCategoryDetail, experienceId: number) {
+    item.experienceId = experienceId;
+    skillCategoryDetails.unshift(item);
+    console.log(item);
   }
 }

@@ -157,7 +157,9 @@ Insert into @tmpDictionary ([LanguageId],[Key],[Label] ,[Created]) values
 (1,'GOT_A_PROJECT', 'Vous avez un projet', @now),
 (2,'GOT_A_PROJECT', 'You got a project', @now),
 (1,'A_QUESTION', 'Une question', @now),
-(2,'A_QUESTION', 'A question', @now)
+(2,'A_QUESTION', 'A question', @now),
+(1,'ADD_EXPERIENCE', 'Ajouter experience', @now),
+(2,'ADD_EXPERIENCE', 'Add experience', @now)
 
 
 Merge into T_REF_Dictionary trd using @tmpDictionary tmpD

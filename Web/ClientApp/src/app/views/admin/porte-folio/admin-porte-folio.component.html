@@ -2,12 +2,12 @@
   <h2 translate>PORTE_FOLIO</h2>
 </div>
 <div class="flex-1">
-  <button type="button" (click)="addExperience()" [disabled]="!canEdit" class="btn btn-primary" translate>ADD_EXPERIENCE</button>
+  <button type="button" (click)="addExperience()" [ngClass]="{'forbidden': !canEdit}" [disabled]="!canEdit" class="btn btn-primary" translate>ADD_EXPERIENCE</button>
 </div>
 <div id="demo" class="carousel slide slide-container">
 
   <div class="">
-    <div *ngFor="let slide of slides;index as i" class="active ">
+    <div *ngFor="let slide of experiences;index as i" class="active ">
       <form [formGroup]="formsExperiences[i]" *ngIf="formsExperiences[i]">
         <div class="text-container flex">
 
@@ -15,7 +15,7 @@
             <div class="slide-title flex">
 
               <input type="text" id="name" placeholder="{{NAME | translate}}" [ngClass]="{'invalid-field': !isValidField(formsExperiences[i],'name')}" class="form-control name-experience" formControlName="name" />
-              <div class="pointer" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && deleteExperience(slide)">
+              <div class="pointer" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && deleteExperience(slide, i)">
                 <i class="fas fa-trash space-trash"></i>
               </div>
             </div>
@@ -42,21 +42,26 @@
 
                 </div>
                 <label translate>DESCRIPTION</label>
-                <ckeditor formControlName="description" [ngClass]="{'invalid-field-ck': !isValidField(formsExperiences[i],'description')}"></ckeditor>
+                <ckeditor formControlName="description" [ngClass]="{'invalid-field-ck': (canEdit && !isValidField(formsExperiences[i],'description'))}"></ckeditor>
 
               </fieldset>
             </div>
             <div class="skill-side">
               <fieldset>
-                <legend>{{'SKILLS'| translate}}<i [ngClass]="{'forbidden': !canEdit}" class="fas fa-plus-circle add-skill-experience pointer"></i></legend>
+                <legend>
+                  {{'SKILLS'| translate}}<i [ngClass]="{'forbidden': !canEdit}" class="fas fa-plus-circle add-skill-experience pointer"
+                                            (click)="addSkillExperience(slide.skillCategoryDetails)"></i>
+                </legend>
                 <div>
+                  <app-ddl-filter [rows]="skillsCategory" (selectedItem)="skillChosen(slide.skillCategoryDetails, $event, slide.experienceId)"></app-ddl-filter>
                   <ul>
-                    <li *ngFor="let techno of slide.skillCategoryDetails">
+                    <li *ngFor="let techno of slide.skillCategoryDetails;index as iscd">
                       <div class="flex">
+
                         <div class="flex-1">
-                          {{techno.label}}
+                          <label>{{techno.label}}</label>
                         </div>
-                        <div class="pointer" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && deleteSkill(techno)">
+                        <div class="pointer" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)">
                           <i class="fas fa-trash space-trash"></i>
                         </div>
                       </div>
@@ -64,7 +69,11 @@
                   </ul>
                 </div>
               </fieldset>
-              <button type="submit" (click)="onSubmit(formsExperiences[i])" [disabled]="!canEdit" class="btn btn-success" data-dismiss="modal" translate>SAVE</button>
+              <button type="submit"
+                      (click)="onSubmit(formsExperiences[i], slide.skillCategoryDetails)"
+                      [disabled]="!canEdit"
+                      class="btn btn-success"
+                      data-dismiss="modal" translate>SAVE</button>
             </div>
           </div>
 

@@ -13,6 +13,9 @@ namespace API.Managers
     {
         Task<List<SkillCategory>> GetAllSkills();
         Task<List<SkillCategoryDetail>> GetAllSkillsDetails();
+        Task<List<SkillCategoryDetail>> InsertMany(List<SkillCategoryDetail> skills);
+        Task<SkillCategoryDetail> Insert(SkillCategoryDetail skill);
+        Task<List<SkillCategoryDetail>> AddSkillsToExperience(List<SkillCategoryDetail> skills);
     }
     public class SkillManager : ISkillManager
     {
@@ -57,6 +60,45 @@ namespace API.Managers
             {
 
                 return await _skillCategoryDetailAccess.GetAll();
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.Message + e.StackTrace);
+                return null;
+            }
+        }
+
+        public async Task<SkillCategoryDetail> Insert(SkillCategoryDetail skill)
+        {
+            try
+            {
+
+                return await _skillCategoryDetailAccess.Insert(skill);
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.Message + e.StackTrace);
+                return null;
+            }
+        }
+        public async Task<List<SkillCategoryDetail>> InsertMany(List<SkillCategoryDetail> skills)
+        {
+            try
+            {
+
+                return await _skillCategoryDetailAccess.InsertMany(skills);
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.Message + e.StackTrace);
+                return null;
+            }
+        }
+        public async Task<List<SkillCategoryDetail>> AddSkillsToExperience(List<SkillCategoryDetail> skills)
+        {
+            try
+            {
+                return await _skillCategoryDetailAccess.AddSkillToExperience(skills);
             }
             catch (Exception e)
             {
