@@ -6,5 +6,5 @@ export class Experience {
   public description: string = '';
   public start: Date;
   public end: Date;
-  public SkillCategoryDetails: SkillCategoryDetail[];
+  public skillCategoryDetails: SkillCategoryDetail[] = [];
 }

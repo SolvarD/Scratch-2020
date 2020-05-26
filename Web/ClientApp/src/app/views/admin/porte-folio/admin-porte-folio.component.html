@@ -2,7 +2,7 @@
   <h2 translate>PORTE_FOLIO</h2>
 </div>
 <div class="flex-1">
-  <button type="button" (click)="addExperience()" [ngClass]="{'forbidden': !canEdit}" [disabled]="!canEdit" class="btn btn-primary" translate>ADD_EXPERIENCE</button>
+  <button type="button" (click)="canEdit && addExperience()" [ngClass]="{'forbidden': !canEdit}" [disabled]="!canEdit" class="btn btn-primary" translate>ADD_EXPERIENCE</button>
 </div>
 <div id="demo" class="carousel slide slide-container">
 
@@ -49,31 +49,51 @@
             <div class="skill-side">
               <fieldset>
                 <legend>
-                  {{'SKILLS'| translate}}<i [ngClass]="{'forbidden': !canEdit}" class="fas fa-plus-circle add-skill-experience pointer"
-                                            (click)="addSkillExperience(slide.skillCategoryDetails)"></i>
+                  {{'SKILLS'| translate}}
+                  <i *ngIf="!editExperiences[i]" [ngClass]="{'forbidden': !canEdit}" class="fas fa-edit add-skill-experience pointer" (click)="edit(i)"></i>
+                  <i *ngIf="editExperiences[i]" [ngClass]="{'forbidden': !canEdit}" class="fas fa-times-circle add-skill-experience pointer" (click)="showExperiences(i)"></i>
                 </legend>
-                <div>
-                  <app-ddl-filter [rows]="skillsCategory" (selectedItem)="skillChosen(slide.skillCategoryDetails, $event, slide.experienceId)"></app-ddl-filter>
-                  <ul>
-                    <li *ngFor="let techno of slide.skillCategoryDetails;index as iscd">
-                      <div class="flex">
+                <div>                
 
-                        <div class="flex-1">
-                          <label>{{techno.label}}</label>
-                        </div>
-                        <div class="pointer" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)">
-                          <i class="fas fa-trash space-trash"></i>
+                  <div class="propose">
+                    <div *ngIf="!editExperiences[i]">
+                      <ul>
+                        <li *ngFor="let techno of slide.skillCategoryDetails">
+                          <div class="flex">
+
+                            <div class="flex-1">
+                              <label>{{techno.label}}</label>
+                            </div>
+                            <!--<div class="pointer" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)">
+                              <i class="fas fa-trash space-trash"></i>
+                            </div>-->
+                          </div>
+
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="edit-experiences" *ngIf="editExperiences[i]">
+                      <div *ngFor="let item of allSkillByExperience[i];index as iscd">
+                        <div class="form-check" [ngClass]="{'selected-experience': item.checked}">
+                          <label class="checkbox-label pointer" >
+                            <input class="form-check-input" type="checkbox" [checked]="item.checked" (change)="checkSkill(item, i, iscd)">  {{item.label}}
+                          </label>
                         </div>
                       </div>
-                    </li>
-                  </ul>
+                    </div>
+                   
+                  </div>
+
                 </div>
               </fieldset>
               <button type="submit"
                       (click)="onSubmit(formsExperiences[i], slide.skillCategoryDetails)"
                       [disabled]="!canEdit"
                       class="btn btn-success"
-                      data-dismiss="modal" translate>SAVE</button>
+                      data-dismiss="modal" translate>
+                SAVE
+              </button>
             </div>
           </div>
 
