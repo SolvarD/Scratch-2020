@@ -12,7 +12,8 @@ namespace API.Managers
     public interface IExperienceManager
     {
         Task<List<Experience>> GetAllExperiences();
-        Task<List<SkillCategoryDetail>> DeleteSkillExperiences(int experienceIdint, int SkillId);
+        Task<List<SkillCategoryDetail>> UnlinkSkillExperience(int experienceIdint, int SkillId);
+        Task<List<SkillCategoryDetail>> UnlinkManySkillExperience(List<Experiences_SkillCategoryDetails> skillscategory);
         Task<Experience> SaveOrUpadateExperience(Experience experience);
         Task<bool> DeleteExperience(int experienceId);
 
@@ -54,11 +55,11 @@ namespace API.Managers
             }
         }
 
-        public async Task<List<SkillCategoryDetail>> DeleteSkillExperiences(int experienceId, int skillId)
+        public async Task<List<SkillCategoryDetail>> UnlinkSkillExperience(int experienceId, int skillId)
         {
             try
             {
-                await _experienceAccess.DeleteExperienceSkillDetail(experienceId, skillId);
+                await _experienceAccess.UnlinkExperienceSkillDetail(experienceId, skillId);
                 return await _skillCategoryDetailAccess.GetSkillCategoryDetailsWithExperiencesByExperienceId(experienceId);
             }
             catch (Exception e)
@@ -67,6 +68,24 @@ namespace API.Managers
                 return null;
             }
         }
+        public async Task<List<SkillCategoryDetail>> UnlinkManySkillExperience(List<Experiences_SkillCategoryDetails> skillscategory)
+        {
+            try
+            {
+                if (skillscategory == null || !skillscategory.Any()) {
+                    return new List<SkillCategoryDetail>();
+                }
+
+                await _experienceAccess.UnlinkManyExperienceSkillDetail(skillscategory);
+                return await _skillCategoryDetailAccess.GetSkillCategoryDetailsWithExperiencesByExperienceId(skillscategory.First().ExperienceId);
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.Message + e.StackTrace);
+                return null;
+            }
+        }
+
         public async Task<Experience> SaveOrUpadateExperience(Experience experience)
         {
             if (experience.ExperienceId > 0)

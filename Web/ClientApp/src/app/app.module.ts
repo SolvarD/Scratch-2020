@@ -51,6 +51,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { DDLComponent } from './component/ddl-filter/ddl-filter.component';
+import { InputDateComponent } from './component/input-date/input-date.component';
 registerLocaleData(localeFr, 'fr-FR');
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ registerLocaleData(localeFr, 'fr-FR');
     FilterPipe,
     AdminPorteFolioComponent,
     AdminSkillsComponent,
-    DDLComponent
+    DDLComponent,
+    InputDateComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

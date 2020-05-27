@@ -26,6 +26,9 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
   expoerienceToDelete: Experience;
   skillsCategory: SkillCategoryDetail[] = [];
   allSkillByExperience: Array<any> = [];
+
+  skillByExperienceToRemove: Array<any[]> = [];
+
   constructor(private experienceService: ExperienceService, private _fb: FormBuilder, private skillService: SkillService, private pipeDate: DatePipe) {
     super();
   }
@@ -45,7 +48,9 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
       let experienceId = experience.experienceId;
 
       copySkills.forEach((skill) => {
-        skill.checked = experience.skillCategoryDetails.filter(g => g.skillCategoryDetailId == skill.skillCategoryDetailId).length > 0;
+        let checked = experience.skillCategoryDetails.filter(g => g.skillCategoryDetailId == skill.skillCategoryDetailId).length > 0;
+        skill.checked = checked;
+        skill.isNew = !checked;
         skill.experienceId = experienceId;
       });
 
@@ -92,7 +97,7 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
     this.editExperiences[bloc] = false;
   }
 
-  onSubmit(form: FormGroup, skills: SkillCategoryDetail[]) {
+  async onSubmit(form: FormGroup, skills: SkillCategoryDetail[], indexExperience: number) {
 
     if (form.valid) {
       let item = form.value as Experience;
@@ -101,7 +106,10 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 
       item.end = item.end ? new Date(this.pipeDate.transform(item.end + ' 12:00:00', null, '+0000', 'fr-FR')) : null;
       item.start = new Date(Date.parse(item.start + ' 12:00:00'));
-
+      if (this.skillByExperienceToRemove[indexExperience] && this.skillByExperienceToRemove[indexExperience].length) {
+        await this.experienceService.unlinkManySkillExperience(this.skillByExperienceToRemove[indexExperience]);
+      }
+      
       this.experienceService.save(item);
     }
 
@@ -137,26 +145,21 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
   //  skillCategoryDetails.unshift(new SkillCategoryDetail());
   //}
 
-  async deleteSkill(experienceSkills: SkillCategoryDetail[], index: number) {
-    if (experienceSkills[index].experienceId && experienceSkills[index].skillCategoryDetailId) {
-      await this.experienceService.deleteSkill(experienceSkills[index].experienceId, experienceSkills[index].skillCategoryDetailId).then((res) => {
-        if (res) {
-          experienceSkills.splice(index, 1);
-        }
-      });
-    } else {
-      experienceSkills.splice(index, 1);
-    }
-  }
+  //async deleteSkill(experienceSkills: SkillCategoryDetail[], index: number) {
+  //  if (experienceSkills[index].experienceId && experienceSkills[index].skillCategoryDetailId) {
+  //    await this.experienceService.unlinkSkillExperience(experienceSkills[index].experienceId, experienceSkills[index].skillCategoryDetailId).then((res) => {
+  //      if (res) {
+  //        experienceSkills.splice(index, 1);
+  //      }
+  //    });
+  //  } else {
+  //    experienceSkills.splice(index, 1);
+  //  }
+  //}
 
   validateDelete = async () => {
     await this.experienceService.deleteExperience(this.expoerienceToDelete.experienceId);
   }
-
-  //skillChosen(skillCategoryDetails: SkillCategoryDetail[], item: SkillCategoryDetail, experienceId: number) {
-  //  item.experienceId = experienceId;
-  //  skillCategoryDetails.unshift(item);
-  //}
 
   checkSkill(item, indexExperience: number, indexSkill: number) {
     let currentSkillExperience = this.allSkillByExperience[indexExperience].filter(g => g.skillCategoryDetailId == item.skillCategoryDetailId)[0]
@@ -168,8 +171,19 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
     //save
     if (currentSkillExperience.checked) {
       this.experiences[indexExperience].skillCategoryDetails.unshift(item);
+      if (!item.isNew) {
+        let itemToRemove = this.skillByExperienceToRemove[indexExperience].find(g => g.skillCategoryDetailId == item.skillCategoryDetailId);
+        this.skillByExperienceToRemove[indexExperience].splice(this.skillByExperienceToRemove[indexExperience].indexOf(itemToRemove), 1)
+        console.log('reomove to remove list', this.skillByExperienceToRemove[indexExperience]);
+      }
     } else {
-      this.experiences[indexExperience].skillCategoryDetails.splice(indexSkill, 1);
+      let itemToRemove = this.experiences[indexExperience].skillCategoryDetails.find(g => g.skillCategoryDetailId == item.skillCategoryDetailId);
+      this.experiences[indexExperience].skillCategoryDetails.splice(this.experiences[indexExperience].skillCategoryDetails.indexOf(itemToRemove), 1);
+      if (!item.isNew) {
+        if (!this.skillByExperienceToRemove[indexExperience]) { this.skillByExperienceToRemove[indexExperience] = []; }
+        this.skillByExperienceToRemove[indexExperience].push(item);
+        console.log('add to remove list', this.skillByExperienceToRemove[indexExperience]);
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { SkillCategory } from "../../models/skill";
+import { SkillCategory, SkillCategoryDetail } from "../../models/skill";
 import { Experience } from "../../models/experience";
 
 @Injectable()
@@ -18,8 +18,12 @@ export class ExperienceService {
     return this.http.post<Experience>(`${environment.API}/Experience/Save`, experience).toPromise();
   }
 
-  deleteSkill(ExperienceId: number, SkillId: number) {
+  unlinkSkillExperience(ExperienceId: number, SkillId: number) {
     return this.http.delete(`${environment.API}/Experience/Skill/Delete/${ExperienceId}/${SkillId}`).toPromise();
+  }
+
+  unlinkManySkillExperience(skillsExperience: Array<SkillCategoryDetail>) {
+    return this.http.post(`${environment.API}/Experience/Skill/Delete`, skillsExperience).toPromise();
   }
 
   deleteExperience(ExperienceId: number) {

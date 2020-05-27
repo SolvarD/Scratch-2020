@@ -44,19 +44,7 @@ namespace DataAccess.CRUD
 
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("ExperienceId", typeof(Int32));
-            dataTable.Columns.Add("SkillCategoryDetailId", typeof(Int32));
-            //var rows = items.Select(g => new object[2] {  }).ToList();
-            //dataTable.Rows.Add(rows);
-
-            //object[] values = new object[2];
-            //foreach (T iListItem in iList)
-            //{
-            //    for (int i = 0; i < values.Length; i++)
-            //    {
-            //        values[i] = propertyDescriptorCollection[i].GetValue(iListItem);
-            //    }
-            //    dataTable.Rows.Add(values);
-            //}
+            dataTable.Columns.Add("SkillCategoryDetailId", typeof(Int32));           
 
             return await base.Execute<SkillCategoryDetail>("AddSkillToExperience",
                 new

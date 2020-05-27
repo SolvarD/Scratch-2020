@@ -9,5 +9,6 @@ namespace DataAccess.Entities
         public int LanguageId { get; set; }
         public string Label { get; set; }
         public string Code { get; set; }
+        public string Format { get; set; }
     }
 }

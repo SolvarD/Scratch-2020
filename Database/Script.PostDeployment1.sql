@@ -12,17 +12,18 @@ Modèle de script de post-déploiement
 
 declare  @tmpLanguage table([LanguageId] int,
 [Label] varchar(max),
-[Code] varchar(10));
+[Code] varchar(10),
+[Format] varchar(50));
 
-Insert into @tmpLanguage ([LanguageId], [Label], [Code]) values 
-(1, 'Français', 'fr-FR'),
-(2, 'English', 'en-US');
+Insert into @tmpLanguage ([LanguageId], [Label], [Code], [Format]) values 
+(1, 'Français', 'fr-FR', 'dd/MM/yyyy'),
+(2, 'English', 'en-US', 'yyyy/MM/dd');
 
 Merge into T_REF_languages trl using @tmpLanguage tmpl
 on trl.[LanguageId] = tmpl.[LanguageId]
 when not matched then
-insert ([LanguageId], [Label], [Code]) values
-( tmpl.[LanguageId],  tmpl.[Label],  tmpl.[Code]);
+insert ([LanguageId], [Label], [Code], [Format]) values
+( tmpl.[LanguageId],  tmpl.[Label],  tmpl.[Code], tmpl.[Format]);
 
 ------------------------------------------------------------------------
 declare @tmpMessageType table ([MessageTypeId] int,[Label] varchar(max));

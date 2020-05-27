@@ -47,7 +47,22 @@ namespace API.Controllers
         {
             try
             {
-                return await _experienceManager.DeleteSkillExperiences(ExperienceId, SkillId);
+                return await _experienceManager.UnlinkSkillExperience(ExperienceId, SkillId);
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.StackTrace);
+                return null;
+            }
+        }
+
+        [HttpPost]
+        [Route("Skill/Delete")]
+        public async Task<List<SkillCategoryDetail>> DeleteManySkill(List<Experiences_SkillCategoryDetails> skillscategory)
+        {
+            try
+            {
+                return await _experienceManager.UnlinkManySkillExperience(skillscategory);
             }
             catch (Exception e)
             {
@@ -78,6 +93,9 @@ namespace API.Controllers
             try
             {
                 var savedExperience = await _experienceManager.SaveOrUpadateExperience(experience);
+
+                experience.SkillCategoryDetails.ForEach(item => item.ExperienceId = savedExperience.ExperienceId);
+
                 savedExperience.SkillCategoryDetails = await _skillManager.AddSkillsToExperience(experience.SkillCategoryDetails);
                 return savedExperience;
             }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Data;
 
 namespace DataAccess.CRUD
 {
@@ -16,13 +17,30 @@ namespace DataAccess.CRUD
         {
             return await base.GetAll<Experience>(new List<string> { "*" });
         }
-        public async Task<bool> DeleteExperienceSkillDetail(int experienceId, int SkillId)
+        public async Task<bool> UnlinkExperienceSkillDetail(int experienceId, int SkillId)
         {
             await base.Execute<bool>("DeleteExperienceSkillDetail", new
             {
                 @ExperienceId = experienceId,
                 @SkillCategoryDetailId = SkillId
             });
+            return true;
+        }
+
+        public async Task<bool> UnlinkManyExperienceSkillDetail(List<Experiences_SkillCategoryDetails> skillscategory)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("ExperienceId", typeof(Int32));
+            dataTable.Columns.Add("SkillCategoryDetailId", typeof(Int32));
+
+            await base.Execute<SkillCategoryDetail>("DeleteMaynExperienceSkillDetail",
+               new
+               {
+                   @skillsExperience = ToDataTable<Experiences_SkillCategoryDetails>(
+                       skillscategory.Select(g => new Experiences_SkillCategoryDetails { ExperienceId = g.ExperienceId, SkillCategoryDetailId = g.SkillCategoryDetailId }).ToList()
+                       )
+               });
+
             return true;
         }
 
