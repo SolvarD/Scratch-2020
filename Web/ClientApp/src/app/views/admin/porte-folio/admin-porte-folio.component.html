@@ -33,11 +33,11 @@
 
                   <div class="form-group">
                     <label for="start" translate>START</label>
-                    <input type="text" id="start" class="form-control" [ngClass]="{'invalid-field': !isValidField(formsExperiences[i],'start')}" formControlName="start" />                    
+                    <app-date id="start" [parentFormGroup]="formsExperiences[i]" [parentFormControl]="'start'"></app-date>
                   </div>
                   <div class="form-group">
                     <label for="end" translate>END</label>
-                    <input type="text" id="end" class="form-control" formControlName="end" />
+                    <app-date id="start" [parentFormGroup]="formsExperiences[i]" [parentFormControl]="'end'"></app-date>
                   </div>
 
                 </div>
@@ -53,7 +53,7 @@
                   <i *ngIf="!editExperiences[i]" [ngClass]="{'forbidden': !canEdit}" class="fas fa-edit add-skill-experience pointer" (click)="edit(i)"></i>
                   <i *ngIf="editExperiences[i]" [ngClass]="{'forbidden': !canEdit}" class="fas fa-times-circle add-skill-experience pointer" (click)="showExperiences(i)"></i>
                 </legend>
-                <div>                
+                <div>
 
                   <div class="propose">
                     <div *ngIf="!editExperiences[i]">
@@ -76,13 +76,13 @@
                     <div class="edit-experiences" *ngIf="editExperiences[i]">
                       <div *ngFor="let item of allSkillByExperience[i];index as iscd">
                         <div class="form-check" [ngClass]="{'selected-experience': item.checked}">
-                          <label class="checkbox-label pointer" >
+                          <label class="checkbox-label pointer">
                             <input class="form-check-input" type="checkbox" [checked]="item.checked" (change)="checkSkill(item, i, iscd)">  {{item.label}}
                           </label>
                         </div>
                       </div>
                     </div>
-                   
+
                   </div>
 
                 </div>

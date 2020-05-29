@@ -1,11 +1,42 @@
 <div class="page-title">
   <h2 translate>SKILLS</h2>
 </div>
+<div class="flex-1">
+  <button type="button" (click)="canEdit && addSkill" [ngClass]="{'forbidden': !canEdit}" [disabled]="!canEdit" class="btn btn-primary" translate>ADD_SKILL</button>
+</div>
 <div class="skills-container">
-  <div class="skill bloc" *ngFor="let category of skillsCategory">
-    <h4 translate>{{category.label}}</h4>
-    <ul>
-      <li *ngFor="let detail of category.skillCategoryDetails">{{detail.label}}</li>
-    </ul>   
+  <div class="skill " *ngFor="let category of skillsCategory;index as i">
+    <!--<form [formGroup]="formsCategory[i]" *ngIf="formsCategory[i]">
+
+    </form>-->
+    <div class="slide-header flex bloc">
+      <div class="flex-1 slide-title">
+      <h4 translate>{{category.label}}</h4>
+      </div>
+
+      <div> <i class="fas fa-edit space-trash"></i></div>
+      <div><i class="fas fa-trash space-trash" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)"></i></div>
+    </div>
+
+
+    <!--<input type="text" id="name" placeholder="{{NAME | translate}}" [ngClass]="{'invalid-field': !isValidField()}" class="form-control name-experience" />-->
+    <div class="bloc flex flex-wrap displayBloc">
+
+      <div class="flex pill" *ngFor="let detail of category.skillCategoryDetails">
+
+        <div class="flex-1 flex no-wrap">
+          <div class="flex-1">
+            <label>{{detail.label}}</label>
+          </div>
+          <div class="pointer" [ngClass]="{'forbidden': !canEdit}">
+            <i class="fas fa-edit space-trash"></i><i class="fas fa-trash space-trash" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)"></i>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+      
+    
   </div>
 </div>

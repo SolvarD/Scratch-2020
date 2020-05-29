@@ -17,4 +17,11 @@ export class AdminSkillsComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.skillService.getAll().then((res) => { this.skillsCategory = res; });
   }
+
+  addSkill() {
+
+  }
+  isValidField() {
+    return true;
+  }
 }

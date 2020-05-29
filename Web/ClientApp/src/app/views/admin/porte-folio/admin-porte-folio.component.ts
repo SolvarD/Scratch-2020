@@ -23,7 +23,7 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
   formsExperiences: FormGroup[] = [];
   showDeleteExperience: boolean = false;
   textDelete: string;
-  expoerienceToDelete: Experience;
+  experienceToDelete: Experience;
   skillsCategory: SkillCategoryDetail[] = [];
   allSkillByExperience: Array<any> = [];
 
@@ -57,8 +57,6 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
       this.allSkillByExperience.push(copySkills);
     });
 
-
-
     UserService.subCurrentUser.subscribe(() => {
       this.formsExperiences.forEach((form) => {
         for (var key in form.controls) {
@@ -77,10 +75,10 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
     return this._fb.group({
       experienceId: [item.experienceId],
       name: [{ value: item.name, disabled: !this.canEdit }, Validators.required],
-      start: [{ value: item.start ? new Date(item.start.toString()).toLocaleDateString() : null, disabled: !this.canEdit }, Validators.required],
-      end: [{ value: item.end ? new Date(item.end.toString()).toLocaleDateString() : null, disabled: !this.canEdit }],
+      start: [{ value: item.start ? new Date(item.start.toString()): null, disabled: !this.canEdit }, [Validators.required]],
+      end: [{ value: item.end ? new Date(item.end.toString()) : null, disabled: !this.canEdit }],
       description: [{ value: item.description, disabled: !this.canEdit }, Validators.required]
-    });
+    }, { updateOn: 'blur' });
   }
 
   display(bloc: number) {
@@ -104,13 +102,14 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 
       item.skillCategoryDetails = skills;
 
-      item.end = item.end ? new Date(this.pipeDate.transform(item.end + ' 12:00:00', null, '+0000', 'fr-FR')) : null;
-      item.start = new Date(Date.parse(item.start + ' 12:00:00'));
       if (this.skillByExperienceToRemove[indexExperience] && this.skillByExperienceToRemove[indexExperience].length) {
         await this.experienceService.unlinkManySkillExperience(this.skillByExperienceToRemove[indexExperience]);
       }
-      
-      this.experienceService.save(item);
+
+      this.experienceService.save(item).then((res) => {
+        this.experiences[indexExperience] = res;
+        this.formsExperiences[indexExperience] = this.buildForm(res);
+      });
     }
 
   }
@@ -132,7 +131,7 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 
   deleteExperience(experience: Experience, index: number) {
     if (experience.experienceId) {
-      this.expoerienceToDelete = experience;
+      this.experienceToDelete = experience;
       this.textDelete = experience.name;
       this.showDeleteExperience = true;
     } else {
@@ -141,24 +140,13 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
     }
   }
 
-  //addSkillExperience(skillCategoryDetails: SkillCategoryDetail[]) {
-  //  skillCategoryDetails.unshift(new SkillCategoryDetail());
-  //}
-
-  //async deleteSkill(experienceSkills: SkillCategoryDetail[], index: number) {
-  //  if (experienceSkills[index].experienceId && experienceSkills[index].skillCategoryDetailId) {
-  //    await this.experienceService.unlinkSkillExperience(experienceSkills[index].experienceId, experienceSkills[index].skillCategoryDetailId).then((res) => {
-  //      if (res) {
-  //        experienceSkills.splice(index, 1);
-  //      }
-  //    });
-  //  } else {
-  //    experienceSkills.splice(index, 1);
-  //  }
-  //}
-
   validateDelete = async () => {
-    await this.experienceService.deleteExperience(this.expoerienceToDelete.experienceId);
+    await this.experienceService.deleteExperience(this.experienceToDelete.experienceId)
+      .then((res) => {
+        if (res) {
+
+        }
+      });
   }
 
   checkSkill(item, indexExperience: number, indexSkill: number) {
@@ -166,15 +154,12 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 
     currentSkillExperience.checked = !currentSkillExperience.checked;
 
-    console.log(currentSkillExperience);
-
     //save
     if (currentSkillExperience.checked) {
       this.experiences[indexExperience].skillCategoryDetails.unshift(item);
       if (!item.isNew) {
         let itemToRemove = this.skillByExperienceToRemove[indexExperience].find(g => g.skillCategoryDetailId == item.skillCategoryDetailId);
         this.skillByExperienceToRemove[indexExperience].splice(this.skillByExperienceToRemove[indexExperience].indexOf(itemToRemove), 1)
-        console.log('reomove to remove list', this.skillByExperienceToRemove[indexExperience]);
       }
     } else {
       let itemToRemove = this.experiences[indexExperience].skillCategoryDetails.find(g => g.skillCategoryDetailId == item.skillCategoryDetailId);
@@ -182,7 +167,6 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
       if (!item.isNew) {
         if (!this.skillByExperienceToRemove[indexExperience]) { this.skillByExperienceToRemove[indexExperience] = []; }
         this.skillByExperienceToRemove[indexExperience].push(item);
-        console.log('add to remove list', this.skillByExperienceToRemove[indexExperience]);
       }
     }
   }
