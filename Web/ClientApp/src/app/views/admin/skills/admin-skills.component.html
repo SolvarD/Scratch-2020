@@ -6,37 +6,39 @@
 </div>
 <div class="skills-container">
   <div class="skill " *ngFor="let category of skillsCategory;index as i">
-    <!--<form [formGroup]="formsCategory[i]" *ngIf="formsCategory[i]">
-
-    </form>-->
-    <div class="slide-header flex bloc">
-      <div class="flex-1 slide-title">
-      <h4 translate>{{category.label}}</h4>
-      </div>
-
-      <div> <i class="fas fa-edit space-trash"></i></div>
-      <div><i class="fas fa-trash space-trash" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)"></i></div>
-    </div>
+    <form [formGroup]="formCategories[i]" *ngIf="formCategories[i]">
 
 
-    <!--<input type="text" id="name" placeholder="{{NAME | translate}}" [ngClass]="{'invalid-field': !isValidField()}" class="form-control name-experience" />-->
-    <div class="bloc flex flex-wrap displayBloc">
-
-      <div class="flex pill" *ngFor="let detail of category.skillCategoryDetails">
-
-        <div class="flex-1 flex no-wrap">
-          <div class="flex-1">
-            <label>{{detail.label}}</label>
+      <div class="slide-header flex bloc">
+        <div class="flex flex-1 slide-title">
+          <input type="text" class="form-control name-category" formControlName="label" />
+          <div>
+            <i class="fas fa-save space-trash"></i>
           </div>
-          <div class="pointer" [ngClass]="{'forbidden': !canEdit}">
-            <i class="fas fa-edit space-trash"></i><i class="fas fa-trash space-trash" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)"></i>
-          </div>
+
         </div>
 
-
+        <div><i class="fas fa-trash space-trash" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)"></i></div>
       </div>
-    </div>
-      
-    
+
+
+      <div class="bloc flex flex-wrap displayBloc">
+
+        <div class="flex pill" *ngFor="let detail of category.skillCategoryDetails">
+
+          <div class="flex-1 flex no-wrap">
+            <div class="flex-1">
+              <label>{{detail.label}}</label>
+            </div>
+            <div class="pointer" [ngClass]="{'forbidden': !canEdit}">
+              <i class="fas fa-edit space-trash"></i><i class="fas fa-trash space-trash" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)"></i>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </form>
+
   </div>
 </div>
