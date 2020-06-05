@@ -1,26 +1,57 @@
 <div class="page-title">
   <h2 translate>PROFIL</h2>
 </div>
-<div class="profil-container">
+<div class="profil-container" *ngIf="proprietaire">
   <div class="historic-container">
-    <div class="bloc-presentation bloc">
+    <div class="bloc-presentation bloc direction-column">
       Presentation
+      <div>
+        {{proprietaire.presentation}}
+      </div>
     </div>
     <div class="blocs-info-container">
-      <div class="bloc-info bloc">
-        passé pro
+      <div class="bloc-info bloc direction-column">
+        <div>
+          passé pro
+        </div>
+        <div>
+          {{proprietaire.pastPro}}
+        </div>
       </div>
-      <div class="bloc-info bloc">
-        pourquoi moi?
+      <div class="bloc-info bloc direction-column">
+        <div>
+          pourquoi moi?
+        </div>
+        <div>
+          {{proprietaire.whyMe}}
+        </div>
       </div>
-      <div class="bloc-info bloc">
-        avantage de bossé avec moi
+      <div class="bloc-info bloc direction-column">
+        <div>
+          avantage de travailler avec moi
+        </div>
+        <div>
+          {{proprietaire.advantage}}
+        </div>
       </div>
-      <div class="bloc-info bloc">
-        vous voulez en savoir plus?
+      <div class="bloc-info bloc direction-column">
+        <div>
+          vous voulez en savoir plus?
+        </div>
+        <div>
+          <button class="contact-button" translate [routerLink]="['/contact']">CONTACT_ME</button>
+        </div>
+        <div>
+          <button class="" translate (click)="getCV(proprietaire)">CV</button>
+        </div>
       </div>
-      <div class="bloc-info bloc">
-        Quel prix
+      <div class="bloc-info bloc direction-column">
+        <div>
+          Quel prix
+        </div>
+        <div>
+          {{proprietaire.price}}
+        </div>
       </div>
     </div>
   </div>

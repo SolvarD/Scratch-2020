@@ -149,3 +149,6 @@ a {
   justify-content: center;
   text-align: center;
 }
+.direction-column {
+  flex-direction: column;
+}

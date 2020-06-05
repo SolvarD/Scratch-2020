@@ -15,7 +15,7 @@ namespace DataAccess.Entities
         public double Price { get; set; }
         public int DocumentId_Photo { get; set; }
         public int DocumentId_CV { get; set; }
-        public Document CV { get; set; }
+        public Document Cv { get; set; }
         public Document Photo { get; set; }
     }
 }

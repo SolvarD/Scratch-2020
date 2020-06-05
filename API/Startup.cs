@@ -102,6 +102,9 @@ namespace API
             services.AddTransient<SkillCategoryAccess>();
             services.AddTransient<SkillCategoryDetailAccess>();
 
+            services.AddTransient<ProfileAccess>();
+            services.AddTransient<DocumentAccess>();
+
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<IMessageManager, MessageManager>();
             services.AddTransient<ILanguageManager, LanguageManager>();
@@ -111,6 +114,7 @@ namespace API
             services.AddTransient<IEmailManager, EmailManager>();
             services.AddTransient<ISkillManager, SkillManager>();
             services.AddTransient<IExperienceManager, ExperienceManager>();
+            services.AddTransient<IProfileManager, ProfileManager>();
 
             services.AddSingleton<Requestor>(new Requestor(Configuration, "PorteFolio"));
             services.AddTransient<IEncryptManager, EncryptManager>();

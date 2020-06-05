@@ -54,6 +54,7 @@ import { DDLComponent } from './component/ddl-filter/ddl-filter.component';
 import { InputDateComponent } from './component/input-date/input-date.component';
 import { CacheService } from './services/Cache.service';
 import { AdminProfilComponent } from './views/admin/profil/admin-profil.component';
+import { ProfileService } from './services/profile.service';
 registerLocaleData(localeFr, 'fr-FR');
 @NgModule({
   declarations: [
@@ -123,7 +124,8 @@ registerLocaleData(localeFr, 'fr-FR');
     SkillService,
     ExperienceService,
     DatePipe,
-    CacheService
+    CacheService,
+    ProfileService
   ],
   bootstrap: [AppComponent]
 })

@@ -12,29 +12,23 @@ namespace DataAccess.CRUD
     {
         public ProfileAccess(Requestor requestor) : base(requestor, "Profiles")
         { }
-        public async Task<List<SkillCategory>> GetAll()
+        public async Task<List<Profile>> GetAll()
         {
-            List<SkillCategory> skillCategories = await base.GetAll<SkillCategory>(new List<string> { "*" });
-            return skillCategories.OrderBy(g => g.Order).ToList();
+            List<Profile> profiles = await base.GetAll<Profile>(new List<string> { "*" });
+            return profiles.OrderBy(g => g.isPrincipal).ToList();
         }
-        public async Task<SkillCategory> Insert(SkillCategory item)
+        public async Task<Profile> Insert(Profile item)
         {
-            List<string> columns = new List<string> { "Order", "Label" };
-            return base.Insert<SkillCategory>(item, columns);
+            List<string> columns = new List<string> {
+                "isPrincipal",
+                "Presentation",
+                "PastPro",
+                "WhyMe",
+                "Price",
+                "DocumentId_Photo",
+                "DocumentId_CV"
+            };
+            return base.Insert<Profile>(item, columns);
         }
-        //public async Task<List<SkillCategory>> GetAll()
-        //{
-        //    var sql = @"select * from SkillCategories
-        //               select * from SkillCategoryDetails where OWNER_PROFILESIDFK = @id";
-
-        //    using (var multi = connection.QueryMultiple(sql))
-        //    {
-        //        var profile = multi.Read<Models.PROFILE>().Single();
-        //        profile.ProfileImages = multi.Read<Model.PROFILEIMAGES>().ToList();
-        //    }
-
-        //    List<SkillCategory> skillCategories = await base.GetAll<SkillCategory>(new List<string> { "*" });
-        //    return skillCategories.OrderBy(g => g.Order).ToList();
-        //}
     }
 }
