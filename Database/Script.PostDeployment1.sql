@@ -378,3 +378,43 @@ on exDe.[ExperienceId] = tmpExDe.[ExperienceId] and exDe.[SkillCategoryDetailId]
 when not matched then
 insert ([ExperienceId],[SkillCategoryDetailId]) values
 (tmpExDe.[ExperienceId],tmpExDe.[SkillCategoryDetailId]);
+
+
+declare @tmpDocument as TABLE
+(
+    [Title] VARCHAR(MAX) NOT NULL, 
+    [Created] DATETIME NOT NULL, 
+    [Content] VARBINARY(MAX) NOT NULL, 
+    [Type] VARCHAR(10) NOT NULL
+)
+
+Insert Into @tmpDocument values ('CV_SOLVAR_DIMITRI', GETDATE(), (SELECT * FROM OPENROWSET(BULK 'F:\Scratch\Scratch\Database\Documents\Dossier technique 2020.docx', SINGLE_BLOB) AS BLOB),'.docs')
+Insert Into @tmpDocument values ('PHOTO_SOLVAR_DIMITRI', GETDATE(), (SELECT * FROM OPENROWSET(BULK 'F:\Scratch\Scratch\Database\Documents\DSC_0073_REDIM.jpg', SINGLE_BLOB) AS BLOB),'.jpg')
+
+merge into Documents d using @tmpDocument tmpD
+on d.Title = tmpD.Title and d.[Content] = tmpD.[Content]
+when not matched then
+insert  ([Title] ,[Created] ,[Content] ,[Type]) values
+(tmpD.[Title], tmpD.[Created], tmpD.[Content], tmpD.[Type]);
+
+
+declare @tmpProfiles as table
+(	
+    [isPrincipal] BIT NOT NULL, 
+    [Presentation] VARCHAR(MAX) NULL, 
+    [PastPro] VARCHAR(MAX) NULL, 
+    [WhyMe] VARCHAR(MAX) NULL, 
+    [Advantage] VARCHAR(MAX) NULL, 
+    [Price] DECIMAL NULL, 
+    [DocumentId_Photo] INT NULL, 
+    [DocumentId_CV] INT NULL
+)
+
+insert into @tmpProfiles ([isPrincipal] ,[Presentation] ,[PastPro] ,[WhyMe],[Advantage],[Price],[DocumentId_Photo], [DocumentId_CV])
+values (1, '','','','',550, (select documentId from Documents where Title = 'PHOTO_SOLVAR_DIMITRI'), (select documentId from Documents where Title = 'CV_SOLVAR_DIMITRI'))
+
+merge into Profiles p using @tmpProfiles tmpP
+on p.Presentation = tmpP.Presentation and p.[Price] = tmpP.[Price]
+when not matched then
+insert ([isPrincipal] ,[Presentation] ,[PastPro] ,[WhyMe],[Advantage],[Price],[DocumentId_Photo], [DocumentId_CV]) 
+values (tmpP.[isPrincipal], tmpP.[Presentation], tmpP.[PastPro], tmpP.[WhyMe], tmpP.[Advantage],tmpP.[Price],tmpP.[DocumentId_Photo], tmpP.[DocumentId_CV]);

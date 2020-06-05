@@ -2,40 +2,51 @@
   <h2 translate>SKILLS</h2>
 </div>
 <div class="flex-1">
-  <button type="button" (click)="canEdit && addSkill" [ngClass]="{'forbidden': !canEdit}" [disabled]="!canEdit" class="btn btn-primary" translate>ADD_SKILL</button>
+  <button type="button" (click)="canEdit && addCategory()" title="{{ADD_CATEGORY|translate}}" [ngClass]="{'forbidden': !canEdit}" [disabled]="!canEdit" class="btn btn-primary" translate>ADD_CATEGORY</button>
 </div>
 <div class="skills-container">
-  <div class="skill " *ngFor="let category of skillsCategory;index as i">
+
+  <div class="skill" *ngFor="let category of skillsCategory;index as i">
     <form [formGroup]="formCategories[i]" *ngIf="formCategories[i]">
-
-
       <div class="slide-header flex bloc">
         <div class="flex flex-1 slide-title">
-          <input type="text" class="form-control name-category" formControlName="label" />
+          <input type="text" placeholder="{{'CATEGORY_NAME' | translate}}"
+                 [ngClass]="{'invalid-field': !isValidField(formCategories[i], 'label')}"
+                 class="form-control name-category" formControlName="label" />
+
           <div>
-            <i class="fas fa-save space-trash"></i>
+            <i class="fas fa-save" (click)="saveCategory(formCategories[i])"></i>
           </div>
 
         </div>
 
-        <div><i class="fas fa-trash space-trash" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)"></i></div>
+        <div><i class="fas fa-trash" (click)="canEdit && deleteCategory(i)"></i></div>
       </div>
 
 
-      <div class="bloc flex flex-wrap displayBloc">
+      <div class="bloc flex flex-wrap displayBloc" [ngStyle]="{'justify-content': (!category.skillCategoryDetails.length? 'center': 'auto')}">
+        <div *ngIf="!category.skillCategoryDetails.length" >
+          <div>
+            <label translate>NO_SKILL</label>
+          </div>
+        </div>
+        <div class="flex pill" *ngFor="let detail of category.skillCategoryDetails;index as scd">
 
-        <div class="flex pill" *ngFor="let detail of category.skillCategoryDetails">
-
-          <div class="flex-1 flex no-wrap">
+          <div class="flex-1 flex no-wrap vertical-center">
             <div class="flex-1">
-              <label>{{detail.label}}</label>
+              <!--<span>{{detail.label}}</span>-->
+              <input type="text" placeholder="{{'SKILL_NAME' | translate}}"
+                     [ngClass]="{'invalid-field': !detail.label}"
+                     [(value)]="detail.label" />
             </div>
             <div class="pointer" [ngClass]="{'forbidden': !canEdit}">
-              <i class="fas fa-edit space-trash"></i><i class="fas fa-trash space-trash" (click)="canEdit && deleteSkill(slide.skillCategoryDetails, iscd)"></i>
+              <!--<i class="fas fa-edit"></i>-->
+              <i class="fas fa-times" (click)="canEdit && deleteSkill(category.skillCategoryDetails, scd)"></i>
             </div>
           </div>
-
-
+        </div>
+        <div class="add-container">
+          <i class="fas fa-plus-circle fa-2x pointer" (click)="addSkill(category.skillCategoryDetails)"></i>
         </div>
       </div>
     </form>

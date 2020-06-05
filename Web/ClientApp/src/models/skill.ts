@@ -1,13 +1,13 @@
 export class SkillCategory {
-  public skillCategoryId: number;
+  public skillCategoryId: number = 0;
   public order: number;
-  public Label: string;
-  public skillCategoryDetails: Array<SkillCategoryDetail>;
+  public label: string = '';
+  public skillCategoryDetails: Array<SkillCategoryDetail> = [];
 }
 
 export class SkillCategoryDetail {
   public skillCategoryDetailId: number;
   public skillCategoryId: number;
   public experienceId: number;
-  public Label: string;
+  public label: string = '';
 }

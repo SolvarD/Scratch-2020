@@ -18,6 +18,7 @@ import { SkillsComponent } from "./views/public/skills/skills.component";
 import { PricesComponent } from "./views/public/prices/prices.component";
 import { AdminSkillsComponent } from "./views/admin/skills/admin-skills.component";
 import { AdminPorteFolioComponent } from "./views/admin/porte-folio/admin-porte-folio.component";
+import { AdminProfilComponent } from "./views/admin/profil/admin-profil.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -45,6 +46,9 @@ const routes: Routes = [
       },
       {
         path: 'porte-folio', component: AdminPorteFolioComponent, canActivate: [AuthGuard]
+      },
+      {
+        path: 'profil', component: AdminProfilComponent, canActivate: [AuthGuard]
       }
     ]
   },

@@ -52,6 +52,8 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { DDLComponent } from './component/ddl-filter/ddl-filter.component';
 import { InputDateComponent } from './component/input-date/input-date.component';
+import { CacheService } from './services/Cache.service';
+import { AdminProfilComponent } from './views/admin/profil/admin-profil.component';
 registerLocaleData(localeFr, 'fr-FR');
 @NgModule({
   declarations: [
@@ -81,7 +83,8 @@ registerLocaleData(localeFr, 'fr-FR');
     AdminPorteFolioComponent,
     AdminSkillsComponent,
     DDLComponent,
-    InputDateComponent
+    InputDateComponent,
+    AdminProfilComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -119,7 +122,8 @@ registerLocaleData(localeFr, 'fr-FR');
     ContactService,
     SkillService,
     ExperienceService,
-    DatePipe
+    DatePipe,
+    CacheService
   ],
   bootstrap: [AppComponent]
 })

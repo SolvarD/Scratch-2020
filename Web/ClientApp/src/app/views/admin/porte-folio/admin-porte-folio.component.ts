@@ -29,7 +29,7 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 
   skillByExperienceToRemove: Array<any[]> = [];
 
-  constructor(private experienceService: ExperienceService, private _fb: FormBuilder, private skillService: SkillService, private pipeDate: DatePipe) {
+  constructor(private experienceService: ExperienceService, private _fb: FormBuilder, private skillService: SkillService) {
     super();
   }
 
@@ -75,7 +75,7 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
     return this._fb.group({
       experienceId: [item.experienceId],
       name: [{ value: item.name, disabled: !this.canEdit }, Validators.required],
-      start: [{ value: item.start ? new Date(item.start.toString()): null, disabled: !this.canEdit }, [Validators.required]],
+      start: [{ value: item.start ? new Date(item.start.toString()): null, disabled: !this.canEdit }, Validators.required],
       end: [{ value: item.end ? new Date(item.end.toString()) : null, disabled: !this.canEdit }],
       description: [{ value: item.description, disabled: !this.canEdit }, Validators.required]
     }, { updateOn: 'blur' });

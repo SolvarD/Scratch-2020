@@ -60,6 +60,7 @@
     <Folder Include="Tables\REF" />
     <Folder Include="StoredProcedure" />
     <Folder Include="Type" />
+    <Folder Include="Documents" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Users.sql" />
@@ -88,6 +89,7 @@
     <Build Include="StoredProcedure\DeleteAllExperienceSkillDetailByIdExperience.sql" />
     <Build Include="StoredProcedure\AddSkillToExperience.sql" />
     <Build Include="StoredProcedure\DeleteMaynExperienceSkillDetail.sql" />
+    <Build Include="Tables\Profiles.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Database.refactorlog" />
@@ -98,5 +100,11 @@
   <ItemGroup>
     <None Include="Database.publish.xml" />
     <Build Include="Type\Type_Experiences_SkillCategoryDetails.sql" />
+    <None Include="Documents\Dossier technique 2020.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Documents\DSC_0073_REDIM.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

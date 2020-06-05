@@ -144,3 +144,8 @@ a {
   cursor: pointer;
   border-radius: 16px;
 }
+.vertical-center {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

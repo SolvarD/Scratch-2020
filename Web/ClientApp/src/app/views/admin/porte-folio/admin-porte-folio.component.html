@@ -14,15 +14,17 @@
           <div class="slide-header bloc">
             <div class="slide-title flex">
 
-              <input type="text" id="name" placeholder="{{NAME | translate}}" [ngClass]="{'invalid-field': !isValidField(formsExperiences[i],'name')}" class="form-control name-experience" formControlName="name" />
+              <input type="text" placeholder="{{'NAME' | translate}}" [ngClass]="{'invalid-field': !isValidField(formsExperiences[i],'name')}"
+                     class="form-control name-experience" formControlName="name" />
               <div class="pointer" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && deleteExperience(slide, i)">
                 <i class="fas fa-trash space-trash"></i>
               </div>
+              
             </div>
-
             <div class="pointer" (click)="!displayBloc[i] ? display(i) : hide(i)">
               <i class="carousel-control-next-icon" [ngClass]="{'rotate': displayBloc[i]}"></i>
             </div>
+           
           </div>
 
           <div class="bloc" [ngClass]="{'displayBloc': displayBloc[i] == true, 'hideBloc': !displayBloc[i]}">
