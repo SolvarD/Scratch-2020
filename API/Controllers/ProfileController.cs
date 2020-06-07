@@ -54,5 +54,19 @@ namespace API.Controllers
                 return null;
             }
         }
+        [HttpPut]
+        [Route("Update")]
+        public async Task<Profile> Update(Profile profile)
+        {
+            try
+            {
+                return await _profile.Update(profile);
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.StackTrace);
+                return null;
+            }
+        }
     }
 }

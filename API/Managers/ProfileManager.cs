@@ -12,13 +12,15 @@ namespace API.Managers
     {
         Task<List<Profile>> GetAll();
         Task<Profile> GetOwner();
+        Task<Profile> Update(Profile profile);
     }
     public class ProfileManager : IProfileManager
     {
         private readonly ProfileAccess _profileAccess;
         private readonly DocumentAccess _documentAccess;
 
-        public ProfileManager(ProfileAccess profileAccess, DocumentAccess documentAccess) {
+        public ProfileManager(ProfileAccess profileAccess, DocumentAccess documentAccess)
+        {
             _profileAccess = profileAccess;
             _documentAccess = documentAccess;
         }
@@ -28,7 +30,8 @@ namespace API.Managers
             var profiles = await _profileAccess.GetAll();
             var documents = await _documentAccess.GetAll();
 
-            profiles.ForEach((profile)=> {
+            profiles.ForEach((profile) =>
+            {
                 profile.Cv = documents.Find(g => g.DocumentId == profile.DocumentId_CV);
                 profile.Photo = documents.Find(g => g.DocumentId == profile.DocumentId_Photo);
             });
@@ -40,12 +43,43 @@ namespace API.Managers
             var profile = await _profileAccess.GetByCondition<Profile>("isPrincipal=1");
             var documents = await _documentAccess.GetAll();
 
-            profile.ForEach((profile) => {
+            profile.ForEach((profile) =>
+            {
                 profile.Cv = documents.Find(g => g.DocumentId == profile.DocumentId_CV);
                 profile.Photo = documents.Find(g => g.DocumentId == profile.DocumentId_Photo);
             });
 
             return profile.FirstOrDefault();
+        }
+        public async Task<Profile> Update(Profile profile)
+        {
+            var updatedProfile =_profileAccess.Update<Profile>("ProfileId", profile.ProfileId, profile, new List<string> {
+                "isPrincipal",
+                "Presentation",
+                "PastPro",
+                "WhyMe",
+                "Advantage",
+                "Price"
+            });
+
+            var cv = _documentAccess.Update<Document>("DocumentId", profile.DocumentId_CV, profile.Cv, new List<string> { 
+                "title",
+                "Created",
+                "Content",
+                "Type"
+            });
+
+            var photo = _documentAccess.Update<Document>("DocumentId", profile.DocumentId_Photo, profile.Photo, new List<string> {
+                "title",
+                "Created",
+                "Content",
+                "Type"
+            });
+
+            updatedProfile.Cv = cv;
+            updatedProfile.Photo = photo;
+
+            return updatedProfile;
         }
     }
 }

@@ -15,7 +15,7 @@ export class ProfilComponent implements OnInit {
 
   async ngOnInit() {
     this.profiles = await this.profileService.getAll();
-    this.proprietaire = this.profiles.find((profile) => { return profile.isPrincipal; })
+    this.proprietaire = this.profiles.filter((profile) => { return profile.isPrincipal; })[0];
     console.log(this.profiles);
   }
 

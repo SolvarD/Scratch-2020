@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   sizeIcon: string = 'fa-7x';
   ngOnInit(): void {
     this.elements = [
-      { title: 'PROFIL', route: '/profil', class: `fas fa-id-card ${this.sizeIcon}`},
+      { title: 'PROFILE', route: '/profil', class: `fas fa-id-card ${this.sizeIcon}`},
       { title: 'SKILLS', route: '/skills', class: `fas fa-suitcase ${this.sizeIcon}` },
       { title: 'PORTE_FOLIO', route: '/porte-folio', class: `fas fa-building ${this.sizeIcon}` },
       { title: 'PRICES', route: '/prices', class: `fas fa-money-check-alt ${this.sizeIcon}` }

@@ -1,30 +1,60 @@
 <div class="page-title">
-  <h2 translate>PROFIL</h2>
+  <h2 translate>PROFILE</h2>
 </div>
-<div class="profil-container">
+<div class="profil-container" [formGroup]="formProfile" *ngFor="let formProfile of formProfiles;index as i">
   <div class="historic-container">
-    <div class="bloc-presentation bloc">
-      Presentation
-    </div>
-    <div class="blocs-info-container">
-      <div class="bloc-info bloc">
-        passé pro
-      </div>
-      <div class="bloc-info bloc">
-        pourquoi moi?
-      </div>
-      <div class="bloc-info bloc">
-        avantage de bossé avec moi
-      </div>
-      <div class="bloc-info bloc">
-        vous voulez en savoir plus?
-      </div>
-      <div class="bloc-info bloc">
-        Quel prix
+    <div class="bloc-presentation bloc direction-column">
+      <div class="form-group">
+        <label for="presentation" translate> PRESENTATION</label>
+        <ckeditor formControlName="presentation" [ngClass]="{'invalid-field-ck': (canEdit && !isValidField())}"></ckeditor>
       </div>
     </div>
+    <div class="bloc-info bloc direction-column">
+      <div class="form-group">
+        <label for="pastPro" translate> PAST_PRO</label>
+        <ckeditor formControlName="pastPro" [ngClass]="{'invalid-field-ck': (canEdit && !isValidField())}"></ckeditor>
+      </div>
+    </div>
+    <div class="bloc-info bloc direction-column">      
+      
+        <div class="form-group">
+          <label for="pastPro" translate> ADVANTAGE</label>
+          <ckeditor formControlName="advantage" [ngClass]="{'invalid-field-ck': (canEdit && !isValidField())}"></ckeditor>
+        </div>
+      </div>
+   
+
   </div>
   <div class="photo-container">
-    <img class="personnal-pic" src="..\..\..\..\assets\images\DSC_0073_REDIM.jpg" />
+
+    <div class="bloc-info bloc direction-column  horizontal-center" >
+      <div><img class="personnal-pic" [src]="'data:image/jpeg;base64,'+ profiles[i].photo.content" alt="SOLVAR_DIMITRI" /></div>
+      <div><input type="file" class="form-control-file border" (change)="changePhoto(formProfile, $event)" /></div>      
+    </div>
+
+
+    <div class="bloc-info bloc direction-column">
+      <div class="form-group">
+        <label for="learn_more" translate>CV</label>
+        <input type="file" id="learn_more" class="form-control-file border " (change)="changeCV(formProfile, $event)" />
+      </div>
+    </div>
+    <div class="bloc-info bloc direction-column">
+
+      <div class="form-group">
+        <label for="price" translate>TJM</label>
+        <input type="email" id="price" class="form-control " formControlName="price" />
+      </div>
+
+    </div>
+
+    <button type="submit"
+            (click)="onSubmit(formProfile, i)"
+            [disabled]="!canEdit"
+            class="btn btn-success save"
+            data-dismiss="modal" translate>
+      SAVE
+    </button>
   </div>
+
 </div>

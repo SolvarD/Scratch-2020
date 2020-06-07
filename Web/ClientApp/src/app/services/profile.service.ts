@@ -21,5 +21,9 @@ export class ProfileService {
       return profile;
     });
   }
+
+  update() {
+    return this.http.get<Profile>(`${environment.API}/profile/update`).toPromise();
+  }
 }
 
