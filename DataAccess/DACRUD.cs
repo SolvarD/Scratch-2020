@@ -16,7 +16,8 @@ namespace DataAccess
 {
     public interface ICRUD
     {
-        public Task<T> GetOneById<T>(int id);
+        public Task<T> GetOneById<T>(int id, string column);
+        public Task<List<T>> GetByCondition<T>(string conditions);
         public Task<List<T>> GetManyById<T>(int id, string column, List<string> tableColumns);
         public Task<int> DeleteById(int id, string column);
         public T Update<T>(string column, int id, T item, List<string> tableColumns);
@@ -49,9 +50,13 @@ namespace DataAccess
             return requestor.Select<T>($"SELECT {string.Join(",", tableColumns.ToArray())} FROM {_table}");
         }
 
-        public async Task<T> GetOneById<T>(int id)
+        public async Task<T> GetOneById<T>(int id, string column)
         {
-            return requestor.Select<T>("").First();
+            return requestor.Select<T>($"select top 1 * from  from {_table} where {column}={id}").First();
+        }
+        public async Task<List<T>> GetByCondition<T>(string conditions)
+        {
+            return requestor.Select<T>($"select top 1 * from  {_table} where {conditions}");
         }
         public async Task<List<T>> GetManyById<T>(int id, string column, List<string> tableColumns)
         {

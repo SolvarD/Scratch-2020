@@ -144,11 +144,21 @@ a {
   cursor: pointer;
   border-radius: 16px;
 }
-.vertical-center {
+.horizontal-center {
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 .direction-column {
   flex-direction: column;
+}
+.contact-button {
+  font-size: 18px;
+  background-color: #f1b221;
+  height: 63px;
+  width: 283px;
+  border: none;
+  margin: 30px;
+  font-family: Poppins-Medium;
+  border-radius: 2px;
 }

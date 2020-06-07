@@ -11,6 +11,7 @@ namespace API.Managers
     public interface IProfileManager
     {
         Task<List<Profile>> GetAll();
+        Task<Profile> GetOwner();
     }
     public class ProfileManager : IProfileManager
     {
@@ -33,6 +34,18 @@ namespace API.Managers
             });
 
             return profiles;
+        }
+        public async Task<Profile> GetOwner()
+        {
+            var profile = await _profileAccess.GetByCondition<Profile>("isPrincipal=1");
+            var documents = await _documentAccess.GetAll();
+
+            profile.ForEach((profile) => {
+                profile.Cv = documents.Find(g => g.DocumentId == profile.DocumentId_CV);
+                profile.Photo = documents.Find(g => g.DocumentId == profile.DocumentId_Photo);
+            });
+
+            return profile.FirstOrDefault();
         }
     }
 }

@@ -385,11 +385,11 @@ declare @tmpDocument as TABLE
     [Title] VARCHAR(MAX) NOT NULL, 
     [Created] DATETIME NOT NULL, 
     [Content] VARBINARY(MAX) NOT NULL, 
-    [Type] VARCHAR(10) NOT NULL
+    [Type] VARCHAR(MAX) NOT NULL
 )
 
-Insert Into @tmpDocument values ('CV_SOLVAR_DIMITRI', GETDATE(), (SELECT * FROM OPENROWSET(BULK 'F:\Scratch\Scratch\Database\Documents\Dossier technique 2020.docx', SINGLE_BLOB) AS BLOB),'.docs')
-Insert Into @tmpDocument values ('PHOTO_SOLVAR_DIMITRI', GETDATE(), (SELECT * FROM OPENROWSET(BULK 'F:\Scratch\Scratch\Database\Documents\DSC_0073_REDIM.jpg', SINGLE_BLOB) AS BLOB),'.jpg')
+Insert Into @tmpDocument values ('CV_SOLVAR_DIMITRI.docx', GETDATE(), (SELECT * FROM OPENROWSET(BULK 'F:\Scratch\Scratch\Database\Documents\Dossier technique 2020.docx', SINGLE_BLOB) AS BLOB),'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+Insert Into @tmpDocument values ('PHOTO_SOLVAR_DIMITRI.jpg', GETDATE(), (SELECT * FROM OPENROWSET(BULK 'F:\Scratch\Scratch\Database\Documents\DSC_0073_REDIM.jpg', SINGLE_BLOB) AS BLOB),'image/jpeg')
 
 merge into Documents d using @tmpDocument tmpD
 on d.Title = tmpD.Title and d.[Content] = tmpD.[Content]
@@ -411,7 +411,7 @@ declare @tmpProfiles as table
 )
 
 insert into @tmpProfiles ([isPrincipal] ,[Presentation] ,[PastPro] ,[WhyMe],[Advantage],[Price],[DocumentId_Photo], [DocumentId_CV])
-values (1, '','','','',550, (select documentId from Documents where Title = 'PHOTO_SOLVAR_DIMITRI'), (select documentId from Documents where Title = 'CV_SOLVAR_DIMITRI'))
+values (1, '','','','',550, (select documentId from Documents where Title = 'PHOTO_SOLVAR_DIMITRI.jpg'), (select documentId from Documents where Title = 'CV_SOLVAR_DIMITRI.docx'))
 
 merge into Profiles p using @tmpProfiles tmpP
 on p.Presentation = tmpP.Presentation and p.[Price] = tmpP.[Price]

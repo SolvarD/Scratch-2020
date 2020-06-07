@@ -103,8 +103,6 @@
     <None Include="Documents\Dossier technique 2020.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Documents\DSC_0073_REDIM.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Documents\DSC_0073_REDIM.jpg" />
   </ItemGroup>
 </Project>

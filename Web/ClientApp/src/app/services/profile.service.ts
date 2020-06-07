@@ -5,12 +5,21 @@ import { Profile } from "../../models/profile";
 
 @Injectable()
 export class ProfileService {
+
+  public static owner: Profile;
+
   constructor(private http: HttpClient) {
 
   }
 
   getAll() {
     return this.http.get<Profile[]>(`${environment.API}/profile/GetAll`).toPromise();
+  }
+  getOwner() {
+    return this.http.get<Profile>(`${environment.API}/profile/GetOwner`).toPromise().then((profile) => {
+      ProfileService.owner = profile;
+      return profile;
+    });
   }
 }
 

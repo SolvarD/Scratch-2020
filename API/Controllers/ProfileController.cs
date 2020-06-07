@@ -38,5 +38,21 @@ namespace API.Controllers
                 return null;
             }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetOwner")]
+        public async Task<Profile> GetOwner()
+        {
+            try
+            {
+                return await _profile.GetOwner();
+            }
+            catch (Exception e)
+            {
+                _email.SendTrace(e.StackTrace);
+                return null;
+            }
+        }
     }
 }

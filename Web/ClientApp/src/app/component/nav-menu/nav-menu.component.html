@@ -46,7 +46,7 @@
             <a class="nav-link text-dark" [routerLink]="['/prices']" translate>PRICES</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/cv']">C.V</a>
+            <a class="nav-link text-dark" (click)="getCvOwner()">C.V</a>
           </li>
 
           <li class="nav-item dropdown" id="sub-menu-admin" *ngIf="canDisplay">

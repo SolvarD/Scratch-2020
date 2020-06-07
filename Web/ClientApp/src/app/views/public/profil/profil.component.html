@@ -4,7 +4,9 @@
 <div class="profil-container" *ngIf="proprietaire">
   <div class="historic-container">
     <div class="bloc-presentation bloc direction-column">
-      Presentation
+      <div>
+        Presentation
+      </div>      
       <div>
         {{proprietaire.presentation}}
       </div>
@@ -12,7 +14,7 @@
     <div class="blocs-info-container">
       <div class="bloc-info bloc direction-column">
         <div>
-          passé pro
+          Experiences
         </div>
         <div>
           {{proprietaire.pastPro}}
@@ -20,15 +22,7 @@
       </div>
       <div class="bloc-info bloc direction-column">
         <div>
-          pourquoi moi?
-        </div>
-        <div>
-          {{proprietaire.whyMe}}
-        </div>
-      </div>
-      <div class="bloc-info bloc direction-column">
-        <div>
-          avantage de travailler avec moi
+          Avantage de travailler avec moi
         </div>
         <div>
           {{proprietaire.advantage}}
@@ -36,26 +30,28 @@
       </div>
       <div class="bloc-info bloc direction-column">
         <div>
-          vous voulez en savoir plus?
+          En savoir plus?
         </div>
-        <div>
-          <button class="contact-button" translate [routerLink]="['/contact']">CONTACT_ME</button>
+        <div class="horizontal-center">
+          <button class="info-button" translate (click)="getCV(proprietaire)">CV</button>
         </div>
-        <div>
-          <button class="" translate (click)="getCV(proprietaire)">CV</button>
+        <div class="horizontal-center">
+          <button class="info-button" translate [routerLink]="['/contact']">CONTACT_ME</button>
         </div>
       </div>
       <div class="bloc-info bloc direction-column">
         <div>
-          Quel prix
+          TJM
         </div>
-        <div>
-          {{proprietaire.price}}
+        <div class="horizontal-center tarif">
+          <span>
+            {{proprietaire.price}} €
+          </span>         
         </div>
       </div>
     </div>
   </div>
   <div class="photo-container">
-    <img class="personnal-pic" src="..\..\..\..\assets\images\DSC_0073_REDIM.jpg" />
+    <img class="personnal-pic" [src]="'data:image/jpeg;base64,'+proprietaire.photo.content" alt="SOLVAR_DIMITRI" />
   </div>
 </div>

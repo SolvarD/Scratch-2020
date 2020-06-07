@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../services/profile.service';
 import { Profile } from '../../../../models/profile';
+import { ToolsService } from '../../../services/tools.service';
 
 @Component({
   selector: 'app-profil',
@@ -10,7 +11,7 @@ import { Profile } from '../../../../models/profile';
 export class ProfilComponent implements OnInit {
   profiles: Array<Profile> = [];
   proprietaire: Profile;
-  constructor(private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService) { }
 
   async ngOnInit() {
     this.profiles = await this.profileService.getAll();
@@ -19,13 +20,9 @@ export class ProfilComponent implements OnInit {
   }
 
   getCV(profile: Profile) {
-    var byteArray = new Uint8Array(profile.cv.content);
     var a = window.document.createElement('a');
-    a.href = window.URL.createObjectURL(new Blob([byteArray], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }));
-
-    // supply your own fileName here...
-    a.download = "YourFileName.docx";
-
+    a.href = window.URL.createObjectURL(ToolsService.converBase64toBlob(profile.cv.content, profile.cv.type));
+    a.download = profile.cv.title;
     document.body.appendChild(a)
     a.click();
     document.body.removeChild(a)

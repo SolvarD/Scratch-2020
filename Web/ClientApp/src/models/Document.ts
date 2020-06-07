@@ -3,6 +3,6 @@ export class AppDocument {
   public title: string = '';
   public type: string = '';
   public created: Date;
-  public content: any[];
+  public content: string;
 }
 
