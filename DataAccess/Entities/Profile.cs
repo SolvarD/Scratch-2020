@@ -12,7 +12,7 @@ namespace DataAccess.Entities
         public string PastPro { get; set; }
         public string WhyMe { get; set; }
         public string Advantage { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public int DocumentId_Photo { get; set; }
         public int DocumentId_CV { get; set; }
         public Document Cv { get; set; }

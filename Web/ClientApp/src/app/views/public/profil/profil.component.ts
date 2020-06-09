@@ -20,11 +20,6 @@ export class ProfilComponent implements OnInit {
   }
 
   getCV(profile: Profile) {
-    var a = window.document.createElement('a');
-    a.href = window.URL.createObjectURL(ToolsService.converBase64toBlob(profile.cv.content, profile.cv.type));
-    a.download = profile.cv.title;
-    document.body.appendChild(a)
-    a.click();
-    document.body.removeChild(a)
+    ToolsService.getCV();
   }
 }

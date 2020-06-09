@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Managers;
+using API.models;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -56,16 +57,18 @@ namespace API.Controllers
         }
         [HttpPut]
         [Route("Update")]
-        public async Task<Profile> Update(Profile profile)
+        public async Task<ApiResult<Profile>> Update(Profile profile)
         {
+            var apiResult = new ApiResult<Profile>();
             try
             {
-                return await _profile.Update(profile);
+                apiResult.Data = await _profile.Update(profile);
+                return apiResult;
             }
             catch (Exception e)
             {
-                _email.SendTrace(e.StackTrace);
-                return null;
+                //_email.SendTrace(e.StackTrace);
+                return new ApiResult<Profile> { isSuccess = false, error = e.StackTrace };
             }
         }
     }

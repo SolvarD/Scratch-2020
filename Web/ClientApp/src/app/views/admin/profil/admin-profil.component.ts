@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Profile } from '../../../../models/profile';
 import { ProfileService } from '../../../services/profile.service';
 import { BaseComponent } from '../../../../models/base-component';
+import { ToolsService } from '../../../services/tools.service';
+import { AppDocument } from '../../../../models/document';
 
 @Component({
   selector: 'app-admin-profil',
@@ -26,7 +28,10 @@ export class AdminProfilComponent extends BaseComponent implements OnInit {
 
   buildForm(profile: Profile) {
     return this._fb.group({
-      documentId: [profile.profileId],
+      profileId: [profile.profileId],
+      documentId_Photo: [profile.documentId_Photo],
+      documentId_CV: [profile.documentId_CV],
+      isPrincipal: [profile.isPrincipal],
       presentation: [{ value: profile.presentation, disabled: !this.canEdit }],
       pastPro: [{ value: profile.pastPro, disabled: !this.canEdit }],
       whyMe: [{ value: profile.whyMe, disabled: !this.canEdit }],
@@ -56,12 +61,22 @@ export class AdminProfilComponent extends BaseComponent implements OnInit {
   onSubmit(form: FormGroup, index: number) {
     let profile = form.value as Profile;
     console.log(profile);
+    this.profileService.update(profile);
     //profile.cv = form
   }
-  changePhoto(formProfile: FormGroup, event) {
-    console.log(event.target.files)
+  changePhoto(formProfile: FormGroup, event, index: number) {
+    let photo: File = event.target.files[0];
+    let formControlName = 'photo';
+
+    ToolsService.uploadFile(formProfile, formControlName, photo).subscribe((item) => {
+      if (item.formControlName == formControlName) {
+        this.profiles[index].photo.content = item.content;
+      }
+    });    
   }
+
   changeCV(formProfile: FormGroup, event) {
-    console.log(event.target.files)
-  }
+    let cv: File = event.target.files[0];
+    ToolsService.uploadFile(formProfile, 'cv', cv);
+  }  
 }

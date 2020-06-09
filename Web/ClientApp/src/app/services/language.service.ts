@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Message } from "../../models/message";
 import { Language } from "../../models/language";
-import { CacheService } from "./Cache.service";
+import { CacheService } from "./cache.service";
 
 @Injectable()
 export class LanguageService {

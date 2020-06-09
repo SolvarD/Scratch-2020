@@ -15,28 +15,32 @@
         <ckeditor formControlName="pastPro" [ngClass]="{'invalid-field-ck': (canEdit && !isValidField())}"></ckeditor>
       </div>
     </div>
-    <div class="bloc-info bloc direction-column">      
-      
-        <div class="form-group">
-          <label for="pastPro" translate> ADVANTAGE</label>
-          <ckeditor formControlName="advantage" [ngClass]="{'invalid-field-ck': (canEdit && !isValidField())}"></ckeditor>
-        </div>
+    <div class="bloc-info bloc direction-column">
+
+      <div class="form-group">
+        <label for="pastPro" translate> ADVANTAGE</label>
+        <ckeditor formControlName="advantage" [ngClass]="{'invalid-field-ck': (canEdit && !isValidField())}"></ckeditor>
       </div>
-   
+    </div>
+
 
   </div>
   <div class="photo-container">
 
-    <div class="bloc-info bloc direction-column  horizontal-center" >
-      <div><img class="personnal-pic" [src]="'data:image/jpeg;base64,'+ profiles[i].photo.content" alt="SOLVAR_DIMITRI" /></div>
-      <div><input type="file" class="form-control-file border" (change)="changePhoto(formProfile, $event)" /></div>      
+    <div class="bloc-info bloc direction-column  ">
+      <div class="input-file">
+        <label for="photo" translate>PHOTO</label>
+        <input type="file" class="form-control-file border" accept="image/*" (change)="changePhoto(formProfile, $event, i)" />
+      </div>
+      <div class="horizontal-center">
+      <img class="personnal-pic" [src]="profiles[i].photo.content" alt="SOLVAR_DIMITRI" />
+      </div>
     </div>
-
 
     <div class="bloc-info bloc direction-column">
       <div class="form-group">
         <label for="learn_more" translate>CV</label>
-        <input type="file" id="learn_more" class="form-control-file border " (change)="changeCV(formProfile, $event)" />
+        <input type="file" id="learn_more" class="form-control-file border " (change)="changeCV(formProfile, $event, i)" />
       </div>
     </div>
     <div class="bloc-info bloc direction-column">

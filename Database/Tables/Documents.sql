@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Documents]
 (
 	[DocumentId] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Title] VARCHAR(MAX) NOT NULL, 
+    [Title] VARCHAR(MAX) NULL, 
     [Created] DATETIME NOT NULL, 
-    [Content] VARBINARY(MAX) NOT NULL, 
-    [Type] VARCHAR(MAX) NOT NULL
+    [Content] VARCHAR(MAX) NULL, 
+    [Type] VARCHAR(MAX) NULL
 )

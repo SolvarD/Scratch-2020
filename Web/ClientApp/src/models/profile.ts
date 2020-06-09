@@ -1,4 +1,4 @@
-import { AppDocument } from "./Document";
+import { AppDocument } from "./document";
 
 export class Profile {
   public profileId: number = 0;
@@ -8,8 +8,8 @@ export class Profile {
   public whyMe: string = '';
   public advantage: string = '';
   public price: number;
-  public documentId_Photo: number;
-  public documentId_CV: number;
+  public documentId_Photo: number = null;
+  public documentId_CV: number= null;
 
   public cv: AppDocument;
   public photo: AppDocument;

@@ -28,11 +28,6 @@ export class NavMenuComponent extends BaseComponent {
   }
 
   getCvOwner() {
-    var a = window.document.createElement('a');
-    a.href = window.URL.createObjectURL(ToolsService.converBase64toBlob(ProfileService.owner.cv.content, ProfileService.owner.cv.type));
-    a.download = ProfileService.owner.cv.title;
-    document.body.appendChild(a)
-    a.click();
-    document.body.removeChild(a)
+    ToolsService.getCV();
   }
 }

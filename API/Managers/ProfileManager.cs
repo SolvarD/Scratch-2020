@@ -59,18 +59,20 @@ namespace API.Managers
                 "PastPro",
                 "WhyMe",
                 "Advantage",
-                "Price"
+                "Price",
+                "DocumentId_Photo",
+                "DocumentId_CV"
             });
 
             var cv = _documentAccess.Update<Document>("DocumentId", profile.DocumentId_CV, profile.Cv, new List<string> { 
-                "title",
+                "Title",
                 "Created",
                 "Content",
                 "Type"
             });
 
             var photo = _documentAccess.Update<Document>("DocumentId", profile.DocumentId_Photo, profile.Photo, new List<string> {
-                "title",
+                "Title",
                 "Created",
                 "Content",
                 "Type"

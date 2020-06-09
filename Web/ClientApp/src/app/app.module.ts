@@ -52,7 +52,7 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { DDLComponent } from './component/ddl-filter/ddl-filter.component';
 import { InputDateComponent } from './component/input-date/input-date.component';
-import { CacheService } from './services/Cache.service';
+import { CacheService } from './services/cache.service';
 import { AdminProfilComponent } from './views/admin/profil/admin-profil.component';
 import { ProfileService } from './services/profile.service';
 import { ToolsService } from './services/tools.service';
