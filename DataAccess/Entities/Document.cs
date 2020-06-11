@@ -10,6 +10,6 @@ namespace DataAccess.Entities
         public string Title { get; set; }
         public string Type { get; set; }
         public DateTime Created { get; set; }
-        public string Content { get; set; }
+        public string DocumentBase64 { get; set; }
     }
 }

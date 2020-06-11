@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Managers;
@@ -14,12 +15,13 @@ namespace API.Controllers
     [Route("[controller]")]
     [Authorize]
     [ApiController]
-    public class ProfileController : ControllerBase
+    public class ProfileController : CustomControllerBase
     {
         private readonly IProfileManager _profile;
         private readonly IEmailManager _email;
 
-        public ProfileController(IEmailManager emailManager, IProfileManager profile) {
+        public ProfileController(IEmailManager emailManager, IProfileManager profile)
+        {
             _profile = profile;
             _email = emailManager;
         }
@@ -27,49 +29,74 @@ namespace API.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("GetAll")]
-        public async Task<List<Profile>> GetAll()
+        public async Task<ActionResult<ApiResult<List<Profile>>>> GetAll()
         {
-            try
-            {
-                return await _profile.GetAll();
-            }
-            catch (Exception e)
-            {
-                _email.SendTrace(e.StackTrace);
-                return null;
-            }
+            return ReturnResponse(() => _profile.GetAll());
         }
 
         [HttpGet]
         [AllowAnonymous]
         [Route("GetOwner")]
-        public async Task<Profile> GetOwner()
+        public async Task<ActionResult<ApiResult<Profile>>> GetOwner()
         {
-            try
-            {
-                return await _profile.GetOwner();
-            }
-            catch (Exception e)
-            {
-                _email.SendTrace(e.StackTrace);
-                return null;
-            }
+            return ReturnResponse(() => _profile.GetOwner());
         }
+
         [HttpPut]
         [Route("Update")]
-        public async Task<ApiResult<Profile>> Update(Profile profile)
+        public async Task<ActionResult<ApiResult<Profile>>> Update([FromForm]ProfileForm profileForm)
         {
-            var apiResult = new ApiResult<Profile>();
-            try
+            return ReturnResponse(() =>
             {
-                apiResult.Data = await _profile.Update(profile);
-                return apiResult;
-            }
-            catch (Exception e)
+                Document cv = null;
+                Document photo = null;
+
+                if (profileForm.Cv != null)
+                {
+                    cv = streamToDocument(profileForm.Cv);
+                    cv.DocumentId = profileForm.DocumentId_CV;
+                }
+                if (profileForm.Photo != null)
+                {
+                    photo = streamToDocument(profileForm.Photo);
+                    photo.DocumentId = profileForm.DocumentId_Photo;
+                }
+
+                Profile profile = new Profile
+                {
+                    Advantage = profileForm.Advantage,
+                    isPrincipal = profileForm.isPrincipal,
+                    PastPro = profileForm.PastPro,
+                    Presentation = profileForm.Presentation,
+                    Price = profileForm.Price,
+                    WhyMe = profileForm.WhyMe,
+                    Cv = cv,
+                    Photo = photo,
+                    ProfileId = profileForm.ProfileId,
+                    DocumentId_CV = profileForm.DocumentId_CV,
+                    DocumentId_Photo = profileForm.DocumentId_Photo
+                };
+
+                return _profile.Update(profile);
+            });
+        }
+
+        private Document streamToDocument(IFormFile file)
+        {
+            Document document = new Document();
+            byte[] bytes;
+
+            using (var fileStream = new MemoryStream())
             {
-                //_email.SendTrace(e.StackTrace);
-                return new ApiResult<Profile> { isSuccess = false, error = e.StackTrace };
+                file.CopyTo(fileStream);
+                bytes = fileStream.ToArray();
+                document.DocumentBase64 = Convert.ToBase64String(bytes);
+                document.Title = file.FileName;
+                document.Type = file.ContentType;
+                document.Created = DateTime.Today;
             }
+
+            return document;
         }
     }
 }

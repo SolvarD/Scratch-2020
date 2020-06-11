@@ -74,7 +74,7 @@ export class MessengerComponent {
   }
 
   async GetAllMessages() {
-    this.lastMessages = await this.messageService.getAll();
+    this.lastMessages = (await this.messageService.getAll()).data;
   }
 
   sendMessagePublic() {

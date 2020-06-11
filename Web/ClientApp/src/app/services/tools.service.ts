@@ -5,6 +5,8 @@ import { ContactMessage } from "../../models/contact";
 import { FormGroup } from "@angular/forms";
 import { Subject } from "rxjs";
 import { ProfileService } from "./profile.service";
+import { AppDocument } from "../../models/document";
+import { Profile } from "../../models/profile";
 
 @Injectable()
 export class ToolsService {
@@ -43,15 +45,12 @@ export class ToolsService {
     return window.btoa(binary);
   }
 
-  public static uploadFile(form: FormGroup, formControlName: string, file: File) {
+  public static uploadFile(attributName: string, file: File) {
     const reader = new FileReader();
     let emit = new Subject<{ formControlName, content }>();
 
     reader.addEventListener('load', () => {
-      form.controls[formControlName].value.content = <string>reader.result;
-      form.controls[formControlName].value.title = file.name;
-      form.controls[formControlName].value.type = file.type;
-      emit.next({ formControlName: formControlName, content: <string>reader.result })
+      emit.next({ formControlName: attributName, content: <string>reader.result })
     });
 
     if (file) {
@@ -61,10 +60,13 @@ export class ToolsService {
     return emit.asObservable();
   }
 
-  public static getCV() {
-    if (!ProfileService.owner.cv.content) { return; }
+  public static getCV(profile: Profile = null) {
+    if (!profile) {
+      profile = ProfileService.owner;
+    }
+    if (!profile.cv.documentBase64) { return; }
     var a = window.document.createElement('a');
-    a.href = window.URL.createObjectURL(ToolsService.converBase64toBlob(ProfileService.owner.cv.content.split(',')[1], ProfileService.owner.cv.type));
+    a.href = window.URL.createObjectURL(ToolsService.converBase64toBlob(ProfileService.owner.cv.documentBase64, ProfileService.owner.cv.type));
     a.download = ProfileService.owner.cv.title;
     document.body.appendChild(a)
     a.click();

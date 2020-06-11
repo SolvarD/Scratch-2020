@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../../models/base-component';
 import { ToolsService } from '../../services/tools.service';
-import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-nav-menu',

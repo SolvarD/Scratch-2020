@@ -21,7 +21,7 @@ export class MultiLanguageComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.languages = await this._languageService.getAll();
+    this.languages = (await this._languageService.getAll()).data;
 
     this.formLanguage = this._fb.group({
       languageId: [this._translateService.getDefaultLang(), [Validators.required]]

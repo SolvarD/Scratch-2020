@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataAccess.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace DataAccess.Entities
+namespace API.models
 {
-    public class Profile
+    public class ProfileForm
     {
         public int ProfileId { get; set; }
         public bool isPrincipal { get; set; }
@@ -16,7 +18,7 @@ namespace DataAccess.Entities
         public decimal Price { get; set; }
         public int DocumentId_Photo { get; set; }
         public int DocumentId_CV { get; set; }
-        public Document Cv { get; set; }
-        public Document Photo { get; set; }
+        public IFormFile Cv { get; set; }
+        public IFormFile Photo { get; set; }
     }
 }

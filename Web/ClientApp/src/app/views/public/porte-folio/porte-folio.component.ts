@@ -17,7 +17,7 @@ export class PorteFolioComponent implements OnInit {
 
   ngOnInit(): void {
     this.experienceService.getAll().then((res) => {
-      this.slides = res;
+      this.slides = res.data;
     });
   }
 

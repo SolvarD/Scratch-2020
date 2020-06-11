@@ -45,7 +45,7 @@ export class LoginComponent {
 
     if (this.formLogin.valid) {
       await this.userService.getByEmailPassword(email, password).then((user) => {
-        this.user = user;
+        this.user = user.data;
         this.toggle();
       }).catch((err) => {
         this.display401 = err.status == 401;

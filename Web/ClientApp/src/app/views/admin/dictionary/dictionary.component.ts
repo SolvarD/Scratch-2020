@@ -30,7 +30,7 @@ export class DictionaryComponent implements OnInit {
 
   async ngOnInit() {
     await this.populate();
-    this.languages = await this._languageService.getAll();
+    this.languages = (await this._languageService.getAll()).data;
 
     this.search.asObservable().subscribe((event: any) => {
       this.filter = event.target.value;

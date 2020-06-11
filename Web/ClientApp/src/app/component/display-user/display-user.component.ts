@@ -65,8 +65,8 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.languages = await this._languageService.getAll();
-    this.roles = await this._roleService.getAll();
+    this.languages = (await this._languageService.getAll()).data;
+    this.roles = (await this._roleService.getAll()).data;
     UserService.subCurrentUser.subscribe(() => {
       for (var key in this.formUser.controls) {
         if (this.canEdit) {

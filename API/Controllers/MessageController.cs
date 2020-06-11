@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Managers;
+using API.models;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,7 +16,7 @@ namespace API.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class MessageController : Controller
+    public class MessageController : CustomControllerBase
     {
         private readonly IMessageManager _messageManager;
         private readonly IEmailManager _email;
@@ -26,17 +27,9 @@ namespace API.Controllers
         }
         [HttpGet]
         [Route("GetAll")]
-        public async Task<List<Message>> GetAll()
+        public async Task<ActionResult<ApiResult<List<Message>>>> GetAll()
         {
-            try
-            {
-                return await _messageManager.GetAllMessages();
-            }
-            catch (Exception e)
-            {
-                _email.SendTrace(e.StackTrace);
-                return null;
-            }
+            return ReturnResponse(() => _messageManager.GetAllMessages());
         }
     }
 }

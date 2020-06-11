@@ -7,26 +7,20 @@
       <div>
         Presentation
       </div>      
-      <div>
-        {{proprietaire.presentation}}
-      </div>
+      <div [innerHtml]="proprietaire.presentation"></div>
     </div>
     <div class="blocs-info-container">
       <div class="bloc-info bloc direction-column">
         <div>
           Experiences
         </div>
-        <div>
-          {{proprietaire.pastPro}}
-        </div>
+        <div [innerHtml]="proprietaire.pastPro"></div>
       </div>
       <div class="bloc-info bloc direction-column">
         <div>
           Avantage de travailler avec moi
         </div>
-        <div>
-          {{proprietaire.advantage}}
-        </div>
+        <div [innerHtml]="proprietaire.advantage"></div>
       </div>
       <div class="bloc-info bloc direction-column">
         <div>
@@ -52,6 +46,6 @@
     </div>
   </div>
   <div class="photo-container">
-    <img class="personnal-pic" [src]="proprietaire.photo.content" alt="SOLVAR_DIMITRI" />
+    <img class="personnal-pic" [src]="'data:'+ proprietaire.photo.type +';base64,' +proprietaire.photo.documentBase64" alt="SOLVAR_DIMITRI" />
   </div>
 </div>

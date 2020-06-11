@@ -14,12 +14,12 @@ export class ProfilComponent implements OnInit {
   constructor(private profileService: ProfileService) { }
 
   async ngOnInit() {
-    this.profiles = await this.profileService.getAll();
+    this.profiles = (await this.profileService.getAll()).data;
     this.proprietaire = this.profiles.filter((profile) => { return profile.isPrincipal; })[0];
     console.log(this.profiles);
   }
 
   getCV(profile: Profile) {
-    ToolsService.getCV();
+    ToolsService.getCV(profile);
   }
 }

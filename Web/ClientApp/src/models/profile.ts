@@ -13,6 +13,4 @@ export class Profile {
 
   public cv: AppDocument;
   public photo: AppDocument;
-
-
 }

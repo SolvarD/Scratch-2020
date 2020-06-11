@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Message } from "../../models/message";
+import { ApiResult } from "../../models/api-result";
 
 @Injectable()
 export class MessageService {
@@ -10,7 +11,7 @@ export class MessageService {
   }
 
   getAll(){
-    return this.http.get<Message[]>(`${environment.API}/Message/GetAll`).toPromise();
+    return this.http.get<ApiResult<Message[]>>(`${environment.API}/Message/GetAll`).toPromise();
   }
 }
 

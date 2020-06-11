@@ -14,16 +14,16 @@ export class ProfileService {
   }
 
   getAll() {
-    return this.http.get<Profile[]>(`${environment.API}/profile/GetAll`).toPromise();
+    return this.http.get<ApiResult<Profile[]>>(`${environment.API}/profile/GetAll`).toPromise();
   }
   getOwner() {
-    return this.http.get<Profile>(`${environment.API}/profile/GetOwner`).toPromise().then((profile) => {
-      ProfileService.owner = profile;
+    return this.http.get<ApiResult<Profile>>(`${environment.API}/profile/GetOwner`).toPromise().then((profile) => {
+      ProfileService.owner = profile.data;
       return profile;
     });
   }
 
-  update(profile: Profile) {
+  update(profile: FormData) {
     return this.http.put<ApiResult<Profile>>(`${environment.API}/profile/update`, profile).toPromise().then((profile) => {
       ProfileService.owner = profile.data;
       return profile.data;

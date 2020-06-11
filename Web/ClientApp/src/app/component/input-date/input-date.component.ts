@@ -33,7 +33,7 @@ export class InputDateComponent extends BaseComponent implements OnInit {
   async ngOnInit() {
     this.date = this.parentFormGroup.get(this.parentFormControl).value ? this.parentFormGroup.get(this.parentFormControl).value.toLocaleDateString() : null;
     
-    this.languages = await this.languageService.getAll();
+    this.languages = (await this.languageService.getAll()).data;
     this.currentLanguage = this.languages.find(g => g.languageId == UserService.currentUser.languageId);
     this.formatDate = this.currentLanguage.format;
 

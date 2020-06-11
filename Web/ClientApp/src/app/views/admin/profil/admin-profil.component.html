@@ -30,17 +30,17 @@
     <div class="bloc-info bloc direction-column  ">
       <div class="input-file">
         <label for="photo" translate>PHOTO</label>
-        <input type="file" class="form-control-file border" accept="image/*" (change)="changePhoto(formProfile, $event, i)" />
+        <input type="file" class="form-control-file border" accept="image/*" (change)="changePhoto($event, i)" />
       </div>
       <div class="horizontal-center">
-      <img class="personnal-pic" [src]="profiles[i].photo.content" alt="SOLVAR_DIMITRI" />
+        <img class="personnal-pic" [src]="'data:'+profiles[i].photo.type + ';base64,'+profiles[i].photo.documentBase64" alt="SOLVAR_DIMITRI" />
       </div>
     </div>
 
     <div class="bloc-info bloc direction-column">
       <div class="form-group">
         <label for="learn_more" translate>CV</label>
-        <input type="file" id="learn_more" class="form-control-file border " (change)="changeCV(formProfile, $event, i)" />
+        <input type="file" id="learn_more" class="form-control-file border " (change)="changeCV($event)" />
       </div>
     </div>
     <div class="bloc-info bloc direction-column">

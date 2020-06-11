@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Managers;
+using API.models;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,12 +14,13 @@ namespace API.Controllers
     [Route("[controller]")]
     [Authorize]
     [ApiController]
-    public class SkillController : ControllerBase
+    public class SkillController : CustomControllerBase
     {
         private readonly IEmailManager _email;
         private readonly ISkillManager _skillManager;
 
-        public SkillController(IEmailManager emailManager,ISkillManager skillManager) {
+        public SkillController(IEmailManager emailManager, ISkillManager skillManager)
+        {
             _email = emailManager;
             _skillManager = skillManager;
         }
@@ -26,33 +28,17 @@ namespace API.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("GetAll")]
-        public async Task<List<SkillCategory>> GetAll()
+        public async Task<ActionResult<ApiResult<List<SkillCategory>>>> GetAll()
         {
-            try
-            {
-                return await _skillManager.GetAllSkills();
-            }
-            catch (Exception e)
-            {
-                _email.SendTrace(e.StackTrace);
-                return null;
-            }
+            return ReturnResponse(() => _skillManager.GetAllSkills());
         }
 
         [HttpGet]
         [AllowAnonymous]
         [Route("Detail/GetAll")]
-        public async Task<List<SkillCategoryDetail>> GetAllDetail()
+        public async Task<ActionResult<ApiResult<List<SkillCategoryDetail>>>> GetAllDetail()
         {
-            try
-            {
-                return await _skillManager.GetAllSkillsDetails();
-            }
-            catch (Exception e)
-            {
-                _email.SendTrace(e.StackTrace);
-                return null;
-            }
+            return ReturnResponse(() => _skillManager.GetAllSkillsDetails());
         }
     }
 }

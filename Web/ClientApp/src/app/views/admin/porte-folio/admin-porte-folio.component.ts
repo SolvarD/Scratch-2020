@@ -35,8 +35,8 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 
   async ngOnInit() {
 
-    this.skillsCategory = await this.skillService.getAllSkillDetail();
-    this.experiences = await this.experienceService.getAll();
+    this.skillsCategory = (await this.skillService.getAllSkillDetail()).data;
+    this.experiences = (await this.experienceService.getAll()).data;
     this.experiences.forEach((experience) => {
       let form = this.buildForm(experience);
       form.markAsUntouched();
@@ -107,8 +107,8 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
       }
 
       this.experienceService.save(item).then((res) => {
-        this.experiences[indexExperience] = res;
-        this.formsExperiences[indexExperience] = this.buildForm(res);
+        this.experiences[indexExperience] = res.data;
+        this.formsExperiences[indexExperience] = this.buildForm(res.data);
       });
     }
 
@@ -144,7 +144,8 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
      this.experienceService.deleteExperience(this.experienceToDelete.experienceId)
       .then((res) => {
         if (res) {
-
+          this.experiences.splice(this.experiences.indexOf(this.experienceToDelete), 1);
+          this.formsExperiences.splice(this.experiences.indexOf(this.experienceToDelete), 1);
         }
       });
   }

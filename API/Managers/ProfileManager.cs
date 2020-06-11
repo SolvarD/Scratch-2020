@@ -53,33 +53,34 @@ namespace API.Managers
         }
         public async Task<Profile> Update(Profile profile)
         {
-            var updatedProfile =_profileAccess.Update<Profile>("ProfileId", profile.ProfileId, profile, new List<string> {
+            var updatedProfile = _profileAccess.Update<Profile>("ProfileId", profile.ProfileId, profile, new List<string> {
                 "isPrincipal",
                 "Presentation",
                 "PastPro",
                 "WhyMe",
                 "Advantage",
-                "Price",
-                "DocumentId_Photo",
-                "DocumentId_CV"
+                "Price"
             });
 
-            var cv = _documentAccess.Update<Document>("DocumentId", profile.DocumentId_CV, profile.Cv, new List<string> { 
-                "Title",
-                "Created",
-                "Content",
-                "Type"
-            });
+            if (profile.Cv != null)
+            {
+                updatedProfile.Cv = _documentAccess.Update<Document>("DocumentId", profile.DocumentId_CV, profile.Cv, new List<string> {
+                    "Title",
+                    "Created",
+                    "DocumentBase64",
+                    "Type"
+                });
+            }
 
-            var photo = _documentAccess.Update<Document>("DocumentId", profile.DocumentId_Photo, profile.Photo, new List<string> {
-                "Title",
-                "Created",
-                "Content",
-                "Type"
-            });
-
-            updatedProfile.Cv = cv;
-            updatedProfile.Photo = photo;
+            if (profile.Photo != null)
+            {
+                updatedProfile.Photo = _documentAccess.Update<Document>("DocumentId", profile.DocumentId_Photo, profile.Photo, new List<string> {
+                    "Title",
+                    "Created",
+                    "DocumentBase64",
+                    "Type"
+                });
+            }
 
             return updatedProfile;
         }

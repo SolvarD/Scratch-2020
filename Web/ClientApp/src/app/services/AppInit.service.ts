@@ -10,7 +10,7 @@ export class AppInitService {
   initializeApp() {
     if (!UserService.currentUser || !UserService.currentUser.token) {
       return this.userService.getAnonymousLogin().then((user) => {
-        UserService.currentUser = user;
+        UserService.currentUser = user.data;
         return user;
       })
     }

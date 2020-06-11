@@ -46,7 +46,7 @@ export class UserComponent extends BaseComponent implements OnInit {
   }
 
   populate = async () => {
-    let tupleDictioanry = await this.userService.GetFilteredAndPagined(this.take, this.skip, this.filter);
+    let tupleDictioanry = (await this.userService.GetFilteredAndPagined(this.take, this.skip, this.filter)).data;
     this.users = tupleDictioanry.item1;
     this.infoPagination = tupleDictioanry.item2;
     this.pageSelector();

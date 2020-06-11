@@ -115,6 +115,7 @@ namespace API
             services.AddTransient<ISkillManager, SkillManager>();
             services.AddTransient<IExperienceManager, ExperienceManager>();
             services.AddTransient<IProfileManager, ProfileManager>();
+            services.AddTransient<IDocumentManager, DocumentManager>();
 
             services.AddSingleton<Requestor>(new Requestor(Configuration, "PorteFolio"));
             services.AddTransient<IEncryptManager, EncryptManager>();
@@ -142,8 +143,7 @@ namespace API
                     var user = new ContextCurrentUser(f.GetService<IUserManager>().Login().Result);
                     return user;
                 }
-            }
-             );
+            });
             //services.AddDistributedSqlServerCache((opt) =>
             //{
             //    opt.ConnectionString = Configuration["connectionStrings:PorteFolio"];

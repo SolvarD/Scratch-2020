@@ -384,7 +384,7 @@ declare @tmpDocument as TABLE
 (
     [Title] VARCHAR(MAX) NULL, 
     [Created] DATETIME NOT NULL, 
-    [Content] VARBINARY(MAX) NULL, 
+    [documentBase64] VARBINARY(MAX) NULL, 
     [Type] VARCHAR(MAX) NULL
 )
 
@@ -392,10 +392,10 @@ Insert Into @tmpDocument ([Created]) values (GETDATE())
 Insert Into @tmpDocument ([Created]) values (GETDATE())
 
 merge into Documents d using @tmpDocument tmpD
-on d.Title = tmpD.Title and d.[Content] = tmpD.[Content]
+on d.Title = tmpD.Title and d.[documentBase64] = tmpD.[documentBase64]
 when not matched then
-insert  ([Title] ,[Created] ,[Content] ,[Type]) values
-(tmpD.[Title], tmpD.[Created], tmpD.[Content], tmpD.[Type]);
+insert  ([Title] ,[Created] ,[documentBase64] ,[Type]) values
+(tmpD.[Title], tmpD.[Created], tmpD.[documentBase64], tmpD.[Type]);
 
 
 declare @tmpProfiles as table

@@ -8,7 +8,13 @@ namespace API.models
     public class ApiResult<T>
     {
         public T Data { get; set; }
-        public bool isSuccess { get; set; } = true;
+        public bool isSuccess
+        {
+            get
+            {
+                return string.IsNullOrEmpty(error);
+            }
+        }
         public string error { get; set; }
     }
 }

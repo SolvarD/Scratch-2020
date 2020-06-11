@@ -19,8 +19,8 @@ export class AdminSkillsComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.skillService.getAll().then((res) => {
-      this.skillsCategory = res;
-      res.forEach((category: SkillCategory) => {
+      this.skillsCategory = res.data;
+      res.data.forEach((category: SkillCategory) => {
         this.formCategories.push(this.buildForm(category));
       });
 
