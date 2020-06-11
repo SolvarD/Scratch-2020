@@ -95,7 +95,7 @@ export class AdminProfilComponent extends BaseComponent implements OnInit {
 
     ToolsService.uploadFile(formControlName, this.files.photo).subscribe((item) => {
       if (item.formControlName == formControlName) {
-        this.profiles[index].photo.documentBase64 = item.content;
+        this.profiles[index].photo.documentBase64 = item.content.split(',')[1];
       }
     });
   }

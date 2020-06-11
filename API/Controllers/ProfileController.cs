@@ -42,7 +42,7 @@ namespace API.Controllers
             return ReturnResponse(() => _profile.GetOwner());
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("Update")]
         public async Task<ActionResult<ApiResult<Profile>>> Update([FromForm]ProfileForm profileForm)
         {
@@ -53,13 +53,11 @@ namespace API.Controllers
 
                 if (profileForm.Cv != null)
                 {
-                    cv = streamToDocument(profileForm.Cv);
-                    cv.DocumentId = profileForm.DocumentId_CV;
+                    cv = new Document(profileForm.DocumentId_CV, profileForm.Cv);
                 }
                 if (profileForm.Photo != null)
                 {
-                    photo = streamToDocument(profileForm.Photo);
-                    photo.DocumentId = profileForm.DocumentId_Photo;
+                    photo = new Document(profileForm.DocumentId_Photo, profileForm.Photo);
                 }
 
                 Profile profile = new Profile
@@ -79,24 +77,6 @@ namespace API.Controllers
 
                 return _profile.Update(profile);
             });
-        }
-
-        private Document streamToDocument(IFormFile file)
-        {
-            Document document = new Document();
-            byte[] bytes;
-
-            using (var fileStream = new MemoryStream())
-            {
-                file.CopyTo(fileStream);
-                bytes = fileStream.ToArray();
-                document.DocumentBase64 = Convert.ToBase64String(bytes);
-                document.Title = file.FileName;
-                document.Type = file.ContentType;
-                document.Created = DateTime.Today;
-            }
-
-            return document;
         }
     }
 }

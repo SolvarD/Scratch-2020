@@ -32,19 +32,17 @@ namespace API.Controllers
             return ReturnResponse(() => _documentManager.GetAll());
         }
 
-        [HttpPut]
-        [AllowAnonymous]
+        [HttpPost]
         [Route("Update")]
-        public async Task<ActionResult<ApiResult<Document>>> Update(Document document)
+        public async Task<ActionResult<ApiResult<Document>>> Update(DocumentForm document)
         {
-            return ReturnResponse(async () => _documentManager.Update(document));
+            return ReturnResponse(async () =>_documentManager.Update(new Document(document.DocumentId, document.Document)));
         }
         [HttpPost]
-        [AllowAnonymous]
         [Route("Create")]
-        public async Task<ActionResult<ApiResult<Document>>> Create(Document document)
+        public async Task<ActionResult<ApiResult<Document>>> Create(DocumentForm document)
         {
-            return ReturnResponse(async () => _documentManager.Create(document));
+            return ReturnResponse(async () => _documentManager.Create(new Document(document.DocumentId, document.Document)));
         }
     }
 }

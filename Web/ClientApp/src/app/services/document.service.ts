@@ -13,10 +13,10 @@ export class DocumentService {
   getAll() {
     return this.http.get<AppDocument[]>(`${environment.API}/document/GetAll`).toPromise();
   }
-  update(document: AppDocument) {
-    return this.http.put<ApiResult<AppDocument>>(`${environment.API}/document/update`, document).toPromise();
+  update(document: FormData) {
+    return this.http.post<ApiResult<AppDocument>>(`${environment.API}/document/update`, document).toPromise();
   }
-  create(document: AppDocument) {
+  create(document: FormData) {
     return this.http.post<ApiResult<AppDocument>>(`${environment.API}/document/create`, document).toPromise();
   }
 }

@@ -24,7 +24,7 @@ export class ProfileService {
   }
 
   update(profile: FormData) {
-    return this.http.put<ApiResult<Profile>>(`${environment.API}/profile/update`, profile).toPromise().then((profile) => {
+    return this.http.post<ApiResult<Profile>>(`${environment.API}/profile/update`, profile).toPromise().then((profile) => {
       ProfileService.owner = profile.data;
       return profile.data;
     });
