@@ -53,14 +53,16 @@ namespace API.Controllers
         [Route("Login")]
         public async Task<ActionResult<ApiResult<User>>> Login(User user)
         {
-            var result = ReturnResponse(() => _userManager.Login(user.Email, user.Password));
-            User loggedUser = result.Value.Data;
+            User loggedUser = await _userManager.Login(user.Email, user.Password);
+
             if (loggedUser == null)
             {
                 return Unauthorized();
             }
 
-            return Ok(result);
+            return ReturnResponse(async () => {
+                return loggedUser;
+            });
         }
 
         [HttpGet]
