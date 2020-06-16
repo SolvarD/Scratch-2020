@@ -88,7 +88,7 @@ export class UserComponent extends BaseComponent implements OnInit {
   pageSelector() {
     let count = 1;
     this.pages = [];
-    while (count <= this.infoPagination.total / this.take) {
+    while (count <= Math.ceil(this.infoPagination.total / this.take)) {
       this.pages.push(count);
       count += 1;
     }

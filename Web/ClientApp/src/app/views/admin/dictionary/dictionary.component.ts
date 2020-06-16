@@ -6,13 +6,14 @@ import { TranslationService } from '../../../services/translation.service';
 import { LanguageService } from '../../../services/language.service';
 import { InfoPagination } from '../../../../models/info-pagination';
 import { Subject } from 'rxjs';
+import { BaseComponent } from '../../../../models/base-component';
 
 @Component({
   selector: 'app-dictionary',
   templateUrl: './dictionary.component.html',
   styleUrls: ['./dictionary.component.less']
 })
-export class DictionaryComponent implements OnInit {
+export class DictionaryComponent extends BaseComponent implements OnInit {
   dictionaryLanguage: DictionaryLanguage[] = [];
   infoPagination: InfoPagination;
   languages: Language[] = [];
@@ -25,7 +26,7 @@ export class DictionaryComponent implements OnInit {
   search: Subject<string> = new Subject<string>();
 
   constructor(private _translationService: TranslationService, private _languageService: LanguageService) {
-
+    super();
   }
 
   async ngOnInit() {
@@ -51,7 +52,7 @@ export class DictionaryComponent implements OnInit {
   }
 
   async nextPage() {
-    if ((this.skip + this.take) == this.infoPagination.total) {
+    if ((this.skip + this.take) >= this.infoPagination.total) {
       return;
     }
     this.skip += this.take;
@@ -80,9 +81,18 @@ export class DictionaryComponent implements OnInit {
   pageSelector() {
     let count = 1;
     this.pages = [];
-    while (count <= this.infoPagination.total / this.take) {
+    while (count <= Math.ceil(this.infoPagination.total / this.take)) {
       this.pages.push(count);
       count += 1;
     }
   }
+
+  edit(languages: any) {
+    languages.edit = true;
+  }
+  cancelEdit(languages: any) {
+    console.log(languages);
+    languages.edit = false;
+  }
+  save() { }
 }

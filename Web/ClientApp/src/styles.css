@@ -149,6 +149,9 @@ a {
   justify-content: center;
   text-align: center;
 }
+.vertical-center {
+  vertical-align: middle !important;
+}
 .direction-column {
   flex-direction: column;
 }

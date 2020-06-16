@@ -42,6 +42,9 @@
         <label for="learn_more" translate>CV</label>
         <input type="file" id="learn_more" class="form-control-file border " (change)="changeCV($event)" />
       </div>
+      <div class="horizontal-center">
+        {{profiles[i].cv.title}}
+      </div>
     </div>
     <div class="bloc-info bloc direction-column">
 

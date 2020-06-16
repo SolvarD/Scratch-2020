@@ -33,11 +33,11 @@ export class AdminProfilComponent extends BaseComponent implements OnInit {
       documentId_Photo: [profile.documentId_Photo],
       documentId_CV: [profile.documentId_CV],
       isPrincipal: [profile.isPrincipal],
-      presentation: [{ value: profile.presentation, disabled: !this.canEdit }],
-      pastPro: [{ value: profile.pastPro, disabled: !this.canEdit }],
-      whyMe: [{ value: profile.whyMe, disabled: !this.canEdit }],
-      advantage: [{ value: profile.advantage, disabled: !this.canEdit }],
-      price: [{ value: profile.price, disabled: !this.canEdit }],
+      presentation: [{ value: profile.presentation || '', disabled: !this.canEdit }],
+      pastPro: [{ value: profile.pastPro || '', disabled: !this.canEdit }],
+      whyMe: [{ value: profile.whyMe || '', disabled: !this.canEdit }],
+      advantage: [{ value: profile.advantage || '', disabled: !this.canEdit }],
+      price: [{ value: profile.price || 0, disabled: !this.canEdit }],
       //photo: this._fb.group({
       //  documentId: [profile.photo.documentId],
       //  title: [profile.photo.title],
@@ -85,7 +85,6 @@ export class AdminProfilComponent extends BaseComponent implements OnInit {
         formData.append(key, profile[key]);
       }      
     });
-
 
     this.profileService.update(formData);
   }

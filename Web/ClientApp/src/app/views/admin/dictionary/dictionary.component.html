@@ -18,14 +18,26 @@
 
       <tbody>
         <tr *ngFor="let dictionary of displayLanguage | keyvalue">
-          <td>{{dictionary.key}}</td>
-          <td *ngFor="let item of dictionary.value"> {{item.label}}</td>
-          <td></td>
+          <td class="vertical-center">{{dictionary.key}}</td>
+          <td *ngFor="let item of dictionary.value" class="vertical-center">
+            <span *ngIf="!dictionary.edit">
+              {{item.label}}
+            </span>
+            <div *ngIf="dictionary.edit">
+              <input class="form-control" type="text" [value]="item.label" />
+            </div>
+          </td>
+          <td class="vertical-center">
+            <i *ngIf="!dictionary.edit" [ngClass]="{'forbidden': !canEdit}" class="fas fa-edit pointer" (click)="edit(dictionary)"></i>
+
+            <i *ngIf="dictionary.edit" [ngClass]="{'forbidden': !canEdit}" class="fas fa-times-circle" (click)="cancelEdit(dictionary)"></i>
+            <i *ngIf="dictionary.edit" [ngClass]="{'forbidden': !canEdit}" class="fas fa-save" (click)="save()"></i>
+          </td>
         </tr>
       </tbody>
 
     </table>
-    <ul class="pagination" *ngIf="pages.length">
+    <ul class="pagination pointer" *ngIf="pages.length">
       <li class="page-item"><a class="page-link" (click)="previewPage()">Previous</a></li>
       <li *ngFor="let page of pages" [ngClass]="{'active':isPageActive(page)}" class="page-item"><a (click)="gotToPage(page)" class="page-link">{{page}}</a></li>
 
