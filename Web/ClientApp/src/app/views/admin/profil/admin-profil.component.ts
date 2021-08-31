@@ -63,16 +63,6 @@ export class AdminProfilComponent extends BaseComponent implements OnInit {
 
     const formData = new FormData();
 
-    //let profile = form.value as Profile;
-
-    //await this.documentService.update(profile.cv);
-    //await this.documentService.update(profile.photo);
-
-    //let simpleProfile = Object.assign({}, profile);
-    //delete simpleProfile.cv;
-    //delete simpleProfile.photo;
-
-    //await this.profileService.update(simpleProfile);
     for (const key of Object.keys(this.files)) {
       if (this.files[key]) {
         formData.append(key, this.files[key]);
