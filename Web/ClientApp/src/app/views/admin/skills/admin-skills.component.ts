@@ -5,9 +5,10 @@ import { BaseComponent } from '../../../../models/base-component';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-admin-skills',
-  templateUrl: './admin-skills.component.html',
-  styleUrls: ['./admin-skills.component.less']
+    selector: 'app-admin-skills',
+    templateUrl: './admin-skills.component.html',
+    styleUrls: ['./admin-skills.component.less'],
+    standalone: false
 })
 export class AdminSkillsComponent extends BaseComponent implements OnInit {
 

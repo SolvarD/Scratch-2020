@@ -7,9 +7,10 @@ import { ToolsService } from '../../../services/tools.service';
 import { DocumentService } from '../../../services/document.service';
 
 @Component({
-  selector: 'app-admin-profil',
-  templateUrl: './admin-profil.component.html',
-  styleUrls: ['./admin-profil.component.less']
+    selector: 'app-admin-profil',
+    templateUrl: './admin-profil.component.html',
+    styleUrls: ['./admin-profil.component.less'],
+    standalone: false
 })
 
 export class AdminProfilComponent extends BaseComponent implements OnInit {

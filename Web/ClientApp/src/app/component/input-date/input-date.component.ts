@@ -9,9 +9,10 @@ import { FormControlName, UntypedFormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-date',
-  templateUrl: './input-date.component.html',
-  styleUrls: ['./input-date.component.less']
+    selector: 'app-date',
+    templateUrl: './input-date.component.html',
+    styleUrls: ['./input-date.component.less'],
+    standalone: false
 })
 export class InputDateComponent extends BaseComponent implements OnInit {
 

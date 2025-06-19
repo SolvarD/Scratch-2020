@@ -4,9 +4,10 @@ import { ContactService } from '../../../services/contact.service';
 import { ContactMessage } from '../../../../models/contact';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.less']
+    selector: 'app-contact',
+    templateUrl: './contact.component.html',
+    styleUrls: ['./contact.component.less'],
+    standalone: false
 })
 export class ContactComponent implements OnInit {
   formContact: UntypedFormGroup;

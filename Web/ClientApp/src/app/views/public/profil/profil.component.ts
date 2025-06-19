@@ -4,9 +4,10 @@ import { Profile } from '../../../../models/profile';
 import { ToolsService } from '../../../services/tools.service';
 
 @Component({
-  selector: 'app-profil',
-  templateUrl: './profil.component.html',
-  styleUrls: ['./profil.component.less']
+    selector: 'app-profil',
+    templateUrl: './profil.component.html',
+    styleUrls: ['./profil.component.less'],
+    standalone: false
 })
 export class ProfilComponent implements OnInit {
   profiles: Array<Profile> = [];

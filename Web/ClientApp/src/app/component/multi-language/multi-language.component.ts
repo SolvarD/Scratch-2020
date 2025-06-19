@@ -8,9 +8,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-multi-language',
-  templateUrl: './multi-language.component.html',
-  styleUrls: ['./multi-language.component.less']
+    selector: 'app-multi-language',
+    templateUrl: './multi-language.component.html',
+    styleUrls: ['./multi-language.component.less'],
+    standalone: false
 })
 export class MultiLanguageComponent implements OnInit {
   formLanguage: UntypedFormGroup;

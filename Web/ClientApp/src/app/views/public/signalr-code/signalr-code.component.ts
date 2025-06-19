@@ -2,8 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-signalr-code',
-  templateUrl: './signalr-code.component.html'
+    selector: 'app-signalr-code',
+    templateUrl: './signalr-code.component.html',
+    standalone: false
 })
 export class SignalRCodeComponent {
 

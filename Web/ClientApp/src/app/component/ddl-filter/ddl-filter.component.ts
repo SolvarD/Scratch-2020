@@ -3,9 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-ddl-filter',
-  templateUrl: './ddl-filter.component.html',
-  styleUrls: ['./ddl-filter.component.less']
+    selector: 'app-ddl-filter',
+    templateUrl: './ddl-filter.component.html',
+    styleUrls: ['./ddl-filter.component.less'],
+    standalone: false
 })
 export class DDLComponent implements OnInit {
 

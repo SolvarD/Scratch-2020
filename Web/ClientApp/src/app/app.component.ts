@@ -5,9 +5,10 @@ import { UserService } from './services/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SpinnerService } from './services/spinner.service';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.less']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.less'],
+    standalone: false
 })
 export class AppComponent {
   title = 'app';

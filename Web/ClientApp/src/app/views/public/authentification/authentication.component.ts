@@ -2,8 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-authentication',
-  templateUrl: './authentication.component.html'
+    selector: 'app-authentication',
+    templateUrl: './authentication.component.html',
+    standalone: false
 })
 export class AuthenticationComponent {
 

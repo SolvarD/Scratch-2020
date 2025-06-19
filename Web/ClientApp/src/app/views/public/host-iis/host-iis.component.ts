@@ -2,8 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-host-iis',
-  templateUrl: './host-iis.component.html'
+    selector: 'app-host-iis',
+    templateUrl: './host-iis.component.html',
+    standalone: false
 })
 export class HostIISComponent {
 

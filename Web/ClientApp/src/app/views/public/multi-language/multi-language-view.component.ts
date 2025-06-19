@@ -2,8 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-multi-language-view',
-  templateUrl: './multi-language-view.component.html'
+    selector: 'app-multi-language-view',
+    templateUrl: './multi-language-view.component.html',
+    standalone: false
 })
 export class MultiLanguageViewComponent {
 

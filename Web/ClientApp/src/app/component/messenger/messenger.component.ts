@@ -8,32 +8,33 @@ import { UserService } from '../../services/user.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-messenger',
-  templateUrl: './messenger.component.html',
-  styleUrls: ['./messenger.component.less'],
-  animations: [trigger('sizeChat', [
-    state('open', style({
-      flex: '1'
-    })),
-    state('closed', style({
-      display: 'none'
-    })),
-    state('justHeader', style({
-      height: '50px'
-    })),
-    state('hideMessage', style({
-      height: '0px'
-    })),
-    state('hideInput', style({
-      display: 'none'
-    })),
-    transition('open <=> *', [
-      animate('0s')
-    ]),
-    transition('open <=> hideInput', [
-      animate('0s')
-    ])
-  ])]
+    selector: 'app-messenger',
+    templateUrl: './messenger.component.html',
+    styleUrls: ['./messenger.component.less'],
+    animations: [trigger('sizeChat', [
+            state('open', style({
+                flex: '1'
+            })),
+            state('closed', style({
+                display: 'none'
+            })),
+            state('justHeader', style({
+                height: '50px'
+            })),
+            state('hideMessage', style({
+                height: '0px'
+            })),
+            state('hideInput', style({
+                display: 'none'
+            })),
+            transition('open <=> *', [
+                animate('0s')
+            ]),
+            transition('open <=> hideInput', [
+                animate('0s')
+            ])
+        ])],
+    standalone: false
 })
 export class MessengerComponent {
   public lastMessages: Array<Message> = [];

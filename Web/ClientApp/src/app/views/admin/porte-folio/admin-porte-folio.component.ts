@@ -9,9 +9,10 @@ import { DatePipe } from '@angular/common';
 import { SkillService } from '../../../services/skill.service';
 
 @Component({
-  selector: 'app-admin-porte-folio',
-  templateUrl: './admin-porte-folio.component.html',
-  styleUrls: ['./admin-porte-folio.component.less']
+    selector: 'app-admin-porte-folio',
+    templateUrl: './admin-porte-folio.component.html',
+    styleUrls: ['./admin-porte-folio.component.less'],
+    standalone: false
 })
 export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 

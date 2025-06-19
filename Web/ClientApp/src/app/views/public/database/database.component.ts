@@ -2,8 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-database',
-  templateUrl: './database.component.html'
+    selector: 'app-database',
+    templateUrl: './database.component.html',
+    standalone: false
 })
 export class DataBaseComponent {
 

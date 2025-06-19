@@ -7,9 +7,10 @@ import { Subject } from 'rxjs';
 import { InfoPagination } from '../../../../models/info-pagination';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['user.component.less']
+    selector: 'app-user',
+    templateUrl: './user.component.html',
+    styleUrls: ['user.component.less'],
+    standalone: false
 })
 
 export class UserComponent extends BaseComponent implements OnInit {

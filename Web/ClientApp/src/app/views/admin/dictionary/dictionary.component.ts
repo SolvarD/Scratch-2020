@@ -9,9 +9,10 @@ import { Subject } from 'rxjs';
 import { BaseComponent } from '../../../../models/base-component';
 
 @Component({
-  selector: 'app-dictionary',
-  templateUrl: './dictionary.component.html',
-  styleUrls: ['./dictionary.component.less']
+    selector: 'app-dictionary',
+    templateUrl: './dictionary.component.html',
+    styleUrls: ['./dictionary.component.less'],
+    standalone: false
 })
 export class DictionaryComponent extends BaseComponent implements OnInit {
   dictionaryLanguage: DictionaryLanguage[] = [];

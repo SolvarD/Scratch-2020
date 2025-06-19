@@ -15,9 +15,10 @@ import { BaseComponent } from '../../../models/base-component';
 import { parse } from 'querystring';
 
 @Component({
-  selector: 'app-display-user',
-  templateUrl: './display-user.component.html',
-  styleUrls: ['./display-user.component.less']
+    selector: 'app-display-user',
+    templateUrl: './display-user.component.html',
+    styleUrls: ['./display-user.component.less'],
+    standalone: false
 })
 export class DisplayUserComponent extends BaseComponent implements OnInit {
 

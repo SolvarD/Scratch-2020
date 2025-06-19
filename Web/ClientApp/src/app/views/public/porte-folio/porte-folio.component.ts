@@ -3,9 +3,10 @@ import { ExperienceService } from '../../../services/experience.service';
 import { Experience } from '../../../../models/experience';
 
 @Component({
-  selector: 'app-porte-folio',
-  templateUrl: './porte-folio.component.html',
-  styleUrls: ['./porte-folio.component.less']
+    selector: 'app-porte-folio',
+    templateUrl: './porte-folio.component.html',
+    styleUrls: ['./porte-folio.component.less'],
+    standalone: false
 })
 export class PorteFolioComponent implements OnInit {
   currentSlide: number = 0;

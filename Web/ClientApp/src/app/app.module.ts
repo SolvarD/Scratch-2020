@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -104,11 +104,12 @@ registerLocaleData(localeFr, 'fr-FR');
             provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
         },
         AppInitService,
-        {
-            provide: APP_INITIALIZER, useFactory: (appInitService: AppInitService) => {
+        provideAppInitializer(() => {
+        const initializerFn = ((appInitService: AppInitService) => {
                 return () => appInitService.initializeApp();
-            }, deps: [AppInitService], multi: true
-        },
+            })(inject(AppInitService));
+        return initializerFn();
+      }),
         WeatherforecastService,
         HubRealtimeService,
         UserService,

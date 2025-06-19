@@ -15,9 +15,10 @@ import { BaseComponent } from '../../../models/base-component';
 import { parse } from 'querystring';
 
 @Component({
-  selector: 'app-modal-confirm',
-  templateUrl: './modal-confirm.component.html',
-  styleUrls: ['./modal-confirm.component.less']
+    selector: 'app-modal-confirm',
+    templateUrl: './modal-confirm.component.html',
+    styleUrls: ['./modal-confirm.component.less'],
+    standalone: false
 })
 export class ModalConfirmComponent implements OnInit {
 

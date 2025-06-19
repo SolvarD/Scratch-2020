@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-prices',
-  templateUrl: './prices.component.html',
-  styleUrls: ['./prices.component.less']
+    selector: 'app-prices',
+    templateUrl: './prices.component.html',
+    styleUrls: ['./prices.component.less'],
+    standalone: false
 })
 export class PricesComponent implements OnInit {
 
