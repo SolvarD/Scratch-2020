@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, Router, ActivatedRouteSnapshot } from "@angular/router";
+import { Router, ActivatedRouteSnapshot } from "@angular/router";
 import { UserService } from "./user.service";
 import { enumRole } from "../../models/user";
 import { BaseComponent } from "../../models/base-component";
 
 @Injectable()
-export class AuthGuard extends BaseComponent implements CanActivate {
+export class AuthGuard extends BaseComponent  {
   constructor(
     public router: Router,
     private user: UserService
