@@ -33,7 +33,7 @@ export class SignalRCodeComponent {
       });`;
   public JS: string = `
       import { Injectable } from "@angular/core";
-      import * as SignalR from "@aspnet/signalr";
+      import * as SignalR from "@microsoft/signalr";
       import { Subject } from "rxjs";
 
       @Injectable({

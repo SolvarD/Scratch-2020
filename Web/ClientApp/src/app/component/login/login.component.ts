@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { HubRealtimeService } from '../../services/hub-realtime';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
 import { MessageService } from '../../services/message.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -18,13 +18,13 @@ export class LoginComponent {
   @Input()
   height: number = 38;
 
-  formLogin: FormGroup;
+  formLogin: UntypedFormGroup;
 
   displayModal: boolean = false;
   user: User = new User();
   display401: boolean = false;
 
-  constructor(private hub: HubRealtimeService, private userService: UserService, private _fb: FormBuilder, public router: Router) {
+  constructor(private hub: HubRealtimeService, private userService: UserService, private _fb: UntypedFormBuilder, public router: Router) {
     if (UserService.currentUser.userId) {
       this.user = UserService.currentUser;
     }

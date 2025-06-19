@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ContactService } from '../../../services/contact.service';
 import { ContactMessage } from '../../../../models/contact';
 
@@ -9,13 +9,13 @@ import { ContactMessage } from '../../../../models/contact';
   styleUrls: ['./contact.component.less']
 })
 export class ContactComponent implements OnInit {
-  formContact: FormGroup;
+  formContact: UntypedFormGroup;
   hasChange: boolean = false;
   messageSend: boolean = false;
   messageError: boolean = false;
   messageSending: boolean = false;
 
-  constructor(private _fb: FormBuilder, private contactService: ContactService) {
+  constructor(private _fb: UntypedFormBuilder, private contactService: ContactService) {
 
   }
   ngOnInit(): void {

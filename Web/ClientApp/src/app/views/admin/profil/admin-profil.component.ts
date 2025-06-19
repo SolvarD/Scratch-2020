@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Profile } from '../../../../models/profile';
 import { ProfileService } from '../../../services/profile.service';
 import { BaseComponent } from '../../../../models/base-component';
@@ -15,10 +15,10 @@ import { DocumentService } from '../../../services/document.service';
 export class AdminProfilComponent extends BaseComponent implements OnInit {
 
   profiles: Profile[] = [];
-  formProfiles: FormGroup[] = [];
+  formProfiles: UntypedFormGroup[] = [];
   files: { photo: File, cv: File } = { photo: null, cv: null };
 
-  constructor(private _fb: FormBuilder, private profileService: ProfileService, private documentService: DocumentService) { super(); }
+  constructor(private _fb: UntypedFormBuilder, private profileService: ProfileService, private documentService: DocumentService) { super(); }
 
   async ngOnInit() {
     this.profiles = (await this.profileService.getAll()).data;
@@ -59,7 +59,7 @@ export class AdminProfilComponent extends BaseComponent implements OnInit {
     return true;
   }
 
-  async onSubmit(form: FormGroup) {
+  async onSubmit(form: UntypedFormGroup) {
 
     const formData = new FormData();
 

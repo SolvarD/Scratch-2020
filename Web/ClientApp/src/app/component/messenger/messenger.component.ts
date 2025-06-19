@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { HubRealtimeService } from '../../services/hub-realtime';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
 import { MessageService } from '../../services/message.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -46,7 +46,7 @@ export class MessengerComponent {
   width: number = 320;
 
   private origineSize = this.height;
-  formMessenger: FormGroup;
+  formMessenger: UntypedFormGroup;
   message: Message = new Message();
   currentUserTag: string = UserService.currentUser.userName;
   titleMessenger: string = UserService.currentUser.userName;
@@ -55,7 +55,7 @@ export class MessengerComponent {
   newMessage: boolean = false;
   stopBlink: NodeJS.Timeout;
 
-  constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: FormBuilder, private messageService: MessageService, private titleService: Title) {
+  constructor(private hub: HubRealtimeService, private ref: ChangeDetectorRef, private _fb: UntypedFormBuilder, private messageService: MessageService, private titleService: Title) {
 
     this.formMessenger = this._fb.group({
       messageToSend: ["", [Validators.required]]

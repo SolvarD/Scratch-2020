@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import * as SignalR from "@aspnet/signalr";
+import * as SignalR from "@microsoft/signalr";
 import { Subject } from "rxjs";
 import { environment } from "../../environments/environment";
 import { Message } from "../../models/message";

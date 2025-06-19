@@ -5,7 +5,7 @@ import { LanguageService } from '../../services/language.service';
 import { Language } from '../../../models/language';
 import { BaseComponent } from '../../../models/base-component';
 import { UserService } from '../../services/user.service';
-import { FormControlName, FormGroup, FormControl } from '@angular/forms';
+import { FormControlName, UntypedFormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -18,7 +18,7 @@ export class InputDateComponent extends BaseComponent implements OnInit {
   search: Subject<string> = new Subject<string>();
   date: string = '';
   @Input()
-  parentFormGroup: FormGroup;
+  parentFormGroup: UntypedFormGroup;
   @Input()
   parentFormControl: string = '';
   @Output()

@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { HubRealtimeService } from '../../services/hub-realtime';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
 import { LanguageService } from '../../services/language.service';
 import { Language } from '../../../models/language';
@@ -13,10 +13,10 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./multi-language.component.less']
 })
 export class MultiLanguageComponent implements OnInit {
-  formLanguage: FormGroup;
+  formLanguage: UntypedFormGroup;
   languages: Language[] = [];
 
-  constructor(private _fb: FormBuilder, private _languageService: LanguageService, private _translateService: TranslateService, private _userService: UserService) {
+  constructor(private _fb: UntypedFormBuilder, private _languageService: LanguageService, private _translateService: TranslateService, private _userService: UserService) {
    
   }
 

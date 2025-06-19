@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExperienceService } from '../../../services/experience.service';
 import { Experience } from '../../../../models/experience';
 import { BaseComponent } from '../../../../models/base-component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { SkillCategoryDetail, SkillCategory } from '../../../../models/skill';
 import { DatePipe } from '@angular/common';
@@ -20,7 +20,7 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
   displayBloc: boolean[] = [];
   editExperiences: boolean[] = [];
 
-  formsExperiences: FormGroup[] = [];
+  formsExperiences: UntypedFormGroup[] = [];
   showDeleteExperience: boolean = false;
   textDelete: string;
   experienceToDelete: Experience;
@@ -29,7 +29,7 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 
   skillByExperienceToRemove: Array<any[]> = [];
 
-  constructor(private experienceService: ExperienceService, private _fb: FormBuilder, private skillService: SkillService) {
+  constructor(private experienceService: ExperienceService, private _fb: UntypedFormBuilder, private skillService: SkillService) {
     super();
   }
 
@@ -95,7 +95,7 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
     this.editExperiences[bloc] = false;
   }
 
-  async onSubmit(form: FormGroup, skills: SkillCategoryDetail[], indexExperience: number) {
+  async onSubmit(form: UntypedFormGroup, skills: SkillCategoryDetail[], indexExperience: number) {
 
     if (form.valid) {
       let item = form.value as Experience;
@@ -114,7 +114,7 @@ export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 
   }
 
-  isValidField(form: FormGroup, field: string) {
+  isValidField(form: UntypedFormGroup, field: string) {
     if (!(form.get(field).dirty || form.get(field).touched)) {
       return true;
     }

@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef, OnInit, Output } from '@angular/core';
 import { HubRealtimeService } from '../../services/hub-realtime';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
 import { MessageService } from '../../services/message.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -21,7 +21,7 @@ import { parse } from 'querystring';
 })
 export class DisplayUserComponent extends BaseComponent implements OnInit {
 
-  formUser: FormGroup;
+  formUser: UntypedFormGroup;
   private _user: User = new User();
   languages: Language[] = [];
   roles: Role[] = [];
@@ -42,7 +42,7 @@ export class DisplayUserComponent extends BaseComponent implements OnInit {
   close: Subject<boolean> = new Subject<boolean>();
 
   constructor(private _languageService: LanguageService, private userService: UserService,
-    private _fb: FormBuilder, private _roleService: RoleService) {
+    private _fb: UntypedFormBuilder, private _roleService: RoleService) {
     super();
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SkillService } from '../../../services/skill.service';
 import { SkillCategory, SkillCategoryDetail } from '../../../../models/skill';
 import { BaseComponent } from '../../../../models/base-component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-skills',
@@ -12,9 +12,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AdminSkillsComponent extends BaseComponent implements OnInit {
 
   skillsCategory: SkillCategory[] = [];
-  formCategories: FormGroup[] = [];
+  formCategories: UntypedFormGroup[] = [];
 
-  constructor(private skillService: SkillService, private _fb: FormBuilder) { super(); }
+  constructor(private skillService: SkillService, private _fb: UntypedFormBuilder) { super(); }
 
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class AdminSkillsComponent extends BaseComponent implements OnInit {
     });
   }
 
-  isValidField(form: FormGroup, field: string) {
+  isValidField(form: UntypedFormGroup, field: string) {
     if (!(form.get(field).dirty || form.get(field).touched)) {
       return true;
     }
@@ -53,7 +53,7 @@ export class AdminSkillsComponent extends BaseComponent implements OnInit {
     this.skillsCategory.unshift(new SkillCategory());
   }
 
-  saveCategory(category: FormGroup) {
+  saveCategory(category: UntypedFormGroup) {
     console.log(category.value);
   }
 
