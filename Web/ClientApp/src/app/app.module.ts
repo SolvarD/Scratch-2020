@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './component/nav-menu/nav-menu.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -58,81 +58,73 @@ import { ProfileService } from './services/profile.service';
 import { ToolsService } from './services/tools.service';
 import { DocumentService } from './services/document.service';
 registerLocaleData(localeFr, 'fr-FR');
-@NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    LoginComponent,
-    UserComponent,
-    ErrorComponent,
-    MessengerComponent,
-    SignalRCodeComponent,
-    DataBaseComponent,
-    HostIISComponent,
-    MultiLanguageComponent,
-    MultiLanguageViewComponent,
-    AuthenticationComponent,
-    DictionaryComponent,
-    DisplayUserComponent,
-    ModalConfirmComponent,
-    ContactComponent,
-    PorteFolioComponent,
-    ProfilComponent,
-    SkillsComponent,
-    PricesComponent,
-    FilterPipe,
-    AdminPorteFolioComponent,
-    AdminSkillsComponent,
-    DDLComponent,
-    InputDateComponent,
-    AdminProfilComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useClass: TranslationService,
-        deps: [HttpClient]
-      }
-    }),
-    CKEditorModule
-  ],
-  providers: [AuthGuard, {
-    provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
-  },
-    AppInitService,
-    {
-      provide: APP_INITIALIZER, useFactory: (appInitService: AppInitService) => {
-        return () => appInitService.initializeApp();
-      }, deps: [AppInitService], multi: true
-    },
-    WeatherforecastService,
-    HubRealtimeService,
-    UserService,
-    MessageService,
-    LanguageService,
-    TranslationService,
-    RoleService,
-    SpinnerService,
-    ContactService,
-    SkillService,
-    ExperienceService,
-    DatePipe,
-    CacheService,
-    ProfileService,
-    ToolsService,
-    DocumentService
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        NavMenuComponent,
+        HomeComponent,
+        CounterComponent,
+        LoginComponent,
+        UserComponent,
+        ErrorComponent,
+        MessengerComponent,
+        SignalRCodeComponent,
+        DataBaseComponent,
+        HostIISComponent,
+        MultiLanguageComponent,
+        MultiLanguageViewComponent,
+        AuthenticationComponent,
+        DictionaryComponent,
+        DisplayUserComponent,
+        ModalConfirmComponent,
+        ContactComponent,
+        PorteFolioComponent,
+        ProfilComponent,
+        SkillsComponent,
+        PricesComponent,
+        FilterPipe,
+        AdminPorteFolioComponent,
+        AdminSkillsComponent,
+        DDLComponent,
+        InputDateComponent,
+        AdminProfilComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useClass: TranslationService,
+                deps: [HttpClient]
+            }
+        }),
+        CKEditorModule], providers: [AuthGuard, {
+            provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
+        },
+        AppInitService,
+        {
+            provide: APP_INITIALIZER, useFactory: (appInitService: AppInitService) => {
+                return () => appInitService.initializeApp();
+            }, deps: [AppInitService], multi: true
+        },
+        WeatherforecastService,
+        HubRealtimeService,
+        UserService,
+        MessageService,
+        LanguageService,
+        TranslationService,
+        RoleService,
+        SpinnerService,
+        ContactService,
+        SkillService,
+        ExperienceService,
+        DatePipe,
+        CacheService,
+        ProfileService,
+        ToolsService,
+        DocumentService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
 
 export function HttpLoaderFactory(http: HttpClient) {
