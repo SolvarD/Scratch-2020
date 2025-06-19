@@ -9,11 +9,6 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, visitez https:
     <_PublishTargetUrl>F:\PorteFolioDeploy\API</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
-    <DestinationConnectionStrings Include="PorteFolio">
-      <Value>Data Source=solvar.database.windows.net%3bInitial Catalog=PorteFolio.Database%3bPersist Security Info=True%3bUser ID=omega%3bPassword=Insta2012</Value>
-    </DestinationConnectionStrings>
-  </ItemGroup>
-  <ItemGroup>
     <File Include="API.deps.json">
       <publishTime>06/09/2020 15:15:10</publishTime>
     </File>
@@ -383,5 +378,10 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, visitez https:
     <File Include="zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll">
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
+  </ItemGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="PorteFolio">
+      <Value>Data Source=solvar.database.windows.net%3bInitial Catalog=PorteFolio.Database%3bPersist Security Info=True%3bUser ID=omega%3bPassword=Insta2012</Value>
+    </DestinationConnectionStrings>
   </ItemGroup>
 </Project>

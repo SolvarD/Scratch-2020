@@ -1,0 +1,21 @@
+services:
+    db:
+        container_name: db
+        image: bitnami/postgresql:14
+        ports:
+        - '5432:5432'
+        environment:
+        - POSTGRESQL_USERNAME=postgres
+        - POSTGRES_PASSWORD=totopassword1234
+        - POSTGRESQL_PGAUDIT_LOG=READ,WRITE
+        - POSTGRESQL_LOG_HOSTNAME=true
+        - POSTGRESQL_REPLICATION_MODE=master
+        - POSTGRESQL_REPLICATION_USER=repl_user
+        - POSTGRESQL_REPLICATION_PASSWORD=repl_password
+
+        - ALLOW_EMPTY_PASSWORD=yes
+    pubsub:
+        container_name: pubsub
+        image: neowaylabs/gcloud-pubsub-emulator        
+        ports:
+            - 8085:8085

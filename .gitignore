@@ -17,3 +17,6 @@
 /Test/obj/Release/netcoreapp3.1/Test.assets.cache
 /Test/obj/Release/netcoreapp3.1/Test.csprojAssemblyReference.cache
 /Test/bin/Debug/
+/Test/obj/Debug
+/Test/obj/Debug
+/Test/obj
