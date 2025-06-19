@@ -4,8 +4,10 @@
   </div>
 
   <div class="propose">
-    <div *ngFor="let item of rows | filter : {label : filter}" (click)="selectRow(item)">
-      {{item.label}}
-    </div>
+    @for (item of rows | filter : {label : filter}; track item) {
+      <div (click)="selectRow(item)">
+        {{item.label}}
+      </div>
+    }
   </div>
 </div>

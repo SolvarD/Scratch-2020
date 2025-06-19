@@ -6,50 +6,51 @@
 </div>
 <div class="skills-container">
 
-  <div class="skill" *ngFor="let category of skillsCategory;index as i">
-    <form [formGroup]="formCategories[i]" *ngIf="formCategories[i]">
-      <div class="slide-header flex bloc">
-        <div class="flex flex-1 slide-title">
-          <input type="text" placeholder="{{'CATEGORY_NAME' | translate}}"
-                 [ngClass]="{'invalid-field': !isValidField(formCategories[i], 'label')}"
-                 class="form-control name-category" formControlName="label" />
-
-          <div>
-            <i class="fas fa-save" (click)="saveCategory(formCategories[i])"></i>
-          </div>
-
-        </div>
-
-        <div><i class="fas fa-trash" (click)="canEdit && deleteCategory(i)"></i></div>
-      </div>
-
-
-      <div class="bloc flex flex-wrap displayBloc" [ngStyle]="{'justify-content': (!category.skillCategoryDetails.length? 'center': 'auto')}">
-        <div *ngIf="!category.skillCategoryDetails.length" >
-          <div>
-            <label translate>NO_SKILL</label>
-          </div>
-        </div>
-        <div class="flex pill" *ngFor="let detail of category.skillCategoryDetails;index as scd">
-
-          <div class="flex-1 flex no-wrap horizontal-center">
-            <div class="flex-1">
-              <!--<span>{{detail.label}}</span>-->
-              <input type="text" placeholder="{{'SKILL_NAME' | translate}}"
-                     [ngClass]="{'invalid-field': !detail.label}"
-                     [(value)]="detail.label" />
+  @for (category of skillsCategory; track category; let i = $index) {
+    <div class="skill">
+      @if (formCategories[i]) {
+        <form [formGroup]="formCategories[i]">
+          <div class="slide-header flex bloc">
+            <div class="flex flex-1 slide-title">
+              <input type="text" placeholder="{{'CATEGORY_NAME' | translate}}"
+                [ngClass]="{'invalid-field': !isValidField(formCategories[i], 'label')}"
+                class="form-control name-category" formControlName="label" />
+                <div>
+                  <i class="fas fa-save" (click)="saveCategory(formCategories[i])"></i>
+                </div>
+              </div>
+              <div><i class="fas fa-trash" (click)="canEdit && deleteCategory(i)"></i></div>
             </div>
-            <div class="pointer" [ngClass]="{'forbidden': !canEdit}">
-              <!--<i class="fas fa-edit"></i>-->
-              <i class="fas fa-times" (click)="canEdit && deleteSkill(category.skillCategoryDetails, scd)"></i>
-            </div>
-          </div>
+            <div class="bloc flex flex-wrap displayBloc" [ngStyle]="{'justify-content': (!category.skillCategoryDetails.length? 'center': 'auto')}">
+              @if (!category.skillCategoryDetails.length) {
+                <div >
+                  <div>
+                    <label translate>NO_SKILL</label>
+                  </div>
+                </div>
+              }
+              @for (detail of category.skillCategoryDetails; track detail; let scd = $index) {
+                <div class="flex pill">
+                  <div class="flex-1 flex no-wrap horizontal-center">
+                    <div class="flex-1">
+                      <!--<span>{{detail.label}}</span>-->
+                      <input type="text" placeholder="{{'SKILL_NAME' | translate}}"
+                        [ngClass]="{'invalid-field': !detail.label}"
+                        [(value)]="detail.label" />
+                      </div>
+                      <div class="pointer" [ngClass]="{'forbidden': !canEdit}">
+                        <!--<i class="fas fa-edit"></i>-->
+                        <i class="fas fa-times" (click)="canEdit && deleteSkill(category.skillCategoryDetails, scd)"></i>
+                      </div>
+                    </div>
+                  </div>
+                }
+                <div class="add-container">
+                  <i class="fas fa-plus-circle fa-2x pointer" (click)="addSkill(category.skillCategoryDetails)"></i>
+                </div>
+              </div>
+            </form>
+          }
         </div>
-        <div class="add-container">
-          <i class="fas fa-plus-circle fa-2x pointer" (click)="addSkill(category.skillCategoryDetails)"></i>
-        </div>
-      </div>
-    </form>
-
-  </div>
-</div>
+      }
+    </div>

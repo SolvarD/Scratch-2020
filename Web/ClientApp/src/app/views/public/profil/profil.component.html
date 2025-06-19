@@ -1,51 +1,53 @@
 <div class="page-title">
   <h2 translate>PROFILE</h2>
 </div>
-<div class="profil-container" *ngIf="proprietaire">
-  <div class="historic-container">
-    <div class="bloc-presentation bloc direction-column">
-      <div>
-        Presentation
-      </div>      
-      <div [innerHtml]="proprietaire.presentation"></div>
+@if (proprietaire) {
+  <div class="profil-container">
+    <div class="historic-container">
+      <div class="bloc-presentation bloc direction-column">
+        <div>
+          Presentation
+        </div>
+        <div [innerHtml]="proprietaire.presentation"></div>
+      </div>
+      <div class="blocs-info-container">
+        <div class="bloc-info bloc direction-column">
+          <div>
+            Experiences
+          </div>
+          <div [innerHtml]="proprietaire.pastPro"></div>
+        </div>
+        <div class="bloc-info bloc direction-column">
+          <div>
+            Avantage de travailler avec moi
+          </div>
+          <div [innerHtml]="proprietaire.advantage"></div>
+        </div>
+        <div class="bloc-info bloc direction-column">
+          <div>
+            En savoir plus?
+          </div>
+          <div class="horizontal-center">
+            <button class="info-button" translate (click)="getCV(proprietaire)">CV</button>
+          </div>
+          <div class="horizontal-center">
+            <button class="info-button" translate [routerLink]="['/contact']">CONTACT_ME</button>
+          </div>
+        </div>
+        <div class="bloc-info bloc direction-column">
+          <div>
+            TJM
+          </div>
+          <div class="horizontal-center tarif">
+            <span>
+              {{proprietaire.price}} €
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="blocs-info-container">
-      <div class="bloc-info bloc direction-column">
-        <div>
-          Experiences
-        </div>
-        <div [innerHtml]="proprietaire.pastPro"></div>
-      </div>
-      <div class="bloc-info bloc direction-column">
-        <div>
-          Avantage de travailler avec moi
-        </div>
-        <div [innerHtml]="proprietaire.advantage"></div>
-      </div>
-      <div class="bloc-info bloc direction-column">
-        <div>
-          En savoir plus?
-        </div>
-        <div class="horizontal-center">
-          <button class="info-button" translate (click)="getCV(proprietaire)">CV</button>
-        </div>
-        <div class="horizontal-center">
-          <button class="info-button" translate [routerLink]="['/contact']">CONTACT_ME</button>
-        </div>
-      </div>
-      <div class="bloc-info bloc direction-column">
-        <div>
-          TJM
-        </div>
-        <div class="horizontal-center tarif">
-          <span>
-            {{proprietaire.price}} €
-          </span>         
-        </div>
-      </div>
+    <div class="photo-container">
+      <img class="personnal-pic" [src]="'data:'+ proprietaire.photo.type +';base64,' +proprietaire.photo.documentBase64" alt="SOLVAR_DIMITRI" />
     </div>
   </div>
-  <div class="photo-container">
-    <img class="personnal-pic" [src]="'data:'+ proprietaire.photo.type +';base64,' +proprietaire.photo.documentBase64" alt="SOLVAR_DIMITRI" />
-  </div>
-</div>
+}

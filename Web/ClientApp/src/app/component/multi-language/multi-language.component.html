@@ -1,8 +1,12 @@
-<div class="container-language" *ngIf="formLanguage">
-  <form [formGroup]="formLanguage">
-    <select class="form-control" formControlName="languageId">
-      <option *ngFor="let language of languages" [value]="language.languageId">{{language.label}}</option>
-    </select>
-  </form>
-</div>
+@if (formLanguage) {
+  <div class="container-language">
+    <form [formGroup]="formLanguage">
+      <select class="form-control" formControlName="languageId">
+        @for (language of languages; track language) {
+          <option [value]="language.languageId">{{language.label}}</option>
+        }
+      </select>
+    </form>
+  </div>
+}
 

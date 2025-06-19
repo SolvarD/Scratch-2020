@@ -1,8 +1,10 @@
 <body>
-  <div *ngIf="spinner.displaySpinner" class="spinner-container">
-    <div class="spinner-grow text-info personnal-spinner"></div>
-  </div>
-  
+  @if (spinner.displaySpinner) {
+    <div class="spinner-container">
+      <div class="spinner-grow text-info personnal-spinner"></div>
+    </div>
+  }
+
   <app-nav-menu></app-nav-menu>
   <div class="container">
     <router-outlet></router-outlet>

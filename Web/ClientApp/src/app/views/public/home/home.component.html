@@ -1,15 +1,15 @@
 <!--<div>
-  Back-end .NET core 3.1
+Back-end .NET core 3.1
 
-  Dapper
+Dapper
 
-  Angular 8
-  -- BrowserAnimationsModule
-  bootstrap 4
-  Font awesome 5
+Angular 8
+-- BrowserAnimationsModule
+bootstrap 4
+Font awesome 5
 </div>-->
 <!--<div class="page-title">
-  <h2 translate>HOME</h2>
+<h2 translate>HOME</h2>
 </div>-->
 <div>
   <b>
@@ -24,32 +24,36 @@
 <div class="thumbnail-container">
 
   <div class="thumbnail-container-left">
-    <div *ngFor="let element of elements | filter: getModulo0" title="{{element.title | translate}}" class="thumbnail" [routerLink]="[element.route]">
-      <div class="content-logo">
-        <i [ngClass]="element.class">
-        </i>
+    @for (element of elements | filter: getModulo0; track element) {
+      <div title="{{element.title | translate}}" class="thumbnail" [routerLink]="[element.route]">
+        <div class="content-logo">
+          <i [ngClass]="element.class">
+          </i>
+        </div>
+        <div class="content-title">
+          <label class="text-thumbnail">{{element.title | translate}}</label>
+        </div>
       </div>
-      <div class="content-title">
-        <label class="text-thumbnail">{{element.title | translate}}</label>
-      </div>
-    </div>
+    }
   </div>
   <div class="thumbnail-container-right">
-    <div *ngFor="let element of elements | filter: getModulo1" title="{{element.title | translate}}" class="thumbnail" [routerLink]="[element.route]">
-      <div class="content-logo">
-        <i [ngClass]="element.class">
-        </i>
+    @for (element of elements | filter: getModulo1; track element) {
+      <div title="{{element.title | translate}}" class="thumbnail" [routerLink]="[element.route]">
+        <div class="content-logo">
+          <i [ngClass]="element.class">
+          </i>
+        </div>
+        <div class="content-title">
+          <label class="text-thumbnail">{{element.title | translate}}</label>
+        </div>
       </div>
-      <div class="content-title">
-        <label class="text-thumbnail">{{element.title | translate}}</label>
-      </div>
-    </div>
+    }
   </div>
 
 </div>
 <div class="contact-container">
   <div class="contact-title"><label translate>GOT_A_PROJECT</label> ? <label translate>A_QUESTION</label> ?</div>
   <div class="">
-  <button class="contact-button" translate [routerLink]="['/contact']">CONTACT_ME</button>
+    <button class="contact-button" translate [routerLink]="['/contact']">CONTACT_ME</button>
   </div>
 </div>

@@ -26,19 +26,25 @@
               <input type="password" id="mdp" class="form-control" formControlName="password" />
             </div>
           </div>
-          <div *ngIf="display401">
-            <span class="text-danger" translate>ERROR_LOGIN</span>
+          @if (display401) {
+            <div>
+              <span class="text-danger" translate>ERROR_LOGIN</span>
+            </div>
+          }
+
+        </div>
+
+        @if (!user.userId) {
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" (click)="toggle()" translate>CANCEL</button>
+            <button type="submit" (click)="onSubmit()" class="btn btn-success" data-dismiss="modal">Ok</button>
           </div>
-
-        </div>
-
-        <div class="modal-footer" *ngIf="!user.userId">
-          <button type="button" class="btn btn-dark" (click)="toggle()" translate>CANCEL</button>
-          <button type="submit" (click)="onSubmit()" class="btn btn-success" data-dismiss="modal">Ok</button>
-        </div>
-        <div class="modal-footer" *ngIf="user.userId">
-          <button type="button" class="btn btn-danger" (click)="onDisconnect()" translate>DECONNEXION</button>
-        </div>
+        }
+        @if (user.userId) {
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="onDisconnect()" translate>DECONNEXION</button>
+          </div>
+        }
       </form>
     </div>
   </div>

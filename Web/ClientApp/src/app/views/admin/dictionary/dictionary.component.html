@@ -11,37 +11,55 @@
       <thead>
         <tr>
           <th>Key</th>
-          <th *ngFor="let language of languages">{{language.label}}</th>
+          @for (language of languages; track language) {
+            <th>{{language.label}}</th>
+          }
           <th>Action</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let dictionary of displayLanguage | keyvalue">
-          <td class="vertical-center">{{dictionary.key}}</td>
-          <td *ngFor="let item of dictionary.value" class="vertical-center">
-            <span *ngIf="!dictionary.edit">
-              {{item.label}}
-            </span>
-            <div *ngIf="dictionary.edit">
-              <input class="form-control" type="text" [value]="item.label" />
-            </div>
-          </td>
-          <td class="vertical-center">
-            <i *ngIf="!dictionary.edit" [ngClass]="{'forbidden': !canEdit}" class="fas fa-edit pointer" (click)="edit(dictionary)"></i>
-
-            <i *ngIf="dictionary.edit" [ngClass]="{'forbidden': !canEdit}" class="fas fa-times-circle" (click)="cancelEdit(dictionary)"></i>
-            <i *ngIf="dictionary.edit" [ngClass]="{'forbidden': !canEdit}" class="fas fa-save" (click)="save()"></i>
-          </td>
-        </tr>
+        @for (dictionary of displayLanguage | keyvalue; track dictionary) {
+          <tr>
+            <td class="vertical-center">{{dictionary.key}}</td>
+            @for (item of dictionary.value; track item) {
+              <td class="vertical-center">
+                @if (!dictionary.edit) {
+                  <span>
+                    {{item.label}}
+                  </span>
+                }
+                @if (dictionary.edit) {
+                  <div>
+                    <input class="form-control" type="text" [value]="item.label" />
+                  </div>
+                }
+              </td>
+            }
+            <td class="vertical-center">
+              @if (!dictionary.edit) {
+                <i [ngClass]="{'forbidden': !canEdit}" class="fas fa-edit pointer" (click)="edit(dictionary)"></i>
+              }
+              @if (dictionary.edit) {
+                <i [ngClass]="{'forbidden': !canEdit}" class="fas fa-times-circle" (click)="cancelEdit(dictionary)"></i>
+              }
+              @if (dictionary.edit) {
+                <i [ngClass]="{'forbidden': !canEdit}" class="fas fa-save" (click)="save()"></i>
+              }
+            </td>
+          </tr>
+        }
       </tbody>
 
     </table>
-    <ul class="pagination pointer" *ngIf="pages.length">
-      <li class="page-item"><a class="page-link" (click)="previewPage()">Previous</a></li>
-      <li *ngFor="let page of pages" [ngClass]="{'active':isPageActive(page)}" class="page-item"><a (click)="gotToPage(page)" class="page-link">{{page}}</a></li>
-
-      <li class="page-item"><a class="page-link" (click)="nextPage()">Next</a></li>
-    </ul>
+    @if (pages.length) {
+      <ul class="pagination pointer">
+        <li class="page-item"><a class="page-link" (click)="previewPage()">Previous</a></li>
+        @for (page of pages; track page) {
+          <li [ngClass]="{'active':isPageActive(page)}" class="page-item"><a (click)="gotToPage(page)" class="page-link">{{page}}</a></li>
+        }
+        <li class="page-item"><a class="page-link" (click)="nextPage()">Next</a></li>
+      </ul>
+    }
   </div>
 </div>

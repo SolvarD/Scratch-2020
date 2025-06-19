@@ -27,31 +27,36 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let user of users">
-            <td (click)="selectUser(user.userId)">{{user.firstName}}</td>
-            <td (click)="selectUser(user.userId)">{{user.lastName}}</td>
-            <td (click)="selectUser(user.userId)">{{user.email}}</td>
-            <td (click)="selectUser(user.userId)" translate>{{user.roleName}}</td>
-            <td>
-              <div class="contain-action">
-                <div class="hide-big-screen" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && toggleUser(user.userId)">
-                  <i class="fas fa-user-edit"></i>
+          @for (user of users; track user) {
+            <tr>
+              <td (click)="selectUser(user.userId)">{{user.firstName}}</td>
+              <td (click)="selectUser(user.userId)">{{user.lastName}}</td>
+              <td (click)="selectUser(user.userId)">{{user.email}}</td>
+              <td (click)="selectUser(user.userId)" translate>{{user.roleName}}</td>
+              <td>
+                <div class="contain-action">
+                  <div class="hide-big-screen" [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && toggleUser(user.userId)">
+                    <i class="fas fa-user-edit"></i>
+                  </div>
+                  <div [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && displayModal(user)">
+                    <i class="fas fa-trash"></i>
+                  </div>
                 </div>
-                <div [ngClass]="{'forbidden': !canEdit}" (click)="canEdit && displayModal(user)">
-                  <i class="fas fa-trash"></i>
-                </div>
-              </div>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          }
         </tbody>
 
       </table>
-      <ul class="pagination" *ngIf="pages.length">
-        <li class="page-item"><a class="page-link" (click)="previewPage()">Previous</a></li>
-        <li *ngFor="let page of pages" [ngClass]="{'active':isPageActive(page)}" class="page-item"><a (click)="gotToPage(page)" class="page-link">{{page}}</a></li>
-
-        <li class="page-item"><a class="page-link" (click)="nextPage()">Next</a></li>
-      </ul>
+      @if (pages.length) {
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" (click)="previewPage()">Previous</a></li>
+          @for (page of pages; track page) {
+            <li [ngClass]="{'active':isPageActive(page)}" class="page-item"><a (click)="gotToPage(page)" class="page-link">{{page}}</a></li>
+          }
+          <li class="page-item"><a class="page-link" (click)="nextPage()">Next</a></li>
+        </ul>
+      }
     </div>
     <div class="container-user-right">
 
