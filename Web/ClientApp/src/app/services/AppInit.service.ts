@@ -3,17 +3,20 @@ import { HttpClient } from "@angular/common/http";
 import { UserService } from "./user.service";
 import { ProfileService } from "./profile.service";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AppInitService {
-  constructor(private userService: UserService, private profileService: ProfileService) { }
+  constructor() { }
 
-  initializeApp() {
+  public static async initializeApp(userService: UserService, profileService: ProfileService) {
+    console.log('app init');
     if (!UserService.currentUser || !UserService.currentUser.token) {
-      return this.userService.getAnonymousLogin().then((user) => {
+      return userService.getAnonymousLogin().then((user) => {
         UserService.currentUser = user.data;
         return user;
       })
     }
-    this.profileService.getOwner();
+    profileService.getOwner();
   }
 }

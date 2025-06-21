@@ -20,7 +20,7 @@ import { AdminSkillsComponent } from "./views/admin/skills/admin-skills.componen
 import { AdminPorteFolioComponent } from "./views/admin/porte-folio/admin-porte-folio.component";
 import { AdminProfilComponent } from "./views/admin/profil/admin-profil.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'counter', component: CounterComponent },
   { path: 'signalr', component: SignalRCodeComponent },
@@ -58,8 +58,8 @@ const routes: Routes = [
   }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes)],
+//   exports: [RouterModule]
+// })
+// export class AppRoutingModule { }

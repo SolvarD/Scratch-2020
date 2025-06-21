@@ -5,7 +5,9 @@ import { SkillCategory, SkillCategoryDetail } from "../../models/skill";
 import { Experience } from "../../models/experience";
 import { ApiResult } from "../../models/api-result";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ExperienceService {
   constructor(private http: HttpClient) {
 

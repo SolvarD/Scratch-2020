@@ -7,12 +7,15 @@ import { LanguageService } from '../../../services/language.service';
 import { InfoPagination } from '../../../../models/info-pagination';
 import { Subject } from 'rxjs';
 import { BaseComponent } from '../../../../models/base-component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-dictionary',
     templateUrl: './dictionary.component.html',
     styleUrls: ['./dictionary.component.less'],
-    standalone: false
+    standalone: true,
+    imports:[TranslateModule, CommonModule]
 })
 export class DictionaryComponent extends BaseComponent implements OnInit {
   dictionaryLanguage: DictionaryLanguage[] = [];

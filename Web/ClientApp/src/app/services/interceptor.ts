@@ -4,7 +4,9 @@ import { Observable } from "rxjs";
 import { UserService } from "./user.service";
 import { SpinnerService } from "./spinner.service";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private spinner: SpinnerService) { }
 

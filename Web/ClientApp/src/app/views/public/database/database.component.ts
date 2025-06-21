@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
     selector: 'app-database',
     templateUrl: './database.component.html',
-    standalone: false
+    standalone: true
 })
 export class DataBaseComponent {
 

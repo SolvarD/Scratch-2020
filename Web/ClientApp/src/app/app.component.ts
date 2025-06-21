@@ -4,11 +4,15 @@ import { WeatherforecastService } from './services/weatherforecast.service';
 import { UserService } from './services/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SpinnerService } from './services/spinner.service';
+import { NavMenuComponent } from './component/nav-menu/nav-menu.component';
+import { RouterOutlet } from '@angular/router';
+import { MessengerComponent } from './component/messenger/messenger.component';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.less'],
-    standalone: false
+    standalone: true,
+     imports: [NavMenuComponent, RouterOutlet, MessengerComponent],
 })
 export class AppComponent {
   title = 'app';

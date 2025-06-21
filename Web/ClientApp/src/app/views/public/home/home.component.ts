@@ -1,10 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { FilterPipe } from 'src/app/pipe/filter.pipe';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.less'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, FilterPipe, RouterModule]
 })
 export class HomeComponent implements OnInit {
   elements: Array<any> = [];

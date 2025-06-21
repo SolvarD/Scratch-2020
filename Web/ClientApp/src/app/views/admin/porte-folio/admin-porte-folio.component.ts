@@ -5,14 +5,16 @@ import { BaseComponent } from '../../../../models/base-component';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { SkillCategoryDetail, SkillCategory } from '../../../../models/skill';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { SkillService } from '../../../services/skill.service';
+import { ModalConfirmComponent } from 'src/app/component/modal-confirm/modal-confirm.component';
 
 @Component({
     selector: 'app-admin-porte-folio',
     templateUrl: './admin-porte-folio.component.html',
     styleUrls: ['./admin-porte-folio.component.less'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule, ModalConfirmComponent]
 })
 export class AdminPorteFolioComponent extends BaseComponent implements OnInit {
 

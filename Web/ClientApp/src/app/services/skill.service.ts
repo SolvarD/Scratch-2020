@@ -4,7 +4,9 @@ import { environment } from "../../environments/environment";
 import { SkillCategory, SkillCategoryDetail } from "../../models/skill";
 import { ApiResult } from "../../models/api-result";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SkillService {
   constructor(private http: HttpClient) {
 

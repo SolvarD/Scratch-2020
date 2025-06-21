@@ -1,17 +1,19 @@
 import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { HubRealtimeService } from '../../services/hub-realtime';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
 import { LanguageService } from '../../services/language.service';
 import { Language } from '../../../models/language';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../services/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-multi-language',
     templateUrl: './multi-language.component.html',
     styleUrls: ['./multi-language.component.less'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule, ReactiveFormsModule]
 })
 export class MultiLanguageComponent implements OnInit {
   formLanguage: UntypedFormGroup;

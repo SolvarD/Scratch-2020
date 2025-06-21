@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'app-prices',
     templateUrl: './prices.component.html',
     styleUrls: ['./prices.component.less'],
-    standalone: false
+    standalone: true
 })
 export class PricesComponent implements OnInit {
 

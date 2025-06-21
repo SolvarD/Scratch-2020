@@ -6,7 +6,9 @@ import { Subject } from "rxjs";
 import { Tuple } from "../../models/tuple";
 import { ApiResult } from "../../models/api-result";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
 
   public static emitCurrentUser = new Subject<User>();

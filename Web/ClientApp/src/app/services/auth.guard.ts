@@ -4,7 +4,9 @@ import { UserService } from "./user.service";
 import { enumRole } from "../../models/user";
 import { BaseComponent } from "../../models/base-component";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthGuard extends BaseComponent  {
   constructor(
     public router: Router,

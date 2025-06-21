@@ -9,7 +9,9 @@ import { DictionaryLanguage } from "../../models/dictionary-language";
 import { InfoPagination } from "../../models/info-pagination";
 import { Tuple } from "../../models/tuple";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TranslationService implements TranslateLoader{
 
   constructor(private http: HttpClient) { }

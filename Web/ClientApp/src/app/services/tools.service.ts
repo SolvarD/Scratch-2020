@@ -8,7 +8,9 @@ import { ProfileService } from "./profile.service";
 import { AppDocument } from "../../models/document";
 import { Profile } from "../../models/profile";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ToolsService {
   constructor() {
 

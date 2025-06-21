@@ -6,7 +6,9 @@ import { Language } from "../../models/language";
 import { CacheService } from "./cache.service";
 import { ApiResult } from "../../models/api-result";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LanguageService {
   constructor(private http: HttpClient,private cache: CacheService) {
 

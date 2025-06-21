@@ -6,13 +6,14 @@ import { Language } from '../../../models/language';
 import { BaseComponent } from '../../../models/base-component';
 import { UserService } from '../../services/user.service';
 import { FormControlName, UntypedFormGroup, FormControl } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-date',
     templateUrl: './input-date.component.html',
     styleUrls: ['./input-date.component.less'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class InputDateComponent extends BaseComponent implements OnInit {
 

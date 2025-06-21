@@ -4,7 +4,9 @@ import { environment } from "../../environments/environment";
 import { Message } from "../../models/message";
 import { ApiResult } from "../../models/api-result";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MessageService {
   constructor(private http: HttpClient) {
 

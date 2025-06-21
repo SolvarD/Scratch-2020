@@ -6,7 +6,7 @@ import { SkillCategory } from '../../../../models/skill';
     selector: 'app-skills',
     templateUrl: './skills.component.html',
     styleUrls: ['./skills.component.less'],
-    standalone: false
+    standalone: true
 })
 export class SkillsComponent implements OnInit {
 

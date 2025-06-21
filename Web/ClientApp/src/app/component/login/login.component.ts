@@ -1,18 +1,20 @@
 import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { HubRealtimeService } from '../../services/hub-realtime';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
 import { MessageService } from '../../services/message.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { User } from '../../../models/user';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.less'],
-    standalone: false
+    standalone: true,
+    imports:[CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class LoginComponent {
 

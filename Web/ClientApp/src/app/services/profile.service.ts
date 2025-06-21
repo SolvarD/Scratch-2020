@@ -4,7 +4,9 @@ import { environment } from "../../environments/environment";
 import { Profile } from "../../models/profile";
 import { ApiResult } from "../../models/api-result";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProfileService {
 
   public static owner: Profile;

@@ -3,12 +3,15 @@ import { SkillService } from '../../../services/skill.service';
 import { SkillCategory, SkillCategoryDetail } from '../../../../models/skill';
 import { BaseComponent } from '../../../../models/base-component';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-admin-skills',
     templateUrl: './admin-skills.component.html',
     styleUrls: ['./admin-skills.component.less'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, TranslateModule]
 })
 export class AdminSkillsComponent extends BaseComponent implements OnInit {
 

@@ -13,12 +13,14 @@ import { Role } from '../../../models/role';
 import { RoleService } from '../../services/role.service';
 import { BaseComponent } from '../../../models/base-component';
 import { parse } from 'querystring';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-modal-confirm',
     templateUrl: './modal-confirm.component.html',
     styleUrls: ['./modal-confirm.component.less'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class ModalConfirmComponent implements OnInit {
 

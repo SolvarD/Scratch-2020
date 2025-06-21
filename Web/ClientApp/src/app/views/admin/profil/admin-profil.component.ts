@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Profile } from '../../../../models/profile';
 import { ProfileService } from '../../../services/profile.service';
 import { BaseComponent } from '../../../../models/base-component';
 import { ToolsService } from '../../../services/tools.service';
 import { DocumentService } from '../../../services/document.service';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-admin-profil',
     templateUrl: './admin-profil.component.html',
     styleUrls: ['./admin-profil.component.less'],
-    standalone: false
+    standalone: true,
+    imports: [ReactiveFormsModule, CommonModule, TranslateModule]
 })
 
 export class AdminProfilComponent extends BaseComponent implements OnInit {

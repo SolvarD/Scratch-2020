@@ -4,7 +4,9 @@ import { environment } from "../../environments/environment";
 import { Role } from "../../models/role";
 import { ApiResult } from "../../models/api-result";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RoleService {
   constructor(private http: HttpClient) {
 

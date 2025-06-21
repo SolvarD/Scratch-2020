@@ -1,40 +1,42 @@
 import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { HubRealtimeService } from '../../services/hub-realtime';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
 import { MessageService } from '../../services/message.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { UserService } from '../../services/user.service';
 import { Title } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-messenger',
-    templateUrl: './messenger.component.html',
-    styleUrls: ['./messenger.component.less'],
-    animations: [trigger('sizeChat', [
-            state('open', style({
-                flex: '1'
-            })),
-            state('closed', style({
-                display: 'none'
-            })),
-            state('justHeader', style({
-                height: '50px'
-            })),
-            state('hideMessage', style({
-                height: '0px'
-            })),
-            state('hideInput', style({
-                display: 'none'
-            })),
-            transition('open <=> *', [
-                animate('0s')
-            ]),
-            transition('open <=> hideInput', [
-                animate('0s')
-            ])
-        ])],
-    standalone: false
+  selector: 'app-messenger',
+  templateUrl: './messenger.component.html',
+  styleUrls: ['./messenger.component.less'],
+  animations: [trigger('sizeChat', [
+    state('open', style({
+      flex: '1'
+    })),
+    state('closed', style({
+      display: 'none'
+    })),
+    state('justHeader', style({
+      height: '50px'
+    })),
+    state('hideMessage', style({
+      height: '0px'
+    })),
+    state('hideInput', style({
+      display: 'none'
+    })),
+    transition('open <=> *', [
+      animate('0s')
+    ]),
+    transition('open <=> hideInput', [
+      animate('0s')
+    ])
+  ])],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule]
 })
 export class MessengerComponent {
   public lastMessages: Array<Message> = [];
@@ -89,8 +91,8 @@ export class MessengerComponent {
   }
   connectFlux() {
     this.hub.suscribePublicMessage.subscribe((message) => {
-      if (message.userName != this.currentUserTag) {        
-        this.triggerNewMessage();   
+      if (message.userName != this.currentUserTag) {
+        this.triggerNewMessage();
       }
       this.lastMessages.push(message);
       this.ref.detectChanges();
@@ -110,7 +112,7 @@ export class MessengerComponent {
       } else {
         this.titleService.setTitle('GlobalDevApp');
       }
-    }, 1000);     
+    }, 1000);
   }
 
   toggle() {

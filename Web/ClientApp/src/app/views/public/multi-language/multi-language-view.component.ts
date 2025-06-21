@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
     selector: 'app-multi-language-view',
     templateUrl: './multi-language-view.component.html',
-    standalone: false
+    standalone: true
 })
 export class MultiLanguageViewComponent {
 

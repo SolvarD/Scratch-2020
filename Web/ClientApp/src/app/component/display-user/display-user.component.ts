@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectorRef, ViewChild, ElementRef, OnInit, Output } from '@angular/core';
 import { HubRealtimeService } from '../../services/hub-realtime';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Message } from '../../../models/message';
 import { MessageService } from '../../services/message.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -13,12 +13,14 @@ import { Role } from '../../../models/role';
 import { RoleService } from '../../services/role.service';
 import { BaseComponent } from '../../../models/base-component';
 import { parse } from 'querystring';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-display-user',
     templateUrl: './display-user.component.html',
     styleUrls: ['./display-user.component.less'],
-    standalone: false
+    standalone: true,
+    imports: [ReactiveFormsModule,CommonModule]
 })
 export class DisplayUserComponent extends BaseComponent implements OnInit {
 

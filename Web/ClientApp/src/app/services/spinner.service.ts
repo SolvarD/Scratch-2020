@@ -4,7 +4,9 @@ import { environment } from "../../environments/environment";
 import { Message } from "../../models/message";
 import { Language } from "../../models/language";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SpinnerService {
   private nbRequest: number = 0;
 

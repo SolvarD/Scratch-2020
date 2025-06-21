@@ -5,12 +5,17 @@ import { User } from '../../../../models/user';
 import { BaseComponent } from '../../../../models/base-component';
 import { Subject } from 'rxjs';
 import { InfoPagination } from '../../../../models/info-pagination';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { DisplayUserComponent } from 'src/app/component/display-user/display-user.component';
+import { ModalConfirmComponent } from 'src/app/component/modal-confirm/modal-confirm.component';
 
 @Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrls: ['user.component.less'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, TranslateModule, DisplayUserComponent, ModalConfirmComponent]
 })
 
 export class UserComponent extends BaseComponent implements OnInit {

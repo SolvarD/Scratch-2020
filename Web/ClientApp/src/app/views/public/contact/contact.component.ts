@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ContactService } from '../../../services/contact.service';
 import { ContactMessage } from '../../../../models/contact';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-contact',
     templateUrl: './contact.component.html',
     styleUrls: ['./contact.component.less'],
-    standalone: false
+    standalone: true,
+    imports: [ReactiveFormsModule, CommonModule, TranslateModule]
 })
 export class ContactComponent implements OnInit {
   formContact: UntypedFormGroup;

@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../services/profile.service';
 import { Profile } from '../../../../models/profile';
 import { ToolsService } from '../../../services/tools.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-profil',
-    templateUrl: './profil.component.html',
-    styleUrls: ['./profil.component.less'],
-    standalone: false
+  selector: 'app-profil',
+  templateUrl: './profil.component.html',
+  styleUrls: ['./profil.component.less'],
+  standalone: true,
+  imports: [TranslateModule, CommonModule]
 })
 export class ProfilComponent implements OnInit {
   profiles: Array<Profile> = [];

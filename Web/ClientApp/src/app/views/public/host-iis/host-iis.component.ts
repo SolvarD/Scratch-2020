@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
     selector: 'app-host-iis',
     templateUrl: './host-iis.component.html',
-    standalone: false
+    standalone: true
 })
 export class HostIISComponent {
 

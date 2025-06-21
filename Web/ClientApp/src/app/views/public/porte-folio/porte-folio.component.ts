@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ExperienceService } from '../../../services/experience.service';
 import { Experience } from '../../../../models/experience';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-porte-folio',
     templateUrl: './porte-folio.component.html',
     styleUrls: ['./porte-folio.component.less'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class PorteFolioComponent implements OnInit {
   currentSlide: number = 0;

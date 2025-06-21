@@ -5,7 +5,9 @@ import { Profile } from "../../models/profile";
 import { ApiResult } from "../../models/api-result";
 import { AppDocument } from "../../models/document";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DocumentService {
 
   constructor(private http: HttpClient) {  }
